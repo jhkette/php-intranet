@@ -49,13 +49,9 @@ function validateInputs($self)
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
         if ($email == $password) {
-
             $data['email'] = $email;
         }
     }
-
-
-
     return $data;
 }
 
@@ -86,8 +82,6 @@ function validateErrors($self)
     } else {
         $errors['email'] = 'email name is not valid';
     }
-
-
     return $errors;
 }
 
@@ -105,15 +99,11 @@ function errordetection($self)
         $fullname = trim($_POST['fullname']);
         if ($fullname !== $username) {
           $errors_detected = true;
-
         }
-
     }
     else{
         $errors_detected = true;
     }
-
-
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
         if ($email !== $password) {
@@ -123,8 +113,6 @@ function errordetection($self)
     } else {
         $errors_detected = true;
     }
-
-
     return     $errors_detected;
 }
 

@@ -1,10 +1,10 @@
 <?php
+require_once('inlcudes/init.php');
 require_once('inlcudes/functions.php');
 ?>
 <?php
 
-$username = 'admin';
-$password = 'DCSadmin01';
+
 
  ?>
 
