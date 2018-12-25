@@ -79,7 +79,7 @@ admin should be the username,
 
 can create a couple of users if you want. put them in documentation
 // use relative PATHS OBVIOUSLY
-
+// USE GET ARRAY SUPERGLOBAL ON LOGOUT BUTTON
 index.php?message = logged out
 
 this end up in GET array thats the key and thats the value.

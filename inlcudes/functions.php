@@ -31,12 +31,15 @@ function showFormErrors($displayForm, $data = array(), $errors=array())
 
 function validateInputs($self)
 {
+    $username = 'admin';
+    $password = 'DCSadmin01';
+
     $errors = array();
     $data = array();
     $errors_detected;
     if (isset($_POST['fullname'])) {
         $fullname = trim($_POST['fullname']);
-        if ((strlen($fullname) < 150) && (preg_match('/\s/', $fullname))) {
+        if ($fullname == $username) {
             $data['fullname'] = $fullname;
 
         }
@@ -45,7 +48,8 @@ function validateInputs($self)
 
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($email == $password) {
+
             $data['email'] = $email;
         }
     }
@@ -57,12 +61,14 @@ function validateInputs($self)
 
 function validateErrors($self)
 {
+    $username = 'admin';
+    $password = 'DCSadmin01';
     $errors = array();
     $data = array();
     $errors_detected;
     if (isset($_POST['fullname'])) {
         $fullname = trim($_POST['fullname']);
-        if ((strlen($fullname) > 150) || (!preg_match('/\s/', $fullname))) {
+        if ($fullname !== $username) {
             $errors['fullname'] = 'Full name is not valid';
 
         }
@@ -73,7 +79,7 @@ function validateErrors($self)
 
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($email !== $password) {
             $errors['email'] = 'email name is not valid';
 
         }
@@ -90,12 +96,14 @@ function validateErrors($self)
 function errordetection($self)
 
 {
+    $username = 'admin';
+    $password = 'DCSadmin01';
     $errors = array();
     $data = array();
     $errors_detected = false;
     if (isset($_POST['fullname'])) {
         $fullname = trim($_POST['fullname']);
-        if ((strlen($fullname) > 150) || (!preg_match('/\s/', $fullname))) {
+        if ($fullname !== $username) {
           $errors_detected = true;
 
         }
@@ -108,7 +116,7 @@ function errordetection($self)
 
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        if ($email !== $password) {
 
             $errors_detected = true;
         }
