@@ -1,0 +1,5 @@
+1) Set up admin login
+  - create form
+  - send to welcome page if valid
+  - redisplay form if invalid
+2)check sessions for admin login
