@@ -1,4 +1,7 @@
 <?php
+// YOU NEED TO CLEAN ALL DATA!!!
+require_once('inlcudes/init.php');
+
 
 function displayForm($data = array(), $errors=array())
 {
@@ -41,15 +44,16 @@ function validateInputs($self)
         $fullname = trim($_POST['fullname']);
         if ($fullname == $username) {
             $data['fullname'] = $fullname;
+            $_SESSION['fullname'] = $fullname;
+
 
         }
     }
-
-
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
         if ($email == $password) {
             $data['email'] = $email;
+            $_SESSION['email'] = $email;
         }
     }
     return $data;

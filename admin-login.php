@@ -1,12 +1,8 @@
 <?php
 require_once('inlcudes/init.php');
+
 require_once('inlcudes/functions.php');
 ?>
-<?php
-
-
-
- ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -19,7 +15,7 @@ require_once('inlcudes/functions.php');
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
     </style>
- </head>
+</head>
      <body>
          <div class ="container">
              <header class="col-md-6">
@@ -40,22 +36,22 @@ require_once('inlcudes/functions.php');
                   $formSubmmited = false;
                   $formValid = true;
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
-                  or redirects the user to welcome.php*/
+                  or redirects the user to welcome.php if no errors were detected */
                   if (isset($_POST['submit'])) {
                        $formSubmmited = true;
                        #declare $self varaible as $_POST for use in validation
                        if ((errordetection($self) == true) && ($formSubmmited == true)) {
                            $formValid = false;
-                           displayErrors(validateErrors($self));
+                           displayErrors($errors);
                        }
                        if(($formValid == true) && ($formSubmmited == true)){
                            header('location: welcome.php');
                        }
                    }
 
-                   /* This secion of code runs to make   */
-
-
+                   /* This code runs to make the form display. The data and errors array
+                   are used as arguments to preserve correct data and dispay an error message above form if
+                   needed   */
                    displayForm($data, $errors);
                    ?>
           </section>
