@@ -3,8 +3,14 @@
   - send to welcome page if valid
   - redisplay form if invalid
 2)check sessions for admin login
+3) Add session if statement to results pages
+4) add function that reads text file and creates an array from first two items. This is then
+passed on to validation functions.
 
 
+
+
+3) The header, footer and navigation (in the header need to be php files)  - this can be done later
 
 
 

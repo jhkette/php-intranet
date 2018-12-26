@@ -32,9 +32,9 @@ if ( isset( $_SESSION['fullname'] ) ) {
 
         </div>
          <ul>
-             <li>List one </li>
-             <li>List one</li>
-             <li>List one</li>
+             <li><a href="P1results.php">List one</a></li>
+             <li><a href="PfPresults.php">List one</a></li>
+             <li><a href="DTresults.php">List one</a></li>
          </ul>
      </div>
     </body>

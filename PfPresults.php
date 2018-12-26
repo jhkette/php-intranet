@@ -1,6 +1,18 @@
 <?php
 require_once('inlcudes/init.php');
+
 require_once('inlcudes/functions.php');
+
+
+if ( isset( $_SESSION['fullname'] ) ) {
+    // Grab user data from the database using the user_id
+    // Let them access the "logged in only" pages
+    echo 'welcome' . $_SESSION['fullname'];
+}
+ else {
+    // Redirect them to the login page
+    header("Location: admin-login.php");
+}
 ?>
 <!doctype html>
 <html>

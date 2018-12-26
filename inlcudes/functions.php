@@ -45,8 +45,6 @@ function validateInputs($self)
         if ($fullname == $username) {
             $data['fullname'] = $fullname;
             $_SESSION['fullname'] = $fullname;
-
-
         }
     }
     if (isset($_POST['email'])) {
