@@ -1,9 +1,9 @@
 <?php
 
-function showFormErrors($displayForm, $data = array(), $errors=array())
+function displayForm($data = array(), $errors=array())
 {
     ?>
-    <?php if ($displayForm == true): ?>
+
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
                            <fieldset>
                         <legend>Sign Up</legend>
@@ -23,7 +23,7 @@ function showFormErrors($displayForm, $data = array(), $errors=array())
                                </div>
                            </fieldset>
                        </form>
-             <?php endif; ?>
+
     <?php
 }
 
@@ -68,9 +68,6 @@ function validateErrors($self)
             $errors['fullname'] = 'Full name is not valid';
 
         }
-    } else {
-        $errors['fullname'] = 'Full name is not valid';
-
     }
 
     if (isset($_POST['email'])) {
@@ -79,8 +76,6 @@ function validateErrors($self)
             $errors['email'] = 'email name is not valid';
 
         }
-    } else {
-        $errors['email'] = 'email name is not valid';
     }
     return $errors;
 }
@@ -101,34 +96,19 @@ function errordetection($self)
           $errors_detected = true;
         }
     }
-    else{
-        $errors_detected = true;
-    }
+
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
         if ($email !== $password) {
 
             $errors_detected = true;
         }
-    } else {
-        $errors_detected = true;
     }
-    return     $errors_detected;
+    return
+    $errors_detected;
 }
 
-function displayResults($data)
-{
-    ?>
 
-       <?php foreach ($data as $key => $value): ?>
-                <li class = "list-group-item">
-                    <strong><?php echo $key; ?>: </strong>
-                    <?php echo $value; ?>
-                </li>
-        <?php endforeach; ?>
-
-<?php
-}
 
 
 function displayErrors($errors)
