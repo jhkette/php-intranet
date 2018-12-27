@@ -6,11 +6,14 @@
 3) Add session if statement to results pages
 4) add function that reads text file and creates an array from first two items. This is then
 passed on to validation functions.
+5) create admin page that add users. This needs to be a sticky form. Use prior sticky form as model.
+6) create write functionality to file that adds users. Need to find end of file. then write to it. Need
+to use a commma as a delimiter(should be banned from form inputs to avoid errors)
 
 
 
-
-3) The header, footer and navigation (in the header need to be php files)  - this can be done later
+7) The header, footer and navigation (in the header need to be php files)  - this can be done later,
+probably one of the last things to be done.
 
 
 
@@ -19,6 +22,9 @@ PROBLEMS
 - how best to save passwords? save password for admin and
 username in the same place? Ie on a text file - use the same form
 function for all form fields
+- how to check passwords 
+- how best to add some level of security to text files? Store not on the same root directory as website. If on the same directory as website
+the user can simply navigate to the text files.
 - how to record logged out status on index page? USE GET superglobal on logout BUTTON
 something like logout.php?message=loggedout.
 
@@ -28,3 +34,5 @@ display message
 else{
 do nothing
 }
+
+use regenerate sessionid for escalation in access level.
