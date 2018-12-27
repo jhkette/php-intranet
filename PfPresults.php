@@ -1,8 +1,7 @@
 <?php
 require_once('inlcudes/init.php');
-
 require_once('inlcudes/functions.php');
-
+include('inlcudes/menu.php');
 
 if ( isset( $_SESSION['fullname'] ) ) {
 
@@ -37,6 +36,11 @@ if ( isset( $_SESSION['fullname'] ) ) {
 		</style>
 	</head>
 	<body>
+        <section class="col-md-12">
+            <?php
+            print makeMenu($menu);
+            ?>
+        </section>
 		<h1>Problem Solving for Programming – PfP Results</h1>
 		<table>
 		  <tr>

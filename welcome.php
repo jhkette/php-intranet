@@ -1,7 +1,7 @@
 <?php
 require_once('inlcudes/init.php');
-
 require_once('inlcudes/functions.php');
+include('inlcudes/menu.php');
 
 
 if ( isset( $_SESSION['fullname'] ) ) {

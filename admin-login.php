@@ -1,7 +1,7 @@
 <?php
 require_once('inlcudes/init.php');
 require_once('inlcudes/functions.php');
-include('inlcudes/menu.php')
+include('inlcudes/menu.php');
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -27,7 +27,6 @@ include('inlcudes/menu.php')
           <main class = "container">
               <section class="col-md-12">
                   <?php
-
                   print makeMenu($menu);
                   ?>
               </section>

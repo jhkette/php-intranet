@@ -5,8 +5,7 @@ require_once('inlcudes/init.php');
 
 
 function makeMenu($menu){
- /* create variable with empty string. Important as we aren't echoing
- anything out in the function */
+ /* create variable output with empty string.*/
  $output='';
  //foreach looping through keys and items and adding them to html link
   foreach ($menu as $key => $items) {

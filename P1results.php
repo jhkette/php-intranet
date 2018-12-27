@@ -1,11 +1,11 @@
 <?php
 require_once('inlcudes/init.php');
-
 require_once('inlcudes/functions.php');
+include('inlcudes/menu.php');
 
 
 if ( isset( $_SESSION['fullname'] ) ) {
-    
+
     echo 'welcome' . $_SESSION['fullname'];
 }
  else {
@@ -39,6 +39,11 @@ if ( isset( $_SESSION['fullname'] ) ) {
 		</style>
 	</head>
 	<body>
+        <section class="col-md-12">
+            <?php
+            print makeMenu($menu);
+            ?>
+        </section>
 		<h1>Web Programming using PHP - P1 Results</h1>
 		<table>
 		  <tr>
