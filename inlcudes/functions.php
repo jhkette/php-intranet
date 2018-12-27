@@ -3,6 +3,20 @@
 require_once('inlcudes/init.php');
 
 
+
+function makeMenu($menu){
+ /* create variable with empty string. Important as we aren't echoing
+ anything out in the function */
+ $output='';
+ //foreach looping through keys and items and adding them to html link
+  foreach ($menu as $key => $items) {
+
+    $output.='<li> <a href ='.$key.'>'.$items.'</a></li>' ;
+  };
+  return $output;
+}
+
+
 function displayForm($showForm, $data = array(), $errors=array())
 {
     ?>
