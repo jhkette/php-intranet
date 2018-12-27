@@ -206,23 +206,15 @@ function displayErrors($errors)
                         $fileDir1 = array(); # create array
                         array_push($fileDir1, $file); # push into array
                         foreach ($fileDir1 as $key => $value) { # for each loop to loop through files
-                            /* I'm checking the file for whitespace as per the specifications provided. The only way to do this without
-                            opening the file is to use file_get_contents. This takes up more memory than opening/closing but allows validation
-                            before opening. I'm only checking the first 50 charecters */
-                            $checkWhiteSpace = (file_get_contents('data/' . $value, FALSE, NULL, 0, 50)); # only check first 50 charecters
+
                             if ((pathinfo($value, PATHINFO_EXTENSION)) == 'txt'){ # check file is a text file. xml file will be ignored
-                                if ((filesize(('data/' . $value)) == 0) || ((ctype_space($checkWhiteSpace)))) { # check file isn't empty & isn't whitespace
 
-                                    echo '<p> This is an empty file and has not been opened </p>'. PHP_EOL;
-
-                                }
-                                else{
 
                                     // open file or report error using string 'data/' and $value to create path to files
                                     $handle = fopen('data/' . htmlentities(trim($value)), 'r');
 
                                     return $handle;
-                                }
+
                             }
                         }
                     }
