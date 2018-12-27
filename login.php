@@ -34,6 +34,8 @@ include('inlcudes/menu.php');
 
 
                   <?php
+                  $data = getData(openDirectory());
+                  print_r($data);
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
                   $data = validateInputs($self);

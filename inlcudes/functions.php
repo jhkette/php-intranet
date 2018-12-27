@@ -47,15 +47,15 @@ function displayForm($showForm, $data = array(), $errors=array())
 
 function validateInputs($self)
 {
-    $username = 'admin';
-    $password = 'DCSadmin01';
+    $adminusername = 'admin';
+    $adminpassword = 'DCSadmin01';
 
     $errors = array();
     $data = array();
     $errors_detected;
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
-        if ($username == $username) {
+        if ($username == $adminusername) {
             $data['username'] = $username;
             $_SESSION['admin'] = $username;
         }
@@ -63,7 +63,7 @@ function validateInputs($self)
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
         if ($password == $password) {
-            $data['password'] = $password;
+            $data['password'] = $adminpassword;
             $_SESSION['password'] = $password;
         }
     }
@@ -142,12 +142,12 @@ function displayErrors($errors)
                             $checkWhiteSpace = (file_get_contents('data/' . $value, FALSE, NULL, 0, 50)); # only check first 50 charecters
                             if ((pathinfo($value, PATHINFO_EXTENSION)) == 'txt'){ # check file is a text file. xml file will be ignored
                                 if ((filesize(('data/' . $value)) == 0) || ((ctype_space($checkWhiteSpace)))) { # check file isn't empty & isn't whitespace
-                                    echo '<p> File name : '. $value . '</p>'. PHP_EOL; # useful to know which file is empty
+
                                     echo '<p> This is an empty file and has not been opened </p>'. PHP_EOL;
 
                                 }
                                 else{
-                                    echo '<p> File name : '. $value . '</p>' . PHP_EOL;
+
                                     // open file or report error using string 'data/' and $value to create path to files
                                     $handle = fopen('data/' . htmlentities(trim($value)), 'r');
 
@@ -170,7 +170,8 @@ function getData($handle){
                 // ensure $line is HTML chars
                 $line = htmlentities(trim($line));
                 if  (!empty($line))  { # check it is not an empty line
-                    array_push($dataArray,  $line);
+                    $line = explode('|', $line);
+                    array_push($dataArray,  $line[0]);
                 }
             }
             return $dataArray;
