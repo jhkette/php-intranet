@@ -166,6 +166,30 @@ function validateLoginErrors($self, $loggeddata)
 }
 
 
+function bothFieldsValid($self, $loggeddata){
+    $valid = false;
+    if (isset($_POST['username']) && (isset($_POST['password']))) {
+
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        foreach ($loggeddata as $key => $value) {
+            $loggeddata = explode(',', $value);
+            $loggeddata[0] = trim($loggeddata[0]);
+            $loggeddata[1] = trim($loggeddata[1]);
+            echo  $loggeddata[0] . $loggeddata[1] . '  ';
+            echo $username . $password. '  ';
+
+            if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
+
+                $valid = true;
+            }
+
+        }
+}
+return $valid;
+}
+
+
 function displayResults($data)
 {
     ?>

@@ -1,5 +1,28 @@
 <?php
 
+
+
+function bothFieldsValid($self, $loggeddata){
+    $valid = false;
+    if (isset($_POST['username']) && (isset($_POST['password']))) {
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        foreach ($loggeddata as $key => $value) {
+            $loggeddata = explode(',', $value);
+            if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
+                $valid = true;
+            }
+
+
+
+        }
+
+
+
+}
+return $valid;
+}
+
 function validateLoginInputs($self, $loggeddata)
 {
 
@@ -9,7 +32,7 @@ function validateLoginInputs($self, $loggeddata)
     $errors_detected;
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
-         foreach ($loggedNames => $value) {
+         foreach ($loggeddata as $key => $value) {
             $loggedUsername = explode(',', $value);
             $loggedUsername = $loggedUsername[0];
             if ($username == $loggedUsername ) {
@@ -20,9 +43,9 @@ function validateLoginInputs($self, $loggeddata)
      }
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
-        foreach ($loggedNames => $value) {
+        foreach ($loggeddata as $key => $value) {
            $loggedPassword = explode(',', $value);
-           $loggedPassword = $loggedPassword[1];
+           $loggedPassword = trim($loggedPassword[1]);
            if ($password == $loggedPassword ) {
                $data['password'] = $password;
                $_SESSION['password'] = $password;
@@ -38,37 +61,37 @@ function validateLoginErrors($self, $loggeddata)
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
     $errors = array();
-    $data = array();
-    $data2 = array();
+    $correctdata = array();
+    $correctdata2 = array();
     $errors_detected;
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
-         foreach ($loggedNames => $value) {
+         foreach ($loggeddata as $key  => $value) {
             $loggedUsername = explode(',', $value);
             $loggedUsername = $loggedUsername[0];
             if($username == $loggedUsername){
-            array_push($data, $loggedUsername)
+            array_push($correctdata, $loggedUsername);
          }
      }
-     if(count($data)== 0){
+     if(count($correctdata)== 0){
          $errors['username'] = 'Full name is not valid';
      }
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
-        foreach ($loggedNames => $value) {
+        foreach ($loggeddata as $key => $value) {
            $loggedPassword = explode(',', $value);
-           $loggedPassword = $loggedPassword[1];
+           $loggedPassword = trim($loggedPassword[1]);
            if ($password == $loggedPassword ) {
-             array_push($data2, $password)
+             array_push($correctdata2, $password);
             }
         }
-        if(count($data)== 0){
+        if(count($correctdata2)== 0){
             $errors['password'] = 'password name is not valid';
         }
     }
     return $errors;
 }
-
+}
 
 
  ?>

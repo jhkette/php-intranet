@@ -51,7 +51,7 @@ include('inlcudes/menu.php');
                            $formValid = false;
                            displayErrors($errors);
                        }
-                       if((sizeof($errors) == 0) && ($formSubmmited == true)){
+                       if(bothFieldsValid($self, $loggeddata) == true){
                            header('Location: welcome.php'); #refreshing page to refresh menu on successful login
 
                            $showForm = false;
