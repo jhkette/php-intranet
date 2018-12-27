@@ -72,14 +72,14 @@ function validateInputs($self)
 
 function validateErrors($self)
 {
-    $username = 'admin';
-    $password = 'DCSadmin01';
+    $adminusername = 'admin';
+    $adminpassword = 'DCSadmin01';
     $errors = array();
     $data = array();
     $errors_detected;
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
-        if ($username !== $username) {
+        if ($username !== $adminusername) {
             $errors['username'] = 'Full name is not valid';
 
         }
@@ -87,7 +87,7 @@ function validateErrors($self)
 
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
-        if ($password !== $password) {
+        if ($password !== $adminpassword) {
             $errors['password'] = 'password name is not valid';
 
         }
