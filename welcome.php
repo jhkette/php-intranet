@@ -30,10 +30,9 @@ if ( isset( $_SESSION['fullname'] ) ) {
         <div class="container">
 
         </div>
-         <ul>
-             <li><a href="P1results.php">List one</a></li>
-             <li><a href="PfPresults.php">List one</a></li>
-             <li><a href="DTresults.php">List one</a></li>
-         </ul>
-     </div>
+        <section class="col-md-12">
+            <?php
+            print makeMenu($menu);
+            ?>
+        </section>
     </body>

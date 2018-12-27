@@ -1,5 +1,5 @@
 <?php
-
+session_unset();
 if (ini_get("session.use_cookies")) {
     $yesterday = time() - (24 * 60 * 60);
     $params = session_get_cookie_params();

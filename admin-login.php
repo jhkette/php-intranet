@@ -50,8 +50,12 @@ include('inlcudes/menu.php');
                            displayErrors($errors);
                        }
                        if((sizeof($errors) == 0) && ($formSubmmited == true)){
+                           header('Location: welcome.php'); #refreshing page to refresh menu on successful login
+
                            $showForm = false;
+
                            displayResults($data);
+
                        }
                    }
 
