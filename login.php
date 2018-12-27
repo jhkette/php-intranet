@@ -34,8 +34,8 @@ include('inlcudes/menu.php');
 
 
                   <?php
-                  $data = getData(openDirectory());
-                  print_r($data);
+                  $loggeddata = getData(openDirectory());
+                  print_r($loggeddata);
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
                   $data = validateInputs($self);
@@ -60,11 +60,11 @@ include('inlcudes/menu.php');
 
                        }
                    }
-
+                   /*I'M REMOVING THE $DATA PARAMETER FOR TESTING */
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   displayForm($showForm, $data, $errors);
+                   displayForm($showForm, $errors);
                    ?>
           </section>
       </main>

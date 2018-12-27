@@ -62,8 +62,8 @@ function validateInputs($self)
     }
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
-        if ($password == $password) {
-            $data['password'] = $adminpassword;
+        if ($password == $adminpassword ) {
+            $data['password'] = $password;
             $_SESSION['password'] = $password;
         }
     }
