@@ -22,7 +22,7 @@ function displayForm($showForm, $data = array(), $errors=array())
         <?php if ($showForm == true): ?>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
                            <fieldset>
-                        <legend>Sign Up</legend>
+                        <legend>Please log in</legend>
                                <div>
                                    <label for="">Username</label>
                                    <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
