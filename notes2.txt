@@ -20,9 +20,11 @@ probably one of the last things to be done.
 
 PROBLEMS
 - how best to save passwords? save password for admin and
-username in the same place? Ie on a text file - use the same form
+username in the same place? // Solution? Hard code admin username/password add diferent functions for validation for admin and
+ordinary users. 
 function for all form fields
-- how to check passwords 
+- how to check passwords /// Solution? you can use the same form functions EXCEPT THE EXPLICT VALIDATION functions
+these need to be separate functions.
 - how best to add some level of security to text files? Store not on the same root directory as website. If on the same directory as website
 the user can simply navigate to the text files.
 - how to record logged out status on index page? USE GET superglobal on logout BUTTON

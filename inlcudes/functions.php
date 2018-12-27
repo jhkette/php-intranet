@@ -24,14 +24,14 @@ function displayForm($showForm, $data = array(), $errors=array())
                            <fieldset>
                         <legend>Sign Up</legend>
                                <div>
-                                   <label for="">Full Name</label>
-                                   <?php if (isset($errors['fullname'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['fullname'])) {echo htmlspecialchars($data['fullname']);} ?>" name="fullname" id="name" />
+                                   <label for="">Username</label>
+                                   <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['username'])) {echo htmlspecialchars($data['username']);} ?>" name="username" id="name" />
                                </div>
                                <div>
-                                   <label for="">Email</label>
-                                   <?php if (isset($errors['email'])) {echo '<p> Please enter email </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['email'])) {echo htmlspecialchars($data['email']);} ?>"  name="email" id="email"/>
+                                   <label for="">Password</label>
+                                   <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['password'])) {echo htmlspecialchars($data['password']);} ?>"  name="password" id="password"/>
                                </div>
 
                                <div>
@@ -53,18 +53,18 @@ function validateInputs($self)
     $errors = array();
     $data = array();
     $errors_detected;
-    if (isset($_POST['fullname'])) {
-        $fullname = trim($_POST['fullname']);
-        if ($fullname == $username) {
-            $data['fullname'] = $fullname;
-            $_SESSION['fullname'] = $fullname;
+    if (isset($_POST['username'])) {
+        $username = trim($_POST['username']);
+        if ($username == $username) {
+            $data['username'] = $username;
+            $_SESSION['admin'] = $username;
         }
     }
-    if (isset($_POST['email'])) {
-        $email = trim($_POST['email']);
-        if ($email == $password) {
-            $data['email'] = $email;
-            $_SESSION['email'] = $email;
+    if (isset($_POST['password'])) {
+        $password = trim($_POST['password']);
+        if ($password == $password) {
+            $data['password'] = $password;
+            $_SESSION['password'] = $password;
         }
     }
     return $data;
@@ -77,18 +77,18 @@ function validateErrors($self)
     $errors = array();
     $data = array();
     $errors_detected;
-    if (isset($_POST['fullname'])) {
-        $fullname = trim($_POST['fullname']);
-        if ($fullname !== $username) {
-            $errors['fullname'] = 'Full name is not valid';
+    if (isset($_POST['username'])) {
+        $username = trim($_POST['username']);
+        if ($username !== $username) {
+            $errors['username'] = 'Full name is not valid';
 
         }
     }
 
-    if (isset($_POST['email'])) {
-        $email = trim($_POST['email']);
-        if ($email !== $password) {
-            $errors['email'] = 'email name is not valid';
+    if (isset($_POST['password'])) {
+        $password = trim($_POST['password']);
+        if ($password !== $password) {
+            $errors['password'] = 'password name is not valid';
 
         }
     }

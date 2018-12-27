@@ -4,9 +4,9 @@ require_once('inlcudes/functions.php');
 include('inlcudes/menu.php');
 
 
-if ( isset( $_SESSION['fullname'] ) ) {
+if ( isset( $_SESSION['admin'] ) ) {
 
-    echo 'welcome' . $_SESSION['fullname'];
+    echo 'welcome' . $_SESSION['admin'];
 }
  else {
     // Redirect them to the login page
