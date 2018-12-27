@@ -3,10 +3,10 @@
 require_once('inlcudes/init.php');
 
 
-function displayForm($data = array(), $errors=array())
+function displayForm($showForm, $data = array(), $errors=array())
 {
     ?>
-
+        <?php if ($showForm == true): ?>
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
                            <fieldset>
                         <legend>Sign Up</legend>
@@ -26,7 +26,7 @@ function displayForm($data = array(), $errors=array())
                                </div>
                            </fieldset>
                        </form>
-
+        <?php endif; ?>
     <?php
 }
 
@@ -83,34 +83,19 @@ function validateErrors($self)
 }
 
 
-/* maybe delete this and just use array lenght for errors to test if error exists  */
-function errordetection($self)
-
+function displayResults($data)
 {
-    $username = 'admin';
-    $password = 'DCSadmin01';
-    $errors = array();
-    $data = array();
-    $errors_detected = false;
-    if (isset($_POST['fullname'])) {
-        $fullname = trim($_POST['fullname']);
-        if ($fullname !== $username) {
-          $errors_detected = true;
-        }
-    }
+    ?>
 
-    if (isset($_POST['email'])) {
-        $email = trim($_POST['email']);
-        if ($email !== $password) {
+       <?php foreach ($data as $key => $value): ?>
+                <li class = "list-group-item">
+                    <strong><?php echo $key; ?>: </strong>
+                    <?php echo $value; ?>
+                </li>
+        <?php endforeach; ?>
 
-            $errors_detected = true;
-        }
-    }
-    return
-    $errors_detected;
+<?php
 }
-
-
 
 
 function displayErrors($errors)
@@ -126,7 +111,7 @@ function displayErrors($errors)
 }
 
 
-/*THIS FUNCTION NEEDS TO BE EDITED DOWN*/ 
+/*THIS FUNCTION NEEDS TO BE EDITED DOWN*/
  function openDirectory(){
          $handleDir = opendir('./data');
          if ($handleDir === false) {

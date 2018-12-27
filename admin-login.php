@@ -6,7 +6,7 @@ require_once('inlcudes/functions.php');
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-    <title>Sign Up to our Mailing List!</title>
+    <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -33,25 +33,26 @@ require_once('inlcudes/functions.php');
                   $data = validateInputs($self);
                   $errors = validateErrors($self);
                   $formSubmmited = false;
-                  $formValid = true;
+                  $showForm = true;
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */
                   if (isset($_POST['submit'])) {
                        $formSubmmited = true;
                        #declare $self varaible as $_POST for use in validation
-                       if ((errordetection($self) == true) && ($formSubmmited == true)) {
+                       if ((sizeof($errors) > 0) && ($formSubmmited == true)) {
                            $formValid = false;
                            displayErrors($errors);
                        }
-                       if(($formValid == true) && ($formSubmmited == true)){
-                           header('location: welcome.php');
+                       if((sizeof($errors) == 0) && ($formSubmmited == true)){
+                           $showForm = false;
+                           displayResults($data);
                        }
                    }
 
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   displayForm($data, $errors);
+                   displayForm($showForm, $data, $errors);
                    ?>
           </section>
       </main>
