@@ -45,9 +45,10 @@ if ( isset( $_SESSION['admin'] ) ) {
                   <?php
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
-                  $data = validateInputs($self);
-                  $errors = validateErrors($self);
+                  $data = validateAddUser($self);
+                  $errors = addUserErrors($self);
                   $formSubmmited = false;
+                  $displayForm = true;
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */
@@ -59,6 +60,9 @@ if ( isset( $_SESSION['admin'] ) ) {
                            displayErrors($errors);
                        }
                        if((sizeof($errors) == 0) && ($formSubmmited == true)){
+
+                         $displayForm = false;
+                         displayResults($data);
                          writeToFile(openDirectory());
 
                        }
@@ -67,7 +71,7 @@ if ( isset( $_SESSION['admin'] ) ) {
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   displayForm($data, $errors);
+                   addUserForm($displayForm, $data, $errors);
                    ?>
           </section>
       </main>

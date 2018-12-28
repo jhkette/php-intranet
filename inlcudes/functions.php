@@ -50,9 +50,9 @@ function validateInputs($self)
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
 
-    $errors = array();
+
     $data = array();
-    $errors_detected;
+
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
         if ($username == $adminusername) {
@@ -75,7 +75,7 @@ function validateErrors($self)
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
     $errors = array();
-    $data = array();
+
     $errors_detected;
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
@@ -270,5 +270,155 @@ function writeToFile($handle){
     }
 
 }
+
+// a. Title
+// b. First name
+// c. Surname
+// d. Email
+// e. Username
+// f. Password
+
+function addUserForm($displayForm, $data = array(), $errors=array())
+{
+    ?>
+    <?php if ($displayForm == true): ?>
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
+                           <fieldset>
+                        <legend>Add a user</legend>
+                        <div>
+                            <label for="">Title</label>
+                            <select name="title" id="title">
+                                <?php if (isset($errors['title'])) {echo '<p> No value selected </p>';} ?>
+                                <option value="Mr"  <?php if (isset($data['title']) &&  ($data['title']=="Mr")) {echo 'selected ="selected"';} ?>>Mr</option>
+                                <option value="Mrs" <?php  if (isset($data['title']) &&  ($data['title']=="Mrs")) {echo 'selected ="selected"';} ?>>Mrs</option>
+                                <option value="Ms" <?php  if (isset($data['title']) &&  ($data['title']=="Ms")) {echo 'selected ="selected"';} ?>>Ms</option>
+                            </select>
+                        </div>
+                               <div>
+                                   <label for="">First name</label>
+                                   <?php if (isset($errors['firstname'])) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['firstname'])) {echo htmlspecialchars($data['firstname']);} ?>" name="firstname" id="name" />
+                               </div>
+                               <div>
+                                   <label for="">Surname</label>
+                                   <?php if (isset($errors['surname'])) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['surname'])) {echo htmlspecialchars($data['surname']);} ?>" name="surname" id="name" />
+                               </div>
+                               <div>
+                                   <label for="">Email</label>
+                                   <?php if (isset($errors['email'])) {echo '<p> Please enter email </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['email'])) {echo htmlspecialchars($data['email']);} ?>"  name="email" id="email"/>
+                               </div>
+                               <div>
+                                   <label for="">Username</label>
+                                   <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['username'])) {echo htmlspecialchars($data['username']);} ?>" name="username" id="name" />
+                               </div>
+                               <div>
+                                   <label for="">Password</label>
+                                   <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
+                                   <input type="text"  value= "<?php if (isset($data['password'])) {echo htmlspecialchars($data['password']);} ?>"  name="password" id="password"/>
+                               </div>
+                               <div>
+                                   <input type="submit" name="submit" value="submitbutton" />
+                               </div>
+                           </fieldset>
+                       </form>
+             <?php endif; ?>
+    <?php
+}
+
+function validateAddUser($self){
+    $data = array();
+
+    if (isset($_POST['username'])) {
+        $username = trim($_POST['username']);
+        if (ctype_alpha($username) && strlen($username) < 75) {
+            $data['username'] = $username;
+
+        }
+    }
+    if (isset($_POST['password'])) {
+        $password = trim($_POST['password']);
+        if (ctype_alnum($password) && strlen($password) < 75) {
+            $data['password'] = $password;
+        }
+    }
+
+    if (isset($_POST['firstname'])) {
+        $firstname = trim($_POST['firstname']);
+        if (ctype_alpha($firstname) && strlen($firstname) < 75) {
+            $data['firstname'] = $firstname;
+        }
+    }
+    if (isset($_POST['surname'])) {
+        $firstname = trim($_POST['surname']);
+        if (ctype_alpha($firstname) && strlen($firstname) < 75) {
+            $data['surname'] = $firstname;
+        }
+    }
+
+    if (isset($_POST['email'])) {
+        $email = trim($_POST['email']);
+        if ((strpos($email, '@')!== false) && strlen($email) < 75) {
+            $data['email'] = $email;
+        }
+    }
+
+    if (isset($_POST['title'])) {
+        $mail = trim($_POST['title']);
+        if (($mail == 'Mr') || ($mail == 'Mrs') || ($mail == 'Ms')) {
+            $data['title'] = $mail;
+        }
+    }
+print_r($data);
+return $data;
+}
+
+function addUserErrors($self){
+    $errors = array();
+
+
+    if (isset($_POST['username'])) {
+        $username = trim($_POST['username']);
+        if (!ctype_alpha($username) || strlen($username) > 75) {
+            $errors['username'] = $username;
+
+        }
+    }
+    if (isset($_POST['password'])) {
+        $password = trim($_POST['password']);
+        if (!ctype_alnum($password) || strlen($password) > 75) {
+            $errors['password'] = $password;
+        }
+    }
+
+    if (isset($_POST['firstname'])) {
+        $firstname = trim($_POST['firstname']);
+        if (!ctype_alpha($firstname) || strlen($firstname) > 75) {
+            $errors['firstname'] = $firstname;
+        }
+    }
+    if (isset($_POST['surname'])) {
+        $firstname = trim($_POST['surname']);
+        if (!ctype_alpha($firstname) || strlen($firstname) > 75) {
+            $errors['surname'] = $firstname;
+        }
+    }
+
+    if (isset($_POST['email'])) {
+        $email = trim($_POST['email']);
+        if ((strpos($email, '@')=== false) || strlen($email) > 75) {
+            $errors['email'] = $email;
+        }
+    }
+
+
+    print_r($errors);
+    return $errors;
+
+}
+
+
 
 ?>
