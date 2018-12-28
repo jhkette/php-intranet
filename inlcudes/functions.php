@@ -264,10 +264,8 @@ function writeToFile($handle){
 
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
-        $text = $username.','.$password.'|';
+        $text =  $username.','.$password.'|' . PHP_EOL;
         fwrite( $handle , $text ) ;
-
-
 
     }
 
