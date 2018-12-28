@@ -16,10 +16,10 @@ function makeMenu($menu){
 }
 
 
-function displayForm($showForm, $data = array(), $errors=array())
+function displayForm( $data = array(), $errors=array())
 {
     ?>
-        <?php if ($showForm == true): ?>
+
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
                            <fieldset>
                         <legend>Please log in</legend>
@@ -39,7 +39,7 @@ function displayForm($showForm, $data = array(), $errors=array())
                                </div>
                            </fieldset>
                        </form>
-        <?php endif; ?>
+
     <?php
 }
 
@@ -95,10 +95,7 @@ function validateErrors($self)
     return $errors;
 }
 
-function validateLoginInputs($self, $loggeddata)
-{
-
-
+function validateLoginInputs($self, $loggeddata){
     $errors = array();
     $data = array();
     $errors_detected;
@@ -113,17 +110,9 @@ function validateLoginInputs($self, $loggeddata)
              }
          }
      }
-    if (isset($_POST['password'])) {
-        $password = trim($_POST['password']);
-        foreach ($loggeddata as $key => $value) {
-           $loggedPassword = explode(',', $value);
-           $loggedPassword = trim($loggedPassword[1]);
-           if ($password == $loggedPassword ) {
-               $data['password'] = $password;
-               $_SESSION['password'] = $password;
-            }
-        }
-    }
+     /*I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
+     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. Of course if they
+     are correct in relation to a username they will be logged in and the data will not need to be represented anyway */
     return $data;
 }
 
@@ -134,7 +123,7 @@ function validateLoginErrors($self, $loggeddata)
     $adminpassword = 'DCSadmin01';
     $errors = array();
     $correctdata = array();
-    $correctdata2 = array();
+    $correctPassword = array();
     $errors_detected;
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
@@ -145,24 +134,31 @@ function validateLoginErrors($self, $loggeddata)
             array_push($correctdata, $loggedUsername);
          }
      }
+ }
      if(count($correctdata)== 0){
          $errors['username'] = 'Full name is not valid';
      }
     if (isset($_POST['password'])) {
+        $passwordValid = false;
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
-           $loggedPassword = explode(',', $value);
-           $loggedPassword = trim($loggedPassword[1]);
-           if ($password == $loggedPassword ) {
-             array_push($correctdata2, $password);
+            $loggeddata = explode(',', $value);
+            $loggeddata[0] = trim($loggeddata[0]);
+            $loggeddata[1] = trim($loggeddata[1]);
+
+
+            if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
+
+                array_push($correctPassword, $loggeddata[1]);
             }
+
         }
-        if(count($correctdata2)== 0){
-            $errors['password'] = 'password name is not valid';
+        if(count($correctPassword)== 0){
+            $errors['password'] = 'Password is not valid';
         }
-    }
-    return $errors;
+
 }
+return $errors;
 }
 
 
@@ -176,8 +172,7 @@ function bothFieldsValid($self, $loggeddata){
             $loggeddata = explode(',', $value);
             $loggeddata[0] = trim($loggeddata[0]);
             $loggeddata[1] = trim($loggeddata[1]);
-            echo  $loggeddata[0] . $loggeddata[1] . '  ';
-            echo $username . $password. '  ';
+
 
             if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
 
@@ -235,7 +230,7 @@ function displayErrors($errors)
 
 
                                     // open file or report error using string 'data/' and $value to create path to files
-                                    $handle = fopen('data/' . htmlentities(trim($value)), 'r');
+                                    $handle = fopen('data/' . htmlentities(trim($value)), 'a+');
 
                                     return $handle;
 
@@ -263,5 +258,19 @@ function getData($handle){
             return $dataArray;
         }
 
+function writeToFile($handle){
+
+    if (isset($_POST['username']) && (isset($_POST['password']))) {
+
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        $text = $username.','.$password.'|';
+        fwrite( $handle , $text ) ;
+
+
+
+    }
+
+}
 
 ?>

@@ -39,7 +39,7 @@ include('inlcudes/menu.php');
                   $data = validateInputs($self);
                   $errors = validateErrors($self);
                   $formSubmmited = false;
-                  $showForm = true;
+
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */
                   if (isset($_POST['submit'])) {
@@ -52,7 +52,7 @@ include('inlcudes/menu.php');
                        if((sizeof($errors) == 0) && ($formSubmmited == true)){
                            header('Location: welcome.php'); #refreshing page to refresh menu on successful login
 
-                           $showForm = false;
+
 
                            displayResults($data);
 
@@ -62,7 +62,7 @@ include('inlcudes/menu.php');
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   displayForm($showForm, $data, $errors);
+                   displayForm($data, $errors);
                    ?>
           </section>
       </main>

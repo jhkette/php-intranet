@@ -2,6 +2,15 @@
 require_once('inlcudes/init.php');
 require_once('inlcudes/functions.php');
 include('inlcudes/menu.php');
+
+if ( isset( $_SESSION['admin'] ) ) {
+
+    echo 'welcome' . $_SESSION['admin'];
+}
+ else {
+    // Redirect them to the login page
+    header("Location: admin-login.php");
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -34,12 +43,10 @@ include('inlcudes/menu.php');
 
 
                   <?php
-                  $loggeddata = getData(openDirectory());
-                  print_r($loggeddata);
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
-                  $data = validateLoginInputs($self, $loggeddata);
-                  $errors = validateLoginErrors($self, $loggeddata);
+                  $data = validateInputs($self);
+                  $errors = validateErrors($self);
                   $formSubmmited = false;
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
@@ -51,12 +58,8 @@ include('inlcudes/menu.php');
                            $formValid = false;
                            displayErrors($errors);
                        }
-                       if(bothFieldsValid($self, $loggeddata) == true){
-                           header('Location: welcome.php'); #refreshing page to refresh menu on successful login
-
-
-
-                           displayResults($data);
+                       if((sizeof($errors) == 0) && ($formSubmmited == true)){
+                         writeToFile(openDirectory());
 
                        }
                    }
@@ -64,7 +67,7 @@ include('inlcudes/menu.php');
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   displayForm( $data, $errors);
+                   displayForm($data, $errors);
                    ?>
           </section>
       </main>
