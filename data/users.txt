@@ -3,9 +3,3 @@ admin2, DCSadmin02 | hello
 admin3, DCSadmin |asda
 joseph, DCSadmin |asda
 steven, DCSadmin4|asda
-ads,asdsad|
-asd,asdas|
-DOESTHISWORK,DOESIT|
-adsad,asdsd|
-hello,hellloagain|
-joseph,hello|

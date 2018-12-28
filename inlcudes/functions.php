@@ -333,34 +333,34 @@ function validateAddUser($self){
 
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
-        if (ctype_alpha($username) && strlen($username) < 75) {
+        if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
             $data['username'] = $username;
 
         }
     }
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
-        if (ctype_alnum($password) && strlen($password) < 75) {
+        if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
             $data['password'] = $password;
         }
     }
 
     if (isset($_POST['firstname'])) {
         $firstname = trim($_POST['firstname']);
-        if (ctype_alpha($firstname) && strlen($firstname) < 75) {
+        if (ctype_alpha($firstname) && (strlen($firstname) < 75) && strlen($firstname) > 2) {
             $data['firstname'] = $firstname;
         }
     }
     if (isset($_POST['surname'])) {
-        $firstname = trim($_POST['surname']);
-        if (ctype_alpha($firstname) && strlen($firstname) < 75) {
-            $data['surname'] = $firstname;
+        $surname = trim($_POST['surname']);
+        if (ctype_alpha($surname) && (strlen($surname) < 75) && strlen($surname) > 2) {
+            $data['surname'] = $surname;
         }
     }
 
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
-        if ((strpos($email, '@')!== false) && strlen($email) < 75) {
+        if ((strpos($email, '@')!== false) && (strlen($email) < 75) && strlen($email) > 2) {
             $data['email'] = $email;
         }
     }
@@ -371,7 +371,7 @@ function validateAddUser($self){
             $data['title'] = $mail;
         }
     }
-print_r($data);
+
 return $data;
 }
 
@@ -381,44 +381,49 @@ function addUserErrors($self){
 
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
-        if (!ctype_alpha($username) || strlen($username) > 75) {
+        if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) < 2)) {
             $errors['username'] = $username;
 
         }
     }
     if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
-        if (!ctype_alnum($password) || strlen($password) > 75) {
+        if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) < 2)) {
             $errors['password'] = $password;
         }
     }
 
     if (isset($_POST['firstname'])) {
         $firstname = trim($_POST['firstname']);
-        if (!ctype_alpha($firstname) || strlen($firstname) > 75) {
+        if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) < 2))  {
             $errors['firstname'] = $firstname;
         }
     }
     if (isset($_POST['surname'])) {
-        $firstname = trim($_POST['surname']);
-        if (!ctype_alpha($firstname) || strlen($firstname) > 75) {
-            $errors['surname'] = $firstname;
+        $surname = trim($_POST['surname']);
+        if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) < 2)) {
+            $errors['surname'] = $surname;
         }
     }
 
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
-        if ((strpos($email, '@')=== false) || strlen($email) > 75) {
+        if ((strpos($email, '@') === false) || (strlen($email) > 75) || (strlen($email) < 4)) {
+
             $errors['email'] = $email;
         }
     }
-
-
-    print_r($errors);
     return $errors;
-
 }
 
+
+function refreshPageButton(){
+    ?>
+
+    <a href="<?php echo $_SERVER['PHP_SELF']; ?>"><button class="button button1">Add User</button></a>
+
+    <?php
+}
 
 
 ?>

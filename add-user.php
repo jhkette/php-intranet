@@ -64,6 +64,7 @@ if ( isset( $_SESSION['admin'] ) ) {
                          $displayForm = false;
                          displayResults($data);
                          writeToFile(openDirectory());
+                         refreshPageButton();
 
                        }
                    }
