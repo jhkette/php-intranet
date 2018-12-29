@@ -30,7 +30,7 @@ the user can simply navigate to the text files.
 - how to record logged out status on index page? USE GET superglobal on logout BUTTON
 something like logout.php?message=loggedout.
 - Generally how to manage login/logout - where to direct user. You don't want to see form again. Not relevant.
-- How to handle duplicates? Turns out you need another error message. Normal error message won't suffice -
+- How to handle duplicates? Turns out you need another error message. Normal error message won't suffice - messages won't make sense
 
 if (isset(message)){
 display message
