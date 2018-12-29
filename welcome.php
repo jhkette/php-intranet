@@ -4,14 +4,11 @@ require_once('inlcudes/init.php');
 include('inlcudes/menu.php');
 
 
-if ( isset( $_SESSION['admin'] ) ) {
+if ( !isset( $_SESSION['admin'] ) ) {
+header("Location: admin-login.php");
 
-    echo 'welcome' . $_SESSION['admin'];
 }
- else {
-    // Redirect them to the login page
-    header("Location: admin-login.php");
-}
+
 ?>
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -28,11 +25,16 @@ if ( isset( $_SESSION['admin'] ) ) {
      </head>
      <body>
         <div class="container">
+            <secion class="">
+            <h2><?php
+            echo 'welcome' . $_SESSION['admin']; ?></h2>
+        </section>
+            <section class="col-md-12">
+                <?php
+                print makeMenu($menu);
+                ?>
+            </section>
 
         </div>
-        <section class="col-md-12">
-            <?php
-            print makeMenu($menu);
-            ?>
-        </section>
+
     </body>
