@@ -305,13 +305,6 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
         $title = 'Mr'; #the title needs to default to a value as it a select box
     }
 
-    if(isset($cleanData['username'])) {
-        $userName = htmlentities($cleanData['username']);
-    }
-    else{
-        $userName = '';
-    }
-
     if (isset($cleanData['firstname'])){
         $firstname = htmlentities($cleanData['firstname']);
     }
@@ -324,6 +317,25 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
     }
     else{
         $surname = '';
+    }
+
+    if (isset($cleanData['email'])){
+        $email = htmlentities($cleanData['email']);
+    }
+    else{
+        $email ='';
+    }
+    if(isset($cleanData['username'])) {
+        $userName = htmlentities($cleanData['username']);
+    }
+    else{
+        $userName = '';
+    }
+    if(isset($cleanData['password'])) {
+        $password = htmlentities($cleanData['password']);
+    }
+    else{
+        $password = '';
     }
 
     ?>
@@ -354,7 +366,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
                                <div>
                                    <label for="">Email</label>
                                    <?php if (isset($errors['email'])) {echo '<p> Please enter email </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($cleanData['email'])) {echo htmlspecialchars($cleanData['email']);} ?>"  name="email" id="email"/>
+                                   <input type="text"  value= "<?php echo $email ?>"  name="email" id="email"/>
                                </div>
                                <div>
                                    <label for="">Username</label>
@@ -364,7 +376,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
                                <div>
                                    <label for="">Password</label>
                                    <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($cleanData['password'])) {echo htmlspecialchars($cleanData['password']);} ?>"  name="password" id="password"/>
+                                   <input type="text"  value= "<?php echo $password ?>"  name="password" id="password"/>
                                </div>
                                <div>
                                    <input type="submit" name="submit" value="submitbutton" />
