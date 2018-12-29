@@ -195,7 +195,7 @@ function displayResults($data)
 }
 
 
-function displayErrors($errors, $duplicates)
+function displayErrors($errors, $duplicates=array())
 {
     ?>
     <?php foreach ($errors as $key => $value): ?>
@@ -374,10 +374,11 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
 function validateAddUser($self, $loggeddata){
     $cleanData = array();
     $userMatch = false;
-    $emailMatch = true;
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
+    $emailMatch = false;
+
     if (isset($_POST['submit'])) {
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
         foreach ($loggeddata as $key => $value) {
 
             $data = explode('|', $value);
@@ -387,10 +388,7 @@ function validateAddUser($self, $loggeddata){
             if ($userPassword[0] == $username){
                 $userMatch = true;
             }
-            if($userMatch== true){
-                $duplicates['username'] = 'This is a duplicate';
 
-            }
             $emailList = $data[1];
             $emailList = explode(',', $emailList);
             if($emailList[3]== $email){
@@ -398,7 +396,7 @@ function validateAddUser($self, $loggeddata){
             };
         }
 
-        $username = trim($_POST['username']);
+        /* username already declared*/
         if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
 
             if ($userMatch == false){
@@ -418,7 +416,7 @@ function validateAddUser($self, $loggeddata){
         if (ctype_alpha($surname) && (strlen($surname) < 75) && strlen($surname) > 2) {
             $cleanData['surname'] = $surname;
         }
-
+       /* email already declared*/
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             if($emailMatch == false){
@@ -493,8 +491,12 @@ function checkDuplicates($self, $loggeddata){
             if($emailList[3]== $email){
                 $emailMatch = true;
             };
-            $duplicates['email'] = 'This is a duplicate';
+
+
         }
+        if($emailMatch== true){
+        $duplicates['email'] = 'This is a duplicate';
+    }
     }
     return $duplicates;
 }
