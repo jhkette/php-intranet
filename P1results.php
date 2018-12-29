@@ -1,17 +1,9 @@
 <?php
 require_once('inlcudes/init.php');
+require_once('inlcudes/sessions.php');
 
 include('inlcudes/menu.php');
 
-
-if ( isset( $_SESSION['admin'] ) ) {
-
-    echo 'welcome' . $_SESSION['admin'];
-}
- else {
-    // Redirect them to the login page
-    header("Location: admin-login.php");
-}
 
 ?>
 
@@ -40,6 +32,17 @@ if ( isset( $_SESSION['admin'] ) ) {
 	</head>
 	<body>
         <section class="col-md-12">
+            <?php
+            if ( isset( $_SESSION['admin'] ) ) {
+
+                echo 'welcome' . $_SESSION['admin'];
+            }
+             else {
+                // Redirect them to the login page
+                header("Location: admin-login.php");
+            }
+
+            ?>
             <?php
             print makeMenu($menu);
             ?>

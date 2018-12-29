@@ -11,7 +11,7 @@ session status.
 
 - Go through all data, making sure it is all clean and escaped.
 
-- Password ERRORS only ADDED if usernmame is VALID
+- Password ERRORS only ADDED if usernmame is VALID (DONE (check))
 
 - revist forms - add if statements at beginning then add variable to forms DONE (double check)
 
@@ -30,6 +30,7 @@ the user can simply navigate to the text files.
 - how to record logged out status on index page? USE GET superglobal on logout BUTTON
 something like logout.php?message=loggedout.
 - Generally how to manage login/logout - where to direct user. You don't want to see form again. Not relevant.
+- How to handle duplicates? Turns out you need another error message. Normal error message won't suffice - doesn't make sense
 
 if (isset(message)){
 display message

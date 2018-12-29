@@ -273,12 +273,6 @@ function writeToFile($handle){
 
 }
 
-// a. Title
-// b. First name
-// c. Surname
-// d. Email
-// e. Username
-// f. Password
 
 function addUserForm($displayForm, $cleanData = array(), $errors=array())
 {
@@ -354,6 +348,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
                                </div>
                                <div>
                                    <label for="">Username</label>
+
                                    <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
                                    <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
                                </div>
@@ -371,13 +366,26 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
     <?php
 }
 
-function validateAddUser($self){
+function validateAddUser($self, $loggeddata){
     $cleanData = array();
+    $userMatch = false;
     if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
         if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
+            foreach ($loggeddata as $key => $value) {
+                $loggeddata = explode('|', $value);
+                $userPassword  =  $loggeddata[0];
+                $userPassword = explode(',', $value);
+                $userPassword[0] = trim($userPassword[0]);
+                if ($userPassword[0] == $username){
+                    $userMatch = true;
+                }
+            }
+            if ($userMatch == false){
             $cleanData['username'] = $username;
+        }
+
         }
         $password = trim($_POST['password']);
         if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
@@ -406,16 +414,29 @@ return $cleanData;
 
 /*You need to check if the form is submitted */
 
-function addUserErrors($self){
+function addUserErrors($self, $loggeddata){
     $errors = array();
+    $userMatch = false;
 
     if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
         if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) < 2)) {
             $errors['username'] = $username;}
-
-
+        if (ctype_alpha($username) || (strlen($username) < 75) || (strlen($username) < 2)) {
+             foreach ($loggeddata as $key => $value) {
+                $loggeddata = explode('|', $value);
+                $userPassword  =  $loggeddata[0];
+                $userPassword = explode(',', $value);
+                $userPassword[0] = trim($userPassword[0]);
+                if ($userPassword[0] == $username){
+                    $userMatch = true;
+                }
+            }
+            if ($userMatch == true){
+            $errors['username'] = $username;
+        }
+    }
 
 
         $password = trim($_POST['password']);
@@ -423,21 +444,14 @@ function addUserErrors($self){
             $errors['password'] = $password;
         }
 
-
-
         $firstname = trim($_POST['firstname']);
         if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) < 2))  {
             $errors['firstname'] = $firstname;
         }
-
-
         $surname = trim($_POST['surname']);
         if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) < 2)) {
             $errors['surname'] = $surname;
         }
-
-
-
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
 
