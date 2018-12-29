@@ -106,7 +106,7 @@ function validateLoginInputs($self, $loggeddata){
             $loggedUsername = explode(',', $value);
             $loggedUsername = $loggedUsername[0];
             if ($username == $loggedUsername ) {
-                $data['username'] = $username;
+                $cleanData['username'] = $username;
                 $_SESSION['admin'] = $username;
              }
          }
