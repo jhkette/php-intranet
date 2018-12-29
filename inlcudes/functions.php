@@ -295,7 +295,7 @@ function writeToFile($handle){
         $firstname = htmlentities(trim($_POST['firstname']));
         $surname = htmlentities(trim($_POST['surname']));
         $email = htmlentities(trim($_POST['email']));
-        $text =  $username.','.$password.' | ' . $title .',' . $firstname.',' . $surname.',' . $email . PHP_EOL;
+        $text =  $username.','.$password.'|' . $title .',' . $firstname.',' . $surname.',' . $email . PHP_EOL;
         fwrite( $handle , $text ) ;
 
     }
