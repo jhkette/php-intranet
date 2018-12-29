@@ -1,4 +1,9 @@
 <?php
+
+require_once('inlcudes/init.php');
+
+include('inlcudes/menu.php');
+
 session_unset();
 if (ini_get("session.use_cookies")) {
     $yesterday = time() - (24 * 60 * 60);

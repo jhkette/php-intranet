@@ -44,7 +44,7 @@ function displayForm( $data = array(), $errors=array())
 }
 
 
-
+/*You need to check if the form is submitted */
 function validateInputs($self)
 {
     $adminusername = 'admin';
@@ -52,24 +52,25 @@ function validateInputs($self)
 
 
     $data = array();
+ if (isset($_POST['submit'])) {
 
-    if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
         if ($username == $adminusername) {
             $data['username'] = $username;
             $_SESSION['admin'] = $username;
         }
-    }
-    if (isset($_POST['password'])) {
+
+
         $password = trim($_POST['password']);
         if ($password == $adminpassword ) {
             $data['password'] = $password;
             $_SESSION['password'] = $password;
         }
-    }
+
+}
     return $data;
 }
-
+/*You need to check if the form is submitted */
 function validateErrors($self)
 {
     $adminusername = 'admin';
@@ -77,29 +78,32 @@ function validateErrors($self)
     $errors = array();
 
     $errors_detected;
-    if (isset($_POST['username'])) {
+     if (isset($_POST['submit'])) {
+
         $username = trim($_POST['username']);
         if ($username !== $adminusername) {
             $errors['username'] = 'Full name is not valid';
 
         }
-    }
 
-    if (isset($_POST['password'])) {
+
+
         $password = trim($_POST['password']);
         if ($password !== $adminpassword) {
             $errors['password'] = 'password name is not valid';
 
         }
-    }
+
+}
     return $errors;
 }
-
+/*You need to check if the form is submitted */
 function validateLoginInputs($self, $loggeddata){
     $errors = array();
     $data = array();
     $errors_detected;
-    if (isset($_POST['username'])) {
+     if (isset($_POST['submit'])) {
+
         $username = trim($_POST['username']);
          foreach ($loggeddata as $key => $value) {
             $loggedUsername = explode(',', $value);
@@ -116,14 +120,14 @@ function validateLoginInputs($self, $loggeddata){
     return $data;
 }
 
-
+/*You need to check if the form is submitted */
 function validateLoginErrors($self, $loggeddata)
 {
-
+   $errors  = array();
     $correctdata = array();
     $correctPassword = array();
+ if (isset($_POST['submit'])) {
 
-    if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
          foreach ($loggeddata as $key  => $value) {
             $loggedUsername = explode(',', $value);
@@ -132,11 +136,11 @@ function validateLoginErrors($self, $loggeddata)
             array_push($correctdata, $loggedUsername);
          }
      }
- }
+
      if(count($correctdata)== 0){
          $errors['username'] = 'Full name is not valid';
      }
-    if (isset($_POST['password'])) {
+
         $passwordValid = false;
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
@@ -159,10 +163,11 @@ function validateLoginErrors($self, $loggeddata)
 return $errors;
 }
 
-
+/*You need to check if the form is submitted */
 function bothFieldsValid($self, $loggeddata){
     $valid = false;
-    if (isset($_POST['username']) && (isset($_POST['password']))) {
+     if (isset($_POST['submit'])) {
+
 
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
@@ -251,16 +256,19 @@ function getData($handle){
                 // ensure $line is HTML chars
                 $line = htmlentities(trim($line));
                 if  (!empty($line))  { # check it is not an empty line
+                    /* the write function and validate form function is going to ensure
+                    the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
+                    the write function always adds '|' after the username and password */
                     $line = explode('|', $line);
                     array_push($dataArray,  $line[0]);
                 }
             }
-            return $dataArray;
+            return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
         }
 
 function writeToFile($handle){
 
-    if (isset($_POST['username']) && (isset($_POST['password']))) {
+     if (isset($_POST['submit'])) {
 
         $username = htmlentities(trim($_POST['username']));
         $password = htmlentities(trim($_POST['password']));
@@ -286,6 +294,7 @@ function addUserForm($displayForm, $data = array(), $errors=array())
 {
     ?>
     <?php if ($displayForm == true): ?>
+        <!--post to the same page  -->
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
                            <fieldset>
                         <legend>Add a user</legend>
@@ -334,42 +343,28 @@ function addUserForm($displayForm, $data = array(), $errors=array())
 
 function validateAddUser($self){
     $data = array();
+    if (isset($_POST['submit'])) {
 
-    if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
         if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
             $data['username'] = $username;
-
         }
-    }
-    if (isset($_POST['password'])) {
         $password = trim($_POST['password']);
         if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
             $data['password'] = $password;
         }
-    }
-
-    if (isset($_POST['firstname'])) {
         $firstname = trim($_POST['firstname']);
         if (ctype_alpha($firstname) && (strlen($firstname) < 75) && strlen($firstname) > 2) {
             $data['firstname'] = $firstname;
         }
-    }
-    if (isset($_POST['surname'])) {
         $surname = trim($_POST['surname']);
         if (ctype_alpha($surname) && (strlen($surname) < 75) && strlen($surname) > 2) {
             $data['surname'] = $surname;
         }
-    }
-
-    if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
-        if ((strpos($email, '@')!== false) && (strlen($email) < 75) && strlen($email) > 2) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $data['email'] = $email;
         }
-    }
-
-    if (isset($_POST['title'])) {
         $mail = trim($_POST['title']);
         if (($mail == 'Mr') || ($mail == 'Mrs') || ($mail == 'Ms')) {
             $data['title'] = $mail;
@@ -379,40 +374,42 @@ function validateAddUser($self){
 return $data;
 }
 
+/*You need to check if the form is submitted */
+
 function addUserErrors($self){
     $errors = array();
 
+    if (isset($_POST['submit'])) {
 
-    if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
         if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) < 2)) {
-            $errors['username'] = $username;
+            $errors['username'] = $username;}
 
-        }
-    }
-    if (isset($_POST['password'])) {
+
+
+
         $password = trim($_POST['password']);
         if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) < 2)) {
             $errors['password'] = $password;
         }
-    }
 
-    if (isset($_POST['firstname'])) {
+
+
         $firstname = trim($_POST['firstname']);
         if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) < 2))  {
             $errors['firstname'] = $firstname;
         }
-    }
-    if (isset($_POST['surname'])) {
+
+
         $surname = trim($_POST['surname']);
         if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) < 2)) {
             $errors['surname'] = $surname;
         }
-    }
 
-    if (isset($_POST['email'])) {
+
+
         $email = trim($_POST['email']);
-        if ((strpos($email, '@') === false) || (strlen($email) > 75) || (strlen($email) < 4)) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
 
             $errors['email'] = $email;
         }

@@ -13,7 +13,19 @@ session_start();
 
 // session start looks for a cookie superglobal - initialises data, if not creates a new session ID.
 
+/* NEED TO TIDY UP FORMS*/
+
+// When displaying the form, we can use the data from $clean to redisplay valid entries
+// – but only if we have valid data!
+// <?php
+// if (isset($clean['age'])) {
+// $age = htmlentities($clean['age']);
+// } else {
+// $age = '';
+// }
 //
+// <input value="<?php echo $age; " id="ag"
+// name="age" type="text" />
 
 
 if(isset $_session[name]){

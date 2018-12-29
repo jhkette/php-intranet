@@ -45,6 +45,7 @@ if ( isset( $_SESSION['admin'] ) ) {
                   <?php
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
+                  $loggeddata = getData(openDirectory());
                   $data = validateAddUser($self);
                   $errors = addUserErrors($self);
                   $formSubmmited = false;

@@ -1,12 +1,14 @@
 - you need to add functions vlidation so that "|" is accounted for. You need
-to add this to write function as well.
+to add this to write function as well. DONE
 - header and footer include files.
 - css file - get rid of bootstrap.
 - ONLY write username if username not already on file - amend function
-- sought out sessions - only admin session should be able to access add user
+- ONLY write email if email not already on file - amend function
+- sought out sessions - only admin session should be able to access add user - create seperate php file with if statement that checks
+session status.
 - record logged out status using GET
 
-- 
+- Go through all data, making sure it is all clean and escaped.
 
 
 
