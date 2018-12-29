@@ -29,6 +29,11 @@ include('inlcudes/menu.php');
                   <?php
                   print makeMenu($menu);
                   ?>
+                  <?php
+                 if(isset($_GET['message'])) {
+                     echo $_GET['message'];
+                 }
+                  ?>
               </section>
               <section class="col-md-12">
 
@@ -69,6 +74,7 @@ include('inlcudes/menu.php');
                    displayForm( $data, $errors);
                    ?>
           </section>
+
       </main>
     </body>
 </html>

@@ -11,7 +11,7 @@ if ( isset( $_SESSION['admin'] ) ) {
 }
  else {
     // Redirect them to the login page
-    header("Location: admin-login.php?message=please log in'");
+    header("Location: login.php?message=please log in");
 }
 ?>
 <!doctype html>

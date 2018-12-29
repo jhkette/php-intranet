@@ -3,8 +3,8 @@ to add this to write function as well. DONE
 - create index page
 - header and footer include files.
 - css file - get rid of bootstrap.
-- ONLY write username if username not already on file - amend function
-- ONLY write email if email not already on file - amend function
+- ONLY write username if username not already on file - amend function DONE
+- ONLY write email if email not already on file - amend function DONE
 - sought out sessions - only admin session should be able to access add user - create seperate php file with if statement that checks
 session status.
 - record logged out status using GET
