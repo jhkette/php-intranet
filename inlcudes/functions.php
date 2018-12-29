@@ -119,12 +119,10 @@ function validateLoginInputs($self, $loggeddata){
 
 function validateLoginErrors($self, $loggeddata)
 {
-    $adminusername = 'admin';
-    $adminpassword = 'DCSadmin01';
-    $errors = array();
+
     $correctdata = array();
     $correctPassword = array();
-    $errors_detected;
+
     if (isset($_POST['username'])) {
         $username = trim($_POST['username']);
          foreach ($loggeddata as $key  => $value) {
@@ -169,12 +167,14 @@ function bothFieldsValid($self, $loggeddata){
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
-            $loggeddata = explode(',', $value);
-            $loggeddata[0] = trim($loggeddata[0]);
-            $loggeddata[1] = trim($loggeddata[1]);
+            $loggeddata = explode('|', $value);
+            $userPasword  =  $loggeddata[0];
+            $userPasword = explode(',', $value);
+            $inputUsername = trim($userPasword[0]);
+            $inputPassword = trim($userPasword[1]);
 
 
-            if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
+            if(($inputUsername ==  $username) && ($inputPassword == $password)){
 
                 $valid = true;
             }
@@ -262,9 +262,13 @@ function writeToFile($handle){
 
     if (isset($_POST['username']) && (isset($_POST['password']))) {
 
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        $text =  $username.','.$password.'|' . PHP_EOL;
+        $username = htmlentities(trim($_POST['username']));
+        $password = htmlentities(trim($_POST['password']));
+        $title = htmlentities(trim($_POST['title']));
+        $firstname = htmlentities(trim($_POST['firstname']));
+        $surname = htmlentities(trim($_POST['surname']));
+        $email = htmlentities(trim($_POST['email']));
+        $text =  $username.','.$password.'|' . $title .',' . $firstname.',' . $surname.',' . $email . PHP_EOL;
         fwrite( $handle , $text ) ;
 
     }
