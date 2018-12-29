@@ -13,7 +13,7 @@ session status.
 
 - Password ERRORS only ADDED if usernmame is VALID
 
-- revist forms - add if statements at beginning then add variable to forms
+- revist forms - add if statements at beginning then add variable to forms DONE (double check)
 
 
 

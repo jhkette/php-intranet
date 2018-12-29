@@ -8,9 +8,9 @@ if(isset($_SESSION['admin'])) {
     'PfPresults.php' => 'PfP results',
     'add-user.php' => 'Add User',
     ];
-
-
 }
+
+
 else{
     $menu = [
     'admin-login.php'  => 'Admin Login',

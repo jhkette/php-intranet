@@ -16,53 +16,43 @@ function makeMenu($menu){
 }
 
 
-function displayForm( $cleanData = array(), $errors=array())
-
-{
+function displayForm( $cleanData = array(), $errors=array()){
     if(isset($cleanData['username'])) {
         $userName = htmlentities($cleanData['username']);
     }
     else{
         $userName = '';
     }
-
-
     ?>
-
-        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
-                           <fieldset>
-                        <legend>Please log in</legend>
-                               <div>
-                                   <label for="">Username</label>
-                                   <?php if (isset($errors['username'])) {echo '<p> Please enter your username </p>';} ?>
-                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
-                               </div>
-                               <div>
-                                   <label for="">Password</label>
-                                   <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                    <!--i'm not saving the password as a value. Password's can't be correct independant of the username  -->
-                                   <input type="text"  value= ""  name="password" id="password"/>
-                               </div>
-
-                               <div>
-                                   <input type="submit" name="submit" value="submitbutton" />
-                               </div>
-                           </fieldset>
-                       </form>
-
-    <?php
+    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
+        <fieldset>
+            <legend>Please log in</legend>
+            <div>
+                <label for="">Username</label>
+                <?php if (isset($errors['username'])) {echo '<p> Please enter your username </p>';} ?>
+                <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
+            </div>
+            <div>
+                 <label for="">Password</label>
+                 <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
+                 <!--i'm not saving the password as a value. Password's can't be correct independant of the username  -->
+                 <input type="text"  value= ""  name="password" id="password"/>
+              </div>
+              <div>
+                  <input type="submit" name="submit" value="submitbutton" />
+              </div>
+          </fieldset>
+      </form>
+      <?php
 }
 
 
 
-function validateInputs($self)
-{
+function validateInputs($self){
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
-
-
     $cleanData = array();
- if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
         if ($username == $adminusername) {
@@ -159,7 +149,6 @@ function validateLoginErrors($self, $loggeddata)
 
                 array_push($correctPassword, $loggeddata[1]);
             }
-
         }
         if(count($correctPassword)== 0){
             $errors['password'] = 'Password is not valid';
@@ -174,7 +163,6 @@ function bothFieldsValid($self, $loggeddata){
     $valid = false;
      if (isset($_POST['submit'])) {
 
-
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
@@ -183,13 +171,9 @@ function bothFieldsValid($self, $loggeddata){
             $userPassword = explode(',', $value);
             $userPassword[0] = trim($userPassword[0]);
             $userPassword[1] = trim($userPassword[1]);
-
-
             if(($userPassword[0]==  $username) && ($userPassword[1] == $password)){
-
                 $valid = true;
             }
-
         }
 }
 return $valid;
@@ -353,8 +337,8 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
                                 <option value="Ms" <?php  if ($title == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
                             </select>
                         </div>
-                               <div>
-                                   <label for="">First name</label>
+                        <div>
+                            <label for="">First name</label>
                                    <?php if (isset($errors['firstname'])) {echo '<p> Please enter your name </p>';} ?>
                                    <input type="text"  value= "<?php echo $firstname ?>" name="firstname" id="name" />
                                </div>
