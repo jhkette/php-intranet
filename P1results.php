@@ -39,7 +39,7 @@ include('inlcudes/menu.php');
             }
              else {
                 // Redirect them to the login page
-                header("Location: admin-login.php");
+                header("Location: admin-login.php?message=please log in'");
             }
 
             ?>

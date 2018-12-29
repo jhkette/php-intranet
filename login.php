@@ -46,7 +46,8 @@ include('inlcudes/menu.php');
                   or redirects the user to welcome.php if no errors were detected */
                   if (isset($_POST['submit'])) {
                        $formSubmmited = true;
-                       #declare $self varaible as $_POST for use in validation
+                      /*i'm counting the size of the errors arry for validation
+                      if errors == 0 the form is valid */
                        if ((sizeof($errors) > 0) && ($formSubmmited == true)) {
                            $formValid = false;
                            displayErrors($errors);

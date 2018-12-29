@@ -237,24 +237,22 @@ function displayErrors($errors)
         }
 
 function getData($handle){
-
     rewind($handle); # pointer needs to be at start of file
-
-            $dataArray = array(); # create data array
-            while (!feof($handle)) { #while not at the end of file
-                $line = fgets($handle);
-                // ensure $line is HTML chars
-                $line = htmlentities(trim($line));
-                if  (!empty($line))  { # check it is not an empty line
-                    /* the write function and validate form function is going to ensure
-                    the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
-                    the write function always adds '|' after the username and password */
-                    $line = explode('|', $line);
-                    array_push($dataArray,  $line[0]);
-                }
-            }
-            return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
+    $dataArray = array(); # create data array
+    while (!feof($handle)) { #while not at the end of file
+        $line = fgets($handle);
+        // ensure $line is HTML chars
+        $line = htmlentities(trim($line));
+        if  (!empty($line))  { # check it is not an empty line
+        /* the write function and validate form function is going to ensure
+        the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
+        the write function always adds '|' after the username and password */
+            $line = explode('|', $line);
+            array_push($dataArray,  $line[0]);
         }
+    }
+return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
+}
 
 function writeToFile($handle){
 
@@ -412,7 +410,7 @@ function validateAddUser($self, $loggeddata){
 return $cleanData;
 }
 
-/*You need to check if the form is submitted */
+
 
 function addUserErrors($self, $loggeddata){
     $errors = array();
@@ -435,6 +433,7 @@ function addUserErrors($self, $loggeddata){
             }
             if ($userMatch == true){
             $errors['username'] = $username;
+            // $errors['username'] = 'This username is already in use';
         }
     }
 
