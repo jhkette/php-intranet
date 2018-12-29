@@ -16,22 +16,32 @@ function makeMenu($menu){
 }
 
 
-function displayForm( $data = array(), $errors=array())
+function displayForm( $cleanData = array(), $errors=array())
+
 {
+    if(isset($cleanData['username'])) {
+        $userName = htmlentities($cleanData['username']);
+    }
+    else{
+        $userName = '';
+    }
+
+
     ?>
 
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
                            <fieldset>
                         <legend>Please log in</legend>
                                <div>
                                    <label for="">Username</label>
-                                   <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['username'])) {echo htmlspecialchars($data['username']);} ?>" name="username" id="name" />
+                                   <?php if (isset($errors['username'])) {echo '<p> Please enter your username </p>';} ?>
+                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
                                </div>
                                <div>
                                    <label for="">Password</label>
                                    <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['password'])) {echo htmlspecialchars($data['password']);} ?>"  name="password" id="password"/>
+                                    <!--i'm not saving the password as a value. Password's can't be correct independant of the username  -->
+                                   <input type="text"  value= ""  name="password" id="password"/>
                                </div>
 
                                <div>
@@ -44,64 +54,61 @@ function displayForm( $data = array(), $errors=array())
 }
 
 
-/*You need to check if the form is submitted */
+
 function validateInputs($self)
 {
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
 
 
-    $data = array();
+    $cleanData = array();
  if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
         if ($username == $adminusername) {
-            $data['username'] = $username;
+            $cleanData['username'] = $username;
             $_SESSION['admin'] = $username;
         }
 
 
         $password = trim($_POST['password']);
         if ($password == $adminpassword ) {
-            $data['password'] = $password;
+            $cleanData['password'] = $password;
             $_SESSION['password'] = $password;
         }
 
 }
-    return $data;
+    return $cleanData;
 }
-/*You need to check if the form is submitted */
+
 function validateErrors($self)
 {
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
     $errors = array();
 
-    $errors_detected;
      if (isset($_POST['submit'])) {
-
-        $username = trim($_POST['username']);
-        if ($username !== $adminusername) {
-            $errors['username'] = 'Full name is not valid';
-
+         $username = trim($_POST['username']);
+         if ($username !== $adminusername) {
+            $errors['username'] = 'Username is not valid';
         }
-
-
-
-        $password = trim($_POST['password']);
-        if ($password !== $adminpassword) {
-            $errors['password'] = 'password name is not valid';
-
+        /*I'm only checking if the password is valid if the username doesn't contain any errors
+        It doesn't make sense for a password to be correct independant of the username it is attached to */
+        if (!isset($errors['username'])) {
+            $password = trim($_POST['password']);
+            if ($password !== $adminpassword) {
+                $errors['password'] = 'password name is not valid';
+            }
         }
-
-}
+    }
     return $errors;
 }
-/*You need to check if the form is submitted */
+
+
 function validateLoginInputs($self, $loggeddata){
     $errors = array();
-    $data = array();
-    $errors_detected;
+    $cleanData = array();
+
      if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
@@ -117,27 +124,26 @@ function validateLoginInputs($self, $loggeddata){
      /*I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
      a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. Of course if they
      are correct in relation to a username they will be logged in and the data will not need to be represented anyway */
-    return $data;
+    return $cleanData;
 }
 
-/*You need to check if the form is submitted */
+
 function validateLoginErrors($self, $loggeddata)
 {
-   $errors  = array();
-    $correctdata = array();
+    $errors  = array();
+    $correctData = array();
     $correctPassword = array();
- if (isset($_POST['submit'])) {
-
+    if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
-         foreach ($loggeddata as $key  => $value) {
+        foreach ($loggeddata as $key  => $value){
             $loggedUsername = explode(',', $value);
             $loggedUsername = $loggedUsername[0];
             if($username == $loggedUsername){
-            array_push($correctdata, $loggedUsername);
+            array_push($correctData, $loggedUsername);
          }
      }
 
-     if(count($correctdata)== 0){
+     if(count($correctData)== 0){
          $errors['username'] = 'Full name is not valid';
      }
 
@@ -163,7 +169,7 @@ function validateLoginErrors($self, $loggeddata)
 return $errors;
 }
 
-/*You need to check if the form is submitted */
+
 function bothFieldsValid($self, $loggeddata){
     $valid = false;
      if (isset($_POST['submit'])) {
@@ -290,47 +296,75 @@ function writeToFile($handle){
 // e. Username
 // f. Password
 
-function addUserForm($displayForm, $data = array(), $errors=array())
+function addUserForm($displayForm, $cleanData = array(), $errors=array())
 {
+    if(isset($cleanData['title'])) {
+        $title = htmlentities($cleanData['title']);
+    }
+    else{
+        $title = 'Mr'; #the title needs to default to a value as it a select box
+    }
+
+    if(isset($cleanData['username'])) {
+        $userName = htmlentities($cleanData['username']);
+    }
+    else{
+        $userName = '';
+    }
+
+    if (isset($cleanData['firstname'])){
+        $firstname = htmlentities($cleanData['firstname']);
+    }
+    else{
+        $firstname = '';
+    }
+
+    if (isset($cleanData['surname'])){
+        $surname = htmlentities($cleanData['surname']);
+    }
+    else{
+        $surname = '';
+    }
+
     ?>
     <?php if ($displayForm == true): ?>
         <!--post to the same page  -->
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>"  method="post">
+        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
                            <fieldset>
                         <legend>Add a user</legend>
                         <div>
                             <label for="">Title</label>
                             <select name="title" id="title">
                                 <?php if (isset($errors['title'])) {echo '<p> No value selected </p>';} ?>
-                                <option value="Mr"  <?php if (isset($data['title']) &&  ($data['title']=="Mr")) {echo 'selected ="selected"';} ?>>Mr</option>
-                                <option value="Mrs" <?php  if (isset($data['title']) &&  ($data['title']=="Mrs")) {echo 'selected ="selected"';} ?>>Mrs</option>
-                                <option value="Ms" <?php  if (isset($data['title']) &&  ($data['title']=="Ms")) {echo 'selected ="selected"';} ?>>Ms</option>
+                                <option value="Mr"  <?php if ($title == 'Mr')  {echo 'selected ="selected"';} ?>>Mr</option>
+                                <option value="Mrs" <?php  if ($title == 'Mrs') {echo 'selected ="selected"';} ?>>Mrs</option>
+                                <option value="Ms" <?php  if ($title == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
                             </select>
                         </div>
                                <div>
                                    <label for="">First name</label>
                                    <?php if (isset($errors['firstname'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['firstname'])) {echo htmlspecialchars($data['firstname']);} ?>" name="firstname" id="name" />
+                                   <input type="text"  value= "<?php echo $firstname ?>" name="firstname" id="name" />
                                </div>
                                <div>
                                    <label for="">Surname</label>
                                    <?php if (isset($errors['surname'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['surname'])) {echo htmlspecialchars($data['surname']);} ?>" name="surname" id="name" />
+                                   <input type="text"  value= "<?php echo $surname ?>" name="surname" id="name" />
                                </div>
                                <div>
                                    <label for="">Email</label>
                                    <?php if (isset($errors['email'])) {echo '<p> Please enter email </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['email'])) {echo htmlspecialchars($data['email']);} ?>"  name="email" id="email"/>
+                                   <input type="text"  value= "<?php if (isset($cleanData['email'])) {echo htmlspecialchars($cleanData['email']);} ?>"  name="email" id="email"/>
                                </div>
                                <div>
                                    <label for="">Username</label>
                                    <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['username'])) {echo htmlspecialchars($data['username']);} ?>" name="username" id="name" />
+                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
                                </div>
                                <div>
                                    <label for="">Password</label>
                                    <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="text"  value= "<?php if (isset($data['password'])) {echo htmlspecialchars($data['password']);} ?>"  name="password" id="password"/>
+                                   <input type="text"  value= "<?php if (isset($cleanData['password'])) {echo htmlspecialchars($cleanData['password']);} ?>"  name="password" id="password"/>
                                </div>
                                <div>
                                    <input type="submit" name="submit" value="submitbutton" />
@@ -342,36 +376,36 @@ function addUserForm($displayForm, $data = array(), $errors=array())
 }
 
 function validateAddUser($self){
-    $data = array();
+    $cleanData = array();
     if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
         if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
-            $data['username'] = $username;
+            $cleanData['username'] = $username;
         }
         $password = trim($_POST['password']);
         if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
-            $data['password'] = $password;
+            $cleanData['password'] = $password;
         }
         $firstname = trim($_POST['firstname']);
         if (ctype_alpha($firstname) && (strlen($firstname) < 75) && strlen($firstname) > 2) {
-            $data['firstname'] = $firstname;
+            $cleanData['firstname'] = $firstname;
         }
         $surname = trim($_POST['surname']);
         if (ctype_alpha($surname) && (strlen($surname) < 75) && strlen($surname) > 2) {
-            $data['surname'] = $surname;
+            $cleanData['surname'] = $surname;
         }
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $data['email'] = $email;
+            $cleanData['email'] = $email;
         }
-        $mail = trim($_POST['title']);
-        if (($mail == 'Mr') || ($mail == 'Mrs') || ($mail == 'Ms')) {
-            $data['title'] = $mail;
+        $title = trim($_POST['title']);
+        if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')) {
+            $cleanData['title'] = $title;
         }
     }
 
-return $data;
+return $cleanData;
 }
 
 /*You need to check if the form is submitted */

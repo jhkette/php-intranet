@@ -1,5 +1,6 @@
 - you need to add functions vlidation so that "|" is accounted for. You need
 to add this to write function as well. DONE
+- create index page
 - header and footer include files.
 - css file - get rid of bootstrap.
 - ONLY write username if username not already on file - amend function
@@ -10,7 +11,9 @@ session status.
 
 - Go through all data, making sure it is all clean and escaped.
 
+- Password ERRORS only ADDED if usernmame is VALID
 
+- revist forms - add if statements at beginning then add variable to forms
 
 
 
