@@ -168,13 +168,13 @@ function bothFieldsValid($self, $loggeddata){
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
             $loggeddata = explode('|', $value);
-            $userPasword  =  $loggeddata[0];
-            $userPasword = explode(',', $value);
-            $inputUsername = trim($userPasword[0]);
-            $inputPassword = trim($userPasword[1]);
+            $userPassword  =  $loggeddata[0];
+            $userPassword = explode(',', $value);
+            $userPassword[0] = trim($userPassword[0]);
+            $userPassword[1] = trim($userPassword[1]);
 
 
-            if(($inputUsername ==  $username) && ($inputPassword == $password)){
+            if(($userPassword[0]==  $username) && ($userPassword[1] == $password)){
 
                 $valid = true;
             }
