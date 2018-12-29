@@ -48,24 +48,30 @@ if ( isset( $_SESSION['admin'] ) ) {
                   $loggeddata = getData(openDirectory());
                   $data = validateAddUser($self, $loggeddata);
                   $errors = addUserErrors($self, $loggeddata);
+                  $duplicates = checkDuplicates($self, $loggeddata);
                   $formSubmmited = false;
                   $displayForm = true;
+
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */
                   if (isset($_POST['submit'])) {
                        $formSubmmited = true;
                        #declare $self varaible as $_POST for use in validation
-                       if ((sizeof($errors) > 0) && ($formSubmmited == true)) {
+                       if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0)) {
+                           if ($formSubmmited == true){
                            $formValid = false;
-                           displayErrors($errors);
+                           displayErrors($errors, $duplicates);
                        }
-                       if((sizeof($errors) == 0) && ($formSubmmited == true)){
+                       }
+                       if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)) {
+                           if ($formSubmmited == true){
 
                          $displayForm = false;
                          displayResults($data);
                          writeToFile(openDirectory());
                          refreshPageButton();
+                     }
 
                        }
                    }
@@ -73,7 +79,7 @@ if ( isset( $_SESSION['admin'] ) ) {
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   addUserForm($displayForm, $data, $errors);
+                   addUserForm($displayForm, $data, $errors, $duplicates);
                    ?>
           </section>
       </main>

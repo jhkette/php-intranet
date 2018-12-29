@@ -195,10 +195,16 @@ function displayResults($data)
 }
 
 
-function displayErrors($errors)
+function displayErrors($errors, $duplicates)
 {
     ?>
     <?php foreach ($errors as $key => $value): ?>
+        <li class = "list-group-item">
+            <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
+            <span class="red-text">    <?php echo $value; ?> </span>
+        </li>
+    <?php endforeach; ?>
+    <?php foreach ($duplicates as $key => $value): ?>
         <li class = "list-group-item">
             <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
             <span class="red-text">    <?php echo $value; ?> </span>
@@ -247,8 +253,8 @@ function getData($handle){
         /* the write function and validate form function is going to ensure
         the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
         the write function always adds '|' after the username and password */
-            $line = explode('|', $line);
-            array_push($dataArray,  $line[0]);
+
+            array_push($dataArray,  $line);
         }
     }
 return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
@@ -264,7 +270,7 @@ function writeToFile($handle){
         $firstname = htmlentities(trim($_POST['firstname']));
         $surname = htmlentities(trim($_POST['surname']));
         $email = htmlentities(trim($_POST['email']));
-        $text =  $username.','.$password.'|' . $title .',' . $firstname.',' . $surname.',' . $email . PHP_EOL;
+        $text =  $username.','.$password.' | ' . $title .',' . $firstname.',' . $surname.',' . $email . PHP_EOL;
         fwrite( $handle , $text ) ;
 
     }
@@ -272,7 +278,7 @@ function writeToFile($handle){
 }
 
 
-function addUserForm($displayForm, $cleanData = array(), $errors=array())
+function addUserForm($displayForm, $cleanData = array(), $errors=array(), $duplicates=array())
 {
     if(isset($cleanData['title'])) {
         $title = htmlentities($cleanData['title']);
@@ -341,12 +347,13 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
                                </div>
                                <div>
                                    <label for="">Email</label>
+                                   <?php if (isset($duplicates['email'])) {echo '<p> This email has already been used</p>';} ?>
                                    <?php if (isset($errors['email'])) {echo '<p> Please enter email </p>';} ?>
                                    <input type="text"  value= "<?php echo $email ?>"  name="email" id="email"/>
                                </div>
                                <div>
                                    <label for="">Username</label>
-
+                                   <?php if (isset($duplicates['username'])) {echo '<p> This username has already been used</p>';} ?>
                                    <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
                                    <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
                                </div>
@@ -367,19 +374,33 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array())
 function validateAddUser($self, $loggeddata){
     $cleanData = array();
     $userMatch = false;
+    $emailMatch = true;
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
     if (isset($_POST['submit'])) {
+        foreach ($loggeddata as $key => $value) {
+
+            $data = explode('|', $value);
+            $userPassword  =  $data[0];
+            $userPassword = explode(',', $userPassword);
+            $userPassword[0] = trim($userPassword[0]);
+            if ($userPassword[0] == $username){
+                $userMatch = true;
+            }
+            if($userMatch== true){
+                $duplicates['username'] = 'This is a duplicate';
+
+            }
+            $emailList = $data[1];
+            $emailList = explode(',', $emailList);
+            if($emailList[3]== $email){
+                $emailMatch = true;
+            };
+        }
 
         $username = trim($_POST['username']);
         if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
-            foreach ($loggeddata as $key => $value) {
-                $loggeddata = explode('|', $value);
-                $userPassword  =  $loggeddata[0];
-                $userPassword = explode(',', $value);
-                $userPassword[0] = trim($userPassword[0]);
-                if ($userPassword[0] == $username){
-                    $userMatch = true;
-                }
-            }
+
             if ($userMatch == false){
             $cleanData['username'] = $username;
         }
@@ -397,9 +418,12 @@ function validateAddUser($self, $loggeddata){
         if (ctype_alpha($surname) && (strlen($surname) < 75) && strlen($surname) > 2) {
             $cleanData['surname'] = $surname;
         }
+
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            if($emailMatch == false){
             $cleanData['email'] = $email;
+            }
         }
         $title = trim($_POST['title']);
         if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')) {
@@ -412,32 +436,16 @@ return $cleanData;
 
 
 
-function addUserErrors($self, $loggeddata){
+function addUserErrors($self){
     $errors = array();
     $userMatch = false;
 
     if (isset($_POST['submit'])) {
 
+
         $username = trim($_POST['username']);
         if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) < 2)) {
             $errors['username'] = $username;}
-        if (ctype_alpha($username) || (strlen($username) < 75) || (strlen($username) < 2)) {
-             foreach ($loggeddata as $key => $value) {
-                $loggeddata = explode('|', $value);
-                $userPassword  =  $loggeddata[0];
-                $userPassword = explode(',', $value);
-                $userPassword[0] = trim($userPassword[0]);
-                if ($userPassword[0] == $username){
-                    $userMatch = true;
-                }
-            }
-            if ($userMatch == true){
-            $errors['username'] = $username;
-            // $errors['username'] = 'This username is already in use';
-        }
-    }
-
-
         $password = trim($_POST['password']);
         if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) < 2)) {
             $errors['password'] = $password;
@@ -458,6 +466,37 @@ function addUserErrors($self, $loggeddata){
         }
     }
     return $errors;
+}
+
+function checkDuplicates($self, $loggeddata){
+    $duplicates = array();
+    $userMatch = false;
+    $emailMatch = false;
+    if (isset($_POST['submit'])) {
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+        foreach ($loggeddata as $key => $value) {
+
+            $data = explode('|', $value);
+            $userPassword  =  $data[0];
+            $userPassword = explode(',', $userPassword);
+            $userPassword[0] = trim($userPassword[0]);
+            if ($userPassword[0] == $username){
+                $userMatch = true;
+            }
+            if($userMatch== true){
+                $duplicates['username'] = 'This is a duplicate';
+
+            }
+            $emailList = $data[1];
+            $emailList = explode(',', $emailList);
+            if($emailList[3]== $email){
+                $emailMatch = true;
+            };
+            $duplicates['email'] = 'This is a duplicate';
+        }
+    }
+    return $duplicates;
 }
 
 
