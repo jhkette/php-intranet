@@ -134,13 +134,14 @@ function validateLoginErrors($self, $loggeddata)
      }
 
      if(count($correctData)== 0){
-         $errors['username'] = 'Full name is not valid';
+         $errors['username'] = 'Username is not valid';
      }
-
-        $passwordValid = false;
+     else{
+         $passwordValid = false;
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
             $loggeddata = explode(',', $value);
+
             $loggeddata[0] = trim($loggeddata[0]);
             $loggeddata[1] = trim($loggeddata[1]);
 
@@ -153,6 +154,7 @@ function validateLoginErrors($self, $loggeddata)
         if(count($correctPassword)== 0){
             $errors['password'] = 'Password is not valid';
         }
+    }
 
 }
 return $errors;
@@ -259,6 +261,29 @@ function getData($handle){
     }
 return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
 }
+
+
+function getUserPw($handle){
+    rewind($handle); # pointer needs to be at start of file
+    $dataArray = array(); # create data array
+    while (!feof($handle)) { #while not at the end of file
+        $line = fgets($handle);
+        // ensure $line is HTML chars
+        $line = htmlentities(trim($line));
+        if  (!empty($line))  { # check it is not an empty line
+            $line = explode('|',$line);
+
+        /* the write function and validate form function is going to ensure
+        the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
+        the write function always adds '|' after the username and password */
+
+            array_push($dataArray,  $line[0]);
+        }
+    }
+return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
+}
+
+
 
 function writeToFile($handle){
 

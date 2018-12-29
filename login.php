@@ -34,7 +34,8 @@ include('inlcudes/menu.php');
 
 
                   <?php
-                  $loggeddata = getData(openDirectory());
+                  $loggeddata = getUserPw(openDirectory());
+
                   print_r($loggeddata);
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
