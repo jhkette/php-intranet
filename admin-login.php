@@ -38,18 +38,18 @@ include('inlcudes/menu.php');
                   $self = htmlentities($_SERVER['PHP_SELF']);
                   $data = validateInputs($self);
                   $errors = validateErrors($self);
-                  $formSubmmited = false;
+
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */
                   if (isset($_POST['submit'])) {
-                       $formSubmmited = true;
+
                        #declare $self varaible as $_POST for use in validation
-                       if ((sizeof($errors) > 0) && ($formSubmmited == true)) {
+                       if (sizeof($errors) > 0) {
                            $formValid = false;
                            displayErrors($errors);
                        }
-                       if((sizeof($errors) == 0) && ($formSubmmited == true)){
+                       if(sizeof($errors) == 0){
                            header('Location: welcome.php'); #refreshing page to refresh menu on successful login
                            displayResults($data);
 

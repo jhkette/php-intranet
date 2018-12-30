@@ -14,6 +14,8 @@ session status.
 - Password ERRORS only ADDED if usernmame is VALID (DONE (check))
 
 - revist forms - add if statements at beginning then add variable to forms DONE (double check)
+- use v small javascript function to toggle password visibility (small feature that would be useful for the user)
+- add confirm password option to add user
 
 
 

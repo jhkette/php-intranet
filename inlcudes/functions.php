@@ -36,7 +36,7 @@ function displayForm( $cleanData = array(), $errors=array()){
                  <label for="">Password</label>
                  <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
                  <!--i'm not saving the password as a value. Password's can't be correct independant of the username  -->
-                 <input type="text"  value= ""  name="password" id="password"/>
+                 <input type="password"  value= ""  name="password" id="password"/>
               </div>
               <div>
                   <input type="submit" name="submit" value="submitbutton" />

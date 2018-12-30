@@ -46,7 +46,7 @@ include('inlcudes/menu.php');
                   $self = htmlentities($_SERVER['PHP_SELF']);
                   $data = validateLoginInputs($self, $loggeddata);
                   $errors = validateLoginErrors($self, $loggeddata);
-                  $formSubmmited = false;
+
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */
@@ -54,7 +54,7 @@ include('inlcudes/menu.php');
                        $formSubmmited = true;
                       /*i'm counting the size of the errors arry for validation
                       if errors == 0 the form is valid */
-                       if ((sizeof($errors) > 0) && ($formSubmmited == true)) {
+                       if (sizeof($errors) > 0) {
                            $formValid = false;
                            displayErrors($errors);
                        }
