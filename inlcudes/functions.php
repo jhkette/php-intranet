@@ -160,9 +160,9 @@ function validateLoginErrors($self, $loggeddata)
 return $errors;
 }
 
-
+/*DON"T THINK YOU NEED THIS - JUST NEED FUNCTION ABOVE - THEN COUNT IT ON INDEX PAGE */
 function bothFieldsValid($self, $loggeddata){
-    $valid = false;
+     $valid = false;
      if (isset($_POST['submit'])) {
 
         $username = trim($_POST['username']);
@@ -177,8 +177,8 @@ function bothFieldsValid($self, $loggeddata){
                 $valid = true;
             }
         }
-}
-return $valid;
+    }
+    return $valid;
 }
 
 
@@ -293,7 +293,7 @@ return $dataArray; # an array of usernames & passwords (all on one line, to be s
 
 function writeToFile($handle){
 
-     if (isset($_POST['submit'])) {
+     if (isset($_POST['submit'])) { // YOU MAY NOT NEED THIS
 
         $username = htmlentities(trim($_POST['username']));
         $password = htmlentities(trim($_POST['password']));
@@ -440,19 +440,19 @@ function validateAddUser($self, $loggeddata){
         }
 
         /* username already declared*/
-        if (ctype_alpha($username) && (strlen($username) < 75) && strlen($username) > 2) {
+        if (ctype_alpha($username) && (strlen($username) < 75) && (strlen($username) > 2) && ($userMatch == false)) {
 
-            if ($userMatch == false){
+
             $cleanData['username'] = $username;
-        }
+
     }
 
         $firstname = trim($_POST['firstname']);
-        if (ctype_alpha($firstname) && (strlen($firstname) < 75) && strlen($firstname) > 2) {
+        if (ctype_alpha($firstname) && (strlen($firstname) < 75) && (strlen($firstname) > 2)) {
             $cleanData['firstname'] = $firstname;
         }
         $surname = trim($_POST['surname']);
-        if (ctype_alpha($surname) && (strlen($surname) < 75) && strlen($surname) > 2) {
+        if (ctype_alpha($surname) && (strlen($surname) < 75) && (strlen($surname) > 2)) {
             $cleanData['surname'] = $surname;
         }
        /* email already declared*/
@@ -467,7 +467,7 @@ function validateAddUser($self, $loggeddata){
             $cleanData['title'] = $title;
         }
         $password = trim($_POST['password']);
-        if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
+        if (ctype_alnum($password) && (strlen($password) < 75) && (strlen($password) > 2)) {
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
@@ -490,19 +490,19 @@ function addUserErrors($self){
 
 
         $username = trim($_POST['username']);
-        if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) < 2)) {
+        if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) <= 2)) {
             $errors['username'] = $username;}
         $password = trim($_POST['password']);
-        if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) < 2)) {
+        if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) <= 2)) {
             $errors['password'] = $password;
         }
 
         $firstname = trim($_POST['firstname']);
-        if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) < 2))  {
+        if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) <= 2))  {
             $errors['firstname'] = $firstname;
         }
         $surname = trim($_POST['surname']);
-        if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) < 2)) {
+        if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) <= 2)) {
             $errors['surname'] = $surname;
         }
         $email = trim($_POST['email']);
