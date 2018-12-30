@@ -42,3 +42,5 @@ do nothing
 }
 
 use regenerate sessionid for escalation in access level.
+
+<br /><b>Notice</b>:  Undefined variable: password in <b>/Users/joseph/Desktop/php/php-tma/inlcudes/functions.php</b> on line <b>388</b><br />

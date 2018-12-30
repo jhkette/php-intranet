@@ -197,7 +197,7 @@ function displayResults($data)
 }
 
 
-function displayErrors($errors, $duplicates=array())
+function displayErrors($errors, $duplicates=array(), $passwordError=array())
 {
     ?>
     <?php foreach ($errors as $key => $value): ?>
@@ -207,6 +207,12 @@ function displayErrors($errors, $duplicates=array())
         </li>
     <?php endforeach; ?>
     <?php foreach ($duplicates as $key => $value): ?>
+        <li class = "list-group-item">
+            <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
+            <span class="red-text">    <?php echo $value; ?> </span>
+        </li>
+    <?php endforeach; ?>
+    <?php foreach ($passwordError as $key => $value): ?>
         <li class = "list-group-item">
             <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
             <span class="red-text">    <?php echo $value; ?> </span>
@@ -303,7 +309,7 @@ function writeToFile($handle){
 }
 
 
-function addUserForm($displayForm, $cleanData = array(), $errors=array(), $duplicates=array())
+function addUserForm($displayForm, $cleanData = array(), $errors=array(), $duplicates=array(), $passwordError=array())
 {
     if(isset($cleanData['title'])) {
         $title = htmlentities($cleanData['title']);
@@ -345,6 +351,13 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
         $password = '';
     }
 
+    if(isset($cleanData['confirm password'])) {
+        $confirmPassword = htmlentities($cleanData['confirm password']);
+    }
+    else{
+        $confirmPassword = '';
+    }
+
     ?>
     <?php if ($displayForm == true): ?>
         <!--post to the same page  -->
@@ -368,7 +381,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
                                <div>
                                    <label for="">Surname</label>
                                    <?php if (isset($errors['surname'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo $surname ?>" name="surname" id="name" />
+                                   <input type="text"  value= "<?php echo $surname ?>" name="surname" id="surname" />
                                </div>
                                <div>
                                    <label for="">Email</label>
@@ -380,12 +393,17 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
                                    <label for="">Username</label>
                                    <?php if (isset($duplicates['username'])) {echo '<p> This username has already been used</p>';} ?>
                                    <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
+                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="username" />
                                </div>
                                <div>
                                    <label for="">Password</label>
                                    <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="text"  value= "<?php echo $password ?>"  name="password" id="password"/>
+                                   <input type="password"  value= "<?php echo $password ?>"  name="password" id="password"/>
+                               </div>
+                               <div>
+                                   <label for="">Confirm Password</label>
+                                   <?php if (isset($passwordError['confirm password'])) {echo '<p> The passwords do not match</p>';} ?>
+                                   <input type="password"  value= "<?php echo $confirmPassword?>"  name="confirm-password" id="confirm-password"/>
                                </div>
                                <div>
                                    <input type="submit" name="submit" value="submitbutton" />
@@ -427,12 +445,8 @@ function validateAddUser($self, $loggeddata){
             if ($userMatch == false){
             $cleanData['username'] = $username;
         }
+    }
 
-        }
-        $password = trim($_POST['password']);
-        if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
-            $cleanData['password'] = $password;
-        }
         $firstname = trim($_POST['firstname']);
         if (ctype_alpha($firstname) && (strlen($firstname) < 75) && strlen($firstname) > 2) {
             $cleanData['firstname'] = $firstname;
@@ -452,6 +466,15 @@ function validateAddUser($self, $loggeddata){
         if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')) {
             $cleanData['title'] = $title;
         }
+        $password = trim($_POST['password']);
+        if (ctype_alnum($password) && (strlen($password) < 75) && strlen($password) > 2) {
+            $cleanData['password'] = $password;
+        }
+        $confirmPassword = trim($_POST['confirm-password']);
+        if ($confirmPassword == $password ) {
+            $cleanData['confirm password'] = $confirmPassword;
+        }
+
     }
 
 return $cleanData;
@@ -499,9 +522,8 @@ function checkDuplicates($self, $loggeddata){
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         foreach ($loggeddata as $key => $value) {
-
-            $data = explode('|', $value);
-            $userPassword  =  $data[0];
+            $loggeddata = explode('|', $value);
+            $userPassword  =  $loggeddata[0];
             $userPassword = explode(',', $userPassword);
             $userPassword[0] = trim($userPassword[0]);
             if ($userPassword[0] == $username){
@@ -509,21 +531,34 @@ function checkDuplicates($self, $loggeddata){
             }
             if($userMatch== true){
                 $duplicates['username'] = 'This is a duplicate';
-
             }
-            $emailList = $data[1];
+            /*duplicate username checked - now check  if there are duplicate email
+            by exploding the other index of $loggeddata  */
+            $emailList = $loggeddata[1];
             $emailList = explode(',', $emailList);
             if($emailList[3]== $email){
                 $emailMatch = true;
-            };
-
-
+            }
         }
         if($emailMatch== true){
         $duplicates['email'] = 'This is a duplicate';
-    }
+        }
     }
     return $duplicates;
+}
+
+function confirmPassword($self){
+    $passwordError = array();
+    if (isset($_POST['submit'])) {
+        $passWord = trim($_POST['password']);
+        $confirmPassword = trim($_POST['confirm-password']);
+        if($passWord !== $confirmPassword){
+            $passwordError['confirm password'] = 'The passwords do not match';
+        }
+
+    }
+
+return $passwordError;
 }
 
 

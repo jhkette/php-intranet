@@ -49,6 +49,7 @@ if ( isset( $_SESSION['admin'] ) ) {
                   $data = validateAddUser($self, $loggeddata);
                   $errors = addUserErrors($self, $loggeddata);
                   $duplicates = checkDuplicates($self, $loggeddata);
+                  $confirmPassword = confirmPassword($self);
                   $displayForm = true;
 
 
@@ -57,13 +58,13 @@ if ( isset( $_SESSION['admin'] ) ) {
                   if (isset($_POST['submit'])) {
 
                        #declare $self varaible as $_POST for use in validation
-                       if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0)) {
+                       if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0) || (sizeof($confirmPassword) > 0)) {
 
                            $formValid = false;
-                           displayErrors($errors, $duplicates);
-                      
+                           displayErrors($errors, $duplicates, $confirmPassword);
+
                        }
-                       if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)) {
+                       if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)  &&  (sizeof($confirmPassword) == 0)) {
 
 
                          $displayForm = false;
@@ -78,7 +79,7 @@ if ( isset( $_SESSION['admin'] ) ) {
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   addUserForm($displayForm, $data, $errors, $duplicates);
+                   addUserForm($displayForm, $data, $errors, $duplicates, $confirmPassword);
                    ?>
           </section>
       </main>
