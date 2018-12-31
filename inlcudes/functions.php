@@ -387,47 +387,47 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
     <?php
 }
 
-function validateAddUser($self, $loggeddata, $duplicates){
-    $cleanData = array();
+function validateAddUser($self, $errors, $duplicates){
 
+    /* I'm adding both the errors and duplicate arrays as arguments here. To confirm the input is valid
+    I simply have to check the input has NOT been put in either the error or duplicate arrays. This reduces unneccesary code */
+    $cleanData = array();
 
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
-        if (ctype_alnum($username) && (strlen($username) <= 25) && (strlen($username) >= 4) && (!isset($duplicates['username'])) ) {
+        if (!isset($errors['username']) && (!isset($duplicates['username'])) ) {
             $cleanData['username'] = $username;
         }
 
         $firstname = trim($_POST['firstname']);
-        if (ctype_alpha($firstname) && (strlen($firstname) <= 25) && (strlen($firstname) >= 2)) {
+        if (!isset($errors['firstname'])) {
             $cleanData['firstname'] = $firstname;
         }
         $surname = trim($_POST['surname']);
-        if (ctype_alpha($surname) && (strlen($surname) <= 25) && (strlen($surname) > 2)) {
+        if (!isset($errors['surname'])) {
             $cleanData['surname'] = $surname;
         }
-       /* email already declared*/
+
         $email = trim($_POST['email']);
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            if(!isset($duplicates['email'])) {
+        if (!isset($errors['email']) && (!isset($duplicates['email']))) {
+
             $cleanData['email'] = $email;
-            }
         }
+
         $title = trim($_POST['title']);
         if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')) {
             $cleanData['title'] = $title;
         }
         $password = trim($_POST['password']);
-        if (ctype_alnum($password) && (strlen($password) <= 25) && (strlen($password) >= 5)) {
+        if (!isset($errors['password'])) {
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
         if ($confirmPassword == $password ) {
             $cleanData['confirm password'] = $confirmPassword;
         }
-
     }
-
-return $cleanData;
+    return $cleanData;
 }
 
 
@@ -440,7 +440,7 @@ function addUserErrors($self){
 
 
         $username = trim($_POST['username']);
-        /* Explain ranges - why <= is needed for two. */
+
         if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 4)) {
             $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';}
         $password = trim($_POST['password']);

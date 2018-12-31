@@ -47,9 +47,10 @@ if ( isset( $_SESSION['admin'] ) ) {
                   $self = htmlentities($_SERVER['PHP_SELF']);
                   $loggeddata = getData(openDirectory());
                   $duplicates = checkDuplicates($self, $loggeddata);
-                  $data = validateAddUser($self, $loggeddata, $duplicates);
+                  $errors = addUserErrors($self);
+                  $data = validateAddUser($self, $duplicates, $errors);
 
-                  $errors = addUserErrors($self, $loggeddata);
+
                   $confirmPassword = confirmPassword($self);
                   $displayForm = true;
 
