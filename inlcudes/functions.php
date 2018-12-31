@@ -413,7 +413,7 @@ function validateAddUser($self, $loggeddata){
         }
 
         /* username already declared*/
-        if (ctype_alnum($username) && (strlen($username) < 75) && (strlen($username) >= 4) && ($userMatch == false)) {
+        if (ctype_alnum($username) && (strlen($username) <= 25) && (strlen($username) >= 4) && ($userMatch == false)) {
 
 
             $cleanData['username'] = $username;
@@ -421,11 +421,11 @@ function validateAddUser($self, $loggeddata){
     }
 
         $firstname = trim($_POST['firstname']);
-        if (ctype_alpha($firstname) && (strlen($firstname) < 75) && (strlen($firstname) > 2)) {
+        if (ctype_alpha($firstname) && (strlen($firstname) <= 25) && (strlen($firstname) <= 2)) {
             $cleanData['firstname'] = $firstname;
         }
         $surname = trim($_POST['surname']);
-        if (ctype_alpha($surname) && (strlen($surname) < 75) && (strlen($surname) > 2)) {
+        if (ctype_alpha($surname) && (strlen($surname) <= 25) && (strlen($surname) > 2)) {
             $cleanData['surname'] = $surname;
         }
        /* email already declared*/
@@ -440,7 +440,7 @@ function validateAddUser($self, $loggeddata){
             $cleanData['title'] = $title;
         }
         $password = trim($_POST['password']);
-        if (ctype_alnum($password) && (strlen($password) < 75) && (strlen($password) >= 5)) {
+        if (ctype_alnum($password) && (strlen($password) <= 25) && (strlen($password) >= 5)) {
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
@@ -464,20 +464,20 @@ function addUserErrors($self){
 
         $username = trim($_POST['username']);
         /* Explain ranges - why <= is needed for two. */
-        if (!ctype_alnum($username) || (strlen($username) > 75) || (strlen($username) < 4)) {
+        if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 4)) {
             $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';}
         $password = trim($_POST['password']);
-        if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) < 5)) {
+        if (!ctype_alnum($password) || (strlen($password) > 25)|| (strlen($password) < 5)) {
             $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
             charecters long';
         }
 
         $firstname = trim($_POST['firstname']);
-        if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) <= 2))  {
+        if (!ctype_alpha($firstname) || (strlen($firstname) > 25) || (strlen($firstname) < 2))  {
             $errors['firstname'] = 'Names can only contain letters. It needs to be at least two charecters';
         }
         $surname = trim($_POST['surname']);
-        if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) <= 2)) {
+        if (!ctype_alpha($surname) || (strlen($surname) > 25) || (strlen($surname) <= 2)) {
             $errors['surname'] = 'Surnames can only contain letters. It needs to be at least two charecters';
         }
         $email = trim($_POST['email']);
