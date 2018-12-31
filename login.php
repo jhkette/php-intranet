@@ -19,7 +19,7 @@ include('inlcudes/menu.php');
      <body>
          <div class ="container">
              <header class="col-md-6">
-                 <h1>Admin login</h1>
+                 <h1>Login</h1>
              </header>
              <header class="col-md-6">
               </header>
@@ -63,7 +63,7 @@ include('inlcudes/menu.php');
 
 
 
-                           displayResults($data);
+
 
                        }
                    }

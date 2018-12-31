@@ -31,7 +31,7 @@ header("Location: admin-login.php");
         </section>
             <section class="col-md-12">
                 <?php
-                print makeMenu($menu);
+                echo makeMenu($menu);
                 ?>
             </section>
 

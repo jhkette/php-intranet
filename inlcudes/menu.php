@@ -2,7 +2,7 @@
 
 if(isset($_SESSION['admin'])) {
     $menu = [
-    'index.php'  => 'Home',  
+    'index.php'  => 'Home',
     'DTresults.php' => 'DT results',
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',

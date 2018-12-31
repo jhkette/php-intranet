@@ -9,9 +9,8 @@ function makeMenu($menu){
  $output='';
  //foreach looping through keys and items and adding them to html link
   foreach ($menu as $key => $items) {
-
-    $output.='<li> <a href ='.$key.'>'.$items.'</a></li>' ;
-  };
+      $output.='<li> <a href ='.$key.'>'.$items.'</a></li>';
+  }
   return $output;
 }
 
@@ -56,7 +55,6 @@ function validateInputs($self){
     $adminpassword = 'DCSadmin01';
     $cleanData = array();
     if (isset($_POST['submit'])) {
-
         $username = trim($_POST['username']);
         if ($username == $adminusername) {
             $cleanData['username'] = $username;
@@ -115,8 +113,7 @@ function validateLoginInputs($self, $loggeddata){
          }
      }
      /*I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
-     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. Of course if they
-     are correct in relation to a username they will be logged in and the data will not need to be represented anyway */
+     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
     return $cleanData;
 }
 
@@ -344,37 +341,37 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
                             <label for="">Title</label>
                             <select name="title" id="title">
 
-                                <option value="Mr"  <?php if (htmlentities($title) == 'Mr')  {echo 'selected ="selected"';} ?>>Mr</option>
-                                <option value="Mrs" <?php  if (htmlentities($title) == 'Mrs') {echo 'selected ="selected"';} ?>>Mrs</option>
-                                <option value="Ms" <?php  if (htmlentities($title) == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
+                                <option value="Mr"  <?php if ($title == 'Mr')  {echo 'selected ="selected"';} ?>>Mr</option>
+                                <option value="Mrs" <?php  if ($title == 'Mrs') {echo 'selected ="selected"';} ?>>Mrs</option>
+                                <option value="Ms" <?php  if ($title == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
                             </select>
                         </div>
                         <div>
                             <label for="">First name</label>
                                    <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo htmlentities($firstname) ?>" name="firstname" id="name" />
+                                   <input type="text"  value= "<?php echo $firstname ?>" name="firstname" id="name" />
                                </div>
                                <div>
                                    <label for="">Surname</label>
                                    <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo htmlentities($surname) ?>" name="surname" id="surname" />
+                                   <input type="text"  value= "<?php echo $surname ?>" name="surname" id="surname" />
                                </div>
                                <div>
                                    <label for="">Email</label>
                                    <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
                                    <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter email </p>';} ?>
-                                   <input type="text"  value= "<?php echo htmlentities($email) ?>"  name="email" id="email"/>
+                                   <input type="text"  value= "<?php echo $email ?>"  name="email" id="email"/>
                                </div>
                                <div>
                                    <label for="">Username</label>
                                    <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
                                    <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo htmlentities($userName) ?>" name="username" id="username" />
+                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="username" />
                                </div>
                                <div>
                                    <label for="">Password</label>
                                    <?php if (htmlentities(isset($errors['password']))) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="password"  value= "<?php echo htmlentities($password) ?>"  name="password" id="password"/>
+                                   <input type="password"  value= "<?php echo $password ?>"  name="password" id="password"/>
                                </div>
                                <div>
                                    <label for="">Confirm Password</label>
@@ -416,7 +413,7 @@ function validateAddUser($self, $loggeddata){
         }
 
         /* username already declared*/
-        if (ctype_alpha($username) && (strlen($username) < 75) && (strlen($username) > 2) && ($userMatch == false)) {
+        if (ctype_alnum($username) && (strlen($username) < 75) && (strlen($username) >= 4) && ($userMatch == false)) {
 
 
             $cleanData['username'] = $username;
@@ -443,7 +440,7 @@ function validateAddUser($self, $loggeddata){
             $cleanData['title'] = $title;
         }
         $password = trim($_POST['password']);
-        if (ctype_alnum($password) && (strlen($password) < 75) && (strlen($password) > 2)) {
+        if (ctype_alnum($password) && (strlen($password) < 75) && (strlen($password) >= 5)) {
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
@@ -467,25 +464,26 @@ function addUserErrors($self){
 
         $username = trim($_POST['username']);
         /* Explain ranges - why <= is needed for two. */
-        if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) <= 2)) {
-            $errors['username'] = $username;}
+        if (!ctype_alnum($username) || (strlen($username) > 75) || (strlen($username) < 4)) {
+            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';}
         $password = trim($_POST['password']);
-        if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) <= 2)) {
-            $errors['password'] = $password;
+        if (!ctype_alnum($password) || (strlen($password) > 75)|| (strlen($password) < 5)) {
+            $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
+            charecters long';
         }
 
         $firstname = trim($_POST['firstname']);
         if (!ctype_alpha($firstname) || (strlen($firstname) > 75) || (strlen($firstname) <= 2))  {
-            $errors['firstname'] = $firstname;
+            $errors['firstname'] = 'Names can only contain letters. It needs to be at least two charecters';
         }
         $surname = trim($_POST['surname']);
         if (!ctype_alpha($surname) || (strlen($surname) > 75) || (strlen($surname) <= 2)) {
-            $errors['surname'] = $surname;
+            $errors['surname'] = 'Surnames can only contain letters. It needs to be at least two charecters';
         }
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
 
-            $errors['email'] = $email;
+            $errors['email'] = 'Please enter a valid email address';
         }
     }
     return $errors;
@@ -540,11 +538,7 @@ function confirmPassword($self){
 
 function refreshPageButton(){
     ?>
-
     <a href="<?php echo htmlentities($_SERVER['PHP_SELF']) ; ?>"><button class="button button1">Add User</button></a>
-
     <?php
 }
-
-
 ?>
