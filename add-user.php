@@ -61,22 +61,20 @@ if ( isset( $_SESSION['admin'] ) ) {
                   if (isset($_POST['submit'])) {
 
                        #declare $self varaible as $_POST for use in validation
+                       if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)  &&  (sizeof($confirmPassword) == 0)) {
+                            $displayForm = false;
+                         displayResults($data);
+                         writeToFile(openDirectory());
+                         refreshPageButton();
+                     }
+
                        if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0) || (sizeof($confirmPassword) > 0)) {
 
                            $formValid = false;
                            displayErrors($errors, $duplicates, $confirmPassword);
 
                        }
-                       if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)  &&  (sizeof($confirmPassword) == 0)) {
 
-
-                         $displayForm = false;
-                         displayResults($data);
-                         writeToFile(openDirectory());
-                         refreshPageButton();
-
-
-                       }
                    }
 
                    /* This code runs to make the form display. The data and errors array

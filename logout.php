@@ -15,7 +15,7 @@ if (ini_get("session.use_cookies")) {
 }
 session_destroy();
 
-
+// CHECK ALL THIS
 header('Location: index.php');
 
 

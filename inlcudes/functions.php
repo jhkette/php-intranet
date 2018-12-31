@@ -1,5 +1,5 @@
 <?php
-// YOU NEED TO CLEAN ALL DATA!!!
+
 require_once('inlcudes/init.php');
 
 
@@ -21,6 +21,10 @@ function displayForm( $cleanData = array(), $errors=array()){
     else{
         $userName = '';
     }
+
+
+
+
     ?>
     <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
         <fieldset>
@@ -53,7 +57,7 @@ function validateInputs($self){
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
     $cleanData = array();
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) { #
         $username = trim($_POST['username']);
         if ($username == $adminusername) {
             $cleanData['username'] = $username;
@@ -90,19 +94,13 @@ function validateErrors($self){
 }
 
 
-function validateLoginInputs($self, $loggeddata){
-    $errors = array();
+function validateLoginInputs($self, $loggeddata, $errors=array()){
     $cleanData = array();
-
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
-        foreach ($loggeddata as $key => $value) {
-            $loggedUsername = explode(',', $value);
-            $loggedUsername = $loggedUsername[0];
-            if ($username == $loggedUsername ) {
-                $cleanData['username'] = $username;
-                $_SESSION['admin'] = $username;
-            }
+        if(!isset($errors['username'])) {
+            $cleanData['username'] = $username;
+            $_SESSION['admin'] = $username;
         }
     }
      /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
@@ -147,9 +145,8 @@ function validateLoginErrors($self, $loggeddata){
 }
 
 
-
-
 function displayResults($data){
+
     ?>
     <?php foreach ($data as $key => $value): ?>
         <li class = "list-group-item">
@@ -161,8 +158,8 @@ function displayResults($data){
 }
 
 
-function displayErrors($errors, $duplicates=array(), $passwordError=array())
-{
+function displayErrors($errors, $duplicates=array(), $passwordError=array()){
+
     ?>
     <?php foreach ($errors as $key => $value): ?>
         <li class = "list-group-item">
@@ -186,26 +183,26 @@ function displayErrors($errors, $duplicates=array(), $passwordError=array())
 }
 
 
- function openDirectory(){
-     $handleDir = opendir('./data');
-     if ($handleDir === false){
-         echo '<p> System error: Unable to open directory</p>';
-     }
-     else {
-         while(false !== ($file = readdir($handleDir))) {
-             if ($file != "." && $file != "..") { # don't add dots which represent directories to array
-                 $fileDir1 = array(); # create array
-                 array_push($fileDir1, $file); # push into array
-                 foreach ($fileDir1 as $key => $value) { # for each loop to loop through files
-                  // open file or report error using string 'data/' and $value to create path to files
-                  $handle = fopen('data/' . htmlentities(trim($value)), 'a+') or die( 'Unable to open file!') ;
+function openDirectory(){
+    $handleDir = opendir('./data');
+    if ($handleDir === false){
+        echo '<p> System error: Unable to open directory</p>';
+    }
+    else {
+        while(false !== ($file = readdir($handleDir))) {
+            if ($file != "." && $file != "..") { # don't add dots which represent directories to array
+                $fileDir1 = array(); # create array
+                array_push($fileDir1, $file); # push into array
+                foreach ($fileDir1 as $key => $value) { # for each loop to loop through files
+                // open file or report error using string 'data/' and $value to create path to files
+                $handle = fopen('data/' . htmlentities(trim($value)), 'a+') or die( 'Unable to open file!') ;
+                }
+            }
+        }
+    }
+    return $handle;
+}
 
-                  }
-              }
-          }
-      }
-      return $handle;
-  }
 
 function getData($handle){
     rewind($handle); # pointer needs to be at start of file
@@ -242,21 +239,16 @@ function getUserPw($handle){
 
 function writeToFile($handle){
 
-     if (isset($_POST['submit'])) { // YOU MAY NOT NEED THIS
-
         $username = htmlentities(trim($_POST['username']));
         $password = htmlentities(trim($_POST['password']));
         $title = htmlentities(trim($_POST['title']));
         $firstname = htmlentities(trim($_POST['firstname']));
         $surname = htmlentities(trim($_POST['surname']));
         $email = htmlentities(trim($_POST['email']));
-        $text =  $username.','.$password.'|' . $title .',' . $firstname.',' . $surname.',' . $email . PHP_EOL;
+        $text =  $username.','.$password.'|'. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
         fwrite( $handle , $text ) ;
 
-    }
-
 }
-
 
 function addUserForm($displayForm, $cleanData = array(), $errors=array(), $duplicates=array(), $passwordError=array())
 {
@@ -300,7 +292,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
         $password = '';
     }
 
-    if(isset($cleanData['confirm password'])) {
+    if(isset($cleanData['confirm password']) && (isset($cleanData['password']))) {
         $confirmPassword = htmlentities($cleanData['confirm password']);
     }
     else{
@@ -402,8 +394,6 @@ function validateAddUser($self, $errors, $duplicates){
             $cleanData['confirm password'] = $confirmPassword;
         }
     }
-
-
     return $cleanData;
 }
 
@@ -412,20 +402,16 @@ function validateAddUser($self, $errors, $duplicates){
 function addUserErrors($self){
     $errors = array();
     $userMatch = false;
-
     if (isset($_POST['submit'])) {
-
         $username = trim($_POST['username']);
-
         if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 5)) {
-            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';}
-
-            $password = trim($_POST['password']);
+            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';
+        }
+        $password = trim($_POST['password']);
         if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
             $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
             charecters long';
         }
-
         $firstname = trim($_POST['firstname']);
         if (!ctype_alpha($firstname) || (strlen($firstname) > 25) || (strlen($firstname) < 2))  {
             $errors['firstname'] = 'Names can only contain letters. It needs to be at least two charecters';
@@ -436,13 +422,12 @@ function addUserErrors($self){
         }
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-
             $errors['email'] = 'Please enter a valid email address';
         }
     }
-
     return $errors;
 }
+
 
 function checkDuplicates($self, $loggeddata){
     $duplicates = array();
@@ -459,23 +444,20 @@ function checkDuplicates($self, $loggeddata){
             if ($userPassword[0] == $username){
                 $userMatch = true;
             }
-
             /* Duplicate username checked - now check  if there are duplicate email
             by exploding the other index of $loggeddata  */
             $emailList = $loggeddata[1];
-            $emailList = explode(',', $emailList);
-            if($emailList[3]== $email){
-                $emailMatch = true;
+            $emailList = explode(',', $emailList); #explode at comma
+            if($emailList[3]== $email){ #email value will be at index [3]
+                $emailMatch = true; # change emailmatch to true if match found
             }
         }
-
         if($emailMatch== true){
         $duplicates['email'] = 'This is a duplicate';
         }
         if($userMatch== true){
             $duplicates['username'] = 'This is a duplicate';
         }
-
     }
     return $duplicates;
 }
@@ -493,8 +475,8 @@ function confirmPassword($self){
     return $passwordError;
 }
 
-
 function refreshPageButton(){
+    return
     ?>
     <a href="<?php echo htmlentities($_SERVER['PHP_SELF']) ; ?>"><button class="button button1">Add User</button></a>
     <?php

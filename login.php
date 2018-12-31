@@ -44,8 +44,10 @@ include('inlcudes/menu.php');
                   print_r($loggeddata);
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
-                  $data = validateLoginInputs($self, $loggeddata);
+
                   $errors = validateLoginErrors($self, $loggeddata);
+                  $data = validateLoginInputs($self, $loggeddata, $errors);
+
 
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
@@ -60,11 +62,6 @@ include('inlcudes/menu.php');
                        }
                        if(sizeof($errors) == 0){
                            header('Location: welcome.php'); #refreshing page to refresh menu on successful login
-
-
-
-
-
                        }
                    }
 
