@@ -29,15 +29,15 @@ function displayForm( $cleanData = array(), $errors=array()){
             <legend>Please log in</legend>
             <div>
                 <label for="">Username</label>
-                <?php if (isset($errors['username'])) {echo '<p> Please enter your username </p>';} ?>
+                <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter your username </p>';} ?>
                 <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
             </div>
             <div>
                  <label for="">Password</label>
-                 <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
+                 <?php if (htmlentities(isset($errors['password']))) {echo '<p> Please enter password </p>';} ?>
                  <!--i'm not saving the password as a value. Password's can't be correct independant of the username  -->
                  <input type="password"  value= ""  name="password" id="password"/>
-              </div>
+             </div>
               <div>
                   <input type="submit" name="submit" value="submitbutton" />
               </div>
@@ -46,7 +46,10 @@ function displayForm( $cleanData = array(), $errors=array()){
       <?php
 }
 
-
+/*The admin login and and oridnary login function do need to be seperate. I could also check for the admin uaer/password
+in the login functions and then call them on both pages. But the admin should ONLY be able to login on the admin page -
+therfore we need a sperate function that deals ONLY with admin login. Similarly an admin cannot login via the normal login pages
+ */
 
 function validateInputs($self){
     $adminusername = 'admin';
@@ -160,40 +163,18 @@ function validateLoginErrors($self, $loggeddata)
 return $errors;
 }
 
-/*DON"T THINK YOU NEED THIS - JUST NEED FUNCTION ABOVE - THEN COUNT IT ON INDEX PAGE */
-function bothFieldsValid($self, $loggeddata){
-     $valid = false;
-     if (isset($_POST['submit'])) {
-
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        foreach ($loggeddata as $key => $value) {
-            $loggeddata = explode('|', $value);
-            $userPassword  =  $loggeddata[0];
-            $userPassword = explode(',', $value);
-            $userPassword[0] = trim($userPassword[0]);
-            $userPassword[1] = trim($userPassword[1]);
-            if(($userPassword[0]==  $username) && ($userPassword[1] == $password)){
-                $valid = true;
-            }
-        }
-    }
-    return $valid;
-}
 
 
-function displayResults($data)
-{
+
+function displayResults($data){
     ?>
-
-       <?php foreach ($data as $key => $value): ?>
-                <li class = "list-group-item">
-                    <strong><?php echo $key; ?>: </strong>
-                    <?php echo $value; ?>
-                </li>
-        <?php endforeach; ?>
-
-<?php
+    <?php foreach ($data as $key => $value): ?>
+        <li class = "list-group-item">
+            <strong><?php echo htmlentities($key); ?>: </strong>
+            <?php echo htmlentities($value); ?>
+        </li>
+    <?php endforeach; ?>
+    <?php
 }
 
 
@@ -202,20 +183,20 @@ function displayErrors($errors, $duplicates=array(), $passwordError=array())
     ?>
     <?php foreach ($errors as $key => $value): ?>
         <li class = "list-group-item">
-            <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
-            <span class="red-text">    <?php echo $value; ?> </span>
+            <span class="red-text">  <strong><?php echo ucfirst(htmlentities($key)); ?>: </strong></span>
+            <span class="red-text">    <?php echo htmlentities($value); ?> </span>
         </li>
     <?php endforeach; ?>
     <?php foreach ($duplicates as $key => $value): ?>
         <li class = "list-group-item">
-            <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
-            <span class="red-text">    <?php echo $value; ?> </span>
+            <span class="red-text">  <strong><?php echo ucfirst(htmlentities($key)); ?>: </strong></span>
+            <span class="red-text">    <?php echo htmlentities($value); ?> </span>
         </li>
     <?php endforeach; ?>
     <?php foreach ($passwordError as $key => $value): ?>
         <li class = "list-group-item">
-            <span class="red-text">  <strong><?php echo ucfirst($key); ?>: </strong></span>
-            <span class="red-text">    <?php echo $value; ?> </span>
+            <span class="red-text">  <strong><?php echo ucfirst(htmlentities($key)); ?>: </strong></span>
+            <span class="red-text">    <?php echo htmlentities($value); ?> </span>
         </li>
     <?php endforeach; ?>
     <?php
@@ -255,13 +236,9 @@ function getData($handle){
     $dataArray = array(); # create data array
     while (!feof($handle)) { #while not at the end of file
         $line = fgets($handle);
-        // ensure $line is HTML chars
-        $line = htmlentities(trim($line));
-        if  (!empty($line))  { # check it is not an empty line
-        /* the write function and validate form function is going to ensure
-        the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
-        the write function always adds '|' after the username and password */
 
+        $line = trim($line);
+        if  (!empty($line))  { # check it is not an empty line
             array_push($dataArray,  $line);
         }
     }
@@ -274,14 +251,13 @@ function getUserPw($handle){
     $dataArray = array(); # create data array
     while (!feof($handle)) { #while not at the end of file
         $line = fgets($handle);
-        // ensure $line is HTML chars
-        $line = htmlentities(trim($line));
+
+        $line = trim($line);
         if  (!empty($line))  { # check it is not an empty line
             $line = explode('|',$line);
-
-        /* the write function and validate form function is going to ensure
-        the '|' is always in the data files. 6 items have to be valid for form to actually post, and then
-        the write function always adds '|' after the username and password */
+            /* the write function and validate form function is going to ensure
+            the '|' is always in the data files. The function always adds '|' after the
+            username and password */
 
             array_push($dataArray,  $line[0]);
         }
@@ -367,42 +343,42 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
                         <div>
                             <label for="">Title</label>
                             <select name="title" id="title">
-                                <?php if (isset($errors['title'])) {echo '<p> No value selected </p>';} ?>
-                                <option value="Mr"  <?php if ($title == 'Mr')  {echo 'selected ="selected"';} ?>>Mr</option>
-                                <option value="Mrs" <?php  if ($title == 'Mrs') {echo 'selected ="selected"';} ?>>Mrs</option>
-                                <option value="Ms" <?php  if ($title == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
+
+                                <option value="Mr"  <?php if (htmlentities($title) == 'Mr')  {echo 'selected ="selected"';} ?>>Mr</option>
+                                <option value="Mrs" <?php  if (htmlentities($title) == 'Mrs') {echo 'selected ="selected"';} ?>>Mrs</option>
+                                <option value="Ms" <?php  if (htmlentities($title) == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
                             </select>
                         </div>
                         <div>
                             <label for="">First name</label>
-                                   <?php if (isset($errors['firstname'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo $firstname ?>" name="firstname" id="name" />
+                                   <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php echo htmlentities($firstname) ?>" name="firstname" id="name" />
                                </div>
                                <div>
                                    <label for="">Surname</label>
-                                   <?php if (isset($errors['surname'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo $surname ?>" name="surname" id="surname" />
+                                   <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php echo htmlentities($surname) ?>" name="surname" id="surname" />
                                </div>
                                <div>
                                    <label for="">Email</label>
-                                   <?php if (isset($duplicates['email'])) {echo '<p> This email has already been used</p>';} ?>
-                                   <?php if (isset($errors['email'])) {echo '<p> Please enter email </p>';} ?>
-                                   <input type="text"  value= "<?php echo $email ?>"  name="email" id="email"/>
+                                   <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
+                                   <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter email </p>';} ?>
+                                   <input type="text"  value= "<?php echo htmlentities($email) ?>"  name="email" id="email"/>
                                </div>
                                <div>
                                    <label for="">Username</label>
-                                   <?php if (isset($duplicates['username'])) {echo '<p> This username has already been used</p>';} ?>
-                                   <?php if (isset($errors['username'])) {echo '<p> Please enter your name </p>';} ?>
-                                   <input type="text"  value= "<?php echo $userName ?>" name="username" id="username" />
+                                   <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
+                                   <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter your name </p>';} ?>
+                                   <input type="text"  value= "<?php echo htmlentities($userName) ?>" name="username" id="username" />
                                </div>
                                <div>
                                    <label for="">Password</label>
-                                   <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="password"  value= "<?php echo $password ?>"  name="password" id="password"/>
+                                   <?php if (htmlentities(isset($errors['password']))) {echo '<p> Please enter password </p>';} ?>
+                                   <input type="password"  value= "<?php echo htmlentities($password) ?>"  name="password" id="password"/>
                                </div>
                                <div>
                                    <label for="">Confirm Password</label>
-                                   <?php if (isset($passwordError['confirm password'])) {echo '<p> The passwords do not match</p>';} ?>
+                                   <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
                                    <input type="password"  value= "<?php echo $confirmPassword?>"  name="confirm-password" id="confirm-password"/>
                                </div>
                                <div>
@@ -490,6 +466,7 @@ function addUserErrors($self){
 
 
         $username = trim($_POST['username']);
+        /* Explain ranges - why <= is needed for two. */
         if (!ctype_alpha($username) || (strlen($username) > 75) || (strlen($username) <= 2)) {
             $errors['username'] = $username;}
         $password = trim($_POST['password']);
@@ -557,15 +534,14 @@ function confirmPassword($self){
         }
 
     }
-
-return $passwordError;
+    return $passwordError;
 }
 
 
 function refreshPageButton(){
     ?>
 
-    <a href="<?php echo $_SERVER['PHP_SELF']; ?>"><button class="button button1">Add User</button></a>
+    <a href="<?php echo htmlentities($_SERVER['PHP_SELF']) ; ?>"><button class="button button1">Add User</button></a>
 
     <?php
 }

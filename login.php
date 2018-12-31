@@ -27,7 +27,7 @@ include('inlcudes/menu.php');
           <main class = "container">
               <section class="col-md-12">
                   <?php
-                  print makeMenu($menu);
+                 echo makeMenu($menu);
                   ?>
                   <?php
                  if(isset($_GET['message'])) {
@@ -58,7 +58,7 @@ include('inlcudes/menu.php');
                            $formValid = false;
                            displayErrors($errors);
                        }
-                       if(bothFieldsValid($self, $loggeddata) == true){
+                       if(sizeof($errors) == 0){
                            header('Location: welcome.php'); #refreshing page to refresh menu on successful login
 
 

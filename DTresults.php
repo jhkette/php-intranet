@@ -40,7 +40,7 @@ if ( isset( $_SESSION['admin'] ) ) {
 	<body>
         <section class="col-md-12">
             <?php
-            print makeMenu($menu);
+            echo makeMenu($menu);
             ?>
         </section>
 		<h1>Introduction to Database Technology - DT Results</h1>

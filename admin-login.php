@@ -27,7 +27,7 @@ include('inlcudes/menu.php');
           <main class = "container">
               <section class="col-md-12">
                   <?php
-                  print makeMenu($menu);
+                  echo makeMenu($menu);
                   ?>
               </section>
               <section class="col-md-12">
