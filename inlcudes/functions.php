@@ -387,41 +387,18 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
     <?php
 }
 
-function validateAddUser($self, $loggeddata){
+function validateAddUser($self, $loggeddata, $duplicates){
     $cleanData = array();
-    $userMatch = false;
-    $emailMatch = false;
+
 
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
-        $email = trim($_POST['email']);
-        foreach ($loggeddata as $key => $value) {
-
-            $data = explode('|', $value);
-            $userPassword  =  $data[0];
-            $userPassword = explode(',', $userPassword);
-            $userPassword[0] = trim($userPassword[0]);
-            if ($userPassword[0] == $username){
-                $userMatch = true;
-            }
-
-            $emailList = $data[1];
-            $emailList = explode(',', $emailList);
-            if($emailList[3]== $email){
-                $emailMatch = true;
-            };
+        if (ctype_alnum($username) && (strlen($username) <= 25) && (strlen($username) >= 4) && (!isset($duplicates['username'])) ) {
+            $cleanData['username'] = $username;
         }
 
-        /* username already declared*/
-        if (ctype_alnum($username) && (strlen($username) <= 25) && (strlen($username) >= 4) && ($userMatch == false)) {
-
-
-            $cleanData['username'] = $username;
-
-    }
-
         $firstname = trim($_POST['firstname']);
-        if (ctype_alpha($firstname) && (strlen($firstname) <= 25) && (strlen($firstname) <= 2)) {
+        if (ctype_alpha($firstname) && (strlen($firstname) <= 25) && (strlen($firstname) >= 2)) {
             $cleanData['firstname'] = $firstname;
         }
         $surname = trim($_POST['surname']);
@@ -431,7 +408,7 @@ function validateAddUser($self, $loggeddata){
        /* email already declared*/
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            if($emailMatch == false){
+            if(!isset($duplicates['email'])) {
             $cleanData['email'] = $email;
             }
         }
