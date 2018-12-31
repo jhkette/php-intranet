@@ -48,10 +48,11 @@ if ( isset( $_SESSION['admin'] ) ) {
                   $loggeddata = getData(openDirectory());
                   $duplicates = checkDuplicates($self, $loggeddata);
                   $errors = addUserErrors($self);
-                  $data = validateAddUser($self, $duplicates, $errors);
-
-
                   $confirmPassword = confirmPassword($self);
+                  $data = validateAddUser($self, $errors, $duplicates);
+
+
+
                   $displayForm = true;
 
 

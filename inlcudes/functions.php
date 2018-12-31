@@ -3,15 +3,14 @@
 require_once('inlcudes/init.php');
 
 
-
+ /* create variable  with empty string.
+ foreach looping through keys and items and adding them to html link*/
 function makeMenu($menu){
- /* create variable  with empty string.*/
- $output='';
- //foreach looping through keys and items and adding them to html link
-  foreach ($menu as $key => $items) {
-      $output.='<li> <a href ='.$key.'>'.$items.'</a></li>';
-  }
-  return $output;
+    $output='';
+    foreach ($menu as $key => $items) {
+         $output.='<li> <a href ='.$key.'>'.$items.'</a></li>';
+     }
+     return $output;
 }
 
 
@@ -60,27 +59,22 @@ function validateInputs($self){
             $cleanData['username'] = $username;
             $_SESSION['admin'] = $username;
         }
-
-
         $password = trim($_POST['password']);
         if ($password == $adminpassword ) {
             $cleanData['password'] = $password;
             $_SESSION['password'] = $password;
         }
-
-}
+    }
     return $cleanData;
 }
 
-function validateErrors($self)
-{
+function validateErrors($self){
     $adminusername = 'admin';
     $adminpassword = 'DCSadmin01';
     $errors = array();
-
-     if (isset($_POST['submit'])) {
-         $username = trim($_POST['username']);
-         if ($username !== $adminusername) {
+    if (isset($_POST['submit'])) {
+        $username = trim($_POST['username']);
+        if ($username !== $adminusername) {
             $errors['username'] = 'Username is not valid';
         }
         /*I'm only checking if the password is valid if the username doesn't contain any errors
@@ -100,26 +94,24 @@ function validateLoginInputs($self, $loggeddata){
     $errors = array();
     $cleanData = array();
 
-     if (isset($_POST['submit'])) {
-
+    if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
-         foreach ($loggeddata as $key => $value) {
+        foreach ($loggeddata as $key => $value) {
             $loggedUsername = explode(',', $value);
             $loggedUsername = $loggedUsername[0];
             if ($username == $loggedUsername ) {
                 $cleanData['username'] = $username;
                 $_SESSION['admin'] = $username;
-             }
-         }
-     }
-     /*I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
+            }
+        }
+    }
+     /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
      a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
     return $cleanData;
 }
 
 
-function validateLoginErrors($self, $loggeddata)
-{
+function validateLoginErrors($self, $loggeddata){
     $errors  = array();
     $correctData = array();
     $correctPassword = array();
@@ -130,34 +122,28 @@ function validateLoginErrors($self, $loggeddata)
             $loggedUsername = $loggedUsername[0];
             if($username == $loggedUsername){
             array_push($correctData, $loggedUsername);
-         }
-     }
-
-     if(count($correctData)== 0){
-         $errors['username'] = 'Username is not valid';
-     }
-     else{
-         $passwordValid = false;
-        $password = trim($_POST['password']);
-        foreach ($loggeddata as $key => $value) {
-            $loggeddata = explode(',', $value);
-
-            $loggeddata[0] = trim($loggeddata[0]);
-            $loggeddata[1] = trim($loggeddata[1]);
-
-
-            if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
-
-                array_push($correctPassword, $loggeddata[1]);
             }
         }
-        if(count($correctPassword)== 0){
-            $errors['password'] = 'Password is not valid';
+        if(count($correctData)== 0){
+        $errors['username'] = 'Username is not valid';
+        }
+        else{
+            $passwordValid = false;
+            $password = trim($_POST['password']);
+            foreach ($loggeddata as $key => $value) {
+                $loggeddata = explode(',', $value);
+                $loggeddata[0] = trim($loggeddata[0]);
+                $loggeddata[1] = trim($loggeddata[1]);
+                if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
+                    array_push($correctPassword, $loggeddata[1]);
+                }
+            }
+            if(count($correctPassword)== 0){
+                $errors['password'] = 'Password is not valid';
+            }
         }
     }
-
-}
-return $errors;
+    return $errors;
 }
 
 
@@ -200,46 +186,38 @@ function displayErrors($errors, $duplicates=array(), $passwordError=array())
 }
 
 
-/*THIS FUNCTION NEEDS TO BE EDITED DOWN*/
  function openDirectory(){
-         $handleDir = opendir('./data');
-         if ($handleDir === false) {
-                echo '<p> System error: Unable to open directory</p>';
-            }
-            else {
-                while(false !== ($file = readdir($handleDir))) {
-                    if ($file != "." && $file != "..") { # don't add dots which represent directories to array
-                        $fileDir1 = array(); # create array
-                        array_push($fileDir1, $file); # push into array
-                        foreach ($fileDir1 as $key => $value) { # for each loop to loop through files
+     $handleDir = opendir('./data');
+     if ($handleDir === false){
+         echo '<p> System error: Unable to open directory</p>';
+     }
+     else {
+         while(false !== ($file = readdir($handleDir))) {
+             if ($file != "." && $file != "..") { # don't add dots which represent directories to array
+                 $fileDir1 = array(); # create array
+                 array_push($fileDir1, $file); # push into array
+                 foreach ($fileDir1 as $key => $value) { # for each loop to loop through files
+                  // open file or report error using string 'data/' and $value to create path to files
+                  $handle = fopen('data/' . htmlentities(trim($value)), 'a+') or die( 'Unable to open file!') ;
 
-                            if ((pathinfo($value, PATHINFO_EXTENSION)) == 'txt'){ # check file is a text file. xml file will be ignored
-
-
-                                    // open file or report error using string 'data/' and $value to create path to files
-                                    $handle = fopen('data/' . htmlentities(trim($value)), 'a+');
-
-                                    return $handle;
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
+                  }
+              }
+          }
+      }
+      return $handle;
+  }
 
 function getData($handle){
     rewind($handle); # pointer needs to be at start of file
     $dataArray = array(); # create data array
     while (!feof($handle)) { #while not at the end of file
         $line = fgets($handle);
-
         $line = trim($line);
         if  (!empty($line))  { # check it is not an empty line
             array_push($dataArray,  $line);
         }
     }
-return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
+    return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
 }
 
 
@@ -248,18 +226,16 @@ function getUserPw($handle){
     $dataArray = array(); # create data array
     while (!feof($handle)) { #while not at the end of file
         $line = fgets($handle);
-
         $line = trim($line);
         if  (!empty($line))  { # check it is not an empty line
             $line = explode('|',$line);
             /* the write function and validate form function is going to ensure
             the '|' is always in the data files. The function always adds '|' after the
             username and password */
-
             array_push($dataArray,  $line[0]);
         }
     }
-return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
+    return $dataArray; # an array of usernames & passwords (all on one line, to be seperated later)
 }
 
 
@@ -371,12 +347,12 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
                                <div>
                                    <label for="">Password</label>
                                    <?php if (htmlentities(isset($errors['password']))) {echo '<p> Please enter password </p>';} ?>
-                                   <input type="password"  value= "<?php echo $password ?>"  name="password" id="password"/>
+                                   <input type="text"  value= "<?php echo $password ?>"  name="password" id="password"/>
                                </div>
                                <div>
                                    <label for="">Confirm Password</label>
                                    <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
-                                   <input type="password"  value= "<?php echo $confirmPassword?>"  name="confirm-password" id="confirm-password"/>
+                                   <input type="text"  value= "<?php echo $confirmPassword?>"  name="confirm-password" id="confirm-password"/>
                                </div>
                                <div>
                                    <input type="submit" name="submit" value="submitbutton" />
@@ -390,7 +366,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
 function validateAddUser($self, $errors, $duplicates){
 
     /* I'm adding both the errors and duplicate arrays as arguments here. To confirm the input is valid
-    I simply have to check the input has NOT been put in either the error or duplicate arrays. This reduces unneccesary code */
+    I  check the input has NOT been put in either the error or duplicate arrays. This reduces unneccesary code */
     $cleanData = array();
 
     if (isset($_POST['submit'])) {
@@ -410,16 +386,15 @@ function validateAddUser($self, $errors, $duplicates){
 
         $email = trim($_POST['email']);
         if (!isset($errors['email']) && (!isset($duplicates['email']))) {
-
             $cleanData['email'] = $email;
         }
 
-        $title = trim($_POST['title']);
-        if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')) {
+        $title = trim($_POST['title']); # Errors are not possible on the select 'title' box, a value is always selected
+        if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')){ # still check the correct value is sent to form for security
             $cleanData['title'] = $title;
         }
         $password = trim($_POST['password']);
-        if (!isset($errors['password'])) {
+        if (!isset($errors['password']))  {
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
@@ -427,6 +402,8 @@ function validateAddUser($self, $errors, $duplicates){
             $cleanData['confirm password'] = $confirmPassword;
         }
     }
+
+
     return $cleanData;
 }
 
@@ -438,13 +415,13 @@ function addUserErrors($self){
 
     if (isset($_POST['submit'])) {
 
-
         $username = trim($_POST['username']);
 
-        if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 4)) {
+        if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 5)) {
             $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';}
-        $password = trim($_POST['password']);
-        if (!ctype_alnum($password) || (strlen($password) > 25)|| (strlen($password) < 5)) {
+
+            $password = trim($_POST['password']);
+        if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
             $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
             charecters long';
         }
@@ -463,6 +440,7 @@ function addUserErrors($self){
             $errors['email'] = 'Please enter a valid email address';
         }
     }
+
     return $errors;
 }
 
@@ -481,10 +459,8 @@ function checkDuplicates($self, $loggeddata){
             if ($userPassword[0] == $username){
                 $userMatch = true;
             }
-            if($userMatch== true){
-                $duplicates['username'] = 'This is a duplicate';
-            }
-            /*duplicate username checked - now check  if there are duplicate email
+
+            /* Duplicate username checked - now check  if there are duplicate email
             by exploding the other index of $loggeddata  */
             $emailList = $loggeddata[1];
             $emailList = explode(',', $emailList);
@@ -492,9 +468,14 @@ function checkDuplicates($self, $loggeddata){
                 $emailMatch = true;
             }
         }
+
         if($emailMatch== true){
         $duplicates['email'] = 'This is a duplicate';
         }
+        if($userMatch== true){
+            $duplicates['username'] = 'This is a duplicate';
+        }
+
     }
     return $duplicates;
 }
