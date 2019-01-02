@@ -34,7 +34,6 @@ include('inlcudes/menu.php');
 
                   <?php
                   $admin = true;
-                  $loggeddata = array();
                   $self = htmlentities($_SERVER['PHP_SELF']);
                   $errors = validateErrors($self,  $loggeddata);
                   $data = validateLoginInputs($self, $errors, $admin);
