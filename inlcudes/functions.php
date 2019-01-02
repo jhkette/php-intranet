@@ -14,13 +14,13 @@ function displayForm( $cleanData = array(), $errors=array()){
         $userName = '';
     }
     if (isset($errors['username']))
-      {$userErrors =  '<p> Please enter your username </p>';}
+      {$userErrors =  '<p> Please enter a valid username </p>';}
      else {
          $userErrors = '';
         }
     if (!isset($errors['username'])){
         if (isset($errors['password'])) {
-            $passwordErrors =  '<p> Please enter your password </p>';}
+            $passwordErrors =  '<p> This is not the correct password </p>';}
          else {
              $passwordErrors = '';
             }
@@ -96,12 +96,18 @@ function displayForm( $cleanData = array(), $errors=array()){
                   array_push($fileDir1, $file); # push into array
                   foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
                   // open file or report error using string 'data/' and $value to create path to files
-                  $handle = fopen('data/' . htmlentities(trim($value)), 'a+') or die( 'Unable to open file!') ;
+                      $handle = fopen('data/' . htmlentities(trim($value)), 'a+');
+                      if ($handle === false) { #error message if you can't open file.
+                          echo '<p>System error. Cannot open file</p>'. PHP_EOL;
+                      }
+                      else{ #else return handle if file can be opened.
+
+                      }
                   }
               }
           }
-      }
       return $handle;
+      }
   }
 
  function getData($handle){
@@ -157,13 +163,13 @@ function validateErrors($self){
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         if ($username !== $adminusername) {
-            $errors['username'] = 'Username is not valid';
+            $errors['username'] = 'This is not the correct username for Admin';
         }
         /*I'm only checking if the password is valid if the username doesn't contain any errors
         It doesn't make sense for a password to be correct independant of the username it is attached to */
 
         if ($password !== $adminpassword) {
-                $errors['password'] = 'password name is not valid';
+                $errors['password'] = 'This is not the correct password for Admin';
             }
     }
     return $errors;
@@ -245,11 +251,11 @@ function addUserErrors($self){
 
         $firstname = trim($_POST['firstname']);
         if (!ctype_alpha($firstname) || (strlen($firstname) > 25) || (strlen($firstname) <= 2))  {
-            $errors['firstname'] = 'Names can only contain letters. It needs to be at least two charecters';
+            $errors['firstname'] = 'Names can only contain letters. They to be at least two charecters';
         }
         $surname = trim($_POST['surname']);
         if (!ctype_alpha($surname) || (strlen($surname) > 25) || (strlen($surname) <= 2)) {
-            $errors['surname'] = 'Surnames can only contain letters. It needs to be at least two charecters';
+            $errors['surname'] = 'Surnames can only contain letters. They need to be at least two charecters';
         }
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
@@ -261,7 +267,7 @@ function addUserErrors($self){
         }
         $password = trim($_POST['password']);
         if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
-            $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
+            $errors['password'] = 'This is not a valid password. It should contain only letters and numbers. It needs to be five or more
             charecters long';
         }
     }
@@ -288,10 +294,10 @@ function checkDuplicates($self, $loggeddata){
             }
         }
         if($emailMatch== true){
-        $duplicates['email'] = 'This is a duplicate';
+        $duplicates['email'] = 'This email is already in use';
         }
         if($userMatch== true){
-            $duplicates['username'] = 'This is a duplicate';
+            $duplicates['username'] = 'This username is already in use';
         }
     }
     return $duplicates;
@@ -309,7 +315,7 @@ function confirmPassword($self){
     return $passwordError; #return password error - this gets displayed on the form on the add user page
 }
 
-/*-------------- FUNCTION TO WRITE USER DATA TO TILE  -----------------------------*/
+/*-------------- FUNCTION TO WRITE USER DATA TO FILE  -----------------------------*/
 
 function writeToFile($handle){
         $username = htmlentities(trim($_POST['username']));
@@ -318,6 +324,7 @@ function writeToFile($handle){
         $firstname = htmlentities(trim($_POST['firstname']));
         $surname = htmlentities(trim($_POST['surname']));
         $email = htmlentities(trim($_POST['email']));
+        /* The verification process ensured that none of the inputs can contain commas, so they are an effective delimiter */
         $text =  $username.','.$password.','. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
         fwrite( $handle , $text ) ;
 }
@@ -325,9 +332,11 @@ function writeToFile($handle){
 
 /*-------------- Header, footer, navigation functions  -----------------------------*/
 function refreshPageButton(){
-    ?>
-    <a href="<?php echo htmlentities($_SERVER['PHP_SELF']) ; ?>"><button class="button button1">Add User</button></a>
-    <?php
+    $self = htmlentities($_SERVER['PHP_SELF']);
+    $output='
+    <a href="'.$self.'"><button class="button button1">Add User</button></a>';
+    return $output;
+
 }
 
 function makeMenu($menu){
