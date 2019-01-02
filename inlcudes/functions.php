@@ -100,13 +100,13 @@ function displayForm( $cleanData = array(), $errors=array()){
                       if ($handle === false) { #error message if you can't open file.
                           echo '<p>System error. Cannot open file</p>'. PHP_EOL;
                       }
-                      else{ #else return handle if file can be opened.
-
+                      else{
+                          return $handle;
                       }
                   }
               }
           }
-      return $handle;
+
       }
   }
 
@@ -127,8 +127,8 @@ function displayForm( $cleanData = array(), $errors=array()){
 /*------------------------ FUNCTIONS TO VALIDATE LOGIN FORMS ---------------------------- */
 
 function validateLoginErrors($self, $loggeddata){
-    $errors  = array();
-    $correctData = false;
+    $errors  = array(); # create errors array
+    $correctData = false;  # set variables to false
     $correctPassword = false;
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
@@ -145,10 +145,10 @@ function validateLoginErrors($self, $loggeddata){
                }
         }
         if($correctData == false){
-            $errors['username'] = 'Username is not valid';
+            $errors['username'] = 'This username does not exist';
         }
         if($correctPassword == false){
-            $errors['password'] = 'password is not valid';
+            $errors['password'] = 'This is not the correct password';
         }
     }
     return $errors;
@@ -167,15 +167,16 @@ function validateErrors($self){
         }
         /*I'm only checking if the password is valid if the username doesn't contain any errors
         It doesn't make sense for a password to be correct independant of the username it is attached to */
-
+        if ($username == $adminusername){
         if ($password !== $adminpassword) {
                 $errors['password'] = 'This is not the correct password for Admin';
             }
+        }
     }
     return $errors;
 }
 
-/*Use admin as a parameter  */
+
 function validateLoginInputs($self, $errors=array(), $admin){
     $cleanData = array();
     /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
@@ -188,7 +189,7 @@ function validateLoginInputs($self, $errors=array(), $admin){
         }
         if(!isset($errors['username']) && (!isset($errors['password']))) {
           session_regenerate_id(true);
-          if($admin == true){
+          if($admin == true){ # if the parameter passed in as admin is true create $_SESSION['admin'] - for access to 'add user'
               $_SESSION['admin'] = $username;
           }
           else{
@@ -199,7 +200,7 @@ function validateLoginInputs($self, $errors=array(), $admin){
    return $cleanData;
 }
 
-/* ------------------------ FUNCTIONS TO VALIDATE ADD USER FORM  -------------------------------*/
+/* ------------------------ FUNCTIONS TO VALIDATE ADD ANOTHER USER FORM  -------------------------------*/
 
 function validateAddUser($self, $errors, $duplicates){
 
@@ -309,7 +310,7 @@ function confirmPassword($self){
         $passWord = trim($_POST['password']);
         $confirmPassword = trim($_POST['confirm-password']);
         if($passWord !== $confirmPassword){
-            $passwordError['confirm password'] = 'The passwords do not match'; # add key and value to password array
+            $passwordError['confirm password'] = 'The passwords do not match'; # add key and value to passwordError array
         }
     }
     return $passwordError; #return password error - this gets displayed on the form on the add user page
@@ -317,6 +318,7 @@ function confirmPassword($self){
 
 /*-------------- FUNCTION TO WRITE USER DATA TO FILE  -----------------------------*/
 
+/* This writes the validated data from add user form to the text file. */
 function writeToFile($handle){
         $username = htmlentities(trim($_POST['username']));
         $password = htmlentities(trim($_POST['password']));

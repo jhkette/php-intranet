@@ -1,0 +1,24 @@
+html{
+    font-size: 62.5%;
+}
+body{
+    font-family: 'Roboto', serif;
+    font-size: 1.6rem;
+}
+
+
+p{
+    font-family: 'Roboto', serif;
+}
+
+.container{
+    width: 75%;
+    margin: auto;
+}
+
+
+.list-group-item{
+    color: rgb(208, 37, 14);
+    list-style: none;
+    margin: .6rem 0rem;
+}

@@ -4,9 +4,9 @@ require_once('inlcudes/init.php');
 include('inlcudes/menu.php');
 
 
-if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
+if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 
-    // echo 'welcome' . $_SESSION['admin'];
+     echo 'You are logged in as' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
 }
 
  else {

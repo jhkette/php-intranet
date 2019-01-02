@@ -9,7 +9,7 @@ if (isset($_SESSION['admin'])) {
 
  else {
     // Redirect them to the login page
-    header("Location: admin-login.php");
+    header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
 }
 ?>
 
@@ -19,10 +19,10 @@ if (isset($_SESSION['admin'])) {
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="./css/style.css">
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
 </head>
      <body>

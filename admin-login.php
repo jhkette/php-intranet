@@ -2,6 +2,11 @@
 require_once('inlcudes/init.php');
 
 include('inlcudes/menu.php');
+if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
+
+     echo 'You are logged in as' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
+}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -9,11 +14,11 @@ include('inlcudes/menu.php');
 <head>
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+
+
+    <link rel="stylesheet" href="./css/style.css">
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
 </head>
      <body>
@@ -29,6 +34,13 @@ include('inlcudes/menu.php');
                   <?php
                   echo makeMenu($menu);
                   ?>
+              </section>
+             <section class="col-md-12">
+             <h4> <?php
+             if (isset($_GET['message'])) {
+                 echo $_GET['message'];
+             }
+              ?></h4>
               </section>
               <section class="col-md-12">
 

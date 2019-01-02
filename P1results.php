@@ -6,7 +6,7 @@ include('inlcudes/menu.php');
 
 if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 
-    // echo 'welcome' . $_SESSION['admin'];
+     echo 'You are logged in as' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
 }
 
  else {
@@ -41,7 +41,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 	</head>
 	<body>
         <section class="col-md-12">
-        
+
             <?php
             print makeMenu($menu);
             ?>
