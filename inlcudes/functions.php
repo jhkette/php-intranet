@@ -2,19 +2,11 @@
 
 require_once('inlcudes/init.php');
 
-
- /* create variable  with empty string.
- foreach looping through keys and items and adding them to html link*/
-function makeMenu($menu){
-    $output='';
-    foreach ($menu as $key => $items) {
-         $output.='<li> <a href ='.$key.'>'.$items.'</a></li>';
-     }
-     return $output;
-}
-
+/* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
 
 function displayForm( $cleanData = array(), $errors=array()){
+    $passwordErrors='';
+    $userErrors = '';
     if(isset($cleanData['username'])) {
         $userName = htmlentities($cleanData['username']);
     }
@@ -22,17 +14,19 @@ function displayForm( $cleanData = array(), $errors=array()){
         $userName = '';
     }
     if (isset($errors['username']))
-      {$errors =  '<p> Please enter your username </p>';}
+      {$userErrors =  '<p> Please enter your username </p>';}
      else {
-         $errors = '';
+         $userErrors = '';
         }
-    if (htmlentities(isset($errors['password']))) {
-        $passwordErrors = '<p> Please enter password </p>';}
-    else{
-        $passwordErrors ='';
-    }
+    if (!isset($errors['username'])){
+        if (isset($errors['password'])) {
+            $passwordErrors =  '<p> Please enter your password </p>';}
+         else {
+             $passwordErrors = '';
+            }
+        }
     $self = htmlentities($_SERVER['PHP_SELF']);
-
+    print_r($errors);
 
     $output='
     <form action="'.$self.'"  method="post">
@@ -40,13 +34,13 @@ function displayForm( $cleanData = array(), $errors=array()){
             <legend>Please log in</legend>
             <div>
                 <label for="">Username</label>'.
-                 $errors .
-                '<input type="text"  value= "" '.$userName.' name="username" id="name" />
+                 $userErrors .
+                '<input type="text"  value= " '.$userName.'" name="username" id="name" />
             </div>
             <div>
-                 <label for="">Password</label>'.
-                $passwordErrors. '
-                 <input type="password"  value= ""  name="password" id="password"/>
+                 <label for="">Password</label>'
+                .$passwordErrors.
+                 '<input type="password"  value= ""  name="password" id="password"/>
              </div>
               <div>
                   <input type="submit" name="submit" value="submitbutton" />
@@ -62,7 +56,7 @@ function displayForm( $cleanData = array(), $errors=array()){
       foreach ($data as $key => $value) {
           $output.='<li class = "list-group-item">
                    <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
-               </li>';
+                   </li>';
            }
       return $output;
   }
@@ -88,6 +82,7 @@ function displayForm( $cleanData = array(), $errors=array()){
         return $output;
   }
 
+/*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
 
  function openDirectory(){
       $handleDir = opendir('./data');
@@ -99,7 +94,7 @@ function displayForm( $cleanData = array(), $errors=array()){
               if ($file != "." && $file != "..") { # don't add dots which represent directories to array
                   $fileDir1 = array(); # create array
                   array_push($fileDir1, $file); # push into array
-                  foreach ($fileDir1 as $key => $value) { # for each loop to loop through files
+                  foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
                   // open file or report error using string 'data/' and $value to create path to files
                   $handle = fopen('data/' . htmlentities(trim($value)), 'a+') or die( 'Unable to open file!') ;
                   }
@@ -123,29 +118,13 @@ function displayForm( $cleanData = array(), $errors=array()){
   }
 
 
+/*------------------------ FUNCTIONS TO VALIDATE FORMS ---------------------------- */
+
 /*The admin login and and oridnary login function do need to be seperate. I could also check for the admin uaer/password
 in the login functions and then call them on both pages. But the admin should ONLY be able to login on the admin page -
 therfore we need a sperate function that deals ONLY with admin login. Similarly an admin cannot login via the normal login pages
  */
 
-function validateInputs($self){
-    $adminusername = 'admin';
-    $adminpassword = 'DCSadmin01';
-    $cleanData = array();
-    if (isset($_POST['submit'])) { #
-        $username = trim($_POST['username']);
-        if ($username == $adminusername) {
-            $cleanData['username'] = $username;
-            $_SESSION['admin'] = $username;
-        }
-        $password = trim($_POST['password']);
-        if ($password == $adminpassword ) {
-            $cleanData['password'] = $password;
-            $_SESSION['password'] = $password;
-        }
-    }
-    return $cleanData;
-}
 
 function validateErrors($self){
     $adminusername = 'admin';
@@ -153,78 +132,71 @@ function validateErrors($self){
     $errors = array();
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
         if ($username !== $adminusername) {
             $errors['username'] = 'Username is not valid';
         }
         /*I'm only checking if the password is valid if the username doesn't contain any errors
         It doesn't make sense for a password to be correct independant of the username it is attached to */
-        if (!isset($errors['username'])) {
-            $password = trim($_POST['password']);
-            if ($password !== $adminpassword) {
+
+        if ($password !== $adminpassword) {
                 $errors['password'] = 'password name is not valid';
             }
-        }
+
     }
     return $errors;
 }
-
 /*Use admin as a parameter  */
-function validateLoginInputs($self, $errors=array()){
+function validateLoginInputs($self, $errors=array(), $admin){
     $cleanData = array();
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
         if(!isset($errors['username'])) {
+
             $cleanData['username'] = $username;
+
+        }
+        if(!isset($errors['username']) && (!isset($errors['password']))) {
+          if($admin == true){
+              echo '<h1>Hello </h1>';
+          }
             $_SESSION['admin'] = $username;
+
         }
     }
      /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
      a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
     return $cleanData;
 }
-
-
 function validateLoginErrors($self, $loggeddata){
     $errors  = array();
-    $correctData = array();
-    $correctPassword = array();
+    $correctData = false;
+    $correctPassword = false;
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
             $loggeddata = explode('|', $value);
-            $userPassword  =  $loggeddata[0];
+            $userPassword  =  trim($loggeddata[0]);
             $userPassword = explode(',', $userPassword);
             $userPassword[0] = trim($userPassword[0]);
+            $userPassword[1] = trim($userPassword[1]);
             if ($userPassword[0] == $username){
-                array_push($correctData, $userPassword[0]);
+                 $correctData = true;
             }
-            if ($userPassword[1] == $password){
-                array_push($correctPassword, $userPassword[1]);
-            }
+            if(($userPassword[0] ==  $username) && ($userPassword[1] == $password)) {
+                   $correctPassword = true;
+               }
         }
-        if(count($correctData)== 0){
+        if($correctData == false){
             $errors['username'] = 'Username is not valid';
         }
-        if(count($correctPassword)== 0){
+        if($correctPassword == false){
             $errors['password'] = 'password is not valid';
         }
     }
     return $errors;
-}
-
-
-function writeToFile($handle){
-
-        $username = htmlentities(trim($_POST['username']));
-        $password = htmlentities(trim($_POST['password']));
-        $title = htmlentities(trim($_POST['title']));
-        $firstname = htmlentities(trim($_POST['firstname']));
-        $surname = htmlentities(trim($_POST['surname']));
-        $email = htmlentities(trim($_POST['email']));
-        $text =  $username.','.$password.'|'. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
-        fwrite( $handle , $text ) ;
-
 }
 
 
@@ -272,22 +244,13 @@ function validateAddUser($self, $errors, $duplicates){
 }
 
 
-
 function addUserErrors($self){
     $errors = array();
     $userMatch = false;
     if (isset($_POST['submit'])) {
-        $username = trim($_POST['username']);
-        if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 5)) {
-            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';
-        }
-        $password = trim($_POST['password']);
-        if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
-            $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
-            charecters long';
-        }
+
         $firstname = trim($_POST['firstname']);
-        if (!ctype_alpha($firstname) || (strlen($firstname) > 25) || (strlen($firstname) < 2))  {
+        if (!ctype_alpha($firstname) || (strlen($firstname) > 25) || (strlen($firstname) <= 2))  {
             $errors['firstname'] = 'Names can only contain letters. It needs to be at least two charecters';
         }
         $surname = trim($_POST['surname']);
@@ -297,6 +260,15 @@ function addUserErrors($self){
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
             $errors['email'] = 'Please enter a valid email address';
+        }
+        $username = trim($_POST['username']);
+        if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 5)) {
+            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';
+        }
+        $password = trim($_POST['password']);
+        if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
+            $errors['password'] = 'This is not valid password. It should contain only letters and numbers and be five or more
+            charecters long';
         }
     }
     return $errors;
@@ -349,9 +321,32 @@ function confirmPassword($self){
     return $passwordError;
 }
 
+/*-------------- Function to write user data to file  -----------------------------*/
+
+function writeToFile($handle){
+        $username = htmlentities(trim($_POST['username']));
+        $password = htmlentities(trim($_POST['password']));
+        $title = htmlentities(trim($_POST['title']));
+        $firstname = htmlentities(trim($_POST['firstname']));
+        $surname = htmlentities(trim($_POST['surname']));
+        $email = htmlentities(trim($_POST['email']));
+        $text =  $username.','.$password.'|'. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
+        fwrite( $handle , $text ) ;
+}
+
+
+/*-------------- Header, footer, navigation functions  -----------------------------*/
 function refreshPageButton(){
     ?>
     <a href="<?php echo htmlentities($_SERVER['PHP_SELF']) ; ?>"><button class="button button1">Add User</button></a>
     <?php
+}
+
+function makeMenu($menu){
+    $output='';
+    foreach ($menu as $key => $items) {
+         $output.='<li> <a href ='.$key.'>'.$items.'</a></li>';
+     }
+     return $output;
 }
 ?>

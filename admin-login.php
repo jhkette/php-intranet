@@ -34,10 +34,13 @@ include('inlcudes/menu.php');
 
 
                   <?php
-
+                  $admin = true;
+                  $loggeddata = array();
                   $self = htmlentities($_SERVER['PHP_SELF']);
-                  $data = validateInputs($self);
-                  $errors = validateErrors($self);
+                  $errors = validateErrors($self,  $loggeddata);
+                  $data = validateLoginInputs($self, $errors, $admin);
+
+
 
 
                   /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form

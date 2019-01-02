@@ -3,10 +3,10 @@ require_once('inlcudes/init.php');
 
 include('inlcudes/menu.php');
 
-if ( isset( $_SESSION['admin'] ) ) {
-
+if (isset($_SESSION['admin'])) {
     echo 'welcome' . $_SESSION['admin'];
 }
+
  else {
     // Redirect them to the login page
     header("Location: admin-login.php");
@@ -85,41 +85,41 @@ if ( isset( $_SESSION['admin'] ) ) {
                                            <label for="">Title</label>
                                            <select name="title" id="title">
                                                <option value="Mr"  <?php if (isset($data['title']) &&  ($data['title']=="Mr")) {echo 'selected ="selected"';} ?>>Mr</option>
-                                               <option value="Mrs" <?php  if (isset($data['title']) &&  ($data['title']=="Mrs")) {echo 'selected ="selected"';} ?>>Mrs</option>
-                                               <option value="Ms" <?php  if (isset($data['title']) &&  ($data['title']=="Ms")) {echo 'selected ="selected"';} ?>>Ms</option>
+                                               <option value="Mrs" <?php if (isset($data['title']) &&  ($data['title']=="Mrs")) {echo 'selected ="selected"';} ?>>Mrs</option>
+                                               <option value="Ms" <?php if (isset($data['title']) &&  ($data['title']=="Ms")) {echo 'selected ="selected"';} ?>>Ms</option>
                                            </select>
                                        </div>
                                        <div>
                                            <label for="">First name</label>
                                                   <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your name </p>';} ?>
-                                                  <input type="text"  value= "<?php if (isset($data['firstname'])) {echo htmlspecialchars($data['firstname']);} ?>" name="firstname" id="name" />
+                                                  <input type="text"  value= "<?php if (isset($data['firstname'])) {echo htmlentities($data['firstname']);} ?>" name="firstname" id="name" />
                                               </div>
                                               <div>
                                                   <label for="">Surname</label>
                                                   <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your name </p>';} ?>
-                                                  <input type="text"  value= "<?php if (isset($data['surname'])) {echo htmlspecialchars($data['surname']);} ?>" name="surname" id="name" />
+                                                  <input type="text"  value= "<?php if (isset($data['surname'])) {echo htmlentities($data['surname']);} ?>" name="surname" id="name" />
                                               </div>
                                               <div>
                                                   <label for="">Email</label>
                                                   <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
                                                   <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter email </p>';} ?>
-                                                 <input type="text"  value= "<?php if (isset($data['email'])) {echo htmlspecialchars($data['email']);} ?>"  name="email" id="email"/>
+                                                 <input type="text"  value= "<?php if (isset($data['email'])) {echo htmlentities($data['email']);} ?>"  name="email" id="email"/>
                                               </div>
                                               <div>
                                                   <label for="">Username</label>
                                                   <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
                                                   <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter your name </p>';} ?>
-                                                  <input type="text"  value= "<?php if (isset($data['username'])) {echo htmlspecialchars($data['username']);} ?>" name="username" id="name" />
+                                                  <input type="text"  value= "<?php if (isset($data['username'])) {echo htmlentities($data['username']);} ?>" name="username" id="name" />
                                               </div>
                                               <div>
                                                   <label for="">Password</label>
                                                    <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
-                                                   <input type="text"  value= "<?php if (isset($data['password'])) {echo htmlspecialchars($data['password']);} ?>"  name="password" id="password"/>
+                                                   <input type="text"  value= "<?php if (isset($data['password'])) {echo htmlentities($data['password']);} ?>"  name="password" id="password"/>
                                               </div>
                                               <div>
                                                   <label for="">Confirm Password</label>
                                                   <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
-                                                   <input type="text"  value= "<?php if (isset($data['confirm password'])) {echo htmlspecialchars($data['confirm password']);} ?>"  name="confirm-password" id="confirm-password"/>
+                                                   <input type="text"  value= "<?php if (isset($data['confirm password'])) {echo htmlentities($data['confirm password']);} ?>"  name="confirm-password" id="confirm-password"/>
                                               </div>
                                               <div>
                                                   <input type="submit" name="submit" value="submitbutton" />

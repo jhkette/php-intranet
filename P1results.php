@@ -1,9 +1,18 @@
 <?php
 require_once('inlcudes/init.php');
-require_once('inlcudes/sessions.php');
+
 
 include('inlcudes/menu.php');
 
+if ( isset( $_SESSION['admin'] ) ) {
+
+    echo 'welcome' . $_SESSION['admin'];
+}
+
+ else {
+    // Redirect them to the login page
+    header("Location: login.php?message=please log in");
+}
 
 ?>
 

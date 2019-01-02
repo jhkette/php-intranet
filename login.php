@@ -39,6 +39,7 @@ include('inlcudes/menu.php');
 
 
                   <?php
+                   $admin = false;
                   $loggeddata = getData(openDirectory());
 
 
@@ -46,7 +47,9 @@ include('inlcudes/menu.php');
                   $self = htmlentities($_SERVER['PHP_SELF']);
 
                   $errors = validateLoginErrors($self, $loggeddata);
-                  $data = validateLoginInputs($self, $errors);
+                  $data = validateLoginInputs($self, $errors, $admin);
+                 
+
 
 
 
@@ -58,7 +61,7 @@ include('inlcudes/menu.php');
                       if errors == 0 the form is valid */
                        if (sizeof($errors) > 0) {
                            $formValid = false;
-                           displayErrors($errors);
+                           echo displayErrors($errors);
                        }
                        if(sizeof($errors) == 0){
                            header('Location: welcome.php'); #refreshing page to refresh menu on successful login
