@@ -47,7 +47,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                   <?php
                   $admin = true;
                   $self = htmlentities($_SERVER['PHP_SELF']);
-                  $errors = validateErrors($self);
+                  $errors = reportAdminErrors($self);
                   $data = validateLoginInputs($self, $errors, $admin);
                    /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                   or redirects the user to welcome.php if no errors were detected */

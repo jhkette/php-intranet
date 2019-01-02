@@ -4,7 +4,7 @@ require_once('inlcudes/init.php');
 include('inlcudes/menu.php');
 if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 
-     echo 'You are logged in as' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
+     echo 'You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
 }
 
 
@@ -46,7 +46,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                    $admin = false;
                    $loggeddata = getData(openDirectory());
                    $self = htmlentities($_SERVER['PHP_SELF']);
-                   $errors = validateLoginErrors($self, $loggeddata);
+                   $errors = reportLoginErrors($self, $loggeddata);
                    $data = validateLoginInputs($self, $errors, $admin);
                     /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                    or redirects the user to welcome.php if no errors were detected */

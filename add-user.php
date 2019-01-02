@@ -45,6 +45,7 @@ if (isset($_SESSION['admin'])) {
                   $errors = addUserErrors($self);
                   $confirmPassword = confirmPassword($self);
                   $data = validateAddUser($self, $errors, $duplicates);
+                  $handle = openDirectory();
                   $displayForm = true;
 
 
@@ -56,17 +57,18 @@ if (isset($_SESSION['admin'])) {
                        if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
                             $displayForm = false;
                             echo displayResults($data);
-                            writeToFile(openDirectory());
+                            writeToFile($handle ,$data);
                             echo refreshPageButton();
                         }
                         if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
                            echo displayErrors($errors, $duplicates, $confirmPassword);
                         }
                     }
-                    /* This code runs to make the form display. The data and errors array
-                   are used as to preserve correct data and dispay an error message above the relevant form field if
-                   needed   */
+
                    ?>
+                   <!--  This code runs to make the form display. The data and errors array
+                  are used as to preserve correct data and dispay an error message above the relevant form field if
+                  needed   -->
                     <?php if ($displayForm == true): ?>
                         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                             <fieldset>
