@@ -80,33 +80,34 @@ if (isset($_SESSION['admin'])) {
                                         <option value="Mr" <?php if (isset($data['title']) && ($data['title']=="Mr" )) {echo 'selected ="selected"' ;} ?>>Mr</option>
                                         <option value="Mrs" <?php if (isset($data['title']) && ($data['title']=="Mrs" )) {echo 'selected ="selected"' ;} ?>>Mrs</option>
                                         <option value="Ms" <?php if (isset($data['title']) && ($data['title']=="Ms" )) {echo 'selected ="selected"' ;} ?>>Ms</option>
+                                        <option value="Miss" <?php if (isset($data['title']) && ($data['title']=="Miss" )) {echo 'selected ="selected"' ;} ?>>Miss</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label for="">First name</label>
-                                    <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your name </p>';} ?>
+                                    <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your first name </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['firstname'])) {echo htmlentities($data['firstname']);} ?>" name="firstname" id="name" />
                                 </div>
                                 <div>
                                     <label for="">Surname</label>
-                                    <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your name </p>';} ?>
+                                    <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your Surname </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['surname'])) {echo htmlentities($data['surname']);} ?>" name="surname" id="name" />
                                 </div>
                                 <div>
                                     <label for="">Email</label>
                                     <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
-                                    <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter email </p>';} ?>
+                                    <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter a valid email </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['email'])) {echo htmlentities($data['email']);} ?>" name="email" id="email" />
                                 </div>
                                 <div>
                                     <label for="">Username</label>
                                     <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
-                                    <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter your name </p>';} ?>
+                                    <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter a valid username</p>';} ?>
                                     <input type="text" value="<?php if (isset($data['username'])) {echo htmlentities($data['username']);} ?>" name="username" id="name" />
                                 </div>
                                 <div>
                                     <label for="">Password</label>
-                                    <?php if (isset($errors['password'])) {echo '<p> Please enter password </p>';} ?>
+                                    <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['password'])) {echo htmlentities($data['password']);} ?>" name="password" id="password" />
                                 </div>
                                 <div>

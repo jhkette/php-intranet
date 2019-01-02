@@ -47,7 +47,7 @@ include('inlcudes/menu.php');
                       #declare $self varaible as $_POST for use in validation
                        if (count($errors) > 0) {
                            $formValid = false;
-                           displayErrors($errors);
+                           echo displayErrors($errors);
                        }
                    }
                    echo displayForm($data, $errors);

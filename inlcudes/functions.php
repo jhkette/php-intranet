@@ -66,17 +66,17 @@ function displayForm( $cleanData = array(), $errors=array()){
       $output='';
       foreach ($errors as $key => $value) {
           $output.='<li class = "list-group-item">
-                   <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+                   <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
                    </li>';
            }
        foreach ($duplicates as $key => $value) {
            $output.='<li class = "list-group-item">
-                     <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+                     <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
                      </li>';
                 }
         foreach ($passwordError as $key => $value) {
             $output.='<li class = "list-group-item">
-                      <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+                      <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
                       </li>';
                      }
         return $output;
@@ -228,7 +228,7 @@ function validateAddUser($self, $errors, $duplicates){
         }
 
         $title = trim($_POST['title']); # Errors are not possible on the select 'title' box, a value is always selected
-        if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms')){ # still check the correct value is sent to form for security
+        if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms') || ($title == 'Miss')) { # still check the correct value is sent to form for security
             $cleanData['title'] = $title;
         }
         $password = trim($_POST['password']);
@@ -251,24 +251,24 @@ function addUserErrors($self){
 
         $firstname = trim($_POST['firstname']);
         if (!ctype_alpha($firstname) || (strlen($firstname) > 25) || (strlen($firstname) <= 2))  {
-            $errors['firstname'] = 'Names can only contain letters. They to be at least two charecters';
+            $errors['firstname'] = 'Names can only contain letters. They need to be at least two charecters.';
         }
         $surname = trim($_POST['surname']);
         if (!ctype_alpha($surname) || (strlen($surname) > 25) || (strlen($surname) <= 2)) {
-            $errors['surname'] = 'Surnames can only contain letters. They need to be at least two charecters';
+            $errors['surname'] = 'Surnames can only contain letters. They need to be at least two charecters.';
         }
         $email = trim($_POST['email']);
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
-            $errors['email'] = 'Please enter a valid email address';
+            $errors['email'] = 'Please enter a valid email address.';
         }
         $username = trim($_POST['username']);
         if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 5)) {
-            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more chrecters long';
+            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more chrecters long.';
         }
         $password = trim($_POST['password']);
         if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
             $errors['password'] = 'This is not a valid password. It should contain only letters and numbers. It needs to be five or more
-            charecters long';
+            charecters long.';
         }
     }
     return $errors;
