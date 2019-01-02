@@ -26,7 +26,7 @@ function displayForm( $cleanData = array(), $errors=array()){
             }
         }
     $self = htmlentities($_SERVER['PHP_SELF']);
-    print_r($errors);
+
 
     $output='
     <form action="'.$self.'"  method="post">
@@ -120,59 +120,6 @@ function displayForm( $cleanData = array(), $errors=array()){
 
 /*------------------------ FUNCTIONS TO VALIDATE LOGIN FORMS ---------------------------- */
 
-/*The admin login and and oridnary login function do need to be seperate. I could also check for the admin uaer/password
-in the login functions and then call them on both pages. But the admin should ONLY be able to login on the admin page -
-therfore we need a sperate function that deals ONLY with admin login. Similarly an admin cannot login via the normal login pages
- */
-
-
-function validateErrors($self){
-    $adminusername = 'admin';
-    $adminpassword = 'DCSadmin01';
-    $errors = array();
-    if (isset($_POST['submit'])) {
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        if ($username !== $adminusername) {
-            $errors['username'] = 'Username is not valid';
-        }
-        /*I'm only checking if the password is valid if the username doesn't contain any errors
-        It doesn't make sense for a password to be correct independant of the username it is attached to */
-
-        if ($password !== $adminpassword) {
-                $errors['password'] = 'password name is not valid';
-            }
-
-    }
-    return $errors;
-}
-/*Use admin as a parameter  */
-function validateLoginInputs($self, $errors=array(), $admin){
-    $cleanData = array();
-    if (isset($_POST['submit'])) {
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        if(!isset($errors['username'])) {
-
-            $cleanData['username'] = $username;
-
-        }
-        /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
-        a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
-        if(!isset($errors['username']) && (!isset($errors['password']))) {
-          if($admin == true){
-              $_SESSION['admin'] = $username;
-          }
-          else{
-               $_SESSION['user'] = $username;
-           }
-       }
-   }
-
-    return $cleanData;
-}
-
-
 function validateLoginErrors($self, $loggeddata){
     $errors  = array();
     $correctData = false;
@@ -199,6 +146,52 @@ function validateLoginErrors($self, $loggeddata){
         }
     }
     return $errors;
+}
+
+
+function validateErrors($self){
+    $adminusername = 'admin';
+    $adminpassword = 'DCSadmin01';
+    $errors = array();
+    if (isset($_POST['submit'])) {
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        if ($username !== $adminusername) {
+            $errors['username'] = 'Username is not valid';
+        }
+        /*I'm only checking if the password is valid if the username doesn't contain any errors
+        It doesn't make sense for a password to be correct independant of the username it is attached to */
+
+        if ($password !== $adminpassword) {
+                $errors['password'] = 'password name is not valid';
+            }
+    }
+    return $errors;
+}
+
+/*Use admin as a parameter  */
+function validateLoginInputs($self, $errors=array(), $admin){
+    $cleanData = array();
+    if (isset($_POST['submit'])) {
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+        if(!isset($errors['username'])) {
+
+            $cleanData['username'] = $username;
+
+        }
+        /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
+        a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
+        if(!isset($errors['username']) && (!isset($errors['password']))) {
+          if($admin == true){
+              $_SESSION['admin'] = $username;
+          }
+          else{
+               $_SESSION['user'] = $username;
+           }
+       }
+   }
+   return $cleanData;
 }
 
 /* ------------------------ FUNCTIONS TO VALIDATE ADD USER FORM  -------------------------------*/
@@ -291,9 +284,7 @@ function checkDuplicates($self, $loggeddata){
             if ($loggeddata[0] == $username){
                 $userMatch = true;
             }
-            /* Duplicate username checked - now check  if there are duplicate email
-            by exploding the other index of $loggeddata  */
-            if($loggeddata[5] == $email){ #email value will be at index [3]
+            if($loggeddata[5] == $email){ #email value will be at index [5]
                 $emailMatch = true; # change emailmatch to true if match found
             }
         }
@@ -315,7 +306,6 @@ function confirmPassword($self){
         if($passWord !== $confirmPassword){
             $passwordError['confirm password'] = 'The passwords do not match'; # add key and value to password array
         }
-
     }
     return $passwordError; #return password error - this gets displayed on the form on the add user page
 }
