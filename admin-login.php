@@ -46,17 +46,14 @@ include('inlcudes/menu.php');
 
                       if(sizeof($errors) == 0){
                           header('Location: welcome.php'); #refreshing page to refresh menu on successful login
-
                       }
-
-                       #declare $self varaible as $_POST for use in validation
+                      #declare $self varaible as $_POST for use in validation
                        if (sizeof($errors) > 0) {
                            $formValid = false;
                            displayErrors($errors);
                        }
-
                    }
-                    echo displayForm($data, $errors);
+                   echo displayForm($data, $errors);
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
