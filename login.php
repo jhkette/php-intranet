@@ -39,14 +39,14 @@ include('inlcudes/menu.php');
 
 
                   <?php
-                  $loggeddata = getUserPw(openDirectory());
+                  $loggeddata = getData(openDirectory());
 
-                  print_r($loggeddata);
+
 
                   $self = htmlentities($_SERVER['PHP_SELF']);
 
                   $errors = validateLoginErrors($self, $loggeddata);
-                  $data = validateLoginInputs($self, $loggeddata, $errors);
+                  $data = validateLoginInputs($self, $errors);
 
 
 
@@ -68,7 +68,7 @@ include('inlcudes/menu.php');
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
-                   displayForm( $data, $errors);
+                   echo displayForm( $data, $errors);
                    ?>
           </section>
 

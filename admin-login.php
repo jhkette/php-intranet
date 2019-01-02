@@ -56,7 +56,7 @@ include('inlcudes/menu.php');
                        }
 
                    }
-                    displayForm($data, $errors);
+                    echo displayForm($data, $errors);
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */

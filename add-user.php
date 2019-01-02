@@ -50,9 +50,6 @@ if ( isset( $_SESSION['admin'] ) ) {
                   $errors = addUserErrors($self);
                   $confirmPassword = confirmPassword($self);
                   $data = validateAddUser($self, $errors, $duplicates);
-
-
-
                   $displayForm = true;
 
 
@@ -63,15 +60,15 @@ if ( isset( $_SESSION['admin'] ) ) {
                        #declare $self varaible as $_POST for use in validation
                        if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)  &&  (sizeof($confirmPassword) == 0)) {
                             $displayForm = false;
-                         displayResults($data);
+                         echo displayResults($data);
                          writeToFile(openDirectory());
                          refreshPageButton();
                      }
 
                        if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0) || (sizeof($confirmPassword) > 0)) {
 
-                           $formValid = false;
-                           displayErrors($errors, $duplicates, $confirmPassword);
+
+                          echo displayErrors($errors, $duplicates, $confirmPassword);
 
                        }
 

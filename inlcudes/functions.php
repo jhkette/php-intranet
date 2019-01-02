@@ -21,31 +21,41 @@ function displayForm( $cleanData = array(), $errors=array()){
     else{
         $userName = '';
     }
+    if (isset($errors['username']))
+      {$errors =  '<p> Please enter your username </p>';}
+     else {
+         $errors = '';
+        }
+    if (htmlentities(isset($errors['password']))) {
+        $passwordErrors = '<p> Please enter password </p>';}
+    else{
+        $passwordErrors ='';
+    }
+    $self = htmlentities($_SERVER['PHP_SELF']);
 
 
-
-
-    ?>
-    <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
+    $output='
+    <form action="'.$self.'"  method="post">
         <fieldset>
             <legend>Please log in</legend>
             <div>
-                <label for="">Username</label>
-                <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter your username </p>';} ?>
-                <input type="text"  value= "<?php echo $userName ?>" name="username" id="name" />
+                <label for="">Username</label>'.
+                 $errors .
+                '<input type="text"  value= "" '.$userName.' name="username" id="name" />
             </div>
             <div>
-                 <label for="">Password</label>
-                 <?php if (htmlentities(isset($errors['password']))) {echo '<p> Please enter password </p>';} ?>
-                 <!--i'm not saving the password as a value. Password's can't be correct independant of the username  -->
+                 <label for="">Password</label>'.
+                $passwordErrors. '
+
                  <input type="password"  value= ""  name="password" id="password"/>
              </div>
               <div>
                   <input type="submit" name="submit" value="submitbutton" />
               </div>
           </fieldset>
-      </form>
-      <?php
+      </form>';
+      return $output;
+
 }
 
 /*The admin login and and oridnary login function do need to be seperate. I could also check for the admin uaer/password
@@ -93,8 +103,8 @@ function validateErrors($self){
     return $errors;
 }
 
-
-function validateLoginInputs($self, $loggeddata, $errors=array()){
+/*Use admin as a parameter  */
+function validateLoginInputs($self, $errors=array()){
     $cleanData = array();
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
@@ -115,30 +125,29 @@ function validateLoginErrors($self, $loggeddata){
     $correctPassword = array();
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
-        foreach ($loggeddata as $key  => $value){
-            $loggedUsername = explode(',', $value);
-            $loggedUsername = $loggedUsername[0];
-            if($username == $loggedUsername){
-            array_push($correctData, $loggedUsername);
+        $password = trim($_POST['password']);
+
+        foreach ($loggeddata as $key => $value) {
+            $loggeddata = explode('|', $value);
+            $userPassword  =  $loggeddata[0];
+            $userPassword = explode(',', $userPassword);
+            $userPassword[0] = trim($userPassword[0]);
+            print_r($userPassword[0]);
+            print_r($userPassword[1]);
+            if ($userPassword[0] == $username){
+                array_push($correctData, $userPassword[0]);
             }
+            if ($userPassword[1] == $password){
+                array_push($correctPassword, $userPassword[1]);
+            }
+
+
         }
         if(count($correctData)== 0){
-        $errors['username'] = 'Username is not valid';
+            $errors['username'] = 'Username is not valid';
         }
-        else{
-            $passwordValid = false;
-            $password = trim($_POST['password']);
-            foreach ($loggeddata as $key => $value) {
-                $loggeddata = explode(',', $value);
-                $loggeddata[0] = trim($loggeddata[0]);
-                $loggeddata[1] = trim($loggeddata[1]);
-                if(($loggeddata[0] ==  $username) && ($loggeddata[1] == $password)){
-                    array_push($correctPassword, $loggeddata[1]);
-                }
-            }
-            if(count($correctPassword)== 0){
-                $errors['password'] = 'Password is not valid';
-            }
+        if(count($correctPassword)== 0){
+            $errors['password'] = 'password is not valid';
         }
     }
     return $errors;
@@ -146,40 +155,35 @@ function validateLoginErrors($self, $loggeddata){
 
 
 function displayResults($data){
-
-    ?>
-    <?php foreach ($data as $key => $value): ?>
-        <li class = "list-group-item">
-            <strong><?php echo htmlentities($key); ?>: </strong>
-            <?php echo htmlentities($value); ?>
-        </li>
-    <?php endforeach; ?>
-    <?php
+    $output='';
+    foreach ($data as $key => $value) {
+        $output.='<li class = "list-group-item">
+                 <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+             </li>';
+         }
+    return $output;
 }
 
 
 function displayErrors($errors, $duplicates=array(), $passwordError=array()){
 
-    ?>
-    <?php foreach ($errors as $key => $value): ?>
-        <li class = "list-group-item">
-            <span class="red-text">  <strong><?php echo ucfirst(htmlentities($key)); ?>: </strong></span>
-            <span class="red-text">    <?php echo htmlentities($value); ?> </span>
-        </li>
-    <?php endforeach; ?>
-    <?php foreach ($duplicates as $key => $value): ?>
-        <li class = "list-group-item">
-            <span class="red-text">  <strong><?php echo ucfirst(htmlentities($key)); ?>: </strong></span>
-            <span class="red-text">    <?php echo htmlentities($value); ?> </span>
-        </li>
-    <?php endforeach; ?>
-    <?php foreach ($passwordError as $key => $value): ?>
-        <li class = "list-group-item">
-            <span class="red-text">  <strong><?php echo ucfirst(htmlentities($key)); ?>: </strong></span>
-            <span class="red-text">    <?php echo htmlentities($value); ?> </span>
-        </li>
-    <?php endforeach; ?>
-    <?php
+    $output='';
+    foreach ($errors as $key => $value) {
+        $output.='<li class = "list-group-item">
+                 <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+             </li>';
+         }
+     foreach ($duplicates as $key => $value) {
+         $output.='<li class = "list-group-item">
+                      <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+                  </li>';
+              }
+      foreach ($passwordError as $key => $value) {
+          $output.='<li class = "list-group-item">
+                           <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+                       </li>';
+                   }
+      return $output;
 }
 
 
@@ -250,13 +254,12 @@ function writeToFile($handle){
 
 }
 
-function addUserForm($displayForm, $cleanData = array(), $errors=array(), $duplicates=array(), $passwordError=array())
-{
+function addUserForm($displayForm, $cleanData = array(), $errors=array(), $duplicates=array(), $passwordError=array()){
     if(isset($cleanData['title'])) {
         $title = htmlentities($cleanData['title']);
     }
     else{
-        $title = 'Mr'; #the title needs to default to a value as it a select box
+        $title = 'Mr'; #the title needs to default to a value when i present the form again as it a select box
     }
 
     if (isset($cleanData['firstname'])){
@@ -303,7 +306,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
     <?php if ($displayForm == true): ?>
         <!--post to the same page  -->
         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>"  method="post">
-                           <fieldset>
+                        <fieldset>
                         <legend>Add a user</legend>
                         <div>
                             <label for="">Title</label>
@@ -311,7 +314,7 @@ function addUserForm($displayForm, $cleanData = array(), $errors=array(), $dupli
 
                                 <option value="Mr"  <?php if ($title == 'Mr')  {echo 'selected ="selected"';} ?>>Mr</option>
                                 <option value="Mrs" <?php  if ($title == 'Mrs') {echo 'selected ="selected"';} ?>>Mrs</option>
-                                <option value="Ms" <?php  if ($title == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
+                                <option value="Ms"  <?php  if ($title == 'Ms') {echo 'selected ="selected"';} ?>>Ms</option>
                             </select>
                         </div>
                         <div>
@@ -476,7 +479,6 @@ function confirmPassword($self){
 }
 
 function refreshPageButton(){
-    return
     ?>
     <a href="<?php echo htmlentities($_SERVER['PHP_SELF']) ; ?>"><button class="button button1">Add User</button></a>
     <?php
