@@ -53,12 +53,12 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                    if (isset($_POST['submit'])) {
                       $formSubmmited = true;
                       /*i'm counting the size of the errors arry for validation
-                      if errors == 0 the form is valid */
-                      if (sizeof($errors) > 0) {
+                      if errors > 0 the form is invalid */
+                      if (count($errors) > 0) {
                           $formValid = false;
                           echo displayErrors($errors);
                       }
-                      if (sizeof($errors) == 0) {
+                      if (count($errors) == 0) {
                           header('Location: welcome.php'); #refreshing page to refresh menu on successful login
                       }
                   }

@@ -4,7 +4,7 @@ require_once('inlcudes/init.php');
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
 
-function displayForm( $cleanData = array(), $errors=array()){
+function displayForm( $cleanData, $errors){
     $passwordErrors='';
     $userErrors = '';
     if(isset($cleanData['username'])) {
@@ -62,7 +62,7 @@ function displayForm( $cleanData = array(), $errors=array()){
   }
 
 
-  function displayErrors($errors, $duplicates=array(), $passwordError=array()){
+  function displayErrors($errors, $duplicates, $passwordError){
       $output='';
       foreach ($errors as $key => $value) {
           $output.='<li class = "list-group-item">
@@ -177,7 +177,7 @@ function validateErrors($self){
 }
 
 
-function validateLoginInputs($self, $errors=array(), $admin){
+function validateLoginInputs($self, $errors, $admin){
     $cleanData = array();
     /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */

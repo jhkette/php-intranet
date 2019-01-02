@@ -18,8 +18,6 @@ if (isset($_SESSION['admin'])) {
 <head>
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <!-- Latest compiled and minified CSS -->
-
     <link rel="stylesheet" href="./css/style.css">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
@@ -55,19 +53,18 @@ if (isset($_SESSION['admin'])) {
                   if (isset($_POST['submit'])) {
 
                        #declare $self varaible as $_POST for use in validation
-                       if ((sizeof($errors) == 0) && (sizeof($duplicates) == 0)  &&  (sizeof($confirmPassword) == 0)) {
+                       if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
                             $displayForm = false;
-                         echo displayResults($data);
-                         writeToFile(openDirectory());
-                         echo refreshPageButton();
-                     }
-
-                       if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0) || (sizeof($confirmPassword) > 0)) {
+                            echo displayResults($data);
+                            writeToFile(openDirectory());
+                            echo refreshPageButton();
+                        }
+                        if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
                            echo displayErrors($errors, $duplicates, $confirmPassword);
                         }
                     }
                     /* This code runs to make the form display. The data and errors array
-                   are used as arguments to preserve correct data and dispay an error message above form if
+                   are used as to preserve correct data and dispay an error message above the relevant form field if
                    needed   */
                    ?>
                     <?php if ($displayForm == true): ?>
