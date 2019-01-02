@@ -11,6 +11,15 @@ if(isset($_SESSION['admin'])) {
     ];
 }
 
+elseif (isset($_SESSION['user'])) {
+    $menu = [
+    'index.php'  => 'Home',
+    'DTresults.php' => 'DT results',
+    'P1results.php' => 'P1 results',
+    'PfPresults.php' => 'PfP results',
+    'logout.php'  => 'Logout',
+    ];
+}
 
 else{
     $menu = [

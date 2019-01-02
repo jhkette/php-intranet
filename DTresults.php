@@ -4,10 +4,10 @@ require_once('inlcudes/init.php');
 include('inlcudes/menu.php');
 
 
-if ( isset( $_SESSION['admin'] ) ) {
-    // Grab user data from the database using the user_id
-    // Let them access the "logged in only" pages
-    echo 'welcome' . $_SESSION['admin'];
+
+if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
+
+    // echo 'welcome' . $_SESSION['admin'];
 }
 
  else {

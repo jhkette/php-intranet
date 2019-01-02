@@ -4,9 +4,9 @@ require_once('inlcudes/init.php');
 include('inlcudes/menu.php');
 
 
-if ( isset( $_SESSION['admin'] ) ) {
+if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
 
-    echo 'welcome' . $_SESSION['admin'];
+    // echo 'welcome' . $_SESSION['admin'];
 }
 
  else {
@@ -31,8 +31,8 @@ if ( isset( $_SESSION['admin'] ) ) {
      <body>
         <div class="container">
             <secion class="">
-            <h2><?php
-            echo 'welcome' . $_SESSION['admin']; ?></h2>
+            
+
         </section>
             <section class="col-md-12">
                 <?php

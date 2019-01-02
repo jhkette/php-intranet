@@ -118,7 +118,7 @@ function displayForm( $cleanData = array(), $errors=array()){
   }
 
 
-/*------------------------ FUNCTIONS TO VALIDATE FORMS ---------------------------- */
+/*------------------------ FUNCTIONS TO VALIDATE LOGIN FORMS ---------------------------- */
 
 /*The admin login and and oridnary login function do need to be seperate. I could also check for the admin uaer/password
 in the login functions and then call them on both pages. But the admin should ONLY be able to login on the admin page -
@@ -157,18 +157,22 @@ function validateLoginInputs($self, $errors=array(), $admin){
             $cleanData['username'] = $username;
 
         }
+        /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
+        a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
         if(!isset($errors['username']) && (!isset($errors['password']))) {
           if($admin == true){
-              echo '<h1>Hello </h1>';
+              $_SESSION['admin'] = $username;
           }
-            $_SESSION['admin'] = $username;
+          else{
+               $_SESSION['user'] = $username;
+           }
+       }
+   }
 
-        }
-    }
-     /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
-     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
     return $cleanData;
 }
+
+
 function validateLoginErrors($self, $loggeddata){
     $errors  = array();
     $correctData = false;
@@ -177,9 +181,7 @@ function validateLoginErrors($self, $loggeddata){
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         foreach ($loggeddata as $key => $value) {
-            $loggeddata = explode('|', $value);
-            $userPassword  =  trim($loggeddata[0]);
-            $userPassword = explode(',', $userPassword);
+            $userPassword = explode(',', $value);
             $userPassword[0] = trim($userPassword[0]);
             $userPassword[1] = trim($userPassword[1]);
             if ($userPassword[0] == $username){
@@ -199,7 +201,7 @@ function validateLoginErrors($self, $loggeddata){
     return $errors;
 }
 
-
+/* ------------------------ FUNCTIONS TO VALIDATE ADD USER FORM  -------------------------------*/
 
 function validateAddUser($self, $errors, $duplicates){
 
@@ -263,7 +265,7 @@ function addUserErrors($self){
         }
         $username = trim($_POST['username']);
         if (!ctype_alnum($username) || (strlen($username) > 25) || (strlen($username) < 5)) {
-            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be four or more chrecters long';
+            $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more chrecters long';
         }
         $password = trim($_POST['password']);
         if (!ctype_alnum($password) || (strlen($password) > 25) || (strlen($password) < 5)) {
@@ -283,18 +285,15 @@ function checkDuplicates($self, $loggeddata){
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         foreach ($loggeddata as $key => $value) {
-            $loggeddata = explode('|', $value);
-            $userPassword  =  $loggeddata[0];
-            $userPassword = explode(',', $userPassword);
-            $userPassword[0] = trim($userPassword[0]);
-            if ($userPassword[0] == $username){
+            $loggeddata = explode(',', $value);
+            $loggeddata[0] =  trim($loggeddata[0]);
+            $loggeddata[5] =  trim($loggeddata[5]);
+            if ($loggeddata[0] == $username){
                 $userMatch = true;
             }
             /* Duplicate username checked - now check  if there are duplicate email
             by exploding the other index of $loggeddata  */
-            $emailList = $loggeddata[1];
-            $emailList = explode(',', $emailList); #explode at comma
-            if($emailList[3]== $email){ #email value will be at index [3]
+            if($loggeddata[5] == $email){ #email value will be at index [3]
                 $emailMatch = true; # change emailmatch to true if match found
             }
         }
@@ -314,14 +313,14 @@ function confirmPassword($self){
         $passWord = trim($_POST['password']);
         $confirmPassword = trim($_POST['confirm-password']);
         if($passWord !== $confirmPassword){
-            $passwordError['confirm password'] = 'The passwords do not match';
+            $passwordError['confirm password'] = 'The passwords do not match'; # add key and value to password array
         }
 
     }
-    return $passwordError;
+    return $passwordError; #return password error - this gets displayed on the form on the add user page
 }
 
-/*-------------- Function to write user data to file  -----------------------------*/
+/*-------------- FUNCTION TO WRITE USER DATA TO TILE  -----------------------------*/
 
 function writeToFile($handle){
         $username = htmlentities(trim($_POST['username']));
@@ -330,7 +329,7 @@ function writeToFile($handle){
         $firstname = htmlentities(trim($_POST['firstname']));
         $surname = htmlentities(trim($_POST['surname']));
         $email = htmlentities(trim($_POST['email']));
-        $text =  $username.','.$password.'|'. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
+        $text =  $username.','.$password.','. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
         fwrite( $handle , $text ) ;
 }
 

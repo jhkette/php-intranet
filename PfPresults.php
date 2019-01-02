@@ -3,9 +3,10 @@ require_once('inlcudes/init.php');
 
 include('inlcudes/menu.php');
 
-if ( isset( $_SESSION['admin'] ) ) {
 
-    echo 'welcome' . $_SESSION['admin'];
+if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
+
+    // echo 'welcome' . $_SESSION['admin'];
 }
 
  else {

@@ -64,11 +64,8 @@ if (isset($_SESSION['admin'])) {
                      }
 
                        if ((sizeof($errors) > 0) || (sizeof($duplicates) > 0) || (sizeof($confirmPassword) > 0)) {
-
-
-                          echo displayErrors($errors, $duplicates, $confirmPassword);
-
-                       }
+                           echo displayErrors($errors, $duplicates, $confirmPassword);
+                        }
 
                    }
 
@@ -84,7 +81,7 @@ if (isset($_SESSION['admin'])) {
                                        <div>
                                            <label for="">Title</label>
                                            <select name="title" id="title">
-                                               <option value="Mr"  <?php if (isset($data['title']) &&  ($data['title']=="Mr")) {echo 'selected ="selected"';} ?>>Mr</option>
+                                               <option value="Mr" <?php if (isset($data['title']) &&  ($data['title']=="Mr")) {echo 'selected ="selected"';} ?>>Mr</option>
                                                <option value="Mrs" <?php if (isset($data['title']) &&  ($data['title']=="Mrs")) {echo 'selected ="selected"';} ?>>Mrs</option>
                                                <option value="Ms" <?php if (isset($data['title']) &&  ($data['title']=="Ms")) {echo 'selected ="selected"';} ?>>Ms</option>
                                            </select>
