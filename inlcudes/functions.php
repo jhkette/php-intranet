@@ -183,6 +183,7 @@ function validateLoginInputs($self, $errors=array(), $admin){
         /* I'm not saving and representing the password data. Passwords are not like other form data. They can only be correct in relation to
         a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
         if(!isset($errors['username']) && (!isset($errors['password']))) {
+          session_regenerate_id(true);
           if($admin == true){
               $_SESSION['admin'] = $username;
           }
