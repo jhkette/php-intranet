@@ -154,7 +154,9 @@ function reportLoginErrors($self, $loggeddata){
         if($correctData == false){ # if values are still false user input was not valid and an error is reported
             $errors['username'] = 'This username does not exist';
         }
-        if($correctPassword == false){
+        /*I'm only checking if the password is valid if the username doesn't contain any errors.
+        It doesn't make sense for a password to be correct independant of the username it is attached to */
+        if(($correctPassword == false) && ($correctData == true)){
             $errors['password'] = 'This is not the correct password';
         }
     }
@@ -172,10 +174,9 @@ function reportAdminErrors($self){
         if ($username !== $adminusername) {
             $errors['username'] = 'This is not the correct username for Admin';
         }
-        /*I'm only checking if the password is valid if the username doesn't contain any errors
-        It doesn't make sense for a password to be correct independant of the username it is attached to */
+
         if ($username == $adminusername){
-        if ($password !== $adminpassword) {
+            if ($password !== $adminpassword) {  # i'm only adding an error to the password field if the username is valid
                 $errors['password'] = 'This is not the correct password for Admin';
             }
         }
@@ -210,7 +211,7 @@ function validateLoginInputs($self, $errors, $admin){
    return $cleanData;
 }
 
-/* ------------------------ FUNCTIONS TO VALIDATE ADD ANOTHER USER FORM  -------------------------------*/
+/* ------------------------ FUNCTIONS TO VALIDATE ADD USER FORM  -------------------------------*/
 
 /*This function checks and validates the input from the add user form. If it's incorrect data is added to the $errors array */
 function addUserErrors($self){
@@ -301,17 +302,16 @@ function validateAddUser($self, $errors, $duplicates){
         if (!isset($errors['surname'])) {
             $cleanData['surname'] = $surname;
         }
-
-        $email = trim($_POST['email']);
+        $email = trim($_POST['email']); # check email is valid and not a duplicate
         if (!isset($errors['email']) && (!isset($duplicates['email']))) {
             $cleanData['email'] = $email;
         }
 
-        $title = trim($_POST['title']); # Errors are not possible on the select 'title' box, a value is always selected
+        $title = trim($_POST['title']); # Errors are not really possible on the select 'title' box, a value is always selected
         if (($title == 'Mr') || ($title == 'Mrs') || ($title == 'Ms') || ($title == 'Miss')) { # still check the correct value is sent to form for security
             $cleanData['title'] = $title;
         }
-        $username = trim($_POST['username']); #username
+        $username = trim($_POST['username']); # check username is valid and not a duplicate
         if (!isset($errors['username']) && (!isset($duplicates['username'])) ) {
             $cleanData['username'] = $username;
         }
@@ -330,20 +330,20 @@ function validateAddUser($self, $errors, $duplicates){
 /*-------------- FUNCTION TO WRITE USER DATA TO FILE  -----------------------------*/
 
 /* This writes the validated data from add user form to the text file. */
-function writeToFile($handle, $data){
-        $username = htmlentities($data['username']);
-        $password = htmlentities($data['password']);
-        $title = htmlentities($data['title']);
-        $firstname = htmlentities($data['firstname']);
-        $surname = htmlentities($data['surname']);
-        $email = htmlentities($data['email']);
+function writeToFile($handle, $cleanData){
+        $username = htmlentities($cleanData['username']);
+        $password = htmlentities($cleanData['password']);
+        $title = htmlentities($cleanData['title']);
+        $firstname = htmlentities($cleanData['firstname']);
+        $surname = htmlentities($cleanData['surname']);
+        $email = htmlentities($cleanData['email']);
         /* The verification process ensured that none of the inputs can contain commas, so they are an effective delimiter */
         $text =  $username.','.$password.','. $title .','. $firstname.','. $surname.','. $email.PHP_EOL;
         fwrite( $handle , $text ) ;
 }
 
 
-/*-------------- Header, footer, navigation functions  -----------------------------*/
+/*--------------  navigation, refresh page to add user functions  -----------------------------*/
 function refreshPageButton(){
     $self = htmlentities($_SERVER['PHP_SELF']);
     $output='
@@ -355,7 +355,7 @@ function refreshPageButton(){
 function makeMenu($menu){
     $output='';
     foreach ($menu as $key => $items) {
-         $output.='<li> <a href ='.$key.'>'.$items.'</a></li>';
+         $output.='<li class="menu"> <a href ='.$key.'>'.$items.'</a></li>';
      }
      return $output;
 }

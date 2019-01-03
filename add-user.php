@@ -1,8 +1,6 @@
 <?php
 require_once('inlcudes/init.php');
 
-
-
 if (isset($_SESSION['admin'])) {
     echo 'welcome' . $_SESSION['admin'];
 }
@@ -68,7 +66,7 @@ if (isset($_SESSION['admin'])) {
                    ?>
                    <!--  This code runs to make the form display. The data and errors array
                   are used as to preserve correct data and dispay an error message above the relevant form field if
-                  needed. If display form is true the form is shown. I'm putting the html form directly into the add-user template here as I feel it is more practical
+                  needed. If the displayform variable is true the form is shown. I'm putting the html form directly into the add-user template here as I feel it is more practical
                  to do so, rather than returning a very long concatenated string. In addition it allows me to write if statements in the form itself, rather than in a very long list
                  in a function.
                 -->
