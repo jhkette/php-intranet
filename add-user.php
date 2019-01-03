@@ -68,7 +68,10 @@ if (isset($_SESSION['admin'])) {
                    ?>
                    <!--  This code runs to make the form display. The data and errors array
                   are used as to preserve correct data and dispay an error message above the relevant form field if
-                  needed   -->
+                  needed. If display form is true the form is shown. I'm putting the html form directly into the add-user template here as I feel it is more practical
+                 to do so, rather than returning a very long concatenated string. In addition it allows me to write if statements in the form itself, rather than in a very long list
+                 in a function.
+                -->
                     <?php if ($displayForm == true): ?>
                         <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                             <fieldset>
@@ -83,34 +86,34 @@ if (isset($_SESSION['admin'])) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="">First name</label>
+                                    <label for="First name">First name</label>
                                     <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your first name </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['firstname'])) {echo htmlentities($data['firstname']);} ?>" name="firstname" id="name" />
                                 </div>
                                 <div>
-                                    <label for="">Surname</label>
+                                    <label for="Surname<">Surname</label>
                                     <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your Surname </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['surname'])) {echo htmlentities($data['surname']);} ?>" name="surname" id="name" />
                                 </div>
                                 <div>
-                                    <label for="">Email</label>
+                                    <label for="Email">Email</label>
                                     <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
                                     <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter a valid email </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['email'])) {echo htmlentities($data['email']);} ?>" name="email" id="email" />
                                 </div>
                                 <div>
-                                    <label for="">Username</label>
+                                    <label for="Username">Username</label>
                                     <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
                                     <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter a valid username</p>';} ?>
                                     <input type="text" value="<?php if (isset($data['username'])) {echo htmlentities($data['username']);} ?>" name="username" id="name" />
                                 </div>
                                 <div>
-                                    <label for="">Password</label>
+                                    <label for="Password<">Password</label>
                                     <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
                                     <input type="text" value="<?php if (isset($data['password'])) {echo htmlentities($data['password']);} ?>" name="password" id="password" />
                                 </div>
                                 <div>
-                                    <label for="">Confirm Password</label>
+                                    <label for="Confirm Password">Confirm Password</label>
                                     <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
                                     <input type="text" value="<?php if (isset($data['confirm password'])) {echo htmlentities($data['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                 </div>
