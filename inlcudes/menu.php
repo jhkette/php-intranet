@@ -7,7 +7,7 @@ if(isset($_SESSION['admin'])) {
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',
     'add-user.php' => 'Add User',
-    'logout.php'  => 'Logout',
+    'logout.php' => 'Logout',
     ];
 }
 

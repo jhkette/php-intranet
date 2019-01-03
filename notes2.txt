@@ -1,22 +1,22 @@
-- you need to add functions vlidation so that "|" is accounted for. You need
-to add this to write function as well. DONE
-- create index page
+
+
 - header and footer include files.
 - css file - get rid of bootstrap.
-- ONLY write username if username not already on file - amend function DONE
-- ONLY write email if email not already on file - amend function DONE
-- sought out sessions - only admin session should be able to access add user - create seperate php file with if statement that checks
-session status.
+
+- sought out sessions - only admin session should be able to access add user -
+- clear navigation structure
+-
 - record logged out status using GET
 
 - Go through all data, making sure it is all clean and escaped.
 
+-
 
-- Password ERRORS only ADDED if usernmame is VALID (DONE (check))
 
-- revist forms - add if statements at beginning then add variable to forms DONE (double check)
-- use v small javascript function to toggle password visibility (small feature that would be useful for the user)
-- add confirm password option to add user DONE
+
+
+
+
 
 
 
@@ -30,9 +30,16 @@ function for all form fields
 these need to be separate functions.
 - how best to add some level of security to text files? Store not on the same root directory as website. If on the same directory as website
 the user can simply navigate to the text files.
-- how to record logged out status on index page? USE GET superglobal on logout BUTTON
+- how to record logged out status on index page? USE GET superglobal on logout link in logout.php
 something like logout.php?message=loggedout.
 - Generally how to manage login/logout - where to direct user. You don't want to see form again. Not relevant.
+
+- How to handle data checking. . Then check for errors first, then check for duplicates. Duplicates need to be checked for - otherwise a user could log in
+with a valid username but the password could be read as invalid by programme as it would be the password from another user.  Then Clean DAta is used by created
+by checking against the arrays created by duplicates, errors and password errors. If none of these are set for any of the forms fields the data is clean.
+
+- How to present add user form? From a function or as part of the template? -
+
 - How to handle duplicates? Turns out you need another error message. Normal error message won't suffice - messages won't make sense
 
 if (isset(message)){

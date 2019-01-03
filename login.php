@@ -19,7 +19,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
     </style>
 </head>
      <body>
-         <div class ="container">
+<div class="main-container">
              <header class="col-md-6">
 
              </header>
@@ -34,7 +34,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                  ?>
               </nav>
 
-          </div>
+
           <main class = "container">
 
 
@@ -56,7 +56,6 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                       /*i'm counting the size of the errors arry for validation
                       if errors > 0 the form is invalid */
                       if (count($errors) > 0) {
-                          $formValid = false;
                           echo displayErrors($errors);
                           closeHandle($handle);
                           closeDirectory($handleDir);
@@ -76,5 +75,6 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
           </section>
 
       </main>
+  </div>
     </body>
 </html>

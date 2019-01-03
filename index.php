@@ -31,7 +31,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
     </style>
 </head>
      <body>
-         <div class ="container">
+      <div class="main-container">
              <header class="col-md-6">
 
              </header>
@@ -45,7 +45,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                 }
                 ?>
             </nav>
-          </div>
+
           <main class = "container">
                <h1>Home</h1>
               <section class="col-md-12">
@@ -61,5 +61,6 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                   sed molestie ligula eros vitae nibh. </p>
               </section>
           </main>
+      </div>
       </body>
 </html>

@@ -209,7 +209,7 @@ function validateLoginInputs($self, $errors, $admin){
               $_SESSION['admin'] = $username;
           }
           else{
-               $_SESSION['user'] = $username;
+              $_SESSION['user'] = $username;
            }
        }
    }
@@ -236,7 +236,7 @@ function addUserErrors($self){
             $errors['email'] = 'Please enter a valid email address.';
         }
         $username = trim($_POST['username']); # The username needs to be letters/numbers and between 2 and 19 charecters long
-        if (!ctype_alnum($username) || (strlen($username) > 20) || (strlen($username) < 5)) {
+        if (!ctype_alnum($username) || (strlen($username) > 20) || (strlen($username) < 5))  {
             $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more chrecters long.';
         }
         $password = trim($_POST['password']); # The password needs to be letters/numbers and between 2 and 19 charecters long
@@ -291,7 +291,7 @@ function confirmPassword($self){
 }
 
 /*Function that takes data from user and adds it to cleanData if it is valid */
-function validateAddUser($self, $errors, $duplicates){
+function validateAddUser($self, $errors, $duplicates, $passwordError){
 
     /* I'm adding both the errors and duplicate arrays as arguments here. To confirm the input is valid
     I  check the input has NOT been put in either the error or duplicate arrays. This reduces unneccesary code, otherwise
@@ -325,7 +325,7 @@ function validateAddUser($self, $errors, $duplicates){
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
-        if ($confirmPassword == $password ) { # i'm checking the password is the same as confirm password here
+        if (!isset($passwordError['confirm password'])) { # i'm checking the password is the same as confirm password here
             $cleanData['confirm password'] = $confirmPassword;
         }
     }

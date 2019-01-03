@@ -16,7 +16,7 @@ if (ini_get("session.use_cookies")) {
 session_destroy();
 
 // CHECK ALL THIS
-header('Location: index.php');
+header('Location: index.php?message=You have logged out');
 
 
 ?>

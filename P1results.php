@@ -17,6 +17,13 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 ?>
 
 <!doctype html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet" href="./css/style.css">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+</style>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -40,12 +47,26 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 		</style>
 	</head>
 	<body>
-        <section class="col-md-12">
+        <div class="main-container">
+        <header class="col-md-6">
 
+        </header>
+        <nav class="col-md-12">
             <?php
-            print makeMenu($menu);
+           echo makeMenu($menu);
             ?>
-        </section>
+            <?php
+           if (isset($_GET['message'])) {
+               echo $_GET['message'];
+           }
+            ?>
+         </nav>
+
+
+     <main class = "container">
+
+
+         <section class="col-md-12">
 		<h1>Web Programming using PHP - P1 Results</h1>
 		<table>
 		  <tr>
@@ -89,5 +110,8 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 			<td>7</td>
 		  </tr>
 		</table>
+    </section>
+    </main>
+</div>
 	</body>
 </html>

@@ -20,18 +20,18 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
     </style>
 </head>
      <body>
-         <div class ="container">
+     <div class="main-container">
              <header class="col-md-6">
 
              </header>
-             <header class="col-md-6">
-              </header>
-          </div>
-          <main class = "container">
-              <section class="col-md-12">
+              <nav class="col-md-12">
                   <?php
                   echo makeMenu($menu);
                   ?>
+              </nav>
+          <main class = "container">
+              <section class="col-md-12">
+
               </section>
              <section class="col-md-12">
              <h4> <?php
@@ -68,5 +68,6 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                    ?>
           </section>
       </main>
+  </div>
     </body>
 </html>

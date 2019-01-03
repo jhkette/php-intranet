@@ -15,7 +15,8 @@ require_once('inlcudes/init.php');
     </style>
 </head>
      <body>
-         <div class ="container">
+         <div class="main-container">
+
              <header class="col-md-6">
 
              </header>
@@ -36,20 +37,20 @@ require_once('inlcudes/init.php');
                  }
                  ?>
              </nav>
-          </div>
+
           <main class = "container">
 
               <section class="col-md-12">
                    <h1>Admin login</h1>
                   <?php
                   $self = $_SERVER['PHP_SELF'];
-                  $handleDir = openDirectory();
-                  $handle = readDirectory($handleDir);
-                  $loggeddata = getData($handle);
+                  $handleDir = openDirectory(); # directory
+                  $handle = readDirectory($handleDir); # handle to file
+                  $loggeddata = getData($handle); # the data from the txt file in an array
                   $duplicates = checkDuplicates($self, $loggeddata);
                   $errors = addUserErrors($self);
                   $confirmPassword = confirmPassword($self);
-                  $cleanData = validateAddUser($self, $errors, $duplicates);
+                  $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword);
                   $displayForm = true;
 
 
@@ -134,5 +135,6 @@ require_once('inlcudes/init.php');
                     <?php endif; ?>
                 </section>
             </main>
-        </body>
+        </div>
+    </body>
 </html>
