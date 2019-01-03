@@ -3,7 +3,8 @@
 require_once('inlcudes/init.php');
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
-
+/*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the fields if there
+are errors  */
 function displayForm( $cleanData , $errors){
     $passwordErrors='';
     $userErrors = '';
@@ -291,9 +292,7 @@ function validateAddUser($self, $errors, $duplicates){
     we are validating the same data twice */
     $cleanData = array();
 
-    if (isset($_POST['submit'])) { #form only runs if post is submitted
-
-
+    if (isset($_POST['submit'])) { # form only runs if post is submitted
         $firstname = trim($_POST['firstname']);
         if (!isset($errors['firstname'])) {
             $cleanData['firstname'] = $firstname;
@@ -327,9 +326,6 @@ function validateAddUser($self, $errors, $duplicates){
     }
     return $cleanData;
 }
-
-
-
 
 /*-------------- FUNCTION TO WRITE USER DATA TO FILE  -----------------------------*/
 

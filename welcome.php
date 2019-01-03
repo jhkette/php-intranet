@@ -1,8 +1,6 @@
 <?php
 require_once('inlcudes/init.php');
 
-include('inlcudes/menu.php');
-
 
 if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
 
@@ -21,25 +19,23 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
      <head>
          <title>Welcome</title>
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-         <!-- Latest compiled and minified CSS -->
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <link rel="stylesheet" href="./css/style.css">
- <style>
- @import url('https://fonts.googleapis.com/css?family=Roboto');
- </style>
+
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+         <link rel="stylesheet" href="./css/style.css">
+         <style>
+         @import url('https://fonts.googleapis.com/css?family=Roboto');
+         </style>
      </head>
      <body>
         <div class="container">
             <secion class="">
 
-
-        </section>
+            </section>
             <section class="col-md-12">
                 <?php
                 echo makeMenu($menu);
                 ?>
             </section>
-
         </div>
 
     </body>

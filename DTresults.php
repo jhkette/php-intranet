@@ -1,7 +1,7 @@
 <?php
 require_once('inlcudes/init.php');
 
-include('inlcudes/menu.php');
+
 
 
 
