@@ -23,7 +23,7 @@
 
 PROBLEMS
 - how best to save passwords? save password for admin and
-username in the same place? // Solution? Hard code admin username/password add diferent functions for validation for admin and
+username in the same place? // Solution? Hard code admin username/password add different functions for validation for admin and
 ordinary users.
 function for all form fields
 - how to check passwords /// Solution? you can use the same form functions EXCEPT THE EXPLICT VALIDATION functions

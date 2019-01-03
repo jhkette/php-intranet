@@ -28,6 +28,12 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                   <?php
                   echo makeMenu($menu);
                   ?>
+                  <?php
+                  if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
+                      echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+                  }
+
+                 ?>
               </nav>
           <main class = "container">
               <section class="col-md-12">

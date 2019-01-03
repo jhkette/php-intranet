@@ -40,9 +40,10 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                  echo makeMenu($menu);
                  ?>
                  <?php
-                 if (isset($_GET['message'])) {
-                    echo $_GET['message'];
-                }
+                 if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
+                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+                 }
+
                 ?>
             </nav>
 

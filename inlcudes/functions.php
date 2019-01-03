@@ -3,7 +3,7 @@
 require_once('inlcudes/init.php');
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
-/*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the fields if there
+/*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the form fields if there
 are errors  */
 function displayForm( $cleanData , $errors){
     $passwordErrors='';
@@ -51,10 +51,10 @@ function displayForm( $cleanData , $errors){
       return $output;
   }
 
-
- function displayResults($data){
+/*Function that loops through cleanData array and presents it. This is used when a user is added. */
+ function displayResults($cleanData){
       $output='';
-      foreach ($data as $key => $value) {
+      foreach ($cleanData as $key => $value) {
           $output.='<li class = "list-group-item">
                    <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
                    </li>';
@@ -62,7 +62,8 @@ function displayForm( $cleanData , $errors){
       return $output;
   }
 
-
+/* Function that displays errors, used by all three forms on the intranet site. Loops through error arrays
+passed as arguments  */
   function displayErrors($errors, $duplicates=array(), $passwordError=array()){ /* i'm creating default arguments for the last 2 parameters. The login
       and admin login doesn't use them. However, the adduser function provides these arrays when it calls this function*/
       $output='';
@@ -99,23 +100,23 @@ folder would not be stored on the root directory of the website ie. it  would be
  }
 
  function readDirectory($handleDir){
-          while(false !== ($file = readdir($handleDir))) {
-              if ($file != "." && $file != "..") { # don't add dots which represent directories to array
-                  $fileDir1 = array();
-                  array_push($fileDir1, $file); # push into array
-                  foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
-                  // open file or report error using string 'data/' and $value to create path to files
-                      $handle = fopen('data/' . htmlentities(trim($value)), 'a+');
-                      if ($handle === false) { #error message if you can't open file.
-                          echo '<p>System error. Cannot open file</p>'. PHP_EOL;
-                      }
-                      else{
-                          return $handle;
-                      }
+     while(false !== ($file = readdir($handleDir))){
+         if ($file != "." && $file != "..") { # don't add dots which represent directories to array
+             $fileDir1 = array();
+             array_push($fileDir1, $file); # push into array
+             foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
+                 $handle = fopen('data/' . htmlentities(trim($value)), 'a+');
+                 if ($handle === false) { #error message if you can't open file.
+                      echo '<p>System error. Cannot open file</p>'. PHP_EOL;
+                  }
+                  else{
+                      return $handle;
                   }
               }
           }
-      }
+     }
+}
+
 
  /* Function that reads data from the file in the directory and add it to an array */
  function getData($handle){
@@ -135,8 +136,8 @@ folder would not be stored on the root directory of the website ie. it  would be
 /*------------------------ FUNCTIONS TO VALIDATE LOGIN FORMS ---------------------------- */
 
 
- /* Function to validate login errors, this is takes data from the text file
- explodes at the comma and then checks to see if user input matches */
+ /* Function to process login errors, this function takes data from the text file,
+ explodes at the comma and then checks to see if user input matches  a recorded entry*/
 function reportLoginErrors($self, $loggedData){
     $errors  = array(); # create errors array
     $correctData = false;  # set variables to false
@@ -358,6 +359,7 @@ function closeDirectory($handleDir){
 }
 
 /*--------------  navigation, refresh page to add user functions  -----------------------------*/
+/*Refresh page -  it is used so another user can be added after correct form submission*/
 function refreshPageButton(){
     $self = htmlentities($_SERVER['PHP_SELF']);
     $output='
@@ -365,7 +367,7 @@ function refreshPageButton(){
     return $output;
 
 }
-
+/* Function that displays menu. The array is stored in menu.php */
 function makeMenu($menu){
     $output='';
     foreach ($menu as $key => $items) {

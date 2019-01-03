@@ -27,11 +27,13 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                  <?php
                 echo makeMenu($menu);
                  ?>
+
                  <?php
-                if (isset($_GET['message'])) {
-                    echo $_GET['message'];
-                }
-                 ?>
+                 if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
+                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+                 }
+
+                ?>
               </nav>
 
 
@@ -71,6 +73,12 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
                    echo displayForm($cleanData, $errors);
+
+                   ?>
+                   <?php
+                   if (isset($_GET['message'])) {
+                      echo $_GET['message'];
+                   }
                    ?>
           </section>
 
