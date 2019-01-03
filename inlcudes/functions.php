@@ -185,9 +185,9 @@ function reportAdminErrors($self){
 }
 
 /*This function is used by the admin and oridinary login pages. It takes in the error array from the prior function
-checked for any errors. It checks if an error was assigned to a form field. If not it saves data as clean. If both password abd username
-are correct, the username is stored to the $_SESSION array. I regenerate the session id beforehand, as both items are correct,the user will be
-logging in  */
+reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. If both password and
+username are correct, the username is stored to the $_SESSION array. I regenerate the session id beforehand; as both items are correct and the form
+has been submitted, the user will be logging in  */
 function validateLoginInputs($self, $errors, $admin){
     $cleanData = array();
     /* I'm not saving and representing the password login data. Passwords are not like other form data. They can only be correct in relation to
@@ -200,7 +200,7 @@ function validateLoginInputs($self, $errors, $admin){
         }
         if(!isset($errors['username']) && (!isset($errors['password']))) {
           session_regenerate_id(true); #i'm regenerating the session id as both fields are correct so the user is logged in
-          if($admin == true){ # if the parameter passed in as admin is true create $_SESSION['admin'] - for access to 'add user'
+          if($admin == true){ # if the argument 'admin' is true create $_SESSION['admin'] - for access to 'add user'
               $_SESSION['admin'] = $username;
           }
           else{

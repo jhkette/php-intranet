@@ -108,12 +108,12 @@ if (isset($_SESSION['admin'])) {
                                 <div>
                                     <label for="Password<">Password</label>
                                     <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
-                                    <input type="text" value="<?php if (isset($data['password'])) {echo htmlentities($data['password']);} ?>" name="password" id="password" />
+                                    <input type="password" value="<?php if (isset($data['password'])) {echo htmlentities($data['password']);} ?>" name="password" id="password" />
                                 </div>
                                 <div>
                                     <label for="Confirm Password">Confirm Password</label>
                                     <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
-                                    <input type="text" value="<?php if (isset($data['confirm password'])) {echo htmlentities($data['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
+                                    <input type="password" value="<?php if (isset($data['confirm password'])) {echo htmlentities($data['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                 </div>
                                 <div>
                                     <input type="submit" name="submit" value="submitbutton" />
