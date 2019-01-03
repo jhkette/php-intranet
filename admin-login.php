@@ -22,7 +22,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
      <body>
          <div class ="container">
              <header class="col-md-6">
-                 <h1>Admin login</h1>
+
              </header>
              <header class="col-md-6">
               </header>
@@ -41,6 +41,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
               ?></h4>
               </section>
               <section class="col-md-12">
+                  <h1>Admin login</h1>
 
                   <?php
                   $admin = true;

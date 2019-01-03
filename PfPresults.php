@@ -38,11 +38,14 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 		</style>
 	</head>
 	<body>
-        <section class="col-md-12">
+        <header class="header">
+
+        </header>
+        <nav class="col-md-12">
             <?php
             print makeMenu($menu);
             ?>
-        </section>
+        </nav>
 		<h1>Problem Solving for Programming – PfP Results</h1>
 		<table>
 		  <tr>

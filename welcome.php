@@ -28,14 +28,14 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
      </head>
      <body>
         <div class="container">
-            <secion class="">
+            <header class="header">
 
-            </section>
-            <section class="col-md-12">
+            </header>
+            <nav class="col-md-12">
                 <?php
                 echo makeMenu($menu);
                 ?>
-            </section>
+            </nav>
         </div>
 
     </body>

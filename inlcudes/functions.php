@@ -8,7 +8,7 @@ are errors  */
 function displayForm( $cleanData , $errors){
     $passwordErrors='';
     $userErrors = '';
-    if(isset($cleanData['username'])) {
+    if(isset($cleanData['username'])) { #check if clean data or error data isset
         $userName = htmlentities($cleanData['username']);
     }
     else{
@@ -86,16 +86,22 @@ function displayForm( $cleanData , $errors){
 
 /*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
 /* function that opens directory that contains data file. While not possible in this excercise, ideally this
-folder would not be stored on the root directory of the website and would not be in a directory that can be accessed online */
+folder would not be stored on the root directory of the website ie. it  would be in a directory that cannot be accessed online */
+
  function openDirectory(){
       $handleDir = opendir('./data');
       if ($handleDir === false){
           echo '<p> System error: Unable to open directory</p>';
       }
       else {
+          return $handleDir;
+      }
+ }
+
+ function readDirectory($handleDir){
           while(false !== ($file = readdir($handleDir))) {
               if ($file != "." && $file != "..") { # don't add dots which represent directories to array
-                  $fileDir1 = array(); # create array
+                  $fileDir1 = array();
                   array_push($fileDir1, $file); # push into array
                   foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
                   // open file or report error using string 'data/' and $value to create path to files
@@ -109,9 +115,8 @@ folder would not be stored on the root directory of the website and would not be
                   }
               }
           }
-
       }
-  }
+
  /* Function that reads data from the file in the directory and add it to an array */
  function getData($handle){
       rewind($handle); # pointer needs to be at start of file
@@ -132,14 +137,14 @@ folder would not be stored on the root directory of the website and would not be
 
  /* Function to validate login errors, this is takes data from the text file
  explodes at the comma and then checks to see if user input matches */
-function reportLoginErrors($self, $loggeddata){
+function reportLoginErrors($self, $loggedData){
     $errors  = array(); # create errors array
     $correctData = false;  # set variables to false
     $correctPassword = false;
     if (isset($_POST['submit'])) { # block of code only runs when user has submitted form
         $username = trim($_POST['username']); # assign variables for user input
         $password = trim($_POST['password']);
-        foreach ($loggeddata as $key => $value) { # loop through stored user data on text file
+        foreach ($loggedData as $key => $value) { # loop through stored user data on text file
             $userPassword = explode(',', $value); # explode at comma
             $userPassword[0] = trim($userPassword[0]); #trim data
             $userPassword[1] = trim($userPassword[1]);
@@ -192,7 +197,7 @@ function validateLoginInputs($self, $errors, $admin){
     $cleanData = array();
     /* I'm not saving and representing the password login data. Passwords are not like other form data. They can only be correct in relation to
     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
-    if (isset($_POST['submit'])) {
+    if (isset($_POST['submit'])) { # only runs after form submission
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         if(!isset($errors['username'])) {
@@ -244,21 +249,21 @@ function addUserErrors($self){
 }
 /*This function check that the user inputs haven't been registered before, it takes data from the text file
 and compares it against user input. I'm only checking the username and email */
-function checkDuplicates($self, $loggeddata){
+function checkDuplicates($self, $loggedData){
     $duplicates = array();
     $userMatch = false; # usermatch and emailmatch initially set to false
     $emailMatch = false;
     if (isset($_POST['submit'])) {
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
-        foreach ($loggeddata as $key => $value) { #loop through text file data
-            $loggeddata = explode(',', $value); # explode at comma
-            $loggeddata[0] =  trim($loggeddata[0]); #trim data
-            $loggeddata[5] =  trim($loggeddata[5]);
-            if ($loggeddata[0] == $username){ # username is at index [0] of the text file data
+        foreach ($loggedData as $key => $value) { #loop through text file data
+            $loggedData = explode(',', $value); # explode at comma
+            $loggedData[0] =  trim($loggedData[0]); #trim data
+            $loggedData[5] =  trim($loggedData[5]);
+            if ($loggedData[0] == $username){ # username is at index [0] of the text file data
                 $userMatch = true;
             }
-            if($loggeddata[5] == $email){ # email value will be at index [5]
+            if($loggedData[5] == $email){ # email value will be at index [5]
                 $emailMatch = true; # change emailmatch to true if match found
             }
         }
@@ -276,9 +281,9 @@ function checkDuplicates($self, $loggeddata){
 function confirmPassword($self){
     $passwordError = array();
     if (isset($_POST['submit'])) {
-        $passWord = trim($_POST['password']);
+        $password = trim($_POST['password']);
         $confirmPassword = trim($_POST['confirm-password']);
-        if($passWord !== $confirmPassword){ # checks the values are the same..
+        if($password !== $confirmPassword){ # checks the values are the same..
             $passwordError['confirm password'] = 'The passwords do not match'; # ..if not add key and value to passwordEror array
         }
     }
@@ -342,6 +347,15 @@ function writeToFile($handle, $cleanData){
         fwrite( $handle , $text ) ;
 }
 
+/*-------------- FUNCTION TO CLOSE FILE AND DIRECTORY  -----------------------------*/
+
+function closeHandle($handle){
+    fclose($handle);
+}
+
+function closeDirectory($handleDir){
+    closedir($handleDir);
+}
 
 /*--------------  navigation, refresh page to add user functions  -----------------------------*/
 function refreshPageButton(){

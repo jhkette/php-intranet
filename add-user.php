@@ -1,14 +1,7 @@
 <?php
 require_once('inlcudes/init.php');
 
-if (isset($_SESSION['admin'])) {
-    echo 'welcome' . $_SESSION['admin'];
-}
 
- else {
-    // Redirect them to the login page
-    header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
-}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -24,26 +17,39 @@ if (isset($_SESSION['admin'])) {
      <body>
          <div class ="container">
              <header class="col-md-6">
-                 <h1>Admin login</h1>
+
              </header>
-             <header class="col-md-6">
-             </header>
+             <nav class="col-md-12">
+                 <?php
+                 echo makeMenu($menu);
+                 ?>
+             </nav>
+             <nav class="col-md-12">
+                  <?php
+                 if (isset($_SESSION['admin'])) {
+                     echo 'welcome' . $_SESSION['admin'];
+                 }
+
+                  else {
+                     // Redirect them to the login page
+                     header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
+                 }
+                 ?>
+             </nav>
           </div>
           <main class = "container">
+
               <section class="col-md-12">
+                   <h1>Admin login</h1>
                   <?php
-                  echo makeMenu($menu);
-                  ?>
-              </section>
-              <section class="col-md-12">
-                  <?php
-                  $self = htmlentities($_SERVER['PHP_SELF']);
-                  $loggeddata = getData(openDirectory());
+                  $self = $_SERVER['PHP_SELF'];
+                  $handleDir = openDirectory();
+                  $handle = readDirectory($handleDir);
+                  $loggeddata = getData($handle);
                   $duplicates = checkDuplicates($self, $loggeddata);
                   $errors = addUserErrors($self);
                   $confirmPassword = confirmPassword($self);
-                  $data = validateAddUser($self, $errors, $duplicates);
-                  $handle = openDirectory();
+                  $cleanData = validateAddUser($self, $errors, $duplicates);
                   $displayForm = true;
 
 
@@ -54,12 +60,17 @@ if (isset($_SESSION['admin'])) {
                        #declare $self varaible as $_POST for use in validation
                        if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
                             $displayForm = false;
-                            echo displayResults($data);
-                            writeToFile($handle ,$data);
+                            echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
+                            echo displayResults($cleanData);
+                            writeToFile($handle ,$cleanData);
                             echo refreshPageButton();
+                            closeHandle($handle);
+                            closeDirectory($handleDir);
                         }
                         if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
                            echo displayErrors($errors, $duplicates, $confirmPassword);
+                           closeHandle($handle);
+                           closeDirectory($handleDir);
                         }
                     }
 
@@ -77,43 +88,43 @@ if (isset($_SESSION['admin'])) {
                                 <div>
                                     <label for="">Title</label>
                                     <select name="title" id="title">
-                                        <option value="Mr" <?php if (isset($data['title']) && ($data['title']=="Mr" )) {echo 'selected ="selected"' ;} ?>>Mr</option>
-                                        <option value="Mrs" <?php if (isset($data['title']) && ($data['title']=="Mrs" )) {echo 'selected ="selected"' ;} ?>>Mrs</option>
-                                        <option value="Ms" <?php if (isset($data['title']) && ($data['title']=="Ms" )) {echo 'selected ="selected"' ;} ?>>Ms</option>
-                                        <option value="Miss" <?php if (isset($data['title']) && ($data['title']=="Miss" )) {echo 'selected ="selected"' ;} ?>>Miss</option>
+                                        <option value="Mr" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mr" )) {echo 'selected ="selected"' ;} ?>>Mr</option>
+                                        <option value="Mrs" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mrs" )) {echo 'selected ="selected"' ;} ?>>Mrs</option>
+                                        <option value="Ms" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Ms" )) {echo 'selected ="selected"' ;} ?>>Ms</option>
+                                        <option value="Miss" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Miss" )) {echo 'selected ="selected"' ;} ?>>Miss</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label for="First name">First name</label>
                                     <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your first name </p>';} ?>
-                                    <input type="text" value="<?php if (isset($data['firstname'])) {echo htmlentities($data['firstname']);} ?>" name="firstname" id="name" />
+                                    <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="name" />
                                 </div>
                                 <div>
                                     <label for="Surname<">Surname</label>
                                     <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your Surname </p>';} ?>
-                                    <input type="text" value="<?php if (isset($data['surname'])) {echo htmlentities($data['surname']);} ?>" name="surname" id="name" />
+                                    <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="name" />
                                 </div>
                                 <div>
                                     <label for="Email">Email</label>
                                     <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
                                     <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter a valid email </p>';} ?>
-                                    <input type="text" value="<?php if (isset($data['email'])) {echo htmlentities($data['email']);} ?>" name="email" id="email" />
+                                    <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
                                 </div>
                                 <div>
                                     <label for="Username">Username</label>
                                     <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
                                     <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter a valid username</p>';} ?>
-                                    <input type="text" value="<?php if (isset($data['username'])) {echo htmlentities($data['username']);} ?>" name="username" id="name" />
+                                    <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="name" />
                                 </div>
                                 <div>
                                     <label for="Password<">Password</label>
                                     <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
-                                    <input type="password" value="<?php if (isset($data['password'])) {echo htmlentities($data['password']);} ?>" name="password" id="password" />
+                                    <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
                                 </div>
                                 <div>
                                     <label for="Confirm Password">Confirm Password</label>
                                     <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
-                                    <input type="password" value="<?php if (isset($data['confirm password'])) {echo htmlentities($data['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
+                                    <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                 </div>
                                 <div>
                                     <input type="submit" name="submit" value="submitbutton" />

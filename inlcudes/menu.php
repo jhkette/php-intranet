@@ -17,7 +17,6 @@ elseif (isset($_SESSION['user'])) {
     'DTresults.php' => 'DT results',
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',
-    'add-user.php' => 'Add User',
     'logout.php'  => 'Logout',
     ];
 }
