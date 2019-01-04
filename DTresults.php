@@ -1,13 +1,10 @@
 <?php
 require_once('inlcudes/init.php');
 
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
-
-
-
-if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
-
-    // echo 'welcome' . $_SESSION['admin'];
+    $loggedState = true;
 }
 
  else {
@@ -50,19 +47,15 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
         <header class="col-md-6">
 
         </header>
-        <nav class="col-md-12">
+        <nav class="main-menu">
             <?php
-           echo makeMenu($menu);
+            echo makeMenu($menu);
             ?>
             <?php
-            if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+            if ($loggedState == true) {
+                echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] . PHP_EOL));
             }
-            else {
-               // Redirect them to the login page
-               header("Location: login.php?message=please log in");
-           }
-           ?>
+            ?>
          </nav>
 
 
@@ -77,8 +70,8 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
                echo makeMenu($menu2);
                ?>
              </nav>
-             <div>
-		<h1>Introduction to Database Technology - DT Results</h1>
+             <div class= "main-body">
+		<h3>Introduction to Database Technology - DT Results</h3>
 		<table>
 		  <tr>
 			<th>Year</th>

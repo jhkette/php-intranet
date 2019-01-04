@@ -1,10 +1,22 @@
 <?php
 require_once('inlcudes/init.php');
+
+$adminState = false;
+if (isset( $_SESSION['admin'])) {
+    $adminState = true;
+}
+else{
+   // Redirect them to the login page
+   header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
+
+}
+
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
+
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="./css/style.css">
@@ -18,15 +30,15 @@ require_once('inlcudes/init.php');
              <header class="col-md-6">
 
              </header>
-             <nav class="col-md-12">
+             <nav class="main-menu">
                  <?php
                  echo makeMenu($menu);
                  ?>
              </nav>
-             <nav class="col-md-12">
+             <nav class="main-menu">
                   <?php
-                 if (isset($_SESSION['admin'])) {
-                     echo 'You are logged in as' . $_SESSION['admin'];
+                 if ($adminState == true) {
+                     echo 'You are logged in as ' . $_SESSION['admin'];
                  }
 
                   else {
@@ -35,8 +47,7 @@ require_once('inlcudes/init.php');
                  }
                  ?>
              </nav>
-
-          <main class = "container">
+              <main class = "container">
 
               <section class="col-md-12">
                    <h1>Admin login</h1>

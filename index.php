@@ -1,10 +1,14 @@
 <?php
 require_once('inlcudes/init.php');
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
+    $loggedState = true;
+}
+else{
+    $loggedState = false;
+}
 ?>
-
-
-
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -26,16 +30,18 @@ require_once('inlcudes/init.php');
              <header class="col-md-6">
 
              </header>
-             <nav class="col-md-6">
+             <nav class="main-menu">
                  <?php
                  echo makeMenu($menu);
                  ?>
                  <?php
-                 if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+                 if ($loggedState == true) {
+                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                  }
-
-                ?>
+                 if (isset($_GET['message'])) {
+                     echo htmlentities($_GET['message']);
+                 }
+                 ?>
             </nav>
 
           <main class = "container">

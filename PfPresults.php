@@ -1,11 +1,17 @@
 <?php
 require_once('inlcudes/init.php');
 
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
+    $loggedState = true;
+}
+ else {
+    // Redirect them to the login page
+    header("Location: login.php?message=please log in");
+}
 ?>
 <!doctype html>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<!-- Latest compiled and minified CSS -->
-
 <link rel="stylesheet" href="./css/style.css">
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto');
@@ -37,13 +43,13 @@ require_once('inlcudes/init.php');
         <header class="col-md-6">
 
         </header>
-        <nav class="col-md-12">
+        <nav class="main-menu">
             <?php
            echo makeMenu($menu);
             ?>
             <?php
-            if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+            if ($loggedState == true) {
+                echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
             }
             else {
                // Redirect them to the login page
@@ -54,10 +60,6 @@ require_once('inlcudes/init.php');
 
 
      <main class = "container">
-
-		 <?php
-			echo makeMenu($menu2);
-		  ?>
          <section class="col-md-12">
 			 <div class ="flex-container">
 
@@ -67,7 +69,7 @@ require_once('inlcudes/init.php');
 			   ?>
 			 </nav>
 
-	    <div>
+	    <div class= "main-body">
 		<h3>Problem Solving for Programming – PfP Results</h3>
 		<table>
 		  <tr>

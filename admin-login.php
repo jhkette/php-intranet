@@ -1,12 +1,11 @@
 <?php
 require_once('inlcudes/init.php');
 
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
-if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-
-     echo 'You are logged in as' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
+    $loggedState = true;
 }
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -24,21 +23,21 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
              <header class="col-md-6">
 
              </header>
-              <nav class="col-md-12">
+              <nav class="main-menu">
                   <?php
                   echo makeMenu($menu);
                   ?>
                   <?php
-                  if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                      echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+                  if ($loggedState == true) {
+                      echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                   }
 
                  ?>
               </nav>
-          <main class = "container">
-              <section class="col-md-12">
+              <main class = "container">
+                  <section class="col-md-12">
 
-              </section>
+                  </section>
              <section class="col-md-12">
              <h4> <?php
              if (isset($_GET['message'])) {

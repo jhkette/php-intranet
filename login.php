@@ -23,14 +23,14 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
              <header class="col-md-6">
 
              </header>
-             <nav class="col-md-12">
+             <nav class="main-menu">
                  <?php
                 echo makeMenu($menu);
                  ?>
 
                  <?php
                  if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                  }
 
                 ?>

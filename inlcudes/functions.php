@@ -252,6 +252,7 @@ function addUserErrors($self){
     }
     return $errors;
 }
+
 /*This function check that the user inputs haven't been registered before, it takes data from the text file
 and compares it against user input. I'm only checking the username and email */
 function checkDuplicates($self, $loggedData){
@@ -318,7 +319,7 @@ function validateAddUser($self, $errors, $duplicates, $passwordError){
         }
 
         $title = trim($_POST['title']);
-        if (!isset($errors['title'])) { 
+        if (!isset($errors['title'])) {
             $cleanData['title'] = $title;
         }
         $username = trim($_POST['username']); # check username is valid and not a duplicate
@@ -374,9 +375,13 @@ function refreshPageButton(){
 /* Function that displays menu. The array is stored in menu.php */
 function makeMenu($menu){
     $output='';
+    $list = '<ul>'. PHP_EOL;
+    $listClose = '</ul>'. PHP_EOL;
     foreach ($menu as $key => $items) {
-         $output.='<li class="menu"> <a href ='.$key.'>'.$items.'</a></li>';
+
+         $output.='<li class="menu"> <a href ='.$key.'>'.$items.'</a></li>'. PHP_EOL;
      }
-     return $output;
+     $finalMenu = $list . $output . $listClose;
+     return $finalMenu;
 }
 ?>

@@ -1,13 +1,13 @@
 <?php
 require_once('inlcudes/init.php');
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
-
-if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
-
-    // echo 'welcome' . $_SESSION['admin'];
+    $loggedState = true;
 }
-
-
+else{
+    $loggedState = false;
+}
 ?>
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -25,24 +25,20 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
                 <header class="col-md-6">
 
                 </header>
-                <nav class="col-md-6">
+                <nav class="main-menu">
                     <?php
                     echo makeMenu($menu);
                     ?>
                     <?php
-                    if (isset($_GET['message'])) {
-                       echo $_GET['message'];
-                   }
-                   ?>
+                    if ($loggedState == true) {
+                        echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                    }
+                    ?>
                </nav>
 
              <main class = "container">
-
-                 <nav class="side-menu">
-
-                 </nav>
                  <section class="col-md-12">
-                      <h2>Results</h2>
+
                       <div class ="flex-container">
 
                       <nav class="side-menu">
@@ -50,14 +46,15 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
                         echo makeMenu($menu2);
                         ?>
                       </nav>
-                      <div>
-                     <p class="news">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
+                      <div class= "main-body">
+                           <h2>Results</h2>
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
                      consectetur adipiscing elit. Ut dapibus facilisis tortor, eu suscipit dolor cursus eu. Fusce vitae tortor est. Aenean
                      volutpat dui eu ex iaculis vestibulum. Maecenas semper imperdiet nibh. Donec at volutpat lectus, quis faucibus nulla.
                      Vivamus eros sapien, ultricies vitae dignissim sed, posuere eget erat. Donec bibendum nunc quis leo mattis, ne
                      c suscipit velit tincidunt. Donec a sapien id leo interdum mollis ut vel lectus. In non luctus orci. In tempor id
                      eros eget rutrum.</p>
-                     <p class="news">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
                      consectetur adipiscing elit. Ut dapibus facilisis tortor, eu suscipit dolor cursus eu. Fusce vitae tortor est. Aenean
                      volutpat dui eu ex iaculis vestibulum. Maecenas semper imperdiet nibh. Donec at volutpat lectus, quis faucibus nulla.
                      Vivamus eros sapien, ultricies vitae dignissim sed, posuere eget erat. Donec bibendum nunc quis leo mattis, ne
@@ -68,6 +65,6 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
                   </section>
 
              </main>
-         </div>
+
          </body>
 </html>

@@ -1,12 +1,10 @@
 <?php
 require_once('inlcudes/init.php');
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
-
-if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
-
-    // echo 'welcome' . $_SESSION['admin'];
+    $loggedState = true;
 }
-
 
 ?>
 
@@ -25,13 +23,13 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
                 <header class="col-md-6">
 
                 </header>
-                <nav class="col-md-6">
+                <nav class="main-menu">
                     <?php
                     echo makeMenu($menu);
                     ?>
-                    <?php
-                    if (isset($_GET['message'])) {
-                       echo $_GET['message'];
+                   <?php
+                   if ($loggedState == true) {
+                       echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                    }
                    ?>
                </nav>

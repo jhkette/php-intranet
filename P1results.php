@@ -1,6 +1,15 @@
 <?php
 require_once('inlcudes/init.php');
 
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
+
+    $loggedState = true;
+}
+ else {
+    // Redirect them to the login page
+    header("Location: login.php?message=please log in");
+}
 ?>
 
 <!doctype html>
@@ -38,24 +47,21 @@ require_once('inlcudes/init.php');
         <header class="col-md-6">
 
         </header>
-        <nav class="col-md-12">
+        <nav class="main-menu">
             <?php
            echo makeMenu($menu);
             ?>
             <?php
-            if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .'</p>'));
+            if ($loggedState == true) {
+                echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
             }
-            else {
-               // Redirect them to the login page
-               header("Location: login.php?message=please log in");
-           }
 
             ?>
          </nav>
 
 
      <main class = "container">
+		 <section class="col-md-12">
 		 <div class ="flex-container">
 
 		 <nav class="side-menu">
@@ -64,10 +70,11 @@ require_once('inlcudes/init.php');
 		   ?>
 		 </nav>
 
-	<div>
 
-         <section class="col-md-12">
-		<h1>Web Programming using PHP - P1 Results</h1>
+
+
+		<div class= "main-body">
+		<h3>Web Programming using PHP - P1 Results</h3>
 		<table>
 		  <tr>
 			<th>Year</th>
