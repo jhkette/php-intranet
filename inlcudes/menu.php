@@ -4,9 +4,7 @@ if(isset($_SESSION['admin'])) {
     $menu = [
     'index.php'  => 'Home',
     'news.php'  => 'News',
-    'DTresults.php' => 'DT results',
-    'P1results.php' => 'P1 results',
-    'PfPresults.php' => 'PfP results',
+    'results.php'  => 'Results',
     'add-user.php' => 'Add User',
     'logout.php' => 'Logout',
     ];
@@ -16,9 +14,7 @@ elseif (isset($_SESSION['user'])) {
     $menu = [
     'index.php'  => 'Home',
     'news.php'  => 'News',
-    'DTresults.php' => 'DT results',
-    'P1results.php' => 'P1 results',
-    'PfPresults.php' => 'PfP results',
+    'results.php'  => 'Results',
     'logout.php'  => 'Logout',
     ];
 }
@@ -27,9 +23,17 @@ else{
     $menu = [
     'index.php'  => 'Home',
     'news.php'  => 'News',
-    'admin-login.php'  => 'Administration login',
     'login.php'  => 'Intranet',
-
+    'admin-login.php'  => 'Administration login',
+    'results.php'  => 'Results',
     ];
 }
+
+
+$menu2 = [
+    'DTresults.php' => 'DT results',
+    'P1results.php' => 'P1 results',
+    'PfPresults.php' => 'PfP results',
+]
+
 ?>

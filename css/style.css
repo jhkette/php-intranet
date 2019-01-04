@@ -1,20 +1,44 @@
+:root {
+    --secondary: #0CAADC;
+    --tertiary: #e2e2e2;
+    --dark: #424343;
+
+
+}
+
+* {
+    box-sizing: border-box;
+
+}
+
+
 html{
     font-size: 62.5%;
 }
 body{
     font-family: 'Roboto', serif;
     font-size: 1.6rem;
+    color: var(--dark);
 }
 
 
 p{
     font-family: 'Roboto', serif;
+    color: var(--dark);
 }
 
+.news{
+    background-color: #eeecec;
+    padding: 2rem;
+}
 
+h2 {
+    border-top: 1px solid var(--secondary);
+    padding-top: 2rem;
+}
 
 .list-group-item{
-    color: rgb(208, 37, 14);
+    color: var(--secondary);
     list-style: none;
     margin: .6rem 0rem;
 }
@@ -29,16 +53,35 @@ p{
 .menu a{
     text-decoration: none;
     color: #1a1a1a;
+    padding-bottom: .2rem;
 }
 
 .menu a:hover{
-    border-bottom: 1px solid rgb(208, 37, 14);
-    transition: .3s;
-    color: rgb(208, 37, 14);
+
+    border-bottom: 2px solid var(--secondary);
+    transition: .1s;
+
 }
 
 .main-container{
     width: 75%;
     max-width: 1200px;
     margin: auto;
+}
+.image {
+    text-align: center;
+}
+.image img{
+    width: 30rem;
+    height: auto;
+    margin: 1.5rem 0;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.side-menu{
+    width: 20rem;
 }

@@ -38,11 +38,19 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
 
              <main class = "container">
 
-                 <section class="col-md-12">
+                 <nav class="side-menu">
 
-                 </section>
+                 </nav>
                  <section class="col-md-12">
-                      <h2>News</h2>
+                      <h2>Results</h2>
+                      <div class ="flex-container">
+
+                      <nav class="side-menu">
+                          <?php
+                        echo makeMenu($menu2);
+                        ?>
+                      </nav>
+                      <div>
                      <p class="news">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
                      consectetur adipiscing elit. Ut dapibus facilisis tortor, eu suscipit dolor cursus eu. Fusce vitae tortor est. Aenean
                      volutpat dui eu ex iaculis vestibulum. Maecenas semper imperdiet nibh. Donec at volutpat lectus, quis faucibus nulla.
@@ -55,6 +63,8 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
                      Vivamus eros sapien, ultricies vitae dignissim sed, posuere eget erat. Donec bibendum nunc quis leo mattis, ne
                      c suscipit velit tincidunt. Donec a sapien id leo interdum mollis ut vel lectus. In non luctus orci. In tempor id
                      eros eget rutrum.</p>
+                    </div>
+                </div>
                   </section>
 
              </main>

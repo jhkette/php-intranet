@@ -47,7 +47,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
               ?></h4>
               </section>
               <section class="col-md-12">
-                  <h1>Admin login</h1>
+                  <h2>Admin login</h2>
 
                   <?php
                   $admin = true;

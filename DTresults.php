@@ -70,6 +70,14 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
 
 
          <section class="col-md-12">
+             <div class ="flex-container">
+
+             <nav class="side-menu">
+                 <?php
+               echo makeMenu($menu2);
+               ?>
+             </nav>
+             <div>
 		<h1>Introduction to Database Technology - DT Results</h1>
 		<table>
 		  <tr>
@@ -114,7 +122,9 @@ if (isset( $_SESSION['admin'] )  || (isset( $_SESSION['user'] )   )) {
 		  </tr>
 		</table>
     </section>
-    </main>
+
 </div>
+</div>
+</main>
 	</body>
 </html>

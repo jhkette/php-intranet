@@ -55,9 +55,20 @@ require_once('inlcudes/init.php');
 
      <main class = "container">
 
-
+		 <?php
+			echo makeMenu($menu2);
+		  ?>
          <section class="col-md-12">
-		<h1>Problem Solving for Programming – PfP Results</h1>
+			 <div class ="flex-container">
+
+			 <nav class="side-menu">
+				 <?php
+			   echo makeMenu($menu2);
+			   ?>
+			 </nav>
+
+	    <div>
+		<h3>Problem Solving for Programming – PfP Results</h3>
 		<table>
 		  <tr>
 			<th>Year</th>
@@ -100,8 +111,10 @@ require_once('inlcudes/init.php');
 			<td>7</td>
 		  </tr>
 		</table>
+	</div>
+</div>
     </section>
     </main>
-</div>
+
 	</body>
 </html>

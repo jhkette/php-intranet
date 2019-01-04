@@ -42,7 +42,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
 
               <section class="col-md-12">
 
-                  <h1>Login</h1>
+                  <h2>Login</h2>
                   <?php
                    $admin = false;
                    $self = htmlentities($_SERVER['PHP_SELF']);
