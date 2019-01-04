@@ -36,9 +36,11 @@ p{
 }
 
 h2 {
-    border-top: 1px solid var(--secondary);
+    width: max-content;
+    width: -moz-max-content;
+    border-bottom: 3px solid var(--secondary);
     padding-top: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
     font-size: 3.7rem;
 }
 
@@ -56,23 +58,44 @@ h2 {
     margin: 1.5rem 0;
 }
 
+
+.col-1{
+    border-top: 1px solid #c1c1c1;
+}
+
 .flex-container{
     display: flex;
     flex-direction: row;
 }
 
 
+
+
 .list-group-item{
-    color: var(--secondary);
+    color: var(--dark);
     list-style: none;
     margin: .6rem 0rem;
 }
 
-.main-menu{
-    margin: 2rem 0;
+.list-group-error{
+    color: red;
+    list-style: none;
+    margin: .6rem 0rem;
+}
+
+
+.navcontainer{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+}
+
+.main-menu{
+    margin: 2rem 0;
+
 }
 .menu {
     list-style: none;
@@ -89,7 +112,7 @@ h2 {
 
 .menu a:hover{
 
-    border-bottom: 2px solid var(--secondary);
+    border-bottom: 2px solid var(--dark);
     transition: .1s;
 
 }
@@ -101,11 +124,11 @@ h2 {
 
 }
 .side-menu{
-    margin-top: 2rem;
+    margin-top: 4.5rem;
     margin-right: 4rem;
     width: 16rem;
     background-color: var(--tertiary);
-    height: 17rem;
+    height:23rem;
 
 }
 
@@ -118,6 +141,15 @@ h2 {
     border-bottom: 2px solid var(--dark);
     transition: .1s;
 
+}
+
+input[type="submit" i]{
+    background-color: var(--secondary);
+    color: white;
+    padding: 1rem;
+    margin: 2rem 0;
+    border-radius: .2rem;
+    border: 0;
 }
 
 

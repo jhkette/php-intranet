@@ -1,10 +1,12 @@
 <?php
 require_once('inlcudes/init.php');
+$loggedState = false;
+if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
-
-if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-
-     echo 'You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
+    $loggedState = true;
+}
+else{
+    $loggedState = false;
 }
 ?>
 
@@ -21,26 +23,30 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
      <body>
 <div class="main-container">
              <header class="col-md-6">
-
+                  <?php include 'inlcudes/header.php';?>
              </header>
-             <nav class="main-menu">
-                 <?php
-                echo makeMenu($menu);
-                 ?>
-
-                 <?php
-                 if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-                     echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
-                 }
-
-                ?>
-              </nav>
-
+             <div class ="navcontainer">
+              <nav class="main-menu">
+                  <?php
+                  echo makeMenu($menu);
+                  ?>
+             </nav>
+             <div class="status">
+                  <?php
+                  if ($loggedState == true) {
+                      echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                  }
+                  if (isset($_GET['message'])) {
+                      echo htmlentities($_GET['message']);
+                  }
+                  ?>
+             </div>
+         </div>
 
           <main class = "container">
 
 
-              <section class="col-md-12">
+              <section class="col-1">
 
                   <h2>Login</h2>
                   <?php

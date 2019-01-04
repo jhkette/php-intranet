@@ -21,31 +21,36 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
      <body>
      <div class="main-container">
              <header class="col-md-6">
-
+                  <?php include 'inlcudes/header.php';?>
              </header>
+             <div class ="navcontainer">
               <nav class="main-menu">
                   <?php
                   echo makeMenu($menu);
                   ?>
+             </nav>
+             <div class="status">
                   <?php
                   if ($loggedState == true) {
                       echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                   }
+                  if (isset($_GET['message'])) {
+                      echo htmlentities($_GET['message']);
+                  }
+                  ?>
+              </div>
+          </div>
 
-                 ?>
-              </nav>
               <main class = "container">
-                  <section class="col-md-12">
 
-                  </section>
-             <section class="col-md-12">
+             <section class="col-1">
              <h4> <?php
              if (isset($_GET['message'])) {
                  echo $_GET['message'];
              }
               ?></h4>
               </section>
-              <section class="col-md-12">
+              <section class="col-1">
                   <h2>Admin login</h2>
 
                   <?php

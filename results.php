@@ -1,12 +1,13 @@
 <?php
 require_once('inlcudes/init.php');
+
 $loggedState = false;
 if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
-
     $loggedState = true;
 }
-else{
-    $loggedState = false;
+ else {
+    // Redirect them to the login page
+    header("Location: login.php?message=please log in");
 }
 ?>
 
@@ -23,21 +24,29 @@ else{
      <body>
          <div class="main-container">
                 <header class="col-md-6">
+                
+                     <?php include 'inlcudes/header.php';?>
+
 
                 </header>
-                <nav class="main-menu">
-                    <?php
-                    echo makeMenu($menu);
-                    ?>
-                    <?php
-                    if ($loggedState == true) {
-                        echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
-                    }
-                    ?>
-               </nav>
+                <div class ="navcontainer">
+                 <nav class="main-menu">
+                     <?php
+                     echo makeMenu($menu);
+                     ?>
+                </nav>
+                <div class="status">
+                     <?php
+                     if ($loggedState == true) {
+                         echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                     }
+
+                     ?>
+                </div>
+            </div>
 
              <main class = "container">
-                 <section class="col-md-12">
+                 <section class="col-1">
 
                       <div class ="flex-container">
 

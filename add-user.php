@@ -10,7 +10,6 @@ else{
    header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
 
 }
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -28,29 +27,27 @@ else{
          <div class="main-container">
 
              <header class="col-md-6">
+                 <?php include 'inlcudes/header.php';?>
 
              </header>
-             <nav class="main-menu">
-                 <?php
-                 echo makeMenu($menu);
-                 ?>
-             </nav>
-             <nav class="main-menu">
+             <div class ="navcontainer">
+              <nav class="main-menu">
                   <?php
-                 if ($adminState == true) {
-                     echo 'You are logged in as ' . $_SESSION['admin'];
-                 }
-
-                  else {
-                     // Redirect them to the login page
-                     header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
-                 }
-                 ?>
+                  echo makeMenu($menu);
+                  ?>
              </nav>
+             <div class="status">
+                  <?php
+                  if ($adminState == true) {
+                      echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                  }
+                  ?>
+             </div>
+             </div>
               <main class = "container">
 
-              <section class="col-md-12">
-                   <h1>Admin login</h1>
+              <section class="col-1">
+                  <h2>Admin login</h2>
                   <?php
                   $self = $_SERVER['PHP_SELF'];
                   $handleDir = openDirectory(); # directory
@@ -137,7 +134,7 @@ else{
                                     <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                 </div>
                                 <div>
-                                    <input type="submit" name="submit" value="submitbutton" />
+                                    <input type="submit" name="submit" value="Submit" />
                                 </div>
                             </fieldset>
                         </form>

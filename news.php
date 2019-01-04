@@ -5,7 +5,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
     $loggedState = true;
 }
-
 ?>
 
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -21,25 +20,30 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
      <body>
          <div class="main-container">
                 <header class="col-md-6">
+                     <?php include 'inlcudes/header.php';?>
 
                 </header>
-                <nav class="main-menu">
-                    <?php
-                    echo makeMenu($menu);
-                    ?>
-                   <?php
-                   if ($loggedState == true) {
-                       echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
-                   }
-                   ?>
-               </nav>
+                <div class ="navcontainer">
+                 <nav class="main-menu">
+                     <?php
+                     echo makeMenu($menu);
+                     ?>
+                </nav>
+                <div class="status">
+                     <?php
+                     if ($loggedState == true) {
+                         echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                     }
+                     ?>
+                </div>
+            </div>
 
              <main class = "container">
 
-                 <section class="col-md-12">
+                 <section class="col-1">
 
                  </section>
-                 <section class="col-md-12">
+                 <section class="col-1">
                       <h2>News</h2>
                      <p class="news">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
                      consectetur adipiscing elit. Ut dapibus facilisis tortor, eu suscipit dolor cursus eu. Fusce vitae tortor est. Aenean

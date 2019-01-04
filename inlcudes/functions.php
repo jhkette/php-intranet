@@ -44,7 +44,7 @@ function displayForm( $cleanData , $errors){
                  '<input type="password"  value= ""  name="password" id="password"/>
              </div>
               <div>
-                  <input type="submit" name="submit" value="submitbutton" />
+                  <input type="submit" name="submit" value="Submit" />
               </div>
           </fieldset>
       </form>';
@@ -68,17 +68,17 @@ passed as arguments  */
       and admin login doesn't use them. However, the adduser function provides these arrays when it calls this function*/
       $output='';
       foreach ($errors as $key => $value) {
-          $output.='<li class = "list-group-item">
+          $output.='<li class = "list-group-error">
                    <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
                    </li>';
            }
        foreach ($duplicates as $key => $value) {
-           $output.='<li class = "list-group-item">
+           $output.='<li class = "list-group-error">
                      <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
                      </li>';
                 }
         foreach ($passwordError as $key => $value) {
-            $output.='<li class = "list-group-item">
+            $output.='<li class = "list-group-error">
                       <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
                       </li>';
                      }
