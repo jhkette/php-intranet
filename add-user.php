@@ -18,18 +18,20 @@ else{
 
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
 </head>
      <body>
-         <div class="main-container">
+
 
              <header class="col-md-6">
                  <?php include 'inlcudes/header.php';?>
 
              </header>
+             <div class="grey">
+             <div class="main-container">
              <div class ="navcontainer">
               <nav class="main-menu">
                   <?php
@@ -142,5 +144,7 @@ else{
                 </section>
             </main>
         </div>
+    </div>
     </body>
+
 </html>

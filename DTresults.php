@@ -16,7 +16,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <!-- Latest compiled and minified CSS -->
 
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="/css/style.css">
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 </style>
@@ -48,7 +48,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
             <?php include 'inlcudes/header.php';?>
         </header>
         </div>
-        <div class="main-container">
+
 
         <div class ="navcontainer">
          <nav class="main-menu">
@@ -64,7 +64,8 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
              ?>
         </div>
     </div>
-
+    <div class="grey">
+    <div class="main-container">
      <main class = "container">
 
 
@@ -121,9 +122,11 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 		  </tr>
 		</table>
     </section>
+</div>
+    </div>
 
-</div>
-</div>
 </main>
+</div>
+</div>
 	</body>
 </html>

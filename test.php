@@ -17,7 +17,7 @@ else{
 
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>

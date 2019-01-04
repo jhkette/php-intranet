@@ -15,7 +15,7 @@ else{
 <head>
     <title>Admin login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
@@ -26,7 +26,8 @@ else{
              <?php include 'inlcudes/header.php';?>
          </header>
          </div>
-<div class="main-container">
+         <div class="grey">
+         <div class="main-container">
 
              <div class ="navcontainer">
               <nav class="main-menu">
@@ -91,5 +92,6 @@ else{
 
       </main>
   </div>
+</div>
     </body>
 </html>
