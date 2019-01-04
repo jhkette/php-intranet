@@ -1,7 +1,5 @@
 <?php
 require_once('inlcudes/init.php');
-
-
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -28,7 +26,7 @@ require_once('inlcudes/init.php');
              <nav class="col-md-12">
                   <?php
                  if (isset($_SESSION['admin'])) {
-                     echo 'welcome' . $_SESSION['admin'];
+                     echo 'You are logged in as' . $_SESSION['admin'];
                  }
 
                   else {
@@ -60,8 +58,8 @@ require_once('inlcudes/init.php');
 
                        #declare $self varaible as $_POST for use in validation
                        if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
-                            $displayForm = false;
-                            echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
+                           $displayForm = false;
+                           echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
                             echo displayResults($cleanData);
                             writeToFile($handle ,$cleanData);
                             echo refreshPageButton();
@@ -69,9 +67,9 @@ require_once('inlcudes/init.php');
                             closeDirectory($handleDir);
                         }
                         if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
-                           echo displayErrors($errors, $duplicates, $confirmPassword);
-                           closeHandle($handle);
-                           closeDirectory($handleDir);
+                            echo displayErrors($errors, $duplicates, $confirmPassword);
+                            closeHandle($handle);
+                            closeDirectory($handleDir);
                         }
                     }
 

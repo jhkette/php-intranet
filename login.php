@@ -65,7 +65,7 @@ if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
                       if (count($errors) == 0) {
                           closeHandle($handle);
                           closeDirectory($handleDir);
-                          header('Location: welcome.php'); #refreshing page to refresh menu on successful login
+                          header('Location: index.php'); #refreshing page to refresh menu on successful login
                       }
                   }
 

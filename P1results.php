@@ -1,19 +1,6 @@
 <?php
 require_once('inlcudes/init.php');
 
-
-
-
-if (isset( $_SESSION['admin'])|| (isset( $_SESSION['user']))) {
-
-     echo 'You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
-}
-
- else {
-    // Redirect them to the login page
-    header("Location: login.php?message=please log in");
-}
-
 ?>
 
 <!doctype html>
