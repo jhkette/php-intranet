@@ -353,7 +353,7 @@ function writeToFile($handle, $cleanData){
         fwrite( $handle , $text ) ;
 }
 
-/*-------------- FUNCTION TO CLOSE FILE AND DIRECTORY  -----------------------------*/
+/*-------------- FUNCTIONS TO CLOSE FILE AND DIRECTORY  -----------------------------*/
 
 function closeHandle($handle){
     fclose($handle);
@@ -368,7 +368,7 @@ function closeDirectory($handleDir){
 function refreshPageButton(){
     $self = htmlentities($_SERVER['PHP_SELF']);
     $output='
-    <a href="'.$self.'"><button class="button button1">Add User</button></a>';
+    <a href="'.$self.'"><button class="button1">Add User</button></a>';
     return $output;
 
 }

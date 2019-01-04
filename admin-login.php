@@ -19,10 +19,13 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     </style>
 </head>
      <body>
+         <div class ="header-container">
+         <header class="col-md-6">
+             <?php include 'inlcudes/header.php';?>
+         </header>
+         </div>
      <div class="main-container">
-             <header class="col-md-6">
-                  <?php include 'inlcudes/header.php';?>
-             </header>
+
              <div class ="navcontainer">
               <nav class="main-menu">
                   <?php
@@ -43,13 +46,13 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
               <main class = "container">
 
-             <section class="col-1">
+            
              <h4> <?php
              if (isset($_GET['message'])) {
                  echo $_GET['message'];
              }
               ?></h4>
-              </section>
+
               <section class="col-1">
                   <h2>Admin login</h2>
 

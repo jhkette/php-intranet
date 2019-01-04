@@ -24,12 +24,13 @@ else{
     </style>
 </head>
      <body>
+         <div class ="header-container">
+         <header class="col-md-6">
+             <?php include 'inlcudes/header.php';?>
+         </header>
+         </div>
       <div class="main-container">
-             <header class="col-md-6">
 
-                 <?php include 'inlcudes/header.php';?>
-
-             </header>
              <div class ="navcontainer">
               <nav class="main-menu">
                   <?php

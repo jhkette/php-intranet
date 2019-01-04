@@ -1,7 +1,7 @@
 :root {
     --secondary: #0CAADC;
     --tertiary: #eeecec;
-    --dark: #424343;
+    --dark: #454545;
 
 
 }
@@ -35,6 +35,15 @@ p{
     padding: 2rem;
 }
 
+.message  {
+    font-size: 2rem;
+    color: #ff3d3d;
+}
+
+header h1 {
+
+}
+
 h2 {
     width: max-content;
     width: -moz-max-content;
@@ -44,8 +53,9 @@ h2 {
     font-size: 3.7rem;
 }
 
+
 .main-container{
-    width: 75%;
+    width: 70%;
     max-width: 1200px;
     margin: auto;
 }
@@ -60,7 +70,7 @@ h2 {
 
 
 .col-1{
-    border-top: 1px solid #c1c1c1;
+    border-top: 1px solid #e0dddc;
 }
 
 .flex-container{
@@ -155,4 +165,20 @@ input[type="submit" i]{
 
 .main-body{
     width: 65%;
+}
+
+.header-container {
+    background-color: white;
+    width: 100%;
+    border-bottom: 1px solid #e0dddc;
+}
+
+.header {
+    width: 70%;
+    max-width: 1200px;
+    margin: auto;
+    color: var(--dark);
+    font-weight: 200;
+    padding: 1rem 0;
+    font-size: 1.2rem;
 }

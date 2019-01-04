@@ -21,10 +21,13 @@ else{
     </style>
 </head>
      <body>
+         <div class ="header-container">
+         <header class="col-md-6">
+             <?php include 'inlcudes/header.php';?>
+         </header>
+         </div>
 <div class="main-container">
-             <header class="col-md-6">
-                  <?php include 'inlcudes/header.php';?>
-             </header>
+
              <div class ="navcontainer">
               <nav class="main-menu">
                   <?php
@@ -74,18 +77,16 @@ else{
                           header('Location: index.php'); #refreshing page to refresh menu on successful login
                       }
                   }
-
+                   ?>
+                   <p class ="message"><?php if (isset($_GET['message2'])) { echo $_GET['message2'];}?></p>
+                   <?php
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if
                    needed   */
                    echo displayForm($cleanData, $errors);
 
                    ?>
-                   <?php
-                   if (isset($_GET['message'])) {
-                      echo $_GET['message'];
-                   }
-                   ?>
+
           </section>
 
       </main>

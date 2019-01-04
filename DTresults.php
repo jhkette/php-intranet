@@ -43,10 +43,13 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 		</style>
 	</head>
 	<body>
-        <div class="main-container">
+        <div class ="header-container">
         <header class="col-md-6">
-             <?php include 'inlcudes/header.php';?>
+            <?php include 'inlcudes/header.php';?>
         </header>
+        </div>
+        <div class="main-container">
+
         <div class ="navcontainer">
          <nav class="main-menu">
              <?php
@@ -61,7 +64,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
              ?>
         </div>
     </div>
-
 
      <main class = "container">
 

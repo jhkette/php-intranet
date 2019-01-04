@@ -7,7 +7,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 }
  else {
     // Redirect them to the login page
-    header("Location: login.php?message=please log in");
+    header("Location: login.php?message2=Please log in to view DCS results");
 }
 ?>
 
@@ -22,13 +22,13 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
          </style>
      </head>
      <body>
+         <div class ="header-container">
+         <header class="col-md-6">
+             <?php include 'inlcudes/header.php';?>
+         </header>
+         </div>
          <div class="main-container">
-                <header class="col-md-6">
-                
-                     <?php include 'inlcudes/header.php';?>
 
-
-                </header>
                 <div class ="navcontainer">
                  <nav class="main-menu">
                      <?php
