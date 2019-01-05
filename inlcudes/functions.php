@@ -33,12 +33,12 @@ function displayForm( $cleanData , $errors){
         <fieldset>
             <legend>Please log in</legend>
             <div>
-                <label for="Username">Username</label>'.
+                <label for="Username" id="Username">Username</label>'.
                  $userErrors .
                 '<input type="text"  value= " '.$userName.'" name="username" id="name" />
             </div>
             <div>
-                 <label for="Password">Password</label>'
+                 <label for="Password" id="Password">Password</label>'
                 .$passwordErrors.
                  '<input type="password"  value= ""  name="password" id="password"/>
              </div>
