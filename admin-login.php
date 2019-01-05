@@ -83,5 +83,8 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                  </main>
              </div>
          </div>
+         <div class ="footer-container">
+              <?php include 'inlcudes/footer.php';?>
+         </div>
     </body>
 </html>

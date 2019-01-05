@@ -74,5 +74,8 @@ else{
                  </main>
              </div>
          </div>
+         <div class ="footer-container">
+              <?php include 'inlcudes/footer.php';?>
+         </div>
      </body>
 </html>
