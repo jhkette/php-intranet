@@ -1,16 +1,11 @@
 
-
-- header and footer include files.
-- css file - get rid of bootstrap.
-
-- sought out sessions - only admin session should be able to access add user -
-- clear navigation structure
--
-- record logged out status using GET
-
+- tidy up forms CSS
+- tidy up form error messages
+- add padding to website
 - Go through all data, making sure it is all clean and escaped.
+- Check HTML is valid
 
--
+- DOUBLE CHECK ALL FUNCTIONALITY
 
 
 

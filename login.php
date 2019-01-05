@@ -71,7 +71,7 @@ else{
                              if (count($errors) == 0) {
                                  closeHandle($handle);
                                  closeDirectory($handleDir);
-                                 header('Location: index.php'); #
+                                 header('Location: index.php'); # redirect user to index page
                              }
                          }
                          ?>

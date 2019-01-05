@@ -59,7 +59,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                            if(count($errors) == 0){
                                header('Location: index.php'); #refreshing page to refresh menu on successful login
                            }
-                           #declare $self varaible as $_POST for use in validation
+
                            if (count($errors) > 0) {
                                $formValid = false;
                                echo displayErrors($errors);
