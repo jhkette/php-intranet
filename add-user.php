@@ -23,9 +23,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <header class="col-md-6">
-                 <?php include 'inlcudes/header.php';?>
-             </header>
+             <?php include 'inlcudes/header.php';?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -87,7 +85,7 @@ else{
                                   <fieldset>
                                       <legend>Add a user</legend>
                                       <div>
-                                          <label for="">Title</label>
+                                          <label for="title">Title</label>
                                           <select name="title" id="title">
                                               <option value="Mr" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mr" )) {echo 'selected ="selected"' ;} ?>>Mr</option>
                                               <option value="Mrs" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mrs" )) {echo 'selected ="selected"' ;} ?>>Mrs</option>
