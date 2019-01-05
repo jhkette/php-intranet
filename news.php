@@ -16,7 +16,6 @@ else{
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
@@ -24,9 +23,8 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <header class="col-md-6">
-                 <?php include 'inlcudes/header.php';?>
-             </header>
+             <?php include 'inlcudes/header.php';?>
+
          </div>
          <div class="grey">
              <div class="main-container">
