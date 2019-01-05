@@ -21,8 +21,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
-    <meta charset="utf-8">
-	<title>Introduction to Database Technology - DT Results</title>
+    <title>Introduction to Database Technology - DT Results</title>
 </head>
     <body>
         <div class ="header-container">

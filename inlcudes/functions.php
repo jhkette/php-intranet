@@ -383,6 +383,7 @@ function makeMenu($menu){
      $finalMenu = $list . $output . $listClose;
      return $finalMenu;
 }
+
 // <!--Joseph Ketterer
 // Jkette01
 // Web Programming with PHP
