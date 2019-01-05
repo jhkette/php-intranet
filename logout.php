@@ -1,6 +1,6 @@
 <?php
 require_once('inlcudes/init.php');
-$_SESSION = array(); #unset session - remove all stored data from array
+$_SESSION = array(); #unset session - removes all stored data from array
 if (ini_get("session.use_cookies")) { #if using cookies
     /* Delete session cookie */
     $yesterday = time() - (24 * 60 * 60);

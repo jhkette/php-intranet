@@ -8,9 +8,12 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 }
 
  else {
-    // Redirect them to the login page
+    // Redirect them to the login page if they are not logged in
     header("Location: login.php?message=please log in");
 }
+
+/* If the user is logged in as admin or user loggedstate is true...
+their username gets echoed to the right of the navigtaion (below)  */
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,7 +28,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 </head>
     <body>
         <div class ="header-container">
-            <?php include 'inlcudes/header.php';?>
+            <?php include('inlcudes/header.php')?>
         </div>
         <div class="grey">
             <div class="main-container">
@@ -102,7 +105,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
              </div>
          </div>
          <div class ="footer-container">
-             <?php include 'inlcudes/footer.php';?>
+             <?php include('inlcudes/footer.php')?>
          </div>
 	</body>
 </html>

@@ -8,6 +8,9 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 else{
     $loggedState = false;
 }
+
+/* If the user is logged in as admin or user loggedstate is true...
+their username gets echoed to the right of the navigtaion (below)  */
 ?>
 
 <!doctype html>
@@ -22,7 +25,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <?php include 'inlcudes/header.php';?>
+             <?php include('inlcudes/header.php');?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -34,10 +37,11 @@ else{
                      </nav>
                      <div class="status">
                          <?php
-                         if ($loggedState == true) {
+
+                         if ($loggedState == true) { #echo user status
                              echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                          }
-                         if (isset($_GET['message'])) {
+                         if (isset($_GET['message'])) { #this echos out logged out message passed by URL
                              echo htmlentities($_GET['message']);
                          }
                          ?>
@@ -61,7 +65,7 @@ else{
              </div>
          </div>
          <div class ="footer-container">
-              <?php include 'inlcudes/footer.php';?>
+              <?php include('inlcudes/footer.php')?>
          </div>
      </body>
 </html>

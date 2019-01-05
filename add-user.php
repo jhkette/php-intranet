@@ -23,7 +23,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <?php include 'inlcudes/header.php';?>
+             <?php include('inlcudes/header.php')?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -43,30 +43,36 @@ else{
                   </div>
                   <main class = "container">
                       <section class="col-1">
+
+
                           <h2>Admin login</h2>
                           <?php
+                          /* Here I am initially presenting the form. When the user submits, I check the valididation functions on
+                          the index page. If there are no errors the form is hidden and the user is added, a confirmation message is presnted to user.
+                          If there are errors, I add error messages above the form and display prompts by the form fields. This data again comes from the validation functions.  */
                           $self = $_SERVER['PHP_SELF'];
                           $handleDir = openDirectory(); # directory
                           $handle = readDirectory($handleDir); # handle to file
                           $loggeddata = getData($handle); # the data from the txt file in an array
-                          $duplicates = checkDuplicates($self, $loggeddata);
-                          $errors = addUserErrors($self);
-                          $confirmPassword = confirmPassword($self);
-                          $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword);
+                          $duplicates = checkDuplicates($self, $loggeddata); # duplicates array
+                          $errors = addUserErrors($self); #errors array
+                          $confirmPassword = confirmPassword($self); # cofirm password array
+                          $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword); #clean data checked against the other arrays it takes as parameters
                           $displayForm = true;
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
-                          or redirects the user to welcome.php if no errors were detected */
+                          or add another user and hides form if no errors are detected.  */
                           if (isset($_POST['submit'])) {
                               #declare $self varaible as $_POST for use in validation
                               if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
                                   $displayForm = false;
                                   echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
-                                  echo displayResults($cleanData);
-                                  writeToFile($handle ,$cleanData);
-                                  echo refreshPageButton();
-                                  closeHandle($handle);
-                                  closeDirectory($handleDir);
+                                  echo displayResults($cleanData); #display the correct data to confirm the new user details
+                                  writeToFile($handle ,$cleanData); # write to the text file
+                                  echo refreshPageButton(); # add a button which allows the user to refresh page and add another user.
+                                  closeHandle($handle); # close handle
+                                  closeDirectory($handleDir); # close directory
                               }
+                              /* If there are errors show the errors.   */
                               if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
                                   echo displayErrors($errors, $duplicates, $confirmPassword);
                                   closeHandle($handle);
@@ -136,7 +142,7 @@ else{
               </div>
           </div>
           <div class ="footer-container">
-               <?php include 'inlcudes/footer.php';?>
+               <?php include('inlcudes/footer.php')?>
           </div>
       </body>
 </html>

@@ -23,7 +23,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <?php include 'inlcudes/header.php';?>
+             <?php include('inlcudes/header.php')?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -64,7 +64,7 @@ else{
              </div>
          </div>
          <div class ="footer-container">
-              <?php include 'inlcudes/footer.php';?>
+              <?php include('inlcudes/footer.php')?>
          </div>
      </body>
 </html>

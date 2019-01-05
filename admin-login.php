@@ -6,6 +6,8 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 
     $loggedState = true;
 }
+/* If the user is logged in as admin or user loggedstate is true...
+their ussername gets echoed to the right of the navigtaion (below)  */
 ?>
 
 <!doctype html>
@@ -21,7 +23,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 </head>
    <body>
        <div class ="header-container">
-           <?php include 'inlcudes/header.php';?>
+           <?php include('inlcudes/header.php')?>
        </div>
        <div class="grey">
            <div class="main-container">
@@ -32,11 +34,11 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                        ?>
                    </nav>
                    <div class="status">
-                       <?php
+                       <?php #echo out username
                        if ($loggedState == true) {
                            echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                        }
-                       if (isset($_GET['message'])) {
+                       if (isset($_GET['message'])) { #this displays message if non admin trys to add user (although link is not available from menu)
                            echo htmlentities($_GET['message']);
                        }
                        ?>
@@ -45,21 +47,22 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                <main class = "container">
                    <section class="col-1">
                        <h2>Admin login</h2>
+
                        <?php
-                       $admin = true;
+                       /*Please see login.php for descripton of how this form validation works.*/
+                       $admin = true; #admin is true so if valid session[admin] will be created by the validateLoginInputs function.
                        $self = htmlentities($_SERVER['PHP_SELF']);
                        $errors = reportAdminErrors($self);
-                       $data = validateLoginInputs($self, $errors, $admin);
+                       $cleanData = validateLoginInputs($self, $errors, $admin);
                        /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                        or redirects the user to index.php if no errors were detected */
                        if (isset($_POST['submit'])) {
-                           if(count($errors) == 0){
+                            if (count($cleanData) < 2) {
+                                $formValid = false;
+                                echo displayErrors($errors);
+                            }
+                            if (count($cleanData) == 2) {
                                header('Location: index.php'); #refreshing page to refresh menu on successful login
-                           }
-
-                           if (count($errors) > 0) {
-                               $formValid = false;
-                               echo displayErrors($errors);
                            }
                        }
                        ?>
@@ -68,14 +71,14 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                        /* This code runs to make the form display. The data and errors array
                        are used as arguments to preserve correct data and dispay an error message above form if
                        needed   */
-                       echo displayForm($data, $errors);
+                       echo displayForm($cleanData, $errors);
                        ?>
                      </section>
                  </main>
              </div>
          </div>
          <div class ="footer-container">
-              <?php include 'inlcudes/footer.php';?>
+              <?php include('inlcudes/footer.php')?>
          </div>
     </body>
 </html>

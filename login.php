@@ -23,7 +23,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <?php include 'inlcudes/header.php';?>
+             <?php include('inlcudes/header.php')?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -46,7 +46,10 @@ else{
                      <section class="col-1">
                          <h2>Login</h2>
                          <?php
-
+                          /*I am initially presenting the form to the user. When the user submits, I check if the function
+                          that returns clean data == 2 or not. If there are no errors the user is logged in and directed back to index page. I've set the variable
+                          admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
+                          If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
                          $admin = false;
                          $self = htmlentities($_SERVER['PHP_SELF']);
                          $handleDir = openDirectory();
@@ -60,12 +63,12 @@ else{
                              $formSubmmited = true;
                               /*i'm counting the size of the errors arry for validation
                              if errors > 0 the form is invalid */
-                             if (count($errors) > 0) {
+                             if (count($cleanData) < 2) {
                                  echo displayErrors($errors);
                                  closeHandle($handle);
                                  closeDirectory($handleDir);
                              }
-                             if (count($errors) == 0) {
+                             if (count($cleanData) == 2) {
                                  closeHandle($handle);
                                  closeDirectory($handleDir);
                                  header('Location: index.php'); # redirect user to index page
@@ -84,7 +87,7 @@ else{
               </div>
           </div>
           <div class ="footer-container">
-               <?php include 'inlcudes/footer.php';?>
+               <?php include('inlcudes/footer.php')?>
           </div>
       </body>
 </html>
