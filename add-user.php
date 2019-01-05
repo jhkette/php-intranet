@@ -99,7 +99,7 @@ else{
                                           <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="first-name" />
                                       </div>
                                       <div>
-                                          <label for="surname<">Surname</label>
+                                          <label for="surname">Surname</label>
                                           <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your Surname </p>';} ?>
                                           <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="surname" />
                                       </div>
@@ -116,7 +116,7 @@ else{
                                           <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="username" />
                                       </div>
                                       <div>
-                                          <label for="password<">Password</label>
+                                          <label for="password">Password</label>
                                           <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
                                           <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
                                       </div>
