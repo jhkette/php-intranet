@@ -4,6 +4,8 @@
 - add padding to website
 - Go through all data, making sure it is all clean and escaped.
 - Check HTML is valid
+- add more notes to template pages
+- add gitignore
 
 - DOUBLE CHECK ALL FUNCTIONALITY
 

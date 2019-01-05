@@ -1,6 +1,11 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
 <?php
 require_once('inlcudes/init.php');
-if (ini_get("session.use_cookies")) {
+if (ini_get("session.use_cookies")) { #if using cookies
     /* Delete session cookie */
     $yesterday = time() - (24 * 60 * 60);
     $params = session_get_cookie_params();
@@ -11,5 +16,7 @@ if (ini_get("session.use_cookies")) {
 }
 session_destroy(); # this destroys all stored session variables.
 
-header('Location: index.php?message=You have logged out'); # after logout the user is returned to the index page. GET superglobal used to echo message
+/* after logout the user is returned to the index page. GET superglobal used to echo 'logged out' message.
+PHP will generate a new SID when it loads the index page*/
+header('Location: index.php?message=You have logged out');
 ?>

@@ -1,3 +1,9 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
+
 <?php
 require_once('inlcudes/init.php');
 
@@ -54,7 +60,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                        $errors = reportAdminErrors($self);
                        $data = validateLoginInputs($self, $errors, $admin);
                        /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
-                       or redirects the user to welcome.php if no errors were detected */
+                       or redirects the user to index.php if no errors were detected */
                        if (isset($_POST['submit'])) {
                            if(count($errors) == 0){
                                header('Location: index.php'); #refreshing page to refresh menu on successful login
@@ -65,6 +71,9 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                                echo displayErrors($errors);
                            }
                        }
+                       ?>
+                       <p class ="message"><?php if (isset($_GET['message2'])) { echo htmlentities($_GET['message2']);}?></p>
+                       <?php
                        /* This code runs to make the form display. The data and errors array
                        are used as arguments to preserve correct data and dispay an error message above form if
                        needed   */

@@ -1,3 +1,10 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
+
+
 <?php
 require_once('inlcudes/init.php');
 $loggedState = false;

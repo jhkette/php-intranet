@@ -1,3 +1,9 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
+
 <?php
 require_once('inlcudes/init.php');
 
@@ -6,8 +12,9 @@ if (isset( $_SESSION['admin'])) {
     $adminState = true;
 }
 else{
-   // Redirect them to the login page
-   header("Location: admin-login.php?message=Only an admin can add a user. Please log in as an admin");
+    /* Redirect them to the admin login page. I am an adding an error message if not logged in as admin althought it
+    is not accessible from the menu */
+   header("Location: admin-login.php?message2=Only an admin can add a user. Please log in as an admin");
 
 }
 ?>
@@ -125,7 +132,7 @@ else{
                                           <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
                                       </div>
                                       <div>
-                                          <label for="Confirm Password">Confirm Password</label>
+                                          <label for="Confirm Password">Confirm password</label>
                                           <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
                                           <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                       </div>

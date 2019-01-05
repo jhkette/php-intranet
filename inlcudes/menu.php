@@ -1,3 +1,8 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
 <?php
 
 /* The menu is modified based on login/logout status and also is modified

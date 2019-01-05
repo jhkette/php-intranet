@@ -1,3 +1,9 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
+
 <?php
 require_once('inlcudes/init.php');
 
@@ -6,8 +12,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     $loggedState = true;
 }
  else {
-    /* Redirect them to the login page I am an adding an error message if not logged in as admin althought it
-    is not accessible from the menu */
+    /* Redirect user to the login page. I am an adding an error message that will be shown on the login page using the GET superglobal */
     header("Location: login.php?message2=Please log in to view DCS results");
 }
 ?>

@@ -1,3 +1,9 @@
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->
+
+
 <?php
 
 require_once('inlcudes/init.php');
@@ -56,7 +62,7 @@ function displayForm( $cleanData , $errors){
       $output='';
       foreach ($cleanData as $key => $value) {
           $output.='<li class = "list-group-item">
-                   <strong>'. htmlentities($key). '</strong> '.htmlentities($value).'
+                   <strong>'. htmlentities($key). ': </strong> '.htmlentities($value).'
                    </li>';
            }
       return $output;
@@ -69,17 +75,17 @@ passed as arguments  */
       $output='';
       foreach ($errors as $key => $value) {
           $output.='<li class = "list-group-error">
-                   <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
+                   <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                    </li>';
            }
        foreach ($duplicates as $key => $value) {
            $output.='<li class = "list-group-error">
-                     <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
+                     <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                      </li>';
                 }
         foreach ($passwordError as $key => $value) {
             $output.='<li class = "list-group-error">
-                      <strong>'. htmlentities(ucfirst($key)). '</strong> '.htmlentities($value).'
+                      <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                       </li>';
                      }
         return $output;
