@@ -79,7 +79,7 @@ else{
                       }
                   }
                    ?>
-                   <p class ="message"><?php if (isset($_GET['message2'])) { echo $_GET['message2'];}?></p>
+                   <p class ="message"><?php if (isset($_GET['message2'])) { echo htmlentities($_GET['message2']);}?></p>
                    <?php
                    /* This code runs to make the form display. The data and errors array
                    are used as arguments to preserve correct data and dispay an error message above form if

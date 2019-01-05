@@ -169,6 +169,9 @@ input[type="submit" i]{
     border: 0;
 }
 
+main {
+    height: 75rem;
+}
 
 .main-body{
     width: 65%;

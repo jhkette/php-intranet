@@ -237,7 +237,7 @@ function addUserErrors($self){
             $errors['email'] = 'Please enter a valid email address.';
         }
         $title = trim($_POST['title']); # Errors are not really possible on the select 'title' box, a value is always selected
-        if (($title !== 'Mr') || ($title !== 'Mrs') || ($title !== 'Ms') || ($title !== 'Miss')) { # still check the correct value is sent to form for security
+        if (($title !== 'Mr') && ($title !== 'Mrs') && ($title !== 'Ms') && ($title !== 'Miss')) { # still check the correct value is sent to form for security
             $errors['title'] = 'This is not the correct title';
         }
         $username = trim($_POST['username']); # The username needs to be letters/numbers and between 2 and 19 charecters long

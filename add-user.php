@@ -15,8 +15,7 @@ else{
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-
-    <title>Admin login</title>
+    <title>Add user</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/style.css">
     <style>
@@ -24,127 +23,120 @@ else{
     </style>
 </head>
      <body>
-
-
+         <div class ="header-container">
              <header class="col-md-6">
                  <?php include 'inlcudes/header.php';?>
-
              </header>
-             <div class="grey">
+         </div>
+         <div class="grey">
              <div class="main-container">
-             <div class ="navcontainer">
-              <nav class="main-menu">
-                  <?php
-                  echo makeMenu($menu);
-                  ?>
-             </nav>
-             <div class="status">
-                  <?php
-                  if ($adminState == true) {
-                      echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
-                  }
-                  ?>
-             </div>
-             </div>
-              <main class = "container">
-
-              <section class="col-1">
-                  <h2>Admin login</h2>
-                  <?php
-                  $self = $_SERVER['PHP_SELF'];
-                  $handleDir = openDirectory(); # directory
-                  $handle = readDirectory($handleDir); # handle to file
-                  $loggeddata = getData($handle); # the data from the txt file in an array
-                  $duplicates = checkDuplicates($self, $loggeddata);
-                  $errors = addUserErrors($self);
-                  $confirmPassword = confirmPassword($self);
-                  $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword);
-                  $displayForm = true;
-
-
-                  /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
-                  or redirects the user to welcome.php if no errors were detected */
-                  if (isset($_POST['submit'])) {
-
-                       #declare $self varaible as $_POST for use in validation
-                       if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
-                           $displayForm = false;
-                           echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
-                            echo displayResults($cleanData);
-                            writeToFile($handle ,$cleanData);
-                            echo refreshPageButton();
-                            closeHandle($handle);
-                            closeDirectory($handleDir);
-                        }
-                        if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
-                            echo displayErrors($errors, $duplicates, $confirmPassword);
-                            closeHandle($handle);
-                            closeDirectory($handleDir);
-                        }
-                    }
-
-                   ?>
-                   <!--  This code runs to make the form display. The data and errors array
-                  are used as to preserve correct data and dispay an error message above the relevant form field if
-                  needed. If the displayform variable is true the form is shown. I'm putting the html form directly into the add-user template here as I feel it is more practical
-                 to do so, rather than returning a very long concatenated string. In addition it allows me to write if statements in the form itself, rather than in a very long list
-                 in a function.
-                -->
-                    <?php if ($displayForm == true): ?>
-                        <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-                            <fieldset>
-                                <legend>Add a user</legend>
-                                <div>
-                                    <label for="">Title</label>
-                                    <select name="title" id="title">
-                                        <option value="Mr" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mr" )) {echo 'selected ="selected"' ;} ?>>Mr</option>
-                                        <option value="Mrs" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mrs" )) {echo 'selected ="selected"' ;} ?>>Mrs</option>
-                                        <option value="Ms" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Ms" )) {echo 'selected ="selected"' ;} ?>>Ms</option>
-                                        <option value="Miss" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Miss" )) {echo 'selected ="selected"' ;} ?>>Miss</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label for="First name">First name</label>
-                                    <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your first name </p>';} ?>
-                                    <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="name" />
-                                </div>
-                                <div>
-                                    <label for="Surname<">Surname</label>
-                                    <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your Surname </p>';} ?>
-                                    <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="name" />
-                                </div>
-                                <div>
-                                    <label for="Email">Email</label>
-                                    <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
-                                    <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter a valid email </p>';} ?>
-                                    <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
-                                </div>
-                                <div>
-                                    <label for="Username">Username</label>
-                                    <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
-                                    <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter a valid username</p>';} ?>
-                                    <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="name" />
-                                </div>
-                                <div>
-                                    <label for="Password<">Password</label>
-                                    <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
-                                    <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
-                                </div>
-                                <div>
-                                    <label for="Confirm Password">Confirm Password</label>
-                                    <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
-                                    <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
-                                </div>
-                                <div>
-                                    <input type="submit" name="submit" value="Submit" />
-                                </div>
-                            </fieldset>
-                        </form>
-                    <?php endif; ?>
-                </section>
-            </main>
-        </div>
-    </div>
-    </body>
-
+                 <div class ="navcontainer">
+                     <nav class="main-menu">
+                         <?php
+                         echo makeMenu($menu);
+                         ?>
+                     </nav>
+                     <div class="status">
+                         <?php
+                          if ($adminState == true) {
+                              echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                          }
+                          ?>
+                      </div>
+                  </div>
+                  <main class = "container">
+                      <section class="col-1">
+                          <h2>Admin login</h2>
+                          <?php
+                          $self = $_SERVER['PHP_SELF'];
+                          $handleDir = openDirectory(); # directory
+                          $handle = readDirectory($handleDir); # handle to file
+                          $loggeddata = getData($handle); # the data from the txt file in an array
+                          $duplicates = checkDuplicates($self, $loggeddata);
+                          $errors = addUserErrors($self);
+                          $confirmPassword = confirmPassword($self);
+                          $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword);
+                          $displayForm = true;
+                          /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
+                          or redirects the user to welcome.php if no errors were detected */
+                          if (isset($_POST['submit'])) {
+                              #declare $self varaible as $_POST for use in validation
+                              if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
+                                  $displayForm = false;
+                                  echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
+                                  echo displayResults($cleanData);
+                                  writeToFile($handle ,$cleanData);
+                                  echo refreshPageButton();
+                                  closeHandle($handle);
+                                  closeDirectory($handleDir);
+                              }
+                              if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
+                                  echo displayErrors($errors, $duplicates, $confirmPassword);
+                                  closeHandle($handle);
+                                  closeDirectory($handleDir);
+                              }
+                          }
+                          ?>
+                          <!--  This code runs to make the form display. The data and errors array
+                          are used as to preserve correct data and dispay an error message above the relevant form field if
+                          needed. If the displayform variable is true the form is shown. I'm putting the html form directly into the add-user template here as I feel it is more practical
+                          to do so, rather than returning a very long concatenated string. In addition it allows me to write if statements in the form itself, rather than in a very long list
+                          in a function.
+                          -->
+                          <?php if ($displayForm == true): ?>
+                              <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
+                                  <fieldset>
+                                      <legend>Add a user</legend>
+                                      <div>
+                                          <label for="">Title</label>
+                                          <select name="title" id="title">
+                                              <option value="Mr" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mr" )) {echo 'selected ="selected"' ;} ?>>Mr</option>
+                                              <option value="Mrs" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Mrs" )) {echo 'selected ="selected"' ;} ?>>Mrs</option>
+                                              <option value="Ms" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Ms" )) {echo 'selected ="selected"' ;} ?>>Ms</option>
+                                              <option value="Miss" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Miss" )) {echo 'selected ="selected"' ;} ?>>Miss</option>
+                                          </select>
+                                      </div>
+                                      <div>
+                                          <label for="First name">First name</label>
+                                          <?php if (htmlentities(isset($errors['firstname']))) {echo '<p> Please enter your first name </p>';} ?>
+                                          <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="name" />
+                                      </div>
+                                      <div>
+                                          <label for="Surname<">Surname</label>
+                                          <?php if (htmlentities(isset($errors['surname']))) {echo '<p> Please enter your Surname </p>';} ?>
+                                          <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="name" />
+                                      </div>
+                                      <div>
+                                          <label for="Email">Email</label>
+                                          <?php if (htmlentities(isset($duplicates['email']))) {echo '<p> This email has already been used</p>';} ?>
+                                          <?php if (htmlentities(isset($errors['email']))) {echo '<p> Please enter a valid email </p>';} ?>
+                                          <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
+                                      </div>
+                                      <div>
+                                          <label for="Username">Username</label>
+                                          <?php if (htmlentities(isset($duplicates['username']))) {echo '<p> This username has already been used</p>';} ?>
+                                          <?php if (htmlentities(isset($errors['username']))) {echo '<p> Please enter a valid username</p>';} ?>
+                                          <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="name" />
+                                      </div>
+                                      <div>
+                                          <label for="Password<">Password</label>
+                                          <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
+                                          <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
+                                      </div>
+                                      <div>
+                                          <label for="Confirm Password">Confirm Password</label>
+                                          <?php if (htmlentities(isset($passwordError['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
+                                          <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
+                                      </div>
+                                      <div>
+                                          <input type="submit" name="submit" value="Submit" />
+                                      </div>
+                                  </fieldset>
+                              </form>
+                          <?php endif; ?>
+                      </section>
+                  </main>
+              </div>
+          </div>
+      </body>
 </html>
