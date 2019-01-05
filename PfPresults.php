@@ -13,6 +13,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 }
 ?>
 <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +22,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
-    <meta charset="utf-8">
 	<title>Problem Solving for Programming – PfP Results</title>
 </head>
     <body>

@@ -24,9 +24,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <header class="col-md-6">
-                 <?php include 'inlcudes/header.php';?>
-             </header>
+             <?php include 'inlcudes/header.php';?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -49,7 +47,7 @@ else{
                  </div>
                  <main class = "container">
                      <div class="row image">
-                         <img src="images/computer-icon.svg">
+                         <img src="images/computer-icon.svg" alt="computer">
                      </div>
                      <section class="col-1">
                          <h2>Home</h2>

@@ -20,14 +20,12 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
-    <meta charset="utf-8">
+
     <title>Results</title>
 </head>
     <body>
         <div class ="header-container">
-            <header class="col-md-6">
-                <?php include 'inlcudes/header.php';?>
-            </header>
+            <?php include 'inlcudes/header.php';?>
         </div>
         <div class="grey">
             <div class="main-container">

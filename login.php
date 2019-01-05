@@ -24,9 +24,7 @@ else{
 </head>
      <body>
          <div class ="header-container">
-             <header class="col-md-6">
-                 <?php include 'inlcudes/header.php';?>
-             </header>
+             <?php include 'inlcudes/header.php';?>
          </div>
          <div class="grey">
              <div class="main-container">
