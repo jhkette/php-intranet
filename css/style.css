@@ -55,7 +55,7 @@ h2 {
 
 
 .main-container{
-    width: 70%;
+    width: 75%;
     max-width: 1200px;
     margin: auto;
     background-color: white;
@@ -184,7 +184,7 @@ main {
 }
 
 .header {
-    width: 70%;
+    width: 75%;
     max-width: 1200px;
     margin: auto;
     color: var(--dark);
