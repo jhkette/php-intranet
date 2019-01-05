@@ -24,9 +24,7 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 </head>
     <body>
         <div class ="header-container">
-            <header class="col-md-6">
-                <?php include 'inlcudes/header.php';?>
-            </header>
+            <?php include 'inlcudes/header.php';?>
         </div>
         <div class="grey">
             <div class="main-container">
@@ -96,17 +94,18 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                                      <td>7</td>
                                    </tr>
                                  </table>
-                            </section>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </div>
-        <div class ="footer-container">
+                             </div>
+                         </div>
+                     </section>
+                 </main>
+             </div>
+         </div>
+         <div class ="footer-container">
              <?php include 'inlcudes/footer.php';?>
-        </div>
+         </div>
 	</body>
 </html>
+
 
 <!--Joseph Ketterer
 Jkette01

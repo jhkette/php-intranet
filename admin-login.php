@@ -14,7 +14,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
