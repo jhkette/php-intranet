@@ -1,8 +1,3 @@
-<!--Joseph Ketterer
-Jkette01
-Web Programming with PHP
-Tobi Brodie -->
-
 <?php
 require_once('inlcudes/init.php');
 $loggedState = false;
@@ -22,7 +17,7 @@ else{
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intranet login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
@@ -96,3 +91,8 @@ else{
           </div>
       </body>
 </html>
+
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->

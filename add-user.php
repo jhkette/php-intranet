@@ -1,9 +1,3 @@
-<!--Joseph Ketterer
-Jkette01
-Web Programming with PHP
-Tobi Brodie -->
-
-
 <?php
 require_once('inlcudes/init.php');
 
@@ -151,3 +145,7 @@ else{
           </div>
       </body>
 </html>
+<!--Joseph Ketterer
+Jkette01
+Web Programming with PHP
+Tobi Brodie -->

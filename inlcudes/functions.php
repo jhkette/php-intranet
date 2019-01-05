@@ -1,11 +1,4 @@
-<!--Joseph Ketterer
-Jkette01
-Web Programming with PHP
-Tobi Brodie -->
-
-
 <?php
-
 require_once('inlcudes/init.php');
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
@@ -390,4 +383,10 @@ function makeMenu($menu){
      $finalMenu = $list . $output . $listClose;
      return $finalMenu;
 }
+// <!--Joseph Ketterer
+// Jkette01
+// Web Programming with PHP
+// Tobi Brodie -->
+
+
 ?>
