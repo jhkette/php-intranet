@@ -128,7 +128,7 @@ else{
                                       </div>
                                       <div>
                                           <label for="confirm-password">Confirm password</label>
-                                          <?php if (htmlentities(isset($confirmPassword['confirm password']))) {echo '<p> The passwords do not match</p>';} ?>
+                                          <?php if (isset($confirmPassword['confirm password']) && (!isset($errors['password']))) {echo '<p> The passwords do not match</p>';} ?>
                                           <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                       </div>
                                       <div>
