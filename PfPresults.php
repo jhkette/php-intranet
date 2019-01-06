@@ -38,7 +38,14 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                     <div class="status">
                         <?php
                         if ($loggedState == true) {
-                            echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                            if(isset( $_SESSION['admin'])){
+                                $admin = htmlentities($_SESSION['admin']);
+                                echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
+                            }
+                            if(isset( $_SESSION['user'])){
+                                $user = htmlentities($_SESSION['user']);
+                                echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
+                            }
                         }
                         ?>
                     </div>

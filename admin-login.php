@@ -35,11 +35,16 @@ their ussername gets echoed to the right of the navigtaion (below)  */
                    <div class="status">
                        <?php #echo out username
                        if ($loggedState == true) {
-                           echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                           if(isset( $_SESSION['admin'])){
+                               $admin = htmlentities($_SESSION['admin']);
+                               echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
+                           }
+                           if(isset( $_SESSION['user'])){
+                               $user = htmlentities($_SESSION['user']);
+                               echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
+                           }
                        }
-                       if (isset($_GET['message'])) { #this displays message if non admin trys to add user (although link is not available from menu)
-                           echo htmlentities($_GET['message']);
-                       }
+
                        ?>
                    </div>
                </div>
@@ -65,7 +70,9 @@ their ussername gets echoed to the right of the navigtaion (below)  */
                            }
                        }
                        ?>
+                        <!-- This shows if user trys to view add user without logging in. Although it is not accessible -->
                        <?php
+
                        if (isset($_GET['message2'])) {
                            if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
                                echo htmlentities($_GET['message2']);

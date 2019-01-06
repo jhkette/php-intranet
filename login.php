@@ -33,9 +33,15 @@ else{
                      <div class="status">
                          <?php
                          if ($loggedState == true) {
-                             echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
+                             if(isset( $_SESSION['admin'])){
+                                 $admin = htmlentities($_SESSION['admin']);
+                                 echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
+                             }
+                             if(isset( $_SESSION['user'])){
+                                 $user = htmlentities($_SESSION['user']);
+                                 echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
+                             }
                          }
-
                          ?>
                      </div>
                  </div>
@@ -78,7 +84,8 @@ else{
                                  if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
                                      echo htmlentities($_GET['message2']);
                                  }
-                             }?>
+                             }
+                             ?>
                          </p>
                          <?php
                           /* This code runs to make the form display. The data and errors array
