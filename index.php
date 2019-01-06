@@ -41,8 +41,10 @@ their username gets echoed to the right of the navigtaion (below)  */
                          if ($loggedState == true) { #echo user status
                              echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                          }
-                         if (isset($_GET['message'])) { #this echos out logged out message passed by URL
-                             echo htmlentities($_GET['message']);
+                         if (isset($_GET['message'])) {
+                             if(ctype_alpha(str_replace(' ', '', $_GET['message']))){
+                                 echo htmlentities($_GET['message']);
+                             }
                          }
                          ?>
                      </div>

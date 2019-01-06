@@ -38,9 +38,6 @@ else{
                          if ($loggedState == true) {
                              echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
                          }
-                         if (isset($_GET['message'])) {
-                             echo htmlentities($_GET['message']);
-                         }
                          ?>
                      </div>
                  </div>

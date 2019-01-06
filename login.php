@@ -36,9 +36,7 @@ else{
                          if ($loggedState == true) {
                              echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
                          }
-                         if (isset($_GET['message'])) {
-                             echo htmlentities($_GET['message']);
-                         }
+
                          ?>
                      </div>
                  </div>
@@ -75,7 +73,14 @@ else{
                              }
                          }
                          ?>
-                         <p class ="message"><?php if (isset($_GET['message2'])) { echo htmlentities($_GET['message2']);}?></p>
+                         <p class ="message">
+                             <?php
+                             if (isset($_GET['message2'])) {
+                                 if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){
+                                     echo htmlentities($_GET['message2']);
+                                 }
+                             }?>
+                         </p>
                          <?php
                           /* This code runs to make the form display. The data and errors array
                           are used as arguments to preserve correct data and dispay an error message above form if
