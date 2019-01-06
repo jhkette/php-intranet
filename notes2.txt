@@ -5,7 +5,9 @@
 - Go through all data, making sure it is all clean and escaped.
 - Check HTML is valid
 - add more notes to template pages
+-add
 - add gitignore
+-redo echo usernames
 
 - DOUBLE CHECK ALL FUNCTIONALITY
 

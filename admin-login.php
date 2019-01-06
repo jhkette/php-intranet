@@ -50,7 +50,7 @@ their ussername gets echoed to the right of the navigtaion (below)  */
                        <?php
                        /*Please see login.php for descripton of how this form validation works.*/
                        $admin = true; #admin is true so if valid session[admin] will be created by the validateLoginInputs function.
-                       $self = htmlentities($_SERVER['PHP_SELF']);
+                       $self = $_SERVER['PHP_SELF'];
                        $errors = reportAdminErrors($self);
                        $cleanData = validateLoginInputs($self, $errors, $admin);
                        /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
@@ -65,7 +65,12 @@ their ussername gets echoed to the right of the navigtaion (below)  */
                            }
                        }
                        ?>
-                       <p class ="message"><?php if (isset($_GET['message2'])) { echo htmlentities($_GET['message2']);}?></p>
+                       <?php
+                       if (isset($_GET['message2'])) {
+                           if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
+                               echo htmlentities($_GET['message2']);
+                           }
+                       }?>
                        <?php
                        /* This code runs to make the form display. The data and errors array
                        are used as arguments to preserve correct data and dispay an error message above form if

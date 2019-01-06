@@ -225,11 +225,11 @@ function addUserErrors($self){
 
         $firstname = trim($_POST['firstname']); # The firstname needs to be letters and between 2 and 19 charecters long
         if (!ctype_alpha($firstname) || (strlen($firstname) > 20) || (strlen($firstname) <= 2))  {
-            $errors['firstname'] = 'Names can only contain letters. They need to be at least two charecters.';
+            $errors['firstname'] = 'Names can only contain letters. They need to be at least three charecters.';
         }
         $surname = trim($_POST['surname']); # The surname needs to be letters and between 2 and 19 charecters long
         if (!ctype_alpha($surname) || (strlen($surname) > 20) || (strlen($surname) <= 2)) {
-            $errors['surname'] = 'Surnames can only contain letters. They need to be at least two charecters.';
+            $errors['surname'] = 'Surnames can only contain letters. They need to be at least three charecters.';
         }
         $email = trim($_POST['email']); #i'm using FILTER_VALIDATE_EMAIL to check if the email is valid. If it returns false it is invalid
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
@@ -284,15 +284,15 @@ function checkDuplicates($self, $loggedData){
 
 /*Function that checks the conform password and password values are the same  */
 function confirmPassword($self){
-    $passwordError = array();
+    $confirmPassword = array();
     if (isset($_POST['submit'])) {
         $password = trim($_POST['password']);
-        $confirmPassword = trim($_POST['confirm-password']);
-        if($password !== $confirmPassword){ # checks the values are the same..
-            $passwordError['confirm password'] = 'The passwords do not match'; # ..if not add key and value to passwordEror array
+        $confirmation = trim($_POST['confirm-password']);
+        if($password !== $confirmation){ # checks the values are the same..
+            $confirmPassword['confirm password'] = 'The passwords do not match'; # ..if not add key and value to passwordEror array
         }
     }
-    return $passwordError; #return password error - this gets displayed on the form on the add user page
+    return $confirmPassword; #return password error - this gets displayed on the form on the add user page
 }
 
 /*Function that takes data from user and adds it to cleanData if it is valid */

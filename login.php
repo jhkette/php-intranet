@@ -48,7 +48,7 @@ else{
                           admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
                           If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
                          $admin = false;
-                         $self = htmlentities($_SERVER['PHP_SELF']);
+                         $self = $_SERVER['PHP_SELF'];
                          $handleDir = openDirectory();
                          $handle = readDirectory($handleDir);
                          $loggeddata = getData($handle);
@@ -75,7 +75,7 @@ else{
                          <p class ="message">
                              <?php
                              if (isset($_GET['message2'])) {
-                                 if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){
+                                 if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
                                      echo htmlentities($_GET['message2']);
                                  }
                              }?>
