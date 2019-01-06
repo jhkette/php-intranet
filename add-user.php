@@ -47,16 +47,16 @@ else{
 
                           <h2>Admin login</h2>
                           <?php
-                          /* Here I am initially presenting the form. When the user submits, I check the valididation functions on
-                          the index page. If there are no errors the form is hidden and the user is added, a confirmation message is presnted to user.
-                          If there are errors, I add error messages above the form and display prompts by the form fields. This data again comes from the validation functions.  */
+                          /* Here I am initially presenting the form. When the user submits, I check the valididation functions  return values after the form is submitted.
+                          If there are no errors the form is hidden and the user is added, a confirmation message is presnted to user.
+                          If there are errors, I add error messages above the form and display prompts by the form fields.   */
                           $self = $_SERVER['PHP_SELF'];
                           $handleDir = openDirectory(); # directory
                           $handle = readDirectory($handleDir); # handle to file
                           $loggeddata = getData($handle); # the data from the txt file in an array
                           $duplicates = checkDuplicates($self, $loggeddata); # duplicates array
                           $errors = addUserErrors($self); #errors array
-                          $confirmPassword = confirmPassword($self); # cofirm password array
+                          $confirmPassword = confirmPassword($self, $errors); # cofirm password array
                           $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword); #clean data checked against the other arrays it takes as parameters
                           $displayForm = true;
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form

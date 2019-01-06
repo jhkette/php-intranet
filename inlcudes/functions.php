@@ -283,13 +283,13 @@ function checkDuplicates($self, $loggedData){
 }
 
 /*Function that checks the conform password and password values are the same  */
-function confirmPassword($self){
+function confirmPassword($self, $errors){
     $confirmPassword = array();
     if (isset($_POST['submit'])) {
         $password = trim($_POST['password']);
         $confirmation = trim($_POST['confirm-password']);
-        if($password !== $confirmation){ # checks the values are the same..
-            $confirmPassword['confirm password'] = 'The passwords do not match'; # ..if not add key and value to passwordEror array
+        if(($password !== $confirmation) && (!isset($errors['password']))) { # checks the values are the same and password error is not set
+            $confirmPassword['confirm password'] = 'The passwords do not match'; # ..if not add key and value to confirmPassword array
         }
     }
     return $confirmPassword; #return password error - this gets displayed on the form on the add user page
