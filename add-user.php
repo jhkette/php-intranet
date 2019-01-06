@@ -7,7 +7,7 @@ if (isset( $_SESSION['admin'])) {
 else{
     /* Redirect them to the admin login page. I am an adding an error message if not logged in as admin althought it
     is not accessible from the menu */
-    header("Location: admin-login.php?message2=Only an admin can add a user. Please log in as an admin");
+    header("Location: admin-login.php?message2=Please log in as an admin");
 }
 ?>
 <!doctype html>
