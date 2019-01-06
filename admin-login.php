@@ -75,7 +75,7 @@ their ussername gets echoed to the right of the navigtaion (below)  */
 
                        if (isset($_GET['message2'])) {
                            if(ctype_alpha(str_replace(' ', '', $_GET['message2']))) {#check that it's letters by removing white space with str replace
-                               echo '<p> class="message">'.htmlentities($_GET['message2']). '</p>';
+                               echo '<p class="message">'.htmlentities($_GET['message2']). '</p>';
                            }
                        }
                        ?>
