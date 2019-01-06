@@ -77,7 +77,8 @@ their ussername gets echoed to the right of the navigtaion (below)  */
                            if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
                                echo htmlentities($_GET['message2']);
                            }
-                       }?>
+                       }
+                       ?>
                        <?php
                        /* This code runs to make the form display. The data and errors array
                        are used as arguments to preserve correct data and dispay an error message above form if

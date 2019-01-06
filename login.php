@@ -79,6 +79,7 @@ else{
                          }
                          ?>
                          <p class ="message">
+                             <!-- This shows if user trys to view results without logging in -->
                              <?php
                              if (isset($_GET['message2'])) {
                                  if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
