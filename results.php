@@ -9,7 +9,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     header("Location: login.php?message2=Please log in to view DCS results");
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,7 +18,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     <style>
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
-
     <title>Results</title>
 </head>
     <body>
@@ -37,11 +35,11 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
                      <div class="status">
                          <?php
                          if ($loggedState == true) {
-                             if(isset( $_SESSION['admin'])){
+                             if(isset($_SESSION['admin'])){
                                  $admin = htmlentities($_SESSION['admin']);
                                  echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
                              }
-                             if(isset( $_SESSION['user'])){
+                             if(isset($_SESSION['user'])){
                                  $user = htmlentities($_SESSION['user']);
                                  echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
                              }

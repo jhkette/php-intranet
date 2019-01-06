@@ -21,7 +21,7 @@ else{
     @import url('https://fonts.googleapis.com/css?family=Roboto');
     </style>
 </head>
-     <body>
+    <body>
          <div class ="header-container">
              <?php include('inlcudes/header.php')?>
          </div>
@@ -36,11 +36,11 @@ else{
                      <div class="status">
                          <?php
                          if ($loggedState == true) {
-                             if(isset( $_SESSION['admin'])){
+                             if(isset($_SESSION['admin'])){
                                  $admin = htmlentities($_SESSION['admin']);
                                  echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
                              }
-                             if(isset( $_SESSION['user'])){
+                             if(isset($_SESSION['user'])){
                                  $user = htmlentities($_SESSION['user']);
                                  echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
                              }
@@ -50,7 +50,6 @@ else{
                   </div>
                   <main class = "container">
                       <section class="col-1">
-
 
                           <h2>Admin login</h2>
                           <?php
@@ -154,7 +153,7 @@ else{
           <div class ="footer-container">
                <?php include('inlcudes/footer.php')?>
           </div>
-      </body>
+       </body>
 </html>
 <!--Joseph Ketterer
 Jkette01

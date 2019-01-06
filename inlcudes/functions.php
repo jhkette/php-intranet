@@ -194,7 +194,7 @@ username are correct, the username is stored to the $_SESSION array. I regenerat
 has been submitted, the user will be logging in  */
 function validateLoginInputs($self, $errors, $admin){
     $cleanData = array();
-    /* I'm not saving and representing the password login data. Passwords are not like other form data. They can only be correct in relation to
+    /* I'm representing the password login data. Passwords are not like other form data. They can only be correct in relation to
     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
     if (isset($_POST['submit'])) { # only runs after form submission
         $username = trim($_POST['username']);

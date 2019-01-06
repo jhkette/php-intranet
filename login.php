@@ -53,29 +53,29 @@ else{
                           that returns clean data == 2 or not. If there are no errors the user is logged in and directed back to index page. I've set the variable
                           admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
                           If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
-                         $admin = false;
-                         $self = $_SERVER['PHP_SELF'];
-                         $handleDir = openDirectory();
-                         $handle = readDirectory($handleDir);
-                         $loggeddata = getData($handle);
-                         $errors = reportLoginErrors($self, $loggeddata);
-                         $cleanData = validateLoginInputs($self, $errors, $admin);
-                         /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
-                         or redirects the user to welcome.php if no errors were detected */
-                         if (isset($_POST['submit'])) {
-                             $formSubmmited = true;
+                          $admin = false;
+                          $self = $_SERVER['PHP_SELF'];
+                          $handleDir = openDirectory();
+                          $handle = readDirectory($handleDir);
+                          $loggeddata = getData($handle);
+                          $errors = reportLoginErrors($self, $loggeddata);
+                          $cleanData = validateLoginInputs($self, $errors, $admin);
+                          /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
+                          or redirects the user to welcome.php if no errors were detected */
+                          if (isset($_POST['submit'])) {
+                              $formSubmmited = true;
                               /*i'm counting the size of the errors arry for validation
-                             if errors > 0 the form is invalid */
-                             if (count($cleanData) < 2) {
-                                 echo displayErrors($errors);
-                                 closeHandle($handle);
-                                 closeDirectory($handleDir);
-                             }
-                             if (count($cleanData) == 2) {
-                                 closeHandle($handle);
-                                 closeDirectory($handleDir);
-                                 header('Location: index.php'); # redirect user to index page
-                             }
+                              if errors > 0 the form is invalid */
+                              if (count($cleanData) < 2) {
+                                  echo displayErrors($errors);
+                                  closeHandle($handle);
+                                  closeDirectory($handleDir);
+                              }
+                              if (count($cleanData) == 2) {
+                                  closeHandle($handle);
+                                  closeDirectory($handleDir);
+                                  header('Location: index.php'); # redirect user to index page
+                              }
                          }
                          ?>
                          <p class ="message">

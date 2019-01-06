@@ -11,7 +11,6 @@ if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
     header("Location: login.php?message=please log in");
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
