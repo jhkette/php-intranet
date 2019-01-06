@@ -36,12 +36,18 @@ their username gets echoed to the right of the navigtaion (below)  */
                      </nav>
                      <div class="status">
                          <?php
-
-                         if ($loggedState == true) { #echo user status
-                             echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                         if ($loggedState == true) {
+                             if(isset( $_SESSION['admin'])){
+                                 $admin = htmlentities($_SESSION['admin']);
+                                 echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
+                             }
+                             if(isset( $_SESSION['user'])){
+                                 $user = htmlentities($_SESSION['user']);
+                                 echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
+                             }
                          }
                          if (isset($_GET['message'])) {
-                             if(ctype_alpha(str_replace(' ', '', $_GET['message']))){
+                             if(ctype_alpha(str_replace(' ', '', $_GET['message']))){ #check it is letters
                                  echo htmlentities($_GET['message']);
                              }
                          }
