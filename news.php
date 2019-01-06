@@ -1,5 +1,5 @@
-<?php
-require_once('inlcudes/init.php');
+<?php require_once('inlcudes/init.php');
+
 $loggedState = false;
 if (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))) {
 

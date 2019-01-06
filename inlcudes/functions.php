@@ -1,5 +1,4 @@
-<?php
-require_once('inlcudes/init.php');
+<?php require_once('inlcudes/init.php');
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
 /*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the form fields if there

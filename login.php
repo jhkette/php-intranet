@@ -34,7 +34,7 @@ else{
                      <div class="status">
                          <?php
                          if ($loggedState == true) {
-                             echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user'] .PHP_EOL));
+                             echo '<p>You are logged in as ' . (isset( $_SESSION['admin']) ? htmlentities($_SESSION['admin']) :  htmlentities($_SESSION['user']));
                          }
                          if (isset($_GET['message'])) {
                              echo htmlentities($_GET['message']);
