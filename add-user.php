@@ -40,10 +40,6 @@ else{
                                  $admin = htmlentities($_SESSION['admin']);
                                  echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
                              }
-                             if(isset($_SESSION['user'])){
-                                 $user = htmlentities($_SESSION['user']);
-                                 echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
-                             }
                          }
                          ?>
                       </div>
