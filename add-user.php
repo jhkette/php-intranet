@@ -35,7 +35,7 @@ else{
                      </nav>
                      <div class="status">
                          <?php
-                         if ($loggedState == true) {
+                         if ($adminState == true) {
                              if(isset($_SESSION['admin'])){
                                  $admin = htmlentities($_SESSION['admin']);
                                  echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;

@@ -252,7 +252,7 @@ function addUserErrors($self){
     return $errors;
 }
 
-/*This function check that the user inputs haven't been registered before, it takes data from the text file
+/*This function checks that the user inputs haven't been registered before, it takes data from the text file
 and compares it against user input. I'm only checking the username and email */
 function checkDuplicates($self, $loggedData){
     $duplicates = array();
@@ -282,7 +282,7 @@ function checkDuplicates($self, $loggedData){
     return $duplicates; # the duplicates array gets represnted to the user on the add user page
 }
 
-/*Function that checks the conform password and password values are the same  */
+/*Function that checks the confirm password and password values are the same  */
 function confirmPassword($self, $errors){
     $confirmPassword = array();
     if (isset($_POST['submit'])) {
