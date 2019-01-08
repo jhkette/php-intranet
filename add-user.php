@@ -1,7 +1,7 @@
 <?php require_once('inlcudes/init.php');
 
 $adminState = false;
-if (isset( $_SESSION['admin'])) {
+if (isset($_SESSION['admin'])) {
     $adminState = true;
 }
 else{
