@@ -377,7 +377,6 @@ function makeMenu($menu){
     $list = '<ul>'. PHP_EOL;
     $listClose = '</ul>'. PHP_EOL;
     foreach ($menu as $key => $items) {
-
          $output.='<li class="menu"> <a href ='.$key.'>'.$items.'</a></li>'. PHP_EOL;
      }
      $finalMenu = $list . $output . $listClose;
