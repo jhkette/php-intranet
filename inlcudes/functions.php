@@ -88,7 +88,7 @@ passed as arguments  */
 folder would not be stored on the root directory of the website ie. it  would be in a directory that cannot be accessed online */
 
  function openDirectory(){
-      $handleDir = opendir('./data');
+      $handleDir = opendir('./data'); 
       if ($handleDir === false){
           echo '<p> System error: Unable to open directory</p>';
       }

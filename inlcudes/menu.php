@@ -11,6 +11,7 @@ if(isset($_SESSION['admin'])) {
     'results.php'  => 'Results',
     'add-user.php' => 'Add User',
     'logout.php' => 'Logout',
+
     ];
 }
 
@@ -20,6 +21,7 @@ elseif (isset($_SESSION['user'])) {
     'news.php'  => 'News',
     'results.php'  => 'Results',
     'logout.php'  => 'Logout',
+
     ];
 }
 
@@ -30,6 +32,7 @@ else{
     'login.php'  => 'Intranet',
     'admin-login.php'  => 'Administration login',
     'results.php'  => 'Results',
+
     ];
 }
 
@@ -39,6 +42,7 @@ $menu2 = [
     'DTresults.php' => 'DT results',
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',
+
 ]
 
 ?>

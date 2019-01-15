@@ -48,7 +48,7 @@ their username gets echoed to the right of the navigtaion (below)  */
                          }
                          if (isset($_GET['message'])) {
                              if(ctype_alpha(str_replace(' ', '', $_GET['message']))){ #check it is letters
-                                 echo htmlentities($_GET['message']);
+                                 echo '<p>'. htmlentities($_GET['message']). '</p>';
                              }
                          }
                          ?>

@@ -234,9 +234,8 @@ label{
 input[type="submit" i]{
     background-color: var(--secondary);
     color: white;
-    padding: 1rem 4rem;
-    margin: 2rem 0;
-
+    padding: 1rem 5rem;
+    margin: 3.5rem 0;
     border: 0;
     font-size: 1.8rem;
 
@@ -273,7 +272,7 @@ h3{
     border-bottom: 2px solid var(--secondary);
     width: max-content;
     width: -moz-max-content;
-    
+
 }
 
 
