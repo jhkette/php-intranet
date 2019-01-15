@@ -14,15 +14,15 @@ their username gets echoed to the right of the navigtaion (below)  */
 
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
-    </style>
-</head>
-     <body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        </style>
+    </head>
+    <body>
          <div class ="header-container">
              <?php include('inlcudes/header.php');?>
          </div>

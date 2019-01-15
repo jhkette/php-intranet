@@ -12,17 +12,17 @@ else{
 ?>
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add user</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
-    </style>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add user</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        </style>
+    </head>
     <body>
-         <div class ="header-container">
+        <div class ="header-container">
              <?php include('inlcudes/header.php')?>
          </div>
          <div class="grey">
@@ -46,7 +46,6 @@ else{
                   </div>
                   <main class = "container">
                       <section class="col-1">
-
                           <h2>Admin login</h2>
                           <?php
                           /* Here I am initially presenting the form. When the user submits, I check the valididation functions  return values after the form is submitted.

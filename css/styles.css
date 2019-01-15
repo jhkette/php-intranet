@@ -268,3 +268,21 @@ footer{
 footer p{
     color: black;
 }
+h3{
+    margin: 3.75rem 0;
+    border-bottom: 2px solid var(--secondary);
+    width: max-content;
+    width: -moz-max-content;
+    
+}
+
+
+
+input{
+    margin: .25rem 0;
+}
+
+.status p {
+
+    text-decoration: underline;
+}
