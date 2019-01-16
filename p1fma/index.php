@@ -51,6 +51,7 @@ their username gets echoed to the right of the navigtaion (below)  */
                                  echo '<p>'. htmlentities($_GET['message']). '</p>';
                              }
                          }
+
                          ?>
                      </div>
                  </div>

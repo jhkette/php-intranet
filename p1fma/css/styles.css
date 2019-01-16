@@ -126,7 +126,8 @@ h3{
     list-style: none;
     margin: .6rem 0rem;
     color: white;
-    width: 95%;
+    width: -moz-fit-content;
+    width: fit-content;
     padding: .4rem;
     border-radius: .1rem;
 }
@@ -203,15 +204,15 @@ main {
 .header-container {
 
     width: 100%;
-    border-bottom: 1px solid #e0dddc;
-    background-color: var(--dark);
+    border-bottom: 1px dashed var(--secondary);
+    background-color: white;
 }
 
 .header {
     width: 75%;
     max-width: 1200px;
     margin: auto;
-    color: white;
+    color: var(--dark);
     font-weight: 200;
     padding: 1rem 0;
     font-size: 1.2rem;
@@ -253,6 +254,7 @@ fieldset p{
 
 label{
     margin-right: 1rem;
+    margin-top: .35rem;
 }
 
 input[type="submit" i]{
@@ -275,7 +277,8 @@ input[type="submit" i]{
     font-size: 1.8rem;
 }
 input{
-    margin: .25rem 0;
+    margin: .35rem 0;
+    padding: .25rem;
 }
 
 .field{
@@ -293,7 +296,7 @@ input{
 .field p{
     font-size: 1.1rem;
     vertical-align:baseline;
-    margin-top: .4rem;
+    margin-top: .8rem;
     margin-left: .4rem;
 }
 
@@ -301,10 +304,10 @@ input{
 
 .status p {
 
-    text-decoration: underline;
+    background-color: var(--tertiary);
+    padding: 1rem;
+    border: dotted 1px gray;
 }
-
-
 
 
 /*Footer styles  */
