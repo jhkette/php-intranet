@@ -21,7 +21,7 @@ their username gets echoed to the right of the navigtaion (below)  */
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
     </style>
     <title>Introduction to Database Technology - DT Results</title>
 </head>

@@ -19,7 +19,7 @@ their username gets echoed to the right of the navigtaion (below)  */
         <title>Home</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
         <style>
-        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
         </style>
     </head>
     <body>
@@ -72,7 +72,7 @@ their username gets echoed to the right of the navigtaion (below)  */
                          <?php
                          if ($loggedState == false) {
                          ?>
-                         <a href='login.php'><button class="button1">Log in<img src="images/arrow.svg"></button>
+                         <a href='login.php'><button class="button1">Log in<img src="images/arrow.svg"></button></a>
                          <?php
                          }
                          ?>

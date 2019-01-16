@@ -17,7 +17,7 @@ their ussername gets echoed to the right of the navigtaion (below)  */
         <title>Admin login</title>
         <link rel="stylesheet" type="text/css" href="css/styles.css" />
         <style>
-        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
         </style>
    </head>
    <body>

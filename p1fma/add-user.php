@@ -18,7 +18,7 @@ else{
         <title>Add user</title>
         <link rel="stylesheet" href="css/styles.css">
         <style>
-        @import url('https://fonts.googleapis.com/css?family=Roboto');
+        @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
         </style>
     </head>
     <body>

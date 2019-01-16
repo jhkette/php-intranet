@@ -30,7 +30,6 @@ function displayForm( $cleanData , $errors){
     $output='
     <form action="'.$self.'"  method="post">
         <fieldset class="login-field">
-            <legend>Please log in</legend>
             <div class="field">
                 <label for="username">Username</label>
 

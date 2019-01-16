@@ -18,7 +18,7 @@ else{
     <title>News</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
     <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
     </style>
 </head>
      <body>
