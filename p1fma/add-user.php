@@ -90,6 +90,7 @@ else{
                           <?php if ($displayForm == true): ?>
                               <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                                   <fieldset>
+                                      <legend>Add another Intranet user</legend>
                                       <div class="field">
                                           <label for="title">Title</label>
                                           <select name="title" id="title">
