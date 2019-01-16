@@ -239,7 +239,6 @@ label{
     margin-right: 1rem;
 }
 
-
 input[type="submit" i]{
     background-color: var(--secondary);
     color: white;
@@ -259,14 +258,52 @@ input[type="submit" i]{
     border: 0;
     font-size: 1.8rem;
 }
-.footer-container{
-    height: 12rem;
-    padding-top: 1rem;
-    background-color: var(--tertiary);
-    width: 100%;
-    border-top: 1px solid  #e0dddc;
+input{
+    margin: .25rem 0;
 }
 
+.field{
+    display: flex;
+    width: 45rem;
+    justify-content: flex-start;
+    flex-direction: row;
+
+}
+
+.login-field{
+    width: 70%;
+}
+
+.field p{
+    font-size: 1.1rem;
+    vertical-align:baseline;
+    margin-top: .4rem;
+    margin-left: .4rem;
+}
+
+
+
+.status p {
+
+    text-decoration: underline;
+}
+
+
+
+h3{
+    margin: 4rem 0;
+    border-bottom: 2px solid var(--dark);
+    width: max-content;
+    width: -moz-max-content;
+
+}
+
+
+
+
+
+
+/*Footer styles  */
 footer{
     width: 75%;
     margin: auto;
@@ -275,22 +312,14 @@ footer{
 
 footer p{
     color: black;
-}
-h3{
-    margin: 3.75rem 0;
-    border-bottom: 2px solid var(--secondary);
-    width: max-content;
-    width: -moz-max-content;
-
+    margin: 0;
+    padding-top: 2rem;
 }
 
-
-
-input{
-    margin: .25rem 0;
-}
-
-.status p {
-
-    text-decoration: underline;
+.footer-container{
+    height: 12rem;
+    padding-top: 1rem;
+    background-color: var(--tertiary);
+    width: 100%;
+    border-top: 1px solid  #e0dddc;
 }

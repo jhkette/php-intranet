@@ -29,14 +29,15 @@ function displayForm( $cleanData , $errors){
 
     $output='
     <form action="'.$self.'"  method="post">
-        <fieldset>
+        <fieldset class="login-field">
             <legend>Please log in</legend>
-            <div>
-                <label for="username">Username</label>'.
+            <div class="field">
+                <label for="username">Username</label>
+
+                <input type="text"  value= " '.$userName.'" name="username" id="username" />'.
                  $userErrors .
-                '<input type="text"  value= " '.$userName.'" name="username" id="username" />
-            </div>
-            <div>
+            '</div>
+            <div class="field">
                  <label for="password">Password</label>'
                 .$passwordErrors.
                  '<input type="password"  value= ""  name="password" id="password"/>

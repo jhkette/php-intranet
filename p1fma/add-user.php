@@ -91,7 +91,7 @@ else{
                               <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                                   <fieldset>
                                       <legend>Add a user</legend>
-                                      <div>
+                                      <div class="field">
                                           <label for="title">Title</label>
                                           <select name="title" id="title">
                                               <!-- Save title value using cleanData -->
@@ -101,41 +101,41 @@ else{
                                               <option value="Miss" <?php if (isset($cleanData['title']) && ($cleanData['title']=="Miss" )) {echo 'selected ="selected"' ;} ?>>Miss</option>
                                           </select>
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <label for="first-name">First name</label>
                                           <!--echo error message if firstname error is set  -->
-                                          <?php if (isset($errors['firstname'])) {echo '<p> Please enter your first name </p>';} ?>
                                           <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="first-name" />
+                                          <?php if (isset($errors['firstname'])) {echo '<p> Please enter your first name </p>';} ?>
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <label for="surname">Surname</label>
-                                          <?php if (isset($errors['surname'])) {echo '<p> Please enter your Surname </p>';} ?>
                                           <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="surname" />
+                                          <?php if (isset($errors['surname'])) {echo '<p> Please enter your Surname </p>';} ?>
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <label for="email">Email</label>
+                                          <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
                                           <?php if (isset($duplicates['email'])) {echo '<p> This email has already been used</p>';} ?>
                                           <?php if (isset($errors['email'])) {echo '<p> Please enter a valid email </p>';} ?>
-                                          <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <label for="username">Username</label>
+                                          <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="username" />
                                           <?php if (isset($duplicates['username'])) {echo '<p> This username has already been used</p>';} ?>
                                           <?php if (isset($errors['username'])) {echo '<p> Please enter a valid username</p>';} ?>
-                                          <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="username" />
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <label for="password">Password</label>
-                                          <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
                                           <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
+                                          <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <label for="confirm-password">Confirm password</label>
                                           <!--only have confirm password comment if the initial password is correct  -->
                                           <?php if (isset($confirmPassword['confirm password']) && (!isset($errors['password']))) {echo '<p> The passwords do not match</p>';} ?>
                                           <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
                                       </div>
-                                      <div>
+                                      <div class="field">
                                           <input type="submit" name="submit" value="Submit" />
                                       </div>
                                   </fieldset>
