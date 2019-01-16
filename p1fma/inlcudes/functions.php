@@ -38,10 +38,11 @@ function displayForm( $cleanData , $errors){
                  $userErrors .
             '</div>
             <div class="field">
-                 <label for="password">Password</label>'
-                .$passwordErrors.
-                 '<input type="password"  value= ""  name="password" id="password"/>
-             </div>
+                 <label for="password">Password</label>
+
+                 <input type="password"  value= ""  name="password" id="password"/>'
+                 .$passwordErrors.
+             '</div>
               <div>
                   <input type="submit" name="submit" value="Submit" />
               </div>

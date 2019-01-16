@@ -4,24 +4,21 @@ Web Programming with PHP
 Tobi Brodie --> */
 
 :root {
-    --secondary: #0CAADC;
+    --secondary: #1099c4;
     --tertiary: #eeecec;
     --dark: #383839;
-
-
 }
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-
 }
-
 
 html{
     font-size: 62.5%;
 }
+
 body{
     font-family: 'Roboto', serif;
     font-size: 1.6rem;
@@ -101,9 +98,6 @@ h2 {
     flex-direction: row;
 }
 
-
-
-
 .list-group-item{
     color: var(--dark);
     list-style: none;
@@ -111,9 +105,16 @@ h2 {
 }
 
 .list-group-error{
-    color: red;
+    background-color: #fc4a4a;
     list-style: none;
     margin: .6rem 0rem;
+    color: white;
+    transition: .3s;
+    width: 85%;
+    padding: .4rem;
+    border-radius: .1rem;
+
+
 }
 
 
@@ -186,7 +187,7 @@ main {
 }
 
 .header-container {
-    background-color: white;
+    background-color: var(--secondary);
     width: 100%;
     border-bottom: 1px solid #e0dddc;
 }
@@ -195,7 +196,7 @@ main {
     width: 75%;
     max-width: 1200px;
     margin: auto;
-    color: var(--dark);
+    color: white;
     font-weight: 200;
     padding: 1rem 0;
     font-size: 1.2rem;
@@ -288,8 +289,6 @@ input{
     text-decoration: underline;
 }
 
-
-
 h3{
     margin: 4rem 0;
     border-bottom: 2px solid var(--dark);
@@ -297,10 +296,6 @@ h3{
     width: -moz-max-content;
 
 }
-
-
-
-
 
 
 /*Footer styles  */
