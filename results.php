@@ -69,6 +69,7 @@ if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
                                  Vivamus eros sapien, ultricies vitae dignissim sed, posuere eget erat. Donec bibendum nunc quis leo mattis, ne
                                  c suscipit velit tincidunt. Donec a sapien id leo interdum mollis ut vel lectus. In non luctus orci. In tempor id
                                  eros eget rutrum.</p>
+                                 <div class="line"> </div>
                              </div>
                          </div>
                      </section>

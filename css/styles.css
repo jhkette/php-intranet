@@ -45,6 +45,15 @@ p{
     color: #ff3d3d;
 }
 
+.line{
+    width: 30%;
+margin: auto;
+border-top: 4px solid var(--secondary);
+height: 1rem;
+/* margin-top: 3rem; */
+padding-bottom: 3rem;
+}
+
 header h1 {
 
 }
@@ -84,7 +93,7 @@ h2 {
 
 
 .col-1{
-    border-top: 1px solid #e0dddc;
+
 }
 
 .flex-container{
@@ -169,7 +178,7 @@ h2 {
 
 
 main {
-    height: 75rem;
+    min-height: 65rem;
 }
 
 .main-body{

@@ -17,7 +17,7 @@ function displayForm( $cleanData , $errors){
      else {
          $userErrors = '';
         }
-    if (!isset($errors['username'])){
+    if (!isset($errors['username'])){ # only add password error if username is NOT an error. (I do this throughout, passwords are only correct in relation to usernames)
         if (isset($errors['password'])) {
             $passwordErrors =  '<p> This is not the correct password </p>';}
          else {
@@ -88,7 +88,7 @@ passed as arguments  */
 folder would not be stored on the root directory of the website ie. it  would be in a directory that cannot be accessed online */
 
  function openDirectory(){
-      $handleDir = opendir('./data'); 
+      $handleDir = opendir("./data");
       if ($handleDir === false){
           echo '<p> System error: Unable to open directory</p>';
       }
