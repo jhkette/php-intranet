@@ -88,6 +88,16 @@ h3{
 
 }
 
+/* header styles */
+.header-container{
+    border-bottom: 1px dashed var(--secondary);
+    padding: 1rem 0;
+}
+.header{
+    width: 75%;
+    margin: auto;
+}
+
 /* main layout */
 
 .main-container{
@@ -110,6 +120,10 @@ h3{
     width: 15rem;
     height: auto;
     margin: 1.5rem 0;
+}
+
+.container{
+    min-height: 65rem;
 }
 
 
@@ -136,30 +150,11 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-.side-menu li {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
 
-}
-.side-menu li a:hover {
-    border-bottom: 2px solid var(--dark);
-    transition: .1s;
 
-}
-.header-container{
-    border-bottom: 1px dashed var(--secondary);
-    padding: 1rem 0;
-}
-.header{
-    width: 75%;
-    margin: auto;
-}
-
-.container{
-    min-height: 65rem;
-}
 
 /*-----------  */
+/* list group- errors, correct data */
 .list-group-item{
     color: var(--dark);
     list-style: none;
@@ -173,11 +168,11 @@ tr:nth-child(even) {
     color: white;
     width: -moz-fit-content;
     width: fit-content;
-    padding: .4rem;
+    padding: .2rem 1rem;
     border-radius: .1rem;
 }
 
-
+/* main Menu and nav div */
 .navcontainer{
     display: flex;
     flex-direction: row;
@@ -211,6 +206,7 @@ tr:nth-child(even) {
     transition: .1s;
 
 }
+/*Side menu  */
 
 .side-menu ul{
     display: flex;
@@ -226,6 +222,16 @@ tr:nth-child(even) {
     height: 25rem;
 }
 
+.side-menu li {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+
+}
+.side-menu li a:hover {
+    border-bottom: 2px solid var(--dark);
+    transition: .1s;
+}
+
 .main-body{width: 75%;}
 
 
@@ -233,7 +239,6 @@ tr:nth-child(even) {
 
 fieldset{
     border: 0;
-
     padding: 1rem;
     border-radius: .2rem;
 }
@@ -241,9 +246,6 @@ fieldset{
 fieldset p{
     padding: 0;
     margin: 0;
-
-
-
 }
 
 label{
@@ -291,6 +293,9 @@ section a {
     color: white;
     cursor: pointer;
 }
+
+
+/*------------FORMS  --------*/
 input{
     margin: .35rem 0;
     padding: .25rem;
@@ -314,9 +319,9 @@ input{
     margin-top: .8rem;
     margin-left: .4rem;
 }
-
+/*--------------- Status updates--------- */
 .status p {
-    background-color: var(--secondary);
+    background-color: #b6d6f6;
     padding: 1rem;
     border: dotted 1px gray;
     margin: 0;

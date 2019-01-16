@@ -48,7 +48,8 @@ their username gets echoed to the right of the navigtaion (below)  */
                          }
                          ?>
                          </div>
-
+                         <!--i'm only showing this div - it shows a logged out message if the user has logged out
+                         it's in a seperate color to the login message  -->
                          <?php if ($loggedState == false): ?>
                              <div class="logout">
                                  <?php

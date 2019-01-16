@@ -46,7 +46,7 @@ else{
                   </div>
                   <main class = "container">
                       <section class="col-1">
-                          <h2>Admin login</h2>
+                          <h2>Add a user</h2>
                           <?php
                           /* Here I am initially presenting the form. When the user submits, I check the valididation functions  return values after the form is submitted.
                           If there are no errors the form is hidden and the user is added, a confirmation message is presnted to user.
@@ -90,7 +90,6 @@ else{
                           <?php if ($displayForm == true): ?>
                               <form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
                                   <fieldset>
-                                      <legend>Add a user</legend>
                                       <div class="field">
                                           <label for="title">Title</label>
                                           <select name="title" id="title">
