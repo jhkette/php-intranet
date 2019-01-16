@@ -225,13 +225,13 @@ function addUserErrors($self){
     $errors = array();
     if (isset($_POST['submit'])) { # code only runs when form is submitted
 
-        $firstname = trim($_POST['firstname']); # The firstname needs to be letters and between 2 and 19 charecters long
+        $firstname = trim($_POST['firstname']); # The firstname needs to be letters and between 2 and 19 characters long
         if (!ctype_alpha($firstname) || (strlen($firstname) > 20) || (strlen($firstname) <= 2))  {
-            $errors['firstname'] = 'Names can only contain letters. They need to be at least three charecters.';
+            $errors['firstname'] = 'Names can only contain letters. They need to be at least three characters.';
         }
-        $surname = trim($_POST['surname']); # The surname needs to be letters and between 2 and 19 charecters long
+        $surname = trim($_POST['surname']); # The surname needs to be letters and between 2 and 19 characters long
         if (!ctype_alpha($surname) || (strlen($surname) > 20) || (strlen($surname) <= 2)) {
-            $errors['surname'] = 'Surnames can only contain letters. They need to be at least three charecters.';
+            $errors['surname'] = 'Surnames can only contain letters. They need to be at least three characters.';
         }
         $email = trim($_POST['email']); #i'm using FILTER_VALIDATE_EMAIL to check if the email is valid. If it returns false it is invalid
         if (filter_var($email, FILTER_VALIDATE_EMAIL) == false) {
@@ -241,14 +241,14 @@ function addUserErrors($self){
         if (($title !== 'Mr') && ($title !== 'Mrs') && ($title !== 'Ms') && ($title !== 'Miss')) { # still check the correct value is sent to form for security
             $errors['title'] = 'This is not the correct title';
         }
-        $username = trim($_POST['username']); # The username needs to be letters/numbers and between 2 and 19 charecters long
+        $username = trim($_POST['username']); # The username needs to be letters/numbers and between 2 and 19 characters long
         if (!ctype_alnum($username) || (strlen($username) > 20) || (strlen($username) < 5))  {
             $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more chrecters long.';
         }
-        $password = trim($_POST['password']); # The password needs to be letters/numbers and between 2 and 19 charecters long
+        $password = trim($_POST['password']); # The password needs to be letters/numbers and between 2 and 19 characters long
         if (!ctype_alnum($password) || (strlen($password) > 20) || (strlen($password) < 5)) {
             $errors['password'] = 'This is not a valid password. It should contain only letters and numbers. It needs to be five or more
-            charecters long.';
+            characters long.';
         }
     }
     return $errors;
@@ -318,7 +318,6 @@ function validateAddUser($self, $errors, $duplicates, $passwordError){
         if (!isset($errors['email']) && (!isset($duplicates['email']))) {
             $cleanData['email'] = $email;
         }
-
         $title = trim($_POST['title']);
         if (!isset($errors['title'])) {
             $cleanData['title'] = $title;

@@ -66,7 +66,7 @@ else{
                               #declare $self varaible as $_POST for use in validation
                               if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
                                   $displayForm = false;
-                                  echo '<h3>New user successfully added</h3>'; #message to confirm the user has been added
+                                  echo '<p class="newuser">New user successfully added</p>'; #message to confirm the user has been added
                                   echo displayResults($cleanData); #display the correct data to confirm the new user details
                                   writeToFile($handle ,$cleanData); # write to the text file
                                   echo refreshPageButton(); # add a button which allows the user to refresh page and add another user.
@@ -132,8 +132,8 @@ else{
                                       <div class="field">
                                           <label for="confirm-password">Confirm password</label>
                                           <!--only have confirm password comment if the initial password is correct  -->
-                                          <?php if (isset($confirmPassword['confirm password']) && (!isset($errors['password']))) {echo '<p> The passwords do not match</p>';} ?>
                                           <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
+                                          <?php if (isset($confirmPassword['confirm password']) && (!isset($errors['password']))) {echo '<p> The passwords do not match</p>';} ?>
                                       </div>
                                       <div class="field">
                                           <input type="submit" name="submit" value="Submit" />
