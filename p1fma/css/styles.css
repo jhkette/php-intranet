@@ -21,7 +21,7 @@ html{
 
 body{
     font-family: 'Roboto', serif;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: var(--dark);
 }
 
@@ -30,6 +30,7 @@ p{
     font-family: 'Roboto', serif;
     color: var(--dark);
     margin: 1.5rem 0;
+
 }
 
 .news{
@@ -83,6 +84,8 @@ h3{
 
 }
 
+/* main layout */
+
 .main-container{
     width: 75%;
     max-width: 1200px;
@@ -106,15 +109,41 @@ h3{
 }
 
 
-.col-1{
-
-}
+/* results page  */
 
 .flex-container{
     display: flex;
     flex-direction: row;
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 5px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.side-menu li {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+
+}
+.side-menu li a:hover {
+    border-bottom: 2px solid var(--dark);
+    transition: .1s;
+
+}
+
+/*-----------  */
 .list-group-item{
     color: var(--dark);
     list-style: none;
@@ -144,13 +173,14 @@ h3{
 
 .main-menu{
     margin: 2rem 0;
+    font-size: 2rem;
 
 }
 .menu {
     list-style: none;
     display: inline-block;
     padding-right: 1.5rem;
-    font-size: 2rem;
+
 }
 
 .menu a{
@@ -178,29 +208,21 @@ h3{
     width: 16rem;
     background-color: var(--tertiary);
     height:23rem;
+    font-size: 1.6rem;
 
 }
 
-.side-menu li {
-    margin: 1rem 0;
-    padding-left: 1.5rem;
 
-}
-.side-menu li a:hover {
-    border-bottom: 2px solid var(--dark);
-    transition: .1s;
-
-}
 
 
 main {
-    min-height: 65rem;
+    min-height: 70rem;
 }
 
 .main-body{
     width: 65%;
 }
-/* header */
+/*--------- header------- */
 .header-container {
 
     width: 100%;
@@ -218,22 +240,7 @@ main {
     font-size: 1.2rem;
 }
 /*------------------------------*/
-/* Table css */
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 50%;
-}
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 5px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
 
 /* form css */
 
@@ -270,11 +277,24 @@ input[type="submit" i]{
 .button1{
     background-color: var(--secondary);
     color: white;
-    padding: 1rem 4rem;
+    padding: 1.3rem 4rem;
     margin: 2rem 0;
 
     border: 0;
     font-size: 1.8rem;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.button1 img{
+    padding-left: 1.5rem;
+    margin-top: .1rem;
+}
+section a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }
 input{
     margin: .35rem 0;
@@ -300,10 +320,7 @@ input{
     margin-left: .4rem;
 }
 
-
-
 .status p {
-
     background-color: var(--tertiary);
     padding: 1rem;
     border: dotted 1px gray;
@@ -314,7 +331,6 @@ input{
 footer{
     width: 75%;
     margin: auto;
-
 }
 
 footer p{

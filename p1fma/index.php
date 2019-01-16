@@ -69,6 +69,13 @@ their username gets echoed to the right of the navigtaion (below)  */
                          eget efficitur felis sodales non. Quisque eu dui ut felis euismod venenatis. Praesent at ante vitae nunc pharetra fringilla. Etiam
                          lacus justo, congue et justo vel, elementum malesuada odio. Quisque bibendum, augue nec placerat vestibulum, arcu purus pretium ligula,
                          sed molestie ligula eros vitae nibh. </p>
+                         <?php
+                         if ($loggedState == false) {
+                         ?>
+                         <a href='login.php'><button class="button1">Log in<img src="images/arrow.svg"></button></a>
+                         <?php
+                         }
+                         ?>
                      </section>
                  </main>
              </div>
