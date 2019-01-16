@@ -72,7 +72,7 @@ their username gets echoed to the right of the navigtaion (below)  */
                          <?php
                          if ($loggedState == false) {
                          ?>
-                         <a href='login.php'><button class="button1">Log in<img src="images/arrow.svg"></button></a>
+                         <a href='login.php'><button class="button1">Log in<img src="images/arrow.svg"></button>
                          <?php
                          }
                          ?>
