@@ -219,12 +219,14 @@ tr:nth-child(even) {
 
 }
 .side-menu{
-    margin-top: 4.5rem;
+    margin-top: 2.5rem;
     margin-right: 4rem;
     width: 16rem;
-    background-f1px solid  #e0dddc;
+    background-color:  #e6e6e6;
+    height: 25rem;
 }
 
+.main-body{width: 75%;}
 
 
 /* form css */
@@ -284,10 +286,6 @@ input[type="submit" i]:hover{
 
 }
 
-.button1 img{
-    padding-left: 1.5rem;
-    margin-top: .1rem;
-}
 section a {
     text-decoration: none;
     color: white;
@@ -318,11 +316,20 @@ input{
 }
 
 .status p {
-    background-color: var(--tertiary);
+    background-color: var(--secondary);
     padding: 1rem;
     border: dotted 1px gray;
+    margin: 0;
+
 }
 
+.logout p{
+    background-color: #ededed;
+    padding: 1rem;
+    border: dotted 1px gray;
+    margin: 0;
+
+}
 
 /*Footer styles  */
 footer{

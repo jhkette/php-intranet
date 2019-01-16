@@ -46,15 +46,21 @@ their username gets echoed to the right of the navigtaion (below)  */
                                  echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
                              }
                          }
-                         if (isset($_GET['message'])) {
-                             if(ctype_alpha(str_replace(' ', '', $_GET['message']))){ #check it is letters
-                                 echo '<p>'. htmlentities($_GET['message']). '</p>';
-                             }
-                         }
-
                          ?>
+                         </div>
+
+                         <?php if ($loggedState == false): ?>
+                             <div class="logout">
+                                 <?php
+                                 if (isset($_GET['message'])) {
+                                     if(ctype_alpha(str_replace(' ', '', $_GET['message']))){ #check it is letters
+                                         echo '<p>'. htmlentities($_GET['message']). '</p>';
+                                     }
+                                 }
+                                 ?>
+                             </div>
+                         <?php endif; ?>
                      </div>
-                 </div>
                  <main class = "container">
                      <div class="row image">
                          <img src="images/computer-icon.svg" alt="computer">
@@ -72,7 +78,7 @@ their username gets echoed to the right of the navigtaion (below)  */
                          <?php
                          if ($loggedState == false) {
                          ?>
-                         <a href='login.php'><button class="button1">Log in<img src="images/arrow.svg"></button></a>
+                         <a href='login.php'><button class="button1">Log in</button></a>
                          <?php
                          }
                          ?>
