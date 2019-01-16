@@ -88,7 +88,7 @@ passed as arguments  */
 folder would not be stored on the root directory of the website ie. it  would be in a directory that cannot be accessed online */
 
  function openDirectory(){
-      $handleDir = opendir("./data");
+      $handleDir = opendir("../data");
       if ($handleDir === false){
           echo '<p> System error: Unable to open directory</p>';
       }
@@ -103,7 +103,7 @@ folder would not be stored on the root directory of the website ie. it  would be
              $fileDir1 = array();
              array_push($fileDir1, $file); # push into array
              foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
-                 $handle = fopen('data/' . htmlentities(trim($value)), 'a+');
+                 $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
                  if ($handle === false) { #error message if you can't open file.
                       echo '<p>System error. Cannot open file</p>'. PHP_EOL;
                   }
