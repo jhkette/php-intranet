@@ -10,5 +10,5 @@ Username = Test1
 
 Password = Hello
 
-To run locally, go to the p1fma folder and start server. The data file is not in the same folder as the website. Ideally it would be 
+To run locally, go to the p1fma folder and start server. The data file is not in the same folder as the website. Ideally it would  
 not be on the public folder on the server (obviously not possible as this is a demonstration).
