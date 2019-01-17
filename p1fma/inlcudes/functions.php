@@ -207,10 +207,14 @@ function validateLoginInputs($self, $errors, $admin){
             $cleanData['password'] = $password;
             session_regenerate_id(true); #i'm regenerating the session id as both fields are correct so the user is logged in
             if($admin == true){ # if the argument 'admin' is true create $_SESSION['admin'] - for access to 'add user'
-                $_SESSION['admin'] = $username;
+                if(!isset( $_SESSION['user'])) { #i'm making sure you can't login in as a user and an admin
+                    $_SESSION['admin'] = $username;
+                }
             }
             else{
-                $_SESSION['user'] = $username;
+                if(!isset( $_SESSION['admin'])) { #again,  making sure you can't login in as a user and an admin
+                    $_SESSION['user'] = $username;
+                }
             }
         }
     }

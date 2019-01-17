@@ -66,17 +66,20 @@ else{
                               $formSubmmited = true;
                               /*i'm counting the size of the errors arry for validation
                               if errors > 0 the form is invalid */
-                              if (count($cleanData) < 2) {
-                                  echo displayErrors($errors);
-                                  closeHandle($handle);
-                                  closeDirectory($handleDir);
+                              if (isset($_POST['submit'])) {
+                                  switch (true) {
+                                       case (isset( $_SESSION['admin'])) :
+                                       echo '<p class="message"> Please logout first </p>'; # checking they are not logged in as an admin
+                                       break;
+                                       case (count($cleanData) < 2) :
+                                       echo displayErrors($errors); # clean data is less than 2 so display errors
+                                       break;
+                                       case (count($cleanData) == 2): # clean data == 2 - no errors so redirect to index
+                                       header('Location: index.php');
+
+                                   }
                               }
-                              if (count($cleanData) == 2) {
-                                  closeHandle($handle);
-                                  closeDirectory($handleDir);
-                                  header('Location: index.php'); # redirect user to index page
-                              }
-                         }
+                          }
                          ?>
                          <p class ="message">
                              <!-- This shows if user trys to view results without logging in -->
