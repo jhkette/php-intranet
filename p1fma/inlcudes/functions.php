@@ -205,14 +205,16 @@ function validateLoginInputs($self, $errors, $admin){
         }
         if(!isset($errors['username']) && (!isset($errors['password']))) {
             $cleanData['password'] = $password;
-            session_regenerate_id(true); #i'm regenerating the session id as both fields are correct so the user is logged in
+            #i'm regenerating the session id as both fields are correct so the user is logged in
             if($admin == true){ # if the argument 'admin' is true create $_SESSION['admin'] - for access to 'add user'
                 if(!isset( $_SESSION['user'])) { #i'm making sure you can't login in as a user and an admin
+                    session_regenerate_id(true);
                     $_SESSION['admin'] = $username;
                 }
             }
             else{
                 if(!isset( $_SESSION['admin'])) { #again,  making sure you can't login in as a user and an admin
+                    session_regenerate_id(true); 
                     $_SESSION['user'] = $username;
                 }
             }
