@@ -1,12 +1,7 @@
 <?php require_once('inlcudes/init.php');
 
-$loggedState = false;
-if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
-    $loggedState = true;
-}
- else {
-    /* Redirect user to the login page. I am an adding an error message that will be shown on the login page using the GET superglobal */
-    header("Location: login.php?message2=Please log in to view DCS results");
+if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
+    header("Location: login.php?message2=Please log in");
 }
 ?>
 <!doctype html>
@@ -32,20 +27,6 @@ if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
                      echo makeMenu($menu);
                      ?>
                      </nav>
-                     <div class="status">
-                         <?php
-                         if ($loggedState == true) {
-                             if(isset($_SESSION['admin'])){
-                                 $admin = htmlentities($_SESSION['admin']);
-                                 echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
-                             }
-                             if(isset($_SESSION['user'])){
-                                 $user = htmlentities($_SESSION['user']);
-                                 echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
-                             }
-                         }
-                         ?>
-                     </div>
                  </div>
                  <main class = "container">
                      <section class="col-1">

@@ -1,15 +1,5 @@
 <?php require_once('inlcudes/init.php');
-$loggedState = false;
-if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
 
-    $loggedState = true;
-}
-else{
-    $loggedState = false;
-}
-
-/* If the user is logged in as admin or user loggedstate is true...
-their username gets echoed to the right of the navigtaion (below)  */
 ?>
 
 <!doctype html>
@@ -34,34 +24,7 @@ their username gets echoed to the right of the navigtaion (below)  */
                          echo makeMenu($menu);
                          ?>
                      </nav>
-                     <div class="status">
-                         <?php
-                         if ($loggedState == true) {
-                             if(isset( $_SESSION['admin'])){
-                                 $admin = htmlentities($_SESSION['admin']);
-                                 echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
-                             }
-                             if(isset( $_SESSION['user'])){
-                                 $user = htmlentities($_SESSION['user']);
-                                 echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
-                             }
-                         }
-                         ?>
-                         </div>
-                         <!--i'm only showing this div - it shows a logged out message if the user has logged out
-                         it's in a seperate color to the login message  -->
-                         <?php if ($loggedState == false): ?>
-                             <div class="logout">
-                                 <?php
-                                 if (isset($_GET['message'])) {
-                                     if(ctype_alpha(str_replace(' ', '', $_GET['message']))){ #check it is letters
-                                         echo '<p>'. htmlentities($_GET['message']). '</p>';
-                                     }
-                                 }
-                                 ?>
-                             </div>
-                         <?php endif; ?>
-                     </div>
+                 </div>
                  <main class = "container">
                      <div class="row image">
                          <img src="images/computer-icon.svg" alt="computer">

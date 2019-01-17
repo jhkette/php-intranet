@@ -1,12 +1,5 @@
 <?php require_once('inlcudes/init.php');
 
-$loggedState = false;
-if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
-
-    $loggedState = true;
-}
-/* If the user is logged in as admin or user loggedstate is true...
-their ussername gets echoed to the right of the navigtaion (below)  */
 ?>
 
 <!doctype html>
@@ -32,21 +25,6 @@ their ussername gets echoed to the right of the navigtaion (below)  */
                        echo makeMenu($menu);
                        ?>
                    </nav>
-                   <div class="status">
-                       <?php #echo out username
-                       if ($loggedState == true) {
-                           if(isset( $_SESSION['admin'])){
-                               $admin = htmlentities($_SESSION['admin']);
-                               echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
-                           }
-                           if(isset( $_SESSION['user'])){
-                               $user = htmlentities($_SESSION['user']);
-                               echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
-                           }
-                       }
-
-                       ?>
-                   </div>
                </div>
                <main class = "container">
                    <section class="col-1">

@@ -1,14 +1,8 @@
 <?php require_once('inlcudes/init.php');
-
-$adminState = false;
-if (isset($_SESSION['admin'])) {
-    $adminState = true;
-}
-else{
-    /* Redirect them to the admin login page. I am an adding an error message if not logged in as admin althought it
-    is not accessible from the menu */
+if (!isset($_SESSION['admin'])) {
     header("Location: admin-login.php?message2=Please log in as an admin");
 }
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,16 +27,6 @@ else{
                          echo makeMenu($menu);
                          ?>
                      </nav>
-                     <div class="status">
-                         <?php
-                         if ($adminState == true) {
-                             if(isset($_SESSION['admin'])){
-                                 $admin = htmlentities($_SESSION['admin']);
-                                 echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
-                             }
-                         }
-                         ?>
-                      </div>
                   </div>
                   <main class = "container">
                       <section class="col-1">

@@ -1,13 +1,6 @@
 <?php require_once('inlcudes/init.php');
 
-$loggedState = false;
-if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
 
-    $loggedState = true;
-}
-else{
-    $loggedState = false;
-}
 ?>
 
 <!doctype html>
@@ -33,20 +26,6 @@ else{
                          echo makeMenu($menu);
                          ?>
                      </nav>
-                     <div class="status">
-                         <?php
-                         if ($loggedState == true) {
-                             if(isset( $_SESSION['admin'])){
-                                 $admin = htmlentities($_SESSION['admin']);
-                                 echo '<p>You are logged in as ' . $admin . '</p>'.PHP_EOL;
-                             }
-                             if(isset( $_SESSION['user'])){
-                                 $user = htmlentities($_SESSION['user']);
-                                 echo '<p>You are logged in as ' . $user . '</p>'.PHP_EOL;
-                             }
-                         }
-                         ?>
-                     </div>
                  </div>
                  <main class = "container">
                      <section class="col-1">

@@ -30,6 +30,10 @@ p{
     font-family: 'Roboto', serif;
     color: var(--dark);
     margin: 1.5rem 0;
+}
+p:last-child{
+    margin: 0;
+    padding-bottom: 2rem;
 
 }
 
@@ -46,7 +50,7 @@ h1{
 
     list-style: none;
     margin: .6rem 0rem;
-    color: var(--secondary);
+    color: #fc4a4a;
     width: 95%;
     padding: .4rem;
     border-radius: .1rem;
@@ -63,27 +67,29 @@ h1{
 
 .line{
     width: 30%;
-margin: auto;
-border-top: 4px solid var(--secondary);
-height: 1rem;
-/* margin-top: 3rem; */
-padding-bottom: 3rem;
+    margin: auto;
+    border-top: 4px solid var(--secondary);
+    height: 1rem;
+     /* margin-top: 3rem; */
+     padding-bottom: 3rem;
 }
 
 
 
 h2 {
+    font-family: 'Roboto Slab', serif;
     width: max-content;
     width: -moz-max-content;
     border-bottom: 3px solid var(--secondary);
     padding-top: 1rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    font-size: 3rem;
+    font-size: 2.8rem;
 
 }
 
 h3{
+    font-family: 'Roboto Slab', serif;
     margin: 4rem 0;
     width: max-content;
     width: -moz-max-content;
@@ -94,10 +100,14 @@ h3{
 .header-container{
     border-bottom: 1px dashed var(--secondary);
     padding: 1rem 0;
+
 }
 .header{
     width: 75%;
     margin: auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
 }
 
 /* main layout */
@@ -262,6 +272,7 @@ input[type="submit" i]{
     margin: 3.5rem 0;
     border: 0;
     font-size: 1.8rem;
+    height: 4rem;
 
 }
 input[type="submit" i]:hover{
@@ -301,6 +312,7 @@ section a {
 input{
     margin: .35rem 0;
     padding: .25rem;
+    height: 2.7rem;
 }
 
 .field{
@@ -308,6 +320,7 @@ input{
     width: 45rem;
     justify-content: flex-start;
     flex-direction: row;
+    align-items: center;
 
 }
 
@@ -317,16 +330,23 @@ input{
 
 .field p{
     font-size: 1.1rem;
-    vertical-align:baseline;
-    margin-top: .8rem;
-    margin-left: .4rem;
+    margin-left: 1rem;
+    padding: 0;
 }
 /*--------------- Status updates--------- */
+.status{
+    width: auto;
+
+    margin-right: 2%;
+}
+
 .status p {
     background-color: #b6d6f6;
     padding: 1rem;
     border: dotted 1px gray;
     margin: 0;
+    text-align: center;
+    font-size: 1.4rem;
 
 }
 
@@ -335,13 +355,21 @@ input{
     padding: 1rem;
     border: dotted 1px gray;
     margin: 0;
+    font-size: 1.4rem;
 
+}
+
+.logout{
+    width: auto;
+
+    margin-right: 2%;
 }
 
 /*Footer styles  */
 footer{
     width: 75%;
     margin: auto;
+    max-width: 1200px;
 }
 
 footer p{

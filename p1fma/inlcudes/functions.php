@@ -86,7 +86,8 @@ passed as arguments  */
 
 /*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
 /* function that opens directory that contains data file. While not possible in this excercise, ideally this
-folder would not be stored on the root directory of the website ie. it  would be in a directory that cannot be accessed online */
+folder would not be stored on the  public folder of the server, obviously not possible in this instance. The data folder is not in the root directory 
+of the website */
 
  function openDirectory(){
       $handleDir = opendir("../data");
@@ -115,7 +116,6 @@ folder would not be stored on the root directory of the website ie. it  would be
           }
      }
 }
-
 
  /* Function that reads data from the file in the directory and add it to an array */
  function getData($handle){
@@ -214,7 +214,7 @@ function validateLoginInputs($self, $errors, $admin){
             }
             else{
                 if(!isset( $_SESSION['admin'])) { #again,  making sure you can't login in as a user and an admin
-                    session_regenerate_id(true); 
+                    session_regenerate_id(true);
                     $_SESSION['user'] = $username;
                 }
             }
