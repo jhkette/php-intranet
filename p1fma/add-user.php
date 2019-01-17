@@ -61,9 +61,8 @@ else{
                           $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword); #clean data checked against the other arrays it takes as parameters
                           $displayForm = true;
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
-                          or add another user and hides form if no errors are detected.  */
+                          or adds another user and hides form if no errors are detected.  */
                           if (isset($_POST['submit'])) {
-                              #declare $self varaible as $_POST for use in validation
                               if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
                                   $displayForm = false;
                                   echo '<p class="newuser">New user successfully added</p>'; #message to confirm the user has been added
