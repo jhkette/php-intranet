@@ -100,6 +100,7 @@ h3{
 .header-container{
     border-bottom: 1px dashed var(--secondary);
     padding: 1rem 0;
+    background-color:  #f5f9fa;
 
 }
 .header{
@@ -341,7 +342,7 @@ input{
 }
 
 .status p {
-    background-color: #b6d6f6;
+    background-color: var(--secondary);
     padding: 1rem;
     border: dotted 1px gray;
     margin: 0;
