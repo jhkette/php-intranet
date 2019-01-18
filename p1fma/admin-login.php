@@ -46,7 +46,7 @@
                                 echo displayErrors($errors); # clean data is less than 2 so display errors
                                 break;
                                 case (count($cleanData) == 2): # clean data == 2 - no errors so redirect to index
-                                header('Location: index.php');
+                                header('Location: add-user.php');
 
                             }
                        }

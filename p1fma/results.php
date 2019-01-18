@@ -1,9 +1,5 @@
 <?php require_once('inlcudes/init.php');
 
-if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
-    header("Location: login.php?message2=Please log in");
-}
-/*If the user is not admin or user redirect to login.php . This page is only accessible to those logged in */
 ?>
 <!doctype html>
 <html lang="en">

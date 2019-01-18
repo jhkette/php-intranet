@@ -38,7 +38,7 @@ else{
 
 
 $menu2 = [
-    'results.php'  => 'Results',
+    
     'DTresults.php' => 'DT results',
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',
