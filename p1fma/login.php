@@ -1,6 +1,4 @@
 <?php require_once('inlcudes/init.php');
-$loggedState = false;
-
 ?>
 
 <!doctype html>

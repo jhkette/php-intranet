@@ -3,18 +3,19 @@
 if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
     header("Location: login.php?message2=Please log in");
 }
+/*If the user is not admin or user redirect to login.php . This page is only accessible to those logged in */
 ?>
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
-    </style>
-    <title>Results</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+        </style>
+        <title>Results</title>
+    </head>
     <body>
         <div class ="header-container">
             <?php include('inlcudes/header.php')?>

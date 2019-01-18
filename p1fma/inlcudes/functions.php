@@ -86,7 +86,7 @@ passed as arguments  */
 
 /*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
 /* function that opens directory that contains data file. While not possible in this excercise, ideally this
-folder would not be stored on the  public folder of the server, obviously not possible in this instance. The data folder is not in the root directory 
+folder would not be stored on the  public folder of the server, obviously not possible in this instance. The data folder is not in the root directory
 of the website */
 
  function openDirectory(){
@@ -336,7 +336,7 @@ function validateAddUser($self, $errors, $duplicates, $passwordError){
             $cleanData['password'] = $password;
         }
         $confirmPassword = trim($_POST['confirm-password']);
-        if (!isset($passwordError['confirm password'])) { # i'm checking the password is the same as confirm password here
+        if (!isset($passwordError['confirm password']) && (!isset($errors['password']))) { # only clean if no password error and password itself is valid
             $cleanData['confirm password'] = $confirmPassword;
         }
     }

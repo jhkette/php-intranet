@@ -1,5 +1,4 @@
 <?php require_once('inlcudes/init.php');
-
 ?>
 
 <!doctype html>
@@ -53,7 +52,7 @@
                        }
 
                        ?>
-                        <!-- This shows if user trys to view add user without logging in. Although it is not accessible -->
+                        <!-- This shows if user trys to view add user without logging in. Although it is not accessible via menu -->
                        <?php
 
                        if (isset($_GET['message2'])) {

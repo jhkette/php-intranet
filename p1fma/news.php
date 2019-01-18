@@ -1,19 +1,17 @@
 <?php require_once('inlcudes/init.php');
-
-
 ?>
 
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
-    </style>
-</head>
+     <head>
+         <meta charset="UTF-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <title>News</title>
+         <link rel="stylesheet" type="text/css" href="css/styles.css" />
+         <style>
+         @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+         </style>
+     </head>
      <body>
          <div class ="header-container">
              <?php include('inlcudes/header.php')?>
@@ -30,7 +28,6 @@
                  <main class = "container">
                      <section class="col-1">
                          <h2>News</h2>
-
                          <p class="news">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
                          consectetur adipiscing elit. Ut dapibus facilisis tortor, eu suscipit dolor cursus eu. Fusce vitae tortor est. Aenean
                          volutpat dui eu ex iaculis vestibulum. Maecenas semper imperdiet nibh. Donec at volutpat lectus, quis faucibus nulla.

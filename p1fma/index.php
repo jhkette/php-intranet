@@ -1,5 +1,4 @@
 <?php require_once('inlcudes/init.php');
-
 ?>
 
 <!doctype html>

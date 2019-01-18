@@ -1,5 +1,5 @@
 <?php require_once('inlcudes/init.php');
-if (!isset($_SESSION['admin'])) {
+if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redirect
     header("Location: admin-login.php?message2=Please log in as an admin");
 }
 
@@ -18,17 +18,17 @@ if (!isset($_SESSION['admin'])) {
     <body>
         <div class ="header-container">
              <?php include('inlcudes/header.php')?>
-         </div>
-         <div class="grey">
-             <div class="main-container">
-                 <div class ="navcontainer">
-                     <nav class="main-menu">
-                         <?php
+        </div>
+        <div class="grey">
+            <div class="main-container">
+                <div class ="navcontainer">
+                    <nav class="main-menu">
+                        <?php
                          echo makeMenu($menu);
                          ?>
-                     </nav>
-                  </div>
-                  <main class = "container">
+                    </nav>
+                 </div>
+                 <main class = "container">
                       <section class="col-1">
                           <h2>Add a user</h2>
                           <?php
@@ -131,7 +131,7 @@ if (!isset($_SESSION['admin'])) {
           <div class ="footer-container">
                <?php include('inlcudes/footer.php')?>
           </div>
-       </body>
+      </body>
 </html>
 <!--Joseph Ketterer
 Jkette01

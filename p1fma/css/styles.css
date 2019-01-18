@@ -30,6 +30,7 @@ p{
     font-family: 'Roboto', serif;
     color: var(--dark);
     margin: 1.5rem 0;
+
 }
 p:last-child{
     margin: 0;
@@ -100,7 +101,7 @@ h3{
 .header-container{
     border-bottom: 1px dashed var(--secondary);
     padding: 1rem 0;
-    background-color:  #f5f9fa;
+
 
 }
 .header{
@@ -263,7 +264,6 @@ fieldset p{
 
 label{
     margin-right: 1rem;
-    margin-top: .35rem;
 }
 
 input[type="submit" i]{
@@ -274,6 +274,8 @@ input[type="submit" i]{
     border: 0;
     font-size: 1.8rem;
     height: 4rem;
+    bottom: 0;
+    width: 18rem;
 
 }
 input[type="submit" i]:hover{
@@ -313,12 +315,16 @@ section a {
 input{
     margin: .35rem 0;
     padding: .25rem;
-    height: 2.7rem;
+    height: 3.1rem;
+    width: 20rem;
+    border: 1px solid var(--dark);
+    font-family: 'Roboto', serif;
+    font-size: 1.5rem;
+    color: var(--dark);
 }
 
 .field{
     display: flex;
-    width: 45rem;
     justify-content: flex-start;
     flex-direction: row;
     align-items: center;
