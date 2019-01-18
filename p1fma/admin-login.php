@@ -50,18 +50,12 @@
 
                             }
                        }
-
-                       ?>
-                        <!-- This shows if user trys to view add user without logging in. Although it is not accessible via menu -->
-                       <?php
-
+                        /* This shows if user trys to view add user without logging in. Although it is not accessible via menu */
                        if (isset($_GET['message2'])) {
                            if(ctype_alpha(str_replace(' ', '', $_GET['message2']))) {#check that it's letters by removing white space with str replace
                                echo '<p class="message">'.htmlentities($_GET['message2']). '</p>';
                            }
                        }
-                       ?>
-                       <?php
                        /* This code runs to make the form display. The data and errors array
                        are used as arguments to preserve correct data and dispay an error message above form if
                        needed   */

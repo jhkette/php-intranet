@@ -55,20 +55,14 @@
                                     header('Location: results.php');
                                 }
                             }
+                             /* This shows if user trys to view results without logging in */
 
-                         ?>
-
-                             <!-- This shows if user trys to view results without logging in -->
-                             <?php
                              if (isset($_GET['message2'])) {
                                  if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
                                      echo '<p class ="message">'. htmlentities($_GET['message2']).'</p>';
                                  }
                              }
-                             ?>
-
-                         <?php
-                          /* This code runs to make the form display. The data and errors array
+                              /* This code runs to make the form display. The data and errors array
                           are used as arguments to preserve correct data and dispay an error message above form if
                           needed   */
                           echo displayForm($cleanData, $errors);
@@ -80,7 +74,7 @@
           <div class ="footer-container">
                <?php include('inlcudes/footer.php')?>
           </div>
-      </body>
+     </body>
 </html>
 
 <!--Joseph Ketterer

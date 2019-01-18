@@ -29,7 +29,7 @@
                          <img src="images/computer-icon.svg" alt="computer">
                      </div>
                      <section class="col-1">
-                         <div class="line">&nbsp;</div>
+
                          <h2>Home</h2>
                          <div class ="flex-container">
                              <div class="main-body">
@@ -53,11 +53,10 @@
                                  <p>Aliquam sit amet aliquam magna. Vivamus ac sapien interdum, dapibus urna sed, pellentesque ante. Nulla ultrices finibus nisi,
                                  eget efficitur. <a href="news.php">Read more </a> </p>
                              </article>
-
-
-                         </div>
-                     </section>
-                 </main>
+                          </div>
+                          <div class="line">&nbsp;</div>
+                      </section>
+                  </main>
              </div>
          </div>
          <div class ="footer-container">
