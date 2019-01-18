@@ -85,37 +85,50 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                                           </select>
                                       </div>
                                       <div class="field">
-                                          <label for="first-name">First name</label>
-                                          <!--echo error message if firstname error is set  -->
-                                          <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="first-name" />
+                                          <div class="adduserforminput">
+                                              <label for="first-name">First name</label>
+                                              <!--echo error message if firstname error is set  -->
+                                              <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="first-name" />
+                                          </div>
                                           <?php if (isset($errors['firstname'])) {echo '<p> Please enter your first name </p>';} ?>
                                       </div>
                                       <div class="field">
-                                          <label for="surname">Surname</label>
-                                          <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="surname" />
+                                          <div class="adduserforminput">
+                                              <label for="surname">Surname</label>
+                                              <input type="text" value="<?php if (isset($cleanData['surname'])) {echo htmlentities($cleanData['surname']);} ?>" name="surname" id="surname" />
+                                          </div>
                                           <?php if (isset($errors['surname'])) {echo '<p> Please enter your Surname </p>';} ?>
+
                                       </div>
                                       <div class="field">
-                                          <label for="email">Email</label>
-                                          <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
+                                          <div class="adduserforminput">
+                                              <label for="email">Email</label>
+                                              <input type="text" value="<?php if (isset($cleanData['email'])) {echo htmlentities($cleanData['email']);} ?>" name="email" id="email" />
+                                          </div>
                                           <?php if (isset($duplicates['email'])) {echo '<p> This email has already been used</p>';} ?>
                                           <?php if (isset($errors['email'])) {echo '<p> Please enter a valid email </p>';} ?>
                                       </div>
                                       <div class="field">
-                                          <label for="username">Username</label>
-                                          <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="username" />
+                                          <div class="adduserforminput">
+                                              <label for="username">Username</label>
+                                              <input type="text" value="<?php if (isset($cleanData['username'])) {echo htmlentities($cleanData['username']);} ?>" name="username" id="username" />
+                                          </div>
                                           <?php if (isset($duplicates['username'])) {echo '<p> This username has already been used</p>';} ?>
                                           <?php if (isset($errors['username'])) {echo '<p> Please enter a valid username</p>';} ?>
                                       </div>
                                       <div class="field">
-                                          <label for="password">Password</label>
-                                          <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
+                                          <div class="adduserforminput">
+                                              <label for="password">Password</label>
+                                              <input type="password" value="<?php if (isset($cleanData['password'])) {echo htmlentities($cleanData['password']);} ?>" name="password" id="password" />
+                                          </div>
                                           <?php if (isset($errors['password'])) {echo '<p> Please enter a valid password </p>';} ?>
                                       </div>
                                       <div class="field">
-                                          <label for="confirm-password">Confirm password</label>
-                                          <!--only have confirm password comment if the initial password is correct  -->
-                                          <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
+                                          <div class="adduserforminput">
+                                              <label for="confirm-password">Confirm password</label>
+                                              <!--only have confirm password comment if the initial password is correct  -->
+                                              <input type="password" value="<?php if (isset($cleanData['confirm password'])) {echo htmlentities($cleanData['confirm password']);} ?>" name="confirm-password" id="confirm-password" />
+                                          </div>
                                           <?php if (isset($confirmPassword['confirm password']) && (!isset($errors['password']))) {echo '<p> The passwords do not match</p>';} ?>
                                       </div>
                                       <div class="field">

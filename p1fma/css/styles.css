@@ -334,14 +334,20 @@ input{
 
 .forminput{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 28rem;
     align-items: center;
-    
+
 
 
 }
+.adduserforminput{
+    display: flex;
+  justify-content: space-between;
 
+    width: 33rem;
+    align-items: center;
+}
 .login-field{
     width: 70%;
 }
