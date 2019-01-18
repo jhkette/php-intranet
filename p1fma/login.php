@@ -57,16 +57,16 @@
                             }
 
                          ?>
-                         <p class ="message">
+
                              <!-- This shows if user trys to view results without logging in -->
                              <?php
                              if (isset($_GET['message2'])) {
                                  if(ctype_alpha(str_replace(' ', '', $_GET['message2']))){#check that it's letters by removing white space with str replace
-                                     echo htmlentities($_GET['message2']);
+                                     echo '<p class ="message">'. htmlentities($_GET['message2']).'</p>';
                                  }
                              }
                              ?>
-                         </p>
+
                          <?php
                           /* This code runs to make the form display. The data and errors array
                           are used as arguments to preserve correct data and dispay an error message above form if
