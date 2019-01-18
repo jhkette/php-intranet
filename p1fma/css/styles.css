@@ -146,6 +146,7 @@ h3{
 .flex-container{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 table {
@@ -246,7 +247,7 @@ tr:nth-child(even) {
     transition: .1s;
 }
 
-.main-body{width: 75%;}
+.main-body{width: 70%;}
 
 
 /* form css */
@@ -269,11 +270,11 @@ label{
 input[type="submit" i]{
     background-color: var(--secondary);
     color: white;
-    padding: 1rem 5rem;
+    padding: 0rem 5rem;
     margin: 3.5rem 0;
     border: 0;
     font-size: 1.8rem;
-    height: 4rem;
+    height: 4.5rem;
     bottom: 0;
     width: 18rem;
 
