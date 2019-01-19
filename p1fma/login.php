@@ -32,29 +32,44 @@
                           admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
                           If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
                           $admin = false;
-                          $self = $_SERVER['PHP_SELF'];
-                          $handleDir = openDirectory();
-                          $handle = readDirectory($handleDir);
-                          $loggeddata = getData($handle);
-                          $errors = reportLoginErrors($self, $loggeddata);
-                          $cleanData = validateLoginInputs($self, $errors, $admin);
+
+                          $errors = array();
+                          $cleanData = array();
+
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                           or redirects the user to welcome.php if no errors were detected */
                           if (isset($_POST['submit'])) {
                               $formSubmmited = true;
                               /*i'm counting the size of the errors array for validation
                               if errors > 0 the form is invalid */
-                               switch (true) {
-                                   case (isset( $_SESSION['admin'])) :
-                                    echo '<p class="message"> Please logout first </p>'; # checking they are not logged in as an admin
-                                    break;
-                                    case (count($cleanData) < 2) :
-                                    echo displayErrors($errors); # clean data is less than 2 so display errors
-                                    break;
-                                    case (count($cleanData) == 2): # clean data == 2 - no errors so redirect to index
-                                    header('Location: results.php');
-                                }
-                            }
+                              $handleDir = openDirectory();
+                              if($handleDir == false){
+
+                                echo '<p>The user data folder cannot be found</p>';
+                              }
+                              else{
+                              $handle = readDirectory($handleDir);
+                              if ($handle == false){
+                                  echo '<p>The user data file cannot be processed</p>';
+                              }
+                              else{
+                                  $self = $_SERVER['PHP_SELF'];
+                                  $loggeddata = getData($handle);
+                                  $errors = reportLoginErrors($self, $loggeddata);
+                                  $cleanData = validateLoginInputs($self, $errors, $admin);
+                                  switch (true) {
+                                      case (isset( $_SESSION['admin'])) :
+                                      echo '<p class="message"> Please logout first </p>'; # checking they are not logged in as an admin
+                                      break;
+                                      case (count($cleanData) < 2) :
+                                      echo displayErrors($errors); # clean data is less than 2 so display errors
+                                      break;
+                                      case (count($cleanData) == 2): # clean data == 2 - no errors so redirect to index
+                                      header('Location: results.php');
+                                  }
+                              }
+                          }
+                      }
                              /* This shows if user trys to view results without logging in */
 
                              if (isset($_GET['message2'])) {

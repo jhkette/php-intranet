@@ -36,32 +36,49 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                           If there are no errors the form is hidden and the user is added, a confirmation message is presnted to user.
                           If there are errors, I add error messages above the form and display prompts by the form fields.   */
                           $self = $_SERVER['PHP_SELF'];
-                          $handleDir = openDirectory(); # directory
-                          $handle = readDirectory($handleDir); # handle to file
-                          $loggeddata = getData($handle); # the data from the txt file in an array
-                          $duplicates = checkDuplicates($self, $loggeddata); # duplicates array
-                          $errors = addUserErrors($self); #errors array
-                          $confirmPassword = confirmPassword($self, $errors); # cofirm password array
-                          $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword); #clean data checked against the other arrays it takes as parameters
+                          $errors = array();
+                          $cleanData = array();
+                          $duplicates  = array();
+                          $confirmPassword = array();
+                         #clean data checked against the other arrays it takes as parameters
                           $displayForm = true;
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                           or adds another user and hides form if no errors are detected.  */
                           if (isset($_POST['submit'])) {
-                              if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
-                                  $displayForm = false;
-                                  echo '<p class="newuser">New user successfully added</p>'; #message to confirm the user has been added
-                                  echo displayResults($cleanData); #display the correct data to confirm the new user details
-                                  writeToFile($handle ,$cleanData); # write to the text file
-                                  echo refreshPageButton(); # add a button which allows the user to refresh page and add another user.
-                                  closeHandle($handle); # close handle
-                                  closeDirectory($handleDir); # close directory
+
+                              $handleDir = openDirectory(); # directory
+                              if($handleDir == false){
+                                 echo '<p>The user data folder cannot be found</p>';
                               }
-                              /* If there are errors show the errors.   */
-                              if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
-                                  echo displayErrors($errors, $duplicates, $confirmPassword);
-                                  closeHandle($handle);
-                                  closeDirectory($handleDir);
-                              }
+                              else{
+                                  $handle = readDirectory($handleDir); # handle to file
+                                  if ($handle == false){
+                                      echo '<p>The user data file cannot be processed</p>';
+                                  }
+                                  else{
+                                  $loggeddata = getData($handle); # the data from the txt file in an array
+                                  $duplicates = checkDuplicates($self, $loggeddata); # duplicates array
+                                  $errors = addUserErrors($self); #errors array
+                                  $confirmPassword = confirmPassword($self, $errors); # cofirm password array
+                                  $cleanData = validateAddUser($self, $errors, $duplicates, $confirmPassword);
+
+                                  if ((count($errors) == 0) && (count($duplicates) == 0)  &&  (count($confirmPassword) == 0)) {
+                                      $displayForm = false;
+                                      echo '<p class="newuser">New user successfully added</p>'; #message to confirm the user has been added
+                                      echo displayResults($cleanData); #display the correct data to confirm the new user details
+                                      writeToFile($handle ,$cleanData); # write to the text file
+                                      echo refreshPageButton(); # add a button which allows the user to refresh page and add another user.
+                                      closeHandle($handle); # close handle
+                                      closeDirectory($handleDir); # close directory
+                                  }
+                                   /* If there are errors show the errors.   */
+                                   if ((count($errors) > 0) || (count($duplicates) > 0) || (count($confirmPassword) > 0)) {
+                                       echo displayErrors($errors, $duplicates, $confirmPassword);
+                                       closeHandle($handle);
+                                       closeDirectory($handleDir);
+                                   }
+                               }
+                           }
                           }
                           ?>
                           <!--  This code runs to make the form display. The data and errors array
@@ -86,9 +103,9 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                                       <div class="field">
                                           <div class="adduserforminput">
                                               <label for="first-name">First name</label>
-                                              <!--echo error message if firstname error is set  -->
                                               <input type="text" value="<?php if (isset($cleanData['firstname'])) {echo htmlentities($cleanData['firstname']);} ?>" name="firstname" id="first-name" />
                                           </div>
+                                          <!--echo error message if firstname error is set  -->
                                           <?php if (isset($errors['firstname'])) {echo '<p> Please enter your first name </p>';} ?>
                                       </div>
                                       <div class="field">

@@ -40,6 +40,7 @@
                                  eget efficitur felis sodales non. Quisque eu dui ut felis euismod venenatis. Praesent at ante vitae nunc pharetra fringilla. Etiam
                                  lacus justo, congue et justo vel, elementum malesuada odio. Quisque bibendum, augue nec placerat vestibulum, arcu purus pretium ligula,
                                  sed molestie ligula eros vitae nibh. </p>
+                                 <div class="line">&nbsp;</div>
                                  <?php
                                  if ($loggedState == false) {
                                  ?>
@@ -54,7 +55,7 @@
                                  eget efficitur. <a href="news.php">Read more </a> </p>
                              </article>
                           </div>
-                          <div class="line">&nbsp;</div>
+
                       </section>
                   </main>
              </div>

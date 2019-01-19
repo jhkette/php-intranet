@@ -1,4 +1,4 @@
-<?php require_once('inlcudes/init.php');
+<?php
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
 /*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the form fields if there
@@ -92,13 +92,20 @@ folder would not be stored on the  public folder of the server, obviously not po
 of the website */
 
  function openDirectory(){
+     if (file_exists("../data")){
       $handleDir = opendir("../data");
       if ($handleDir === false){
-          echo '<p> System error: Unable to open directory</p>';
+          $handleDir = false;
+          return  $handleDir;
       }
       else {
           return $handleDir;
       }
+   }
+   else{
+       $handleDir = false;
+       return  $handleDir;
+   }
  }
 
  function readDirectory($handleDir){
@@ -107,9 +114,14 @@ of the website */
              $fileDir1 = array();
              array_push($fileDir1, $file); # push into array
              foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
-                 $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
-                 if ($handle === false) { #error message if you can't open file.
-                      echo '<p>System error. Cannot open file</p>'. PHP_EOL;
+                 if ((pathinfo($value, PATHINFO_EXTENSION)) !== 'txt'){
+                     $handle = false;
+                     return $handle;
+                }
+                $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
+                if ($handle === false) { #error message if you can't open file.
+                      $handle = false;
+                      return $handle;
                   }
                   else{
                       return $handle;
@@ -143,7 +155,7 @@ function reportLoginErrors($self, $loggedData){
     $errors  = array(); # create errors array
     $correctData = false;  # set variables to false
     $correctPassword = false;
-    if (isset($_POST['submit'])) { # block of code only runs when user has submitted form
+     # block of code only runs when user has submitted form
         $username = trim($_POST['username']); # assign variables for user input
         $password = trim($_POST['password']);
         foreach ($loggedData as $key => $value) { # loop through stored user data on text file
@@ -166,7 +178,7 @@ function reportLoginErrors($self, $loggedData){
         if(($correctPassword == false) && ($correctData == true)){
             $errors['password'] = 'This is not the correct password';
         }
-    }
+
     return $errors;
 }
 
@@ -175,7 +187,7 @@ function reportAdminErrors($self){
     $adminusername = 'admin'; #correct username
     $adminpassword = 'DCSadmin01'; #correct password
     $errors = array();
-    if (isset($_POST['submit'])) {  # block of code only runs when user has submitted form
+ # block of code only runs when user has submitted form
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         if ($username !== $adminusername) {
@@ -187,7 +199,6 @@ function reportAdminErrors($self){
                 $errors['password'] = 'This is not the correct password for Admin';
             }
         }
-    }
     return $errors;
 }
 
@@ -199,7 +210,7 @@ function validateLoginInputs($self, $errors, $admin){
     $cleanData = array();
     /* I'm representing the password login data. Passwords are not like other form data. They can only be correct in relation to
     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
-    if (isset($_POST['submit'])) { # only runs after form submission
+    # only runs after form submission
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
         if(!isset($errors['username'])) {
@@ -221,7 +232,7 @@ function validateLoginInputs($self, $errors, $admin){
                 }
             }
         }
-    }
+
     return $cleanData;
 }
 

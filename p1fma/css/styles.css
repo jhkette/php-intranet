@@ -67,13 +67,10 @@ h1{
 }
 
 .line{
-    width: 30%;
-    margin:  3rem auto 0 auto;
+    width: 80%;
+    margin:  6rem auto 0 auto;
     border-top: 1px solid var(--secondary);
-    height: 1rem;
-     /* margin-top: 3rem; */
-     padding-bottom: 5rem;
-     padding-top: 3rem;
+    padding-bottom: 2rem;
 }
 
 
@@ -317,13 +314,14 @@ input[type="submit" i]:hover{
     background-color: var(--secondary);
     color: white;
     padding: 1.3rem 4rem;
-    margin: 3rem 0 3rem 0;
+    margin: 1rem 0 3rem 0;
     width: 18rem;
     border: 0;
     font-size: 1.8rem;
     display: flex;
     justify-content: space-around;
     align-content: center;
+    text-decoration: none;
 }
 
 .button1:hover{

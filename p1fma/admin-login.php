@@ -32,12 +32,16 @@
                        <?php
                        /*Please see login.php for descripton of how this form validation works.*/
                        $admin = true; #admin is true so if valid session[admin] will be created by the validateLoginInputs function.
-                       $self = $_SERVER['PHP_SELF'];
-                       $errors = reportAdminErrors($self);
-                       $cleanData = validateLoginInputs($self, $errors, $admin);
+                       $errors = array();
+                       $cleanData = array();
+
                        /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                        or redirects the user to index.php if no errors were detected */
                        if (isset($_POST['submit'])) {
+                           $self = $_SERVER['PHP_SELF'];
+                           $errors = reportAdminErrors($self);
+                           $cleanData = validateLoginInputs($self, $errors, $admin);
+
                            switch (true) {
                                 case (isset( $_SESSION['user'])) :
                                 echo '<p class="message"> Please logout first </p>'; # checking they are not logged in as user
