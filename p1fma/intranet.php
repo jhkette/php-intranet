@@ -18,13 +18,7 @@
         </div>
         <div class="grey">
             <div class="main-container">
-                <div class ="navcontainer">
-                    <nav class="main-menu">
-                     <?php
-                     echo makeMenu($menu);
-                     ?>
-                     </nav>
-                 </div>
+                <?php include('includes/navigation.php'); ?>
                  <main class = "container">
                      <section class="col-1">
                          <div class ="flex-container">

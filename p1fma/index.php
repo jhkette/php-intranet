@@ -17,13 +17,7 @@
          </div>
          <div class="grey">
              <div class="main-container">
-                 <div class ="navcontainer">
-                     <nav class="main-menu">
-                         <?php
-                         echo makeMenu($menu);
-                         ?>
-                     </nav>
-                 </div>
+                 <?php include('includes/navigation.php'); ?>
                  <main class = "container">
                      <div class="row image">
                          <img src="images/computer-icon.svg" alt="computer">

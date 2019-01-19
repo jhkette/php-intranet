@@ -21,13 +21,7 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
         </div>
         <div class="grey">
             <div class="main-container">
-                <div class ="navcontainer">
-                    <nav class="main-menu">
-                        <?php
-                         echo makeMenu($menu);
-                         ?>
-                    </nav>
-                 </div>
+                <?php include('includes/navigation.php'); ?>
                  <main class = "container">
                       <section class="col-1">
                           <h2>Add a user</h2>
