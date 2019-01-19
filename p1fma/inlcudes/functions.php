@@ -92,20 +92,15 @@ folder would not be stored on the  public folder of the server, obviously not po
 of the website */
 
  function openDirectory(){
-     if (file_exists("../data")){
+     if (!file_exists("../data")){
+         $handleDir = false;
+         return  $handleDir;
+     }
+     else{
       $handleDir = opendir("../data");
-      if ($handleDir === false){
-          $handleDir = false;
-          return  $handleDir;
-      }
-      else {
-          return $handleDir;
-      }
-   }
-   else{
-       $handleDir = false;
-       return  $handleDir;
-   }
+      return $handleDir;
+
+  }
  }
 
  function readDirectory($handleDir){
@@ -117,19 +112,14 @@ of the website */
                  if ((pathinfo($value, PATHINFO_EXTENSION)) !== 'txt'){
                      $handle = false;
                      return $handle;
-                }
-                $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
-                if ($handle === false) { #error message if you can't open file.
-                      $handle = false;
-                      return $handle;
-                  }
-                  else{
-                      return $handle;
-                  }
-              }
-          }
+                 }
+                 $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
+                 return $handle;
+
+             }
+         }
      }
-}
+ }
 
  /* Function that reads data from the file in the directory and add it to an array */
  function getData($handle){
@@ -241,9 +231,8 @@ function validateLoginInputs($self, $errors, $admin){
 /*This function checks and validates the input from the add user form. If it's incorrect data is added to the $errors array */
 function addUserErrors($self){
     $errors = array();
-    if (isset($_POST['submit'])) { # code only runs when form is submitted
-
-        $firstname = trim($_POST['firstname']); # The firstname needs to be letters and between 2 and 19 characters long
+    # code only runs when form is submitted
+    $firstname = trim($_POST['firstname']); # The firstname needs to be letters and between 2 and 19 characters long
         if (!ctype_alpha($firstname) || (strlen($firstname) > 20) || (strlen($firstname) <= 2))  {
             $errors['firstname'] = 'Names can only contain letters. They need to be at least three characters.';
         }
@@ -268,7 +257,7 @@ function addUserErrors($self){
             $errors['password'] = 'This is not a valid password. It should contain only letters and numbers. It needs to be five or more
             characters long.';
         }
-    }
+
     return $errors;
 }
 
@@ -278,7 +267,7 @@ function checkDuplicates($self, $loggedData){
     $duplicates = array();
     $userMatch = false; # usermatch and emailmatch initially set to false
     $emailMatch = false;
-    if (isset($_POST['submit'])) {
+
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         foreach ($loggedData as $key => $value) { #loop through text file data
@@ -298,20 +287,20 @@ function checkDuplicates($self, $loggedData){
         if($userMatch== true){
             $duplicates['username'] = 'This username is already in use';
         }
-    }
+
     return $duplicates; # the duplicates array gets represnted to the user on the add user page
 }
 
 /*Function that checks the confirm password and password values are the same  */
 function confirmPassword($self, $errors){
     $confirmPassword = array();
-    if (isset($_POST['submit'])) {
+
         $password = trim($_POST['password']);
         $confirmation = trim($_POST['confirm-password']);
         if(($password !== $confirmation) && (!isset($errors['password']))) { # checks the values are the same and password error is not set
             $confirmPassword['confirm password'] = 'The passwords do not match'; # ..if not add key and value to confirmPassword array
         }
-    }
+
     return $confirmPassword; #return password error - this gets displayed on the form on the add user page
 }
 
@@ -323,7 +312,7 @@ function validateAddUser($self, $errors, $duplicates, $passwordError){
     we are validating the same data twice */
     $cleanData = array();
 
-    if (isset($_POST['submit'])) { # form only runs if post is submitted
+    # form only runs if post is submitted
         $firstname = trim($_POST['firstname']);
         if (!isset($errors['firstname'])) {
             $cleanData['firstname'] = $firstname;
@@ -352,7 +341,7 @@ function validateAddUser($self, $errors, $duplicates, $passwordError){
         if (!isset($passwordError['confirm password']) && (!isset($errors['password']))) { # only clean if no password error and password itself is valid
             $cleanData['confirm password'] = $confirmPassword;
         }
-    }
+
     return $cleanData;
 }
 
