@@ -33,7 +33,7 @@ function displayForm( $cleanData , $errors){
             <div class="field">
                 <div class="forminput">
                     <label for="username">Username</label>
-                    <input type="text"  value= " '.$userName.'" name="username" id="username" />
+                    <input type="text"  value= "'.$userName.'" name="username" id="username" />
                 </div>'.
                  $userErrors .
             '</div>

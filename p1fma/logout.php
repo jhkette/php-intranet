@@ -1,4 +1,4 @@
-<?php require_once('inlcudes/init.php');
+<?php require_once('includes/init.php');
 
 $_SESSION = array(); #unset session - removes all stored data from array
 if (ini_get("session.use_cookies")) {

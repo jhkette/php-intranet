@@ -1,4 +1,4 @@
-<?php require_once('inlcudes/init.php');
+<?php require_once('includes/init.php');
 ?>
 
 <!doctype html>
@@ -14,7 +14,7 @@
    </head>
    <body>
        <div class ="header-container">
-           <?php include('inlcudes/header.php')?>
+           <?php include('includes/header.php')?>
        </div>
        <div class="grey">
            <div class="main-container">
@@ -57,7 +57,9 @@
                         /* This shows if user trys to view add user without logging in. Although it is not accessible via menu */
                        if (isset($_GET['message2'])) {
                            if(ctype_alpha(str_replace(' ', '', $_GET['message2']))) {#check that it's letters by removing white space with str replace
-                               echo '<p class="message">'.htmlentities($_GET['message2']). '</p>';
+                               if( $_GET['message2']='Please log in as an admin'){
+                                   echo '<p class="message">'.htmlentities($_GET['message2']). '</p>';
+                               }
                            }
                        }
                        /* This code runs to make the form display. The data and errors array
@@ -70,7 +72,7 @@
              </div>
          </div>
          <div class ="footer-container">
-              <?php include('inlcudes/footer.php')?>
+              <?php include('includes/footer.php')?>
          </div>
     </body>
 </html>

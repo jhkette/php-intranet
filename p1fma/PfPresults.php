@@ -1,4 +1,4 @@
-<?php require_once('inlcudes/init.php');
+<?php require_once('includes/init.php');
 if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
     header("Location: login.php?message2=Please log in");
 }
@@ -17,7 +17,7 @@ if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
 </head>
     <body>
         <div class ="header-container">
-            <?php include('inlcudes/header.php')?>
+            <?php include('includes/header.php')?>
         </div>
         <div class="grey">
             <div class="main-container">
@@ -87,7 +87,7 @@ if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
              </div>
          </div>
          <div class ="footer-container">
-             <?php include('inlcudes/footer.php')?>
+             <?php include('includes/footer.php')?>
          </div>
 	</body>
 </html>

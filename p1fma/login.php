@@ -1,5 +1,4 @@
-<?php require_once('inlcudes/init.php');
-?>
+<?php require_once('includes/init.php');?>
 
 <!doctype html>
 <html lang="en">
@@ -14,7 +13,7 @@
     </head>
     <body>
         <div class ="header-container">
-             <?php include('inlcudes/header.php')?>
+             <?php include('includes/header.php')?>
          </div>
          <div class="grey">
              <div class="main-container">
@@ -39,7 +38,7 @@
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                           or redirects the user to welcome.php if no errors were detected */
                           if (isset($_POST['submit'])) {
-                              $formSubmmited = true;
+
                               /*i'm counting the size of the errors array for validation
                               if errors > 0 the form is invalid */
                               $handleDir = openDirectory();
@@ -51,6 +50,7 @@
                               $handle = readDirectory($handleDir);
                               if ($handle == false){
                                   echo '<p>The user data file cannot be processed</p>';
+                                  closeDirectory($handleDir); # close directory
                               }
                               else{
                                   $self = $_SERVER['PHP_SELF'];
@@ -63,9 +63,13 @@
                                       break;
                                       case (count($cleanData) < 2) :
                                       echo displayErrors($errors); # clean data is less than 2 so display errors
+                                      closeHandle($handle); # close handle
+                                      closeDirectory($handleDir); # close directory
                                       break;
                                       case (count($cleanData) == 2): # clean data == 2 - no errors so redirect to index
-                                      header('Location: results.php');
+                                      header('Location: intranet.php');
+                                      closeHandle($handle); # close handle
+                                      closeDirectory($handleDir); # close directory
                                   }
                               }
                           }
@@ -87,7 +91,7 @@
               </div>
           </div>
           <div class ="footer-container">
-               <?php include('inlcudes/footer.php')?>
+               <?php include('includes/footer.php')?>
           </div>
      </body>
 </html>

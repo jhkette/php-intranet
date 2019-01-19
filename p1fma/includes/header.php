@@ -9,9 +9,6 @@ $loggedState = false;
 if (isset($_SESSION['admin']) || (isset($_SESSION['user']))) {
     $loggedState = true;
 }
-else{
-    $loggedState = false;
-}
 
 echo '<div class="status">';
 

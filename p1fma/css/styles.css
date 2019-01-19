@@ -45,6 +45,7 @@ h1{
 .news{
     background-color: var(--tertiary);
     padding: 2rem;
+    margin: 2rem 0;
 }
 
 .message  {
