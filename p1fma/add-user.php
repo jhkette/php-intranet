@@ -39,18 +39,11 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                           or adds another user and hides form if no errors are detected.  */
                           if (isset($_POST['submit'])) {
+                              include('includes/connection.php');
+                              if($connection == true){
 
-                              $handleDir = openDirectory(); # directory
-                              if($handleDir == false){
-                                 echo '<p>The user data folder cannot be found</p>';
-                              }
-                              else{
-                                  $handle = readDirectory($handleDir); # handle to file
-                                  if ($handle == false){
-                                      echo '<p>The user data file cannot be processed</p>';
-                                  }
-                                  else{
-                                  $loggeddata = getData($handle); # the data from the txt file in an array
+
+                              $loggeddata = getData($handle); # the data from the txt file in an array
                                   $duplicates = checkDuplicates($self, $loggeddata); # duplicates array
                                   $errors = addUserErrors($self); #errors array
                                   $confirmPassword = confirmPassword($self, $errors); # cofirm password array
@@ -72,7 +65,7 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                                        closeDirectory($handleDir);
                                    }
                                }
-                           }
+
                           }
                           ?>
                           <!--  This code runs to make the form display. The data and errors array

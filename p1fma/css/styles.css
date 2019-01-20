@@ -270,6 +270,12 @@ tr:nth-child(even) {
 }
 
 
+.side-menu h3{
+    margin: .5rem 1rem;
+    font-size: 2rem;
+
+    padding-top: 1rem;
+}
 
 
 /*------------FORMS  --------*/
