@@ -8,7 +8,7 @@ header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 require_once('functions.php');
 include('includes/menu.php');
-$adminUserPassword = array('admin,DCSadmin01');#admin user/password
+$adminUserPassword = array('admin,DCSadmin01');#admin user/password. This is used in validation.php
 
 /*I am checking for users logged status in the init file*/
 $loggedState = false;
