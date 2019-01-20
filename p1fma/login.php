@@ -26,6 +26,9 @@
                          $admin = false;
                          include('includes/validation.php'); #see validation.php for comments on validation process
                          ?>
+                         <div class="add-info small">
+                             <p>If you do not have a username, or you wish to regsiter a new staff member, contact an administrator</p>
+                         </div>
                       </section>
                   </main>
               </div>

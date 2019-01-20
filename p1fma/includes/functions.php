@@ -143,7 +143,7 @@ of the website */
 
  /* Function to process login errors, this function takes data from the text file,
  explodes at the comma and then checks to see if user input matches  a recorded entry*/
-function reportLoginErrors($self, $loggedData){
+function reportLoginErrors($self, $loggedData, $admin){
     $errors  = array(); # create errors array
     $correctData = false;  # set variables to false
     $correctPassword = false;
@@ -162,8 +162,11 @@ function reportLoginErrors($self, $loggedData){
                    $correctPassword = true;
                }
         }
-        if($correctData == false){ # if values are still false user input was not valid and an error is reported
+        if(($correctData == false) && ($admin==false)) { # if values are still false user input was not valid and an error is reported
             $errors['username'] = 'This username does not exist';
+        }
+        if(($correctData == false) && ($admin==true)) { # if values are still false user input was not valid and an error is reported
+            $errors['username'] = 'This is not the correct username for admin';
         }
         /*I'm only checking if the password is valid if the username doesn't contain any errors.
         It doesn't make sense for a password to be correct independant of the username it is attached to */

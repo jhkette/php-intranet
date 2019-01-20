@@ -20,17 +20,17 @@
             <div class="main-container">
                 <?php include('includes/navigation.php'); ?>
                  <main class = "container">
-                     <section class="col-1">
+                     <div class="col-1">
                          <div class ="flex-container">
                              <?php include('includes/sidemenu.php'); ?>
-                             <div class="main-body">
+                             <section class="main-body">
                                  <h2>DCS Intranet</h2>
                                  <?php include('includes/lorum.php');?>
                                  <?php include('includes/lorum.php');?>
                                  <div class="line"> </div>
-                             </div>
+                             </section>
                          </div>
-                     </section>
+                     </div>
                  </main>
              </div>
          </div>

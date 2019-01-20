@@ -2,7 +2,6 @@
 Jkette01
 Web Programming with PHP
 Tobi Brodie --> */
-
 :root {
     --secondary: #0095de;
     --tertiary: #eeeeee;
@@ -15,98 +14,30 @@ Tobi Brodie --> */
     margin: 0;
 }
 
-html{
+html {
     font-size: 62.5%;
 }
 
-body{
-    font-family: 'Roboto', serif;
+body {
+    font-family: 'Roboto', helvetica, arial, sans-serif;
     font-size: 1.5rem;
     color: var(--dark);
 }
 
-
-p{
-    font-family: 'Roboto', serif;
+p {
+    font-family: 'Roboto', helvetica, arial, sans-serif;
     color: var(--dark);
     margin: 1.5rem 0;
-
 }
-p:last-child{
+
+p:last-child {
     margin: 0;
     padding-bottom: 2rem;
-
 }
 
-h1{
+h1 {
     font-family: 'Roboto Slab', serif;
 }
-
-.news{
-    background-color: var(--tertiary);
-    padding: 2rem;
-    margin: 2rem 0;
-}
-
-.news p{
-  padding: 0;
-}
-
-
-.events{
-    background-color: #e2f0f6;
-    padding: 2rem;
-    margin: 2rem 0;
-}
-
-.add-info{
-    background-color: #fff3d4;
-    padding: 2rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    border-top: 5px solid #fbc12c;
-}
-
-.add-info p{
-    margin: .2rem;;
-    padding: 0;
-}
-
-.add-info h3{
-    margin:  0 0 1rem 0;
-    padding: 0;
-}
-
-.events p{
-  padding: 0;
-}
-
-.message  {
-    list-style: none;
-    margin: .6rem 0rem;
-    color: #fc4a4a;
-    width: 95%;
-    padding: .4rem;
-    border-radius: .1rem;
-    font-size: 2rem;
-    font-weight: 900;
-
-}
-
-.newuser{
-    font-size: 2rem;
-    color: var(--secondary);
-    font-weight: 900;
-}
-
-.line{
-    width: 80%;
-    margin:  4rem auto 0 auto;
-    border-top: 1px solid var(--secondary);
-    padding-bottom: 4rem;
-}
-
-
 
 h2 {
     font-family: 'Roboto Slab', serif;
@@ -119,7 +50,7 @@ h2 {
     font-size: 2.8rem;
 }
 
-h3{
+h3 {
     font-family: 'Roboto Slab', serif;
     margin: 2rem 0;
     font-size: 2rem;
@@ -127,70 +58,69 @@ h3{
     width: -moz-max-content;
 }
 
-h4{
+h4 {
     font-family: 'Roboto Slab', serif;
     font-size: 1.6rem;
     color: var(--dark);
     margin-bottom: 1rem;
     text-decoration: underline;
-
 }
 
-
-/* header styles */
-.header-container{
-    border-bottom: 1px dashed var(--secondary);
-    padding: 1rem 0;
-
-
-}
-.header{
-    width: 75%;
-    margin: auto;
-    display: flex;
-    justify-content: flex-start;
-    max-width: 1100px;
-    align-content: center;
-    align-items: center;
-}
-
-
-
-/* main layout */
-
-.main-container{
-    width: 75%;
-    max-width: 1100px;
-    margin: auto;
-    background-color: white;
-    padding: 0 5rem;
-
-}
-
-.grey{
+/*Formatting - block of info, lines etc  */
+.news {
     background-color: var(--tertiary);
-    height: 100%;
-}
-.image {
-    text-align: center;
-}
-.image img{
-    width: 29rem;
-    height: auto;
-    margin: 1.5rem 0;
+    padding: 2rem;
+    margin: 2rem 0;
 }
 
-
-
-.container{
-    padding-bottom: 5rem;
-    min-height: 65rem
+.news p {
+    padding: 0;
 }
 
+.events {
+    background-color: #e2f0f6;
+    padding: 2rem;
+    margin: 2rem 0;
+}
 
-.main-body{width: 75%;}
+.add-info {
+    background-color: #fff3d4;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-top: 5px solid #fbc12c;
+}
 
-.news-snippet{
+.small{
+    width: 61rem;
+}
+
+.add-info p {
+    margin: .2rem;
+    padding: 0;
+}
+
+.add-info h3 {
+    margin: 0 0 1rem 0;
+    padding: 0;
+}
+
+.events p {
+    padding: 0;
+}
+
+.message {
+    list-style: none;
+    margin: .6rem 0rem;
+    color: #fc4a4a;
+    width: 95%;
+    padding: .4rem;
+    border-radius: .1rem;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+.news-snippet {
     background-color: #fff3d4;
     width: 18rem;
     height: 25rem;
@@ -200,7 +130,7 @@ h4{
     border-top: 5px solid #fbc12c;
 }
 
-.events-snippet{
+.events-snippet {
     background-color: #e2f0f6;
     width: 18rem;
     height: 25rem;
@@ -210,8 +140,71 @@ h4{
     border-top: 5px solid var(--secondary);
 }
 
+.newuser {
+    font-size: 2rem;
+    color: var(--secondary);
+    font-weight: 900;
+}
 
-.flex-container{
+.line {
+    width: 80%;
+    margin: 4rem auto 0 auto;
+    border-top: 1px solid var(--secondary);
+    padding-bottom: 4rem;
+}
+
+/* header styles */
+.header-container {
+    border-bottom: 1px dashed var(--secondary);
+    padding: 1rem 0;
+}
+
+.header {
+    width: 75%;
+    margin: auto;
+    display: flex;
+    justify-content: flex-start;
+    max-width: 1100px;
+    align-content: center;
+    align-items: center;
+}
+
+/* main layout divs, section etc */
+
+.grey {
+    background-color: var(--tertiary);
+    height: 100%;
+}
+
+.main-container {
+    width: 75%;
+    max-width: 1100px;
+    margin: auto;
+    background-color: white;
+    padding: 0 5rem;
+}
+
+
+.image {
+    text-align: center;
+}
+
+.image img {
+    width: 35rem;
+    height: auto;
+    margin: 1.5rem 0;
+}
+
+.container {
+    padding-bottom: 5rem;
+    min-height: 65rem
+}
+
+.main-body {
+    width: 75%;
+}
+
+.flex-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -227,7 +220,6 @@ section a {
 }
 
 /* results page  */
-
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -244,18 +236,15 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
-
-
-
 /*-----------  */
-/* list group- errors, correct data */
-.list-group-item{
+/* list group- errors and correct data */
+.list-group-item {
     color: var(--dark);
     list-style: none;
     margin: .6rem 0rem;
 }
 
-.list-group-error{
+.list-group-error {
     background-color: #faeeee;
     list-style: none;
     margin: .6rem 0rem;
@@ -268,52 +257,48 @@ tr:nth-child(even) {
 }
 
 /* main Menu and nav div */
-.navcontainer{
+.navcontainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1.5rem;
-
 }
 
-.main-menu{
+.main-menu {
     margin: 2rem 0;
     font-size: 2rem;
-
 }
+
 .menu {
     list-style: none;
     display: inline-block;
     padding-right: 1.5rem;
-
 }
 
-.menu a{
+.menu a {
     text-decoration: none;
     color: #1a1a1a;
     padding-bottom: .2rem;
 }
 
-.menu a:hover{
-
+.menu a:hover {
     border-bottom: 2px solid var(--dark);
     transition: .1s;
-
 }
-/*Side menu  */
 
-.side-menu ul{
+/*Side menu  */
+.side-menu ul {
     display: flex;
     flex-direction: column;
     padding-top: 1rem;
-
 }
-.side-menu{
+
+.side-menu {
     margin-top: 1rem;
     margin-right: 4rem;
     width: 14.5rem;
-    background-color:  white;
+    background-color: white;
     height: auto;
 }
 
@@ -322,28 +307,25 @@ tr:nth-child(even) {
     padding-left: 1.5rem;
     padding-bottom: .5rem;
     border-bottom: 1px solid var(--tertiary);
-
 }
-.side-menu a{
+
+.side-menu a {
     font-weight: 400;
 }
+
 .side-menu li a:hover {
-text-decoration: underline;
-border: 0;
+    text-decoration: underline;
+    border: 0;
 }
 
-
-.side-menu h3{
+.side-menu h3 {
     margin: .5rem 1rem;
     font-size: 2rem;
-
     padding-top: 1rem;
 }
 
-
 /*------------FORMS  --------*/
-
-fieldset{
+fieldset {
     border-left: 0;
     border-right: 0;
     border-bottom: 0;
@@ -351,22 +333,28 @@ fieldset{
     padding: 3rem;
     border-radius: .2rem;
     background-color: var(--tertiary);
-    width: 60%;
+    width: 55rem;
     margin: 3rem 0;
+}
+
+.field {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
 
 }
 
-
-fieldset p{
+fieldset p {
     padding: 0;
     margin: 0;
 }
 
-label{
+label {
     margin-right: 1rem;
 }
 
-input[type="submit" i]{
+input[type="submit"i] {
     background-color: var(--dark);
     color: white;
     padding: 0rem;
@@ -376,53 +364,45 @@ input[type="submit" i]{
     height: 4.5rem;
     bottom: 0;
     width: 12rem;
-
 }
-input[type="submit" i]:hover{
+
+input[type="submit"i]:hover {
     background-color: var(--secondary);
     color: var(--dark);
     transition: .3s;
-
 }
 
-.button1{
+.button1 {
     background-color: var(--secondary);
-color: white;
-padding: 1.3rem 2rem;
-margin: 3rem 0 3rem 0;
-width: 14rem;
-height: 5rem;
-border: 0;
-font-size: 1.8rem;
-display: flex;
-justify-content: space-between;
-text-decoration: none;
+    color: white;
+    padding: 1.3rem 2rem;
+    margin: 3rem 0 3rem 0;
+    width: 14rem;
+    height: 5rem;
+    border: 0;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
 }
-.button1 a{
+
+.button1 a {
     text-decoration: none;
     color: #fff;
     font-weight: normal;
-
 }
 
-
-.button1:hover{
+.button1:hover {
     background-color: var(--dark);
     transition: .3s;
-
 }
 
-.arrow{
+.arrow {
     width: 2rem;
-    /* margin-top: .3rem; */
     margin-left: .3rem;
 }
 
-
-
-
-
-input{
+input {
     margin: .35rem 0;
     padding: .25rem;
     height: 2.5rem;
@@ -433,44 +413,31 @@ input{
     color: var(--dark);
 }
 
-.field{
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    align-items: center;
-    width: 55rem;
 
-}
 
-.forminput{
+.forminput {
     display: flex;
     justify-content: space-between;
     width: 28rem;
     align-items: center;
-
-
-
 }
-.adduserforminput{
-    display: flex;
-  justify-content: space-between;
 
+.adduserforminput {
+    display: flex;
+    justify-content: space-between;
     width: 33rem;
     align-items: center;
 }
 
-
-.field p{
+.field p {
     font-size: 1.1rem;
     margin-left: 1rem;
     padding: 0;
 }
 
-
 /*--------------- Status updates--------- */
-.status{
+.status {
     width: auto;
-
     margin-right: 2%;
 }
 
@@ -481,42 +448,39 @@ input{
     margin: 0;
     text-align: center;
     font-size: 1.4rem;
-
 }
 
-.logout p{
+.logout p {
     background-color: #ededed;
     padding: 1rem;
     border: dotted 1px gray;
     margin: 0;
     font-size: 1.4rem;
-
 }
 
-.logout{
+.logout {
     width: auto;
-
     margin-right: 2%;
 }
 
 /*Footer styles  */
-footer{
+footer {
     width: 75%;
     margin: auto;
     max-width: 1100px;
 }
 
-footer p{
+footer p {
     color: black;
     margin: 0;
     padding-top: 2rem;
     max-width: 1100px;
 }
 
-.footer-container{
+.footer-container {
     height: 12rem;
     padding-top: 1rem;
     background-color: var(--tertiary);
     width: 100%;
-    border-top: 1px solid  #e0dddc;
+    border-top: 1px solid #e0dddc;
 }

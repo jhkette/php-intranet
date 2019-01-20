@@ -28,6 +28,9 @@
                        $admin = true; #admin is true so if valid session[admin] will be created by the validateLoginInputs function.
                        include('includes/validation.php');
                        ?>
+                       <div class="add-info small">
+                           <p>An admin is allowed to add new staff users as well as visit the Intranet</p>
+                       </div>
                      </section>
                  </main>
              </div>

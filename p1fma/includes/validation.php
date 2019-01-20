@@ -20,7 +20,7 @@ if(isset($_POST['submit'])) {
         else{
              $loggeddata = $adminUserPassword;
          }
-         $errors = reportLoginErrors($self, $loggeddata);
+         $errors = reportLoginErrors($self, $loggeddata, $admin);
          $cleanData = validateLoginInputs($self, $errors);
 
          switch (true) {

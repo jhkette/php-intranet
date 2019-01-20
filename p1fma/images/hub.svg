@@ -8,7 +8,7 @@
 </style>
 <rect x="300" y="300" class="st0" width="150" height="150"/>
     <!--Fun animation! Rotates 360 degrees slowly  -->
-	<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="360 8.4 9.5" to="0 8.4 9.5" dur="260s" additive="sum" repeatCount="indefinite" />
+	<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="360 8.4 9.5" to="0 8.4 9.5" dur="200s" additive="sum" repeatCount="indefinite" />
 <path class="st1" d="M623.3,413.4c-1.7-6.9-8.7-11.3-15.6-9.5c-4.3,0.9-6.9,3.5-8.7,6.9l-204.3-36.4c0.9-3.5,0.9-6.9,0.9-10.4
 	c0-1.7,0-3.5,0-4.3l163.6-29.4c0.9,1.7,3.5,3.5,5.2,3.5c4.3,0.9,7.8-2.6,7.8-6.1c0.9-4.3-2.6-7.8-6.1-7.8c-4.3-0.9-7.8,2.6-7.8,6.1
 	v0.9l-163.6,29.4c-0.9-5.2-2.6-9.5-4.3-13.9l82.2-46.7c2.6,4.3,7.8,7.8,13.9,8.7c10.4,0.9,19.9-6.1,21.6-16.4
