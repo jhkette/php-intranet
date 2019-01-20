@@ -19,7 +19,7 @@ if ($loggedState == true) {
 }
 echo '</div>'.PHP_EOL;
 
-if ($loggedState == false){ # div is only presented if loggestate is false
+if ($loggedState == false){ # div is only echoed if loggestate is false
     echo '<div class="logout">';
     if (isset($_GET['message'])) { # this communicates logged out message to user
         if($_GET['message'] = 'You have logged out'){ #needs to be the correct message
