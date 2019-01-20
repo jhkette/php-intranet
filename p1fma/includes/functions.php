@@ -199,11 +199,11 @@ function addUserErrors($self){
     $errors = array();
     # code only runs when form is submitted
     $firstname = trim($_POST['firstname']); # The firstname needs to be letters and between 2 and 19 characters long
-        if (!ctype_alpha($firstname) || (strlen($firstname) > 20) || (strlen($firstname) <= 2))  {
-            $errors['firstname'] = 'Names can only contain letters. They need to be at least three characters.';
-        }
-        $surname = trim($_POST['surname']); # The surname needs to be letters and between 2 and 19 characters long
-        if (!ctype_alpha($surname) || (strlen($surname) > 20) || (strlen($surname) <= 2)) {
+    if (!ctype_alpha($firstname) || (strlen($firstname) > 20) || (strlen($firstname) <= 2))  {
+        $errors['firstname'] = 'Names can only contain letters. They need to be at least three characters.';
+    }
+    $surname = trim($_POST['surname']); # The surname needs to be letters and between 2 and 19 characters long
+    if (!ctype_alpha($surname) || (strlen($surname) > 20) || (strlen($surname) <= 2)) {
             $errors['surname'] = 'Surnames can only contain letters. They need to be at least three characters.';
         }
         $email = trim($_POST['email']); #i'm using FILTER_VALIDATE_EMAIL to check if the email is valid. If it returns false it is invalid

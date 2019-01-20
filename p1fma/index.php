@@ -30,6 +30,7 @@
                                  <?php include('includes/lorum.php');?>
                                  <?php include('includes/lorum.php');?>
                                  <?php include('includes/lorum.php');?>
+                                 <?php include('includes/lorum.php');?>
                                  <div class="line">&nbsp;</div>
                                  <?php
                                  if ($loggedState == false) {
@@ -39,14 +40,20 @@
                                  }
                                  ?>
                              </div>
-                             <article class ="news-snippet">
-                                 <h4>News </h4>
-                                 <p>Aliquam sit amet aliquam magna. Vivamus ac sapien interdum, dapibus urna sed, pellentesque ante. Nulla ultrices finibus nisi,
-                                 eget efficitur. <a href="news.php">Read more </a> </p>
-                             </article>
-                          </div>
-
-                      </section>
+                             <div>
+                                 <article class ="news-snippet">
+                                     <h4>News </h4>
+                                     <p>Aliquam sit amet aliquam magna. Vivamus ac sapien interdum, dapibus urna sed, pellentesque ante. Nulla ultrices finibus nisi,
+                                         eget efficitur. <a href="news.php">Read more </a> </p>
+                                 </article>
+                                 <article class ="events-snippet">
+                                    <h4>Events </h4>
+                                    <p>Aliquam sit amet aliquam magna. Vivamus ac sapien interdum, dapibus urna sed, pellentesque ante. Nulla ultrices finibus nisi,
+                                    eget efficitur. <a href="events.php">Read more </a> </p>
+                                 </article>
+                             </div>
+                         </div>
+                     </section>
                   </main>
              </div>
          </div>

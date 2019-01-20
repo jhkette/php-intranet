@@ -45,8 +45,8 @@ $menu2 = [
 ];
 
 $menu3 = [
-    'News.php' => 'News',
-    'Events.php' => 'Events',
+    'news.php' => 'News',
+    'events.php' => 'Events',
 ];
 
 ?>

@@ -24,7 +24,7 @@
                          <div class ="flex-container">
                              <?php include('includes/sidemenu.php'); ?>
                              <div class="main-body">
-                                 <h2>Intranet Home</h2>
+                                 <h2>DCS Intranet</h2>
                                  <?php include('includes/lorum.php');?>
                                  <?php include('includes/lorum.php');?>
                                  <div class="line"> </div>

@@ -24,9 +24,9 @@
                               <?php include('includes/sidemenu.php'); ?>
                               <div class="main-body">
                                   <h2>Events</h2>
-                                  <div class="news"><?php include('includes/lorum.php');?></div>
-                                  <div class="news"><?php include('includes/lorum.php');?></div>
-                                  <div class="news"><?php include('includes/lorum.php');?></div>
+                                  <div class="events"><?php include('includes/lorum.php');?></div>
+                                  <div class="events"><?php include('includes/lorum.php');?></div>
+                                  <div class="events"><?php include('includes/lorum.php');?></div>
                                   <div class="line"> </div>
                               </div>
                           </div>
