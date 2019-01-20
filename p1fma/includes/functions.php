@@ -1,9 +1,9 @@
 <?php
 
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
-/*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the form fields if there
+/*This displays the form for the admin login and normal login. Error feedback is presnted above and prompts are presented by the form fields if there
 are errors  */
-function displayForm( $cleanData , $errors){ #default arguments because arrays are passed as argument until after validation
+function displayForm( $cleanData , $errors){
     $passwordErrors='';
     $userErrors = '';
     if(isset($cleanData['username'])) { #check if clean data or error data isset
@@ -17,7 +17,7 @@ function displayForm( $cleanData , $errors){ #default arguments because arrays a
      else {
          $userErrors = '';
         }
-    if (!isset($errors['username'])){ # only add password error if username is NOT an error. (I do this throughout, passwords are only correct in relation to usernames)
+    if (!isset($errors['username'])){ # only add password error if username is not an error. (I do this throughout, passwords are only correct in relation to a usernames)
         if (isset($errors['password'])) {
             $passwordErrors =  '<p>This is not the correct password </p>';}
          else {
@@ -88,18 +88,18 @@ foreach ($passwordError as $key => $value) {
   }
 
 /*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
-/* function that opens directory that contains data file. While not possible in this excercise, ideally this
+/* Function that opens directory that contains data file. While not possible in this excercise, ideally this
 folder would not be stored on the  public folder of the server. The data folder is not in the root directory
 of the website */
 
  function openDirectory(){
-     if (!file_exists("../data")){ #if file doesn't exist return false
+     if (!file_exists("../data")){ # If file doesn't exist return false
          $handleDir = false;
          return  $handleDir;
      }
      else{
          $handleDir = opendir("../data");
-         /*i'm checking if the handleDir ==  retruns false for some other reason in connection.php. This is part of validation.php,
+         /* I'm checking if the handleDir ==  returns false for some other reason in connection.php. This is part of validation.php,
          which allows me to present an error message above the form (nb if opendir can't connect it returns a boolean value of false) */
          return $handleDir;
      }
@@ -263,13 +263,11 @@ function checkDuplicates($self, $loggedData){
 /*Function that checks the confirm password and password values are the same  */
 function confirmPassword($self, $errors){
     $confirmPassword = array();
-
-        $password = trim($_POST['password']);
-        $confirmation = trim($_POST['confirm-password']);
-        if(($password !== $confirmation) && (!isset($errors['password']))) { # checks the values are the same and password error is not set
-            $confirmPassword['confirm password'] = 'The passwords do not match'; # ..if not add key and value to confirmPassword array
-        }
-
+    $password = trim($_POST['password']);
+    $confirmation = trim($_POST['confirm-password']);
+    if(($password !== $confirmation) && (!isset($errors['password']))) { # checks the values are the same and password error is not set
+        $confirmPassword['confirm password'] = 'The passwords do not match'; # ..if not add key and value to confirmPassword array
+    }
     return $confirmPassword; #return password error - this gets displayed on the form on the add user page
 }
 
@@ -345,8 +343,8 @@ function refreshPageButton(){
     $output='
     <div class="button1"><a href="'.$self.'">Add User</a><img src="images/arrow.svg" alt="arrow" class="arrow"></div>';
     return $output;
-
 }
+
 /* Function that displays menu. The array is stored in menu.php */
 function makeMenu($menu){
     $output='';

@@ -7,12 +7,12 @@
 $cleanData=array();
 $errors=array();
 
-if(isset($_POST['submit'])) {
+if(isset($_POST['submit'])) {#if the form is submitted
     if($admin == false ){
         include('includes/connection.php');
     }
 
-    if($admin == true || ($admin == false && $connection == true)){ #only running code if admin or not admin and connection to file is true (this is checked in connection.php)
+    if($admin == true || ($admin == false && $connection == true)){ #only running code if admin= true  admin = false and connection to file is true (this is checked in connection.php)
         $self = $_SERVER['PHP_SELF'];
         if($admin == false){
             $loggeddata = getData($handle);
