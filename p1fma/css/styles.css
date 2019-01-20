@@ -175,24 +175,18 @@ h4{
     text-align: center;
 }
 .image img{
-    width: 25rem;
+    width: 29rem;
     height: auto;
     margin: 1.5rem 0;
 }
 
-.arrow{
-    width: 2rem;
-    /* margin-top: .3rem; */
-    margin-left: .3rem;
-}
+
 
 .container{
-    min-height: 75rem;
+    padding-bottom: 5rem;
+    min-height: 65rem
 }
 
-.container-user{
-    min-height: 95rem;
-}
 
 .main-body{width: 75%;}
 
@@ -222,6 +216,14 @@ h4{
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+section a {
+    text-decoration: none;
+    color: var(--dark);
+    cursor: pointer;
+    font-weight: 900;
+    text-decoration: underline;
 }
 
 /* results page  */
@@ -410,13 +412,13 @@ text-decoration: none;
 
 }
 
-section a {
-    text-decoration: none;
-    color: var(--dark);
-    cursor: pointer;
-    font-weight: 900;
-    text-decoration: underline;
+.arrow{
+    width: 2rem;
+    /* margin-top: .3rem; */
+    margin-left: .3rem;
 }
+
+
 
 
 

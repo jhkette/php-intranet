@@ -22,7 +22,7 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
         <div class="grey">
             <div class="main-container">
                 <?php include('includes/navigation.php'); ?>
-                <main class = "container-user">
+                <main class = "container">
                     <section class="col-1">
                         <h2>Add a user</h2>
                         <?php
@@ -145,7 +145,7 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                           <p>* Names can only contain letters. They need to be at least three characters.</p>
                           <p>* Surnames can only contain letters. They need to be at least three characters</p>
                           <p>* A valid email address needs to be entered</p>
-                          <p>* Usernames can only be numbers or letters. They need to be five or more chrecters long.</p>
+                          <p>* Usernames can only be numbers or letters. They need to be five or more charecters long.</p>
                           <p>* A password should contain only letters and numbers. It needs to be five or more
                           characters long.</p>
                           <p>* Confirm password need to be the same as the password</p>

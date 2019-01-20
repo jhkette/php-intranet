@@ -5,12 +5,12 @@ a message will be printed out. Othwerise connection will be 'true'. I check for 
 $connection = false;
 $handleDir = openDirectory();
 if($handleDir == false){
-    echo '<p>The user data folder cannot be found</p>';
+    echo '<p>The user data folder cannot be found</p>'.PHP_EOL;
 }
 else{
     $handle = readDirectory($handleDir);
     if ($handle == false){
-        echo '<p>The user data file cannot be processed</p>';
+        echo '<p>The user data file cannot be processed</p>'.PHP_EOL;
         closeDirectory($handleDir); # close directory
     }
     else{
