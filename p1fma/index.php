@@ -20,7 +20,7 @@
                  <?php include('includes/navigation.php'); ?>
                  <main class = "container">
                      <div class="row image">
-                         <img src="images/hub.svg" alt="computer">
+                         <img src="images/hub.svg" alt="Hub">
                          <!--hub by NeMaria from the Noun Project CC license  -->
                      </div>
                      <section class="col-1">
@@ -32,14 +32,15 @@
                                  <?php include('includes/lorum.php');?>
                                  <?php include('includes/lorum.php');?>
                                  <?php include('includes/lorum.php');?>
-                                 <div class="line">&nbsp;</div>
+
                                  <?php
                                  if ($loggedState == false) {
                                  ?>
-                                 <a href='login.php' class="button1">Log in</a>
+                                 <div class="button1"> <a href='login.php'> Log in</a> <img src="images/arrow.svg" alt="arrow" class="arrow"></div>
                                  <?php
                                  }
                                  ?>
+                                 <div class="line">&nbsp;</div>
                              </div>
                              <div>
                                  <article class ="news-snippet">

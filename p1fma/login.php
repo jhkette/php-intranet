@@ -19,6 +19,7 @@
              <div class="main-container">
                  <?php include('includes/navigation.php'); ?>
                  <main class = "container">
+
                      <section class="col-1">
                          <h2>Login</h2>
                          <?php

@@ -1,6 +1,10 @@
 <?php
 echo "<header class='header'>".PHP_EOL.
-         "<h1>DCS Intranet</h1>".PHP_EOL;
+
+          '<h1>DCS Intranet</h1>'.PHP_EOL;
+
+
+
 
 /*I am checking for users logged status in the header*/
 $loggedState = false;
