@@ -20,7 +20,8 @@
                  <?php include('includes/navigation.php'); ?>
                  <main class = "container">
                      <div class="row image">
-                         <img src="images/computer-icon.svg" alt="computer">
+                         <img src="images/hub.svg" alt="computer">
+                         <!--hub by NeMaria from the Noun Project CC license  -->
                      </div>
                      <section class="col-1">
 

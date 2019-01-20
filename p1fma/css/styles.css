@@ -155,13 +155,13 @@ h4{
     text-align: center;
 }
 .image img{
-    width: 15rem;
+    width: 25rem;
     height: auto;
     margin: 1.5rem 0;
 }
 
 .container{
-    min-height: 70rem;
+    min-height: 75rem;
 }
 
 .main-body{width: 75%;}
@@ -224,14 +224,15 @@ tr:nth-child(even) {
 }
 
 .list-group-error{
-    background-color: #fc4a4a;
+    background-color: #faeeee;
     list-style: none;
     margin: .6rem 0rem;
-    color: white;
+    color: var(--dark);
     width: -moz-fit-content;
     width: fit-content;
-    padding: .2rem 1rem;
-    border-radius: .1rem;
+    padding: .4rem 1rem;
+    border-radius: .2rem;
+    border: 1px solid #e63737;
 }
 
 /* main Menu and nav div */
@@ -316,7 +317,8 @@ fieldset{
     border-radius: .2rem;
     background-color: var(--tertiary);
     width: 60%;
-    margin-top: 5rem;
+    margin: 3rem 0;
+
 }
 
 
