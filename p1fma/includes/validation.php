@@ -12,7 +12,7 @@ if(isset($_POST['submit'])) {
         include('includes/connection.php');
     }
 
-    if($admin == true || ($admin == false && $connection == true)){
+    if($admin == true || ($admin == false && $connection == true)){ #only running code if admin or not admin and connection to file is true
         $self = $_SERVER['PHP_SELF'];
         if($admin == false){
             $loggeddata = getData($handle);

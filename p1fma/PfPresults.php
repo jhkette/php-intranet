@@ -2,15 +2,15 @@
 <?php include('includes/secure.php');?>
 <!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
-    </style>
-	<title>Problem Solving for Programming – PfP Results</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="css/styles.css" />
+        <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
+        </style>
+	    <title>Problem Solving for Programming – PfP Results</title>
+    </head>
     <body>
         <div class ="header-container">
             <?php include('includes/header.php')?>
