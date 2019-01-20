@@ -1,5 +1,5 @@
 <?php
-
+/* Include which presnts navigation and loggedin status */
 echo '<div class ="navcontainer">
          <nav class="main-menu">'.PHP_EOL;
             echo  makeMenu($menu); # displays main menu using makeMenu function

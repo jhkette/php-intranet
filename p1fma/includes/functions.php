@@ -59,9 +59,9 @@ function displayForm( $cleanData , $errors){ #default arguments because arrays a
           $output.='<li class = "list-group-item">
                    <strong>'. htmlentities($key). ': </strong> '.htmlentities($value).'
                    </li>';
-           }
+      }
       return $output;
-  }
+ }
 
 /* Function that displays errors, used by all three forms on the intranet site. Loops through error arrays
 passed as arguments  */
@@ -72,17 +72,17 @@ passed as arguments  */
           $output.='<li class = "list-group-error">
                    <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                    </li>';
-           }
+       }
        foreach ($duplicates as $key => $value) {
            $output.='<li class = "list-group-error">
                      <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                      </li>';
-                }
+        }
         foreach ($passwordError as $key => $value) {
             $output.='<li class = "list-group-error">
                       <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                       </li>';
-                     }
+        }
         return $output;
   }
 
@@ -98,24 +98,25 @@ of the website */
      }
      else{
          $handleDir = opendir("../data");
-         /*i'm checking if the handleDir == false for some oth reason in connection.php which is part of validation,
-         this allows me to present error message above the form */
+         /*i'm checking if the handleDir ==  retruns false for some other reason in connection.php. This is part of validation.php,
+         which allows me to present error message above the form (nb if opendir can't connect it returns a boolean value of false) */
          return $handleDir;
      }
 }
+
  function readDirectory($handleDir){
      while(false !== ($file = readdir($handleDir))){
          if ($file != "." && $file != "..") { # don't add dots which represent directories to array
              $fileDir1 = array();
              array_push($fileDir1, $file); # push into array
              foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
-                 if ((pathinfo($value, PATHINFO_EXTENSION)) !== 'txt'){
+                 if ((pathinfo($value, PATHINFO_EXTENSION)) !== 'txt'){ #check the extension is 'txt'
                      $handle = false;
                      return $handle;
                  }
                  $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
-                 /*i'm checking if the handle == false for some other reason in connection.php which is part of validation,
-                 this allows me to present error message above the form */
+                 /*i'm checking if the handle == false for some reason in connection.php which is part of validation,
+                 this allows me to present error message above the form (nb if fopen can't connect it returns a boolean value of false) */
                  return $handle;
              }
          }
@@ -176,7 +177,7 @@ function reportLoginErrors($self, $loggedData){
 /*This function is used by the admin and staff login pages. It takes in the error array from the prior function
 reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. This is retuned to validation process.
 If there are 2 indexes in clean data the user is logged in (see validation.php) */
-function validateLoginInputs($self, $errors, $admin){
+function validateLoginInputs($self, $errors){
     $cleanData = array();
     /* I'm not representing the password login data. Passwords are not like other form data. They can only be correct in relation to
     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
@@ -214,16 +215,15 @@ function addUserErrors($self){
     if (($title !== 'Mr') && ($title !== 'Mrs') && ($title !== 'Ms') && ($title !== 'Miss')) { # still check the correct value is sent to form for security
         $errors['title'] = 'This is not the correct title';
     }
-    $username = trim($_POST['username']); # The username needs to be letters/numbers and between 2 and 19 characters long
+    $username = trim($_POST['username']); # The username needs to be letters/numbers and between 5 and 19 characters long
     if (!ctype_alnum($username) || (strlen($username) > 20) || (strlen($username) < 5))  {
         $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more charecters long.';
     }
-    $password = trim($_POST['password']); # The password needs to be letters/numbers and between 2 and 19 characters long
+    $password = trim($_POST['password']); # The password needs to be letters/numbers and between 5 and 19 characters long
     if (!ctype_alnum($password) || (strlen($password) > 20) || (strlen($password) < 5)) {
         $errors['password'] = 'This is not a valid password. It should contain only letters and numbers. It needs to be five or more
         characters long.';
     }
-
     return $errors;
 }
 
@@ -233,26 +233,25 @@ function checkDuplicates($self, $loggedData){
     $duplicates = array();
     $userMatch = false; # usermatch and emailmatch initially set to false
     $emailMatch = false;
-
-        $username = trim($_POST['username']);
-        $email = trim($_POST['email']);
-        foreach ($loggedData as $key => $value) { #loop through text file data
-            $loggedData = explode(',', $value); # explode at comma
-            $loggedData[0] =  trim($loggedData[0]); #trim data
-            $loggedData[5] =  trim($loggedData[5]);
-            if ($loggedData[0] == $username){ # username is at index [0] of the text file data
-                $userMatch = true;
-            }
-            if($loggedData[5] == $email){ # email value will be at index [5]
-                $emailMatch = true; # change emailmatch to true if match found
-            }
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    foreach ($loggedData as $key => $value) { #loop through text file data
+        $loggedData = explode(',', $value); # explode at comma
+        $loggedData[0] =  trim($loggedData[0]); #trim data
+        $loggedData[5] =  trim($loggedData[5]);
+        if ($loggedData[0] == $username){ # username is at index [0] of the text file data
+            $userMatch = true;
         }
-        if($emailMatch== true){
+        if($loggedData[5] == $email){ # email value will be at index [5]
+            $emailMatch = true; # change emailmatch to true if match found
+        }
+    }
+    if($emailMatch== true){
         $duplicates['email'] = 'This email is already in use'; #adding data to a duplicates array if match is true
-        }
-        if($userMatch== true){
-            $duplicates['username'] = 'This username is already in use';
-        }
+    }
+    if($userMatch== true){
+        $duplicates['username'] = 'This username is already in use';
+    }
 
     return $duplicates; # the duplicates array gets represnted to the user on the add user page
 }
@@ -277,36 +276,35 @@ function validateAddUser($self, $errors, $duplicates, $passwordError){
     I  check the input has NOT been put in either the error or duplicate arrays. This reduces unneccesary code, otherwise
     we are validating the same data twice */
     $cleanData = array();
-
     # form only runs if post is submitted
-        $firstname = trim($_POST['firstname']);
-        if (!isset($errors['firstname'])) {
-            $cleanData['firstname'] = $firstname;
-        }
-        $surname = trim($_POST['surname']);
-        if (!isset($errors['surname'])) {
-            $cleanData['surname'] = $surname;
-        }
-        $email = trim($_POST['email']); # check email is valid and not a duplicate
-        if (!isset($errors['email']) && (!isset($duplicates['email']))) {
-            $cleanData['email'] = $email;
-        }
-        $title = trim($_POST['title']);
-        if (!isset($errors['title'])) {
-            $cleanData['title'] = $title;
-        }
-        $username = trim($_POST['username']); # check username is valid and not a duplicate
-        if (!isset($errors['username']) && (!isset($duplicates['username'])) ) {
-            $cleanData['username'] = $username;
-        }
-        $password = trim($_POST['password']);
-        if (!isset($errors['password']))  {
-            $cleanData['password'] = $password;
-        }
-        $confirmPassword = trim($_POST['confirm-password']);
-        if (!isset($passwordError['confirm password']) && (!isset($errors['password']))) { # only clean if no password error and password itself is valid
-            $cleanData['confirm password'] = $confirmPassword;
-        }
+    $firstname = trim($_POST['firstname']);
+    if (!isset($errors['firstname'])) {
+        $cleanData['firstname'] = $firstname;
+    }
+    $surname = trim($_POST['surname']);
+    if (!isset($errors['surname'])) {
+        $cleanData['surname'] = $surname;
+    }
+    $email = trim($_POST['email']); # check email is valid and not a duplicate
+    if (!isset($errors['email']) && (!isset($duplicates['email']))) {
+        $cleanData['email'] = $email;
+    }
+    $title = trim($_POST['title']);
+    if (!isset($errors['title'])) {
+        $cleanData['title'] = $title;
+    }
+    $username = trim($_POST['username']); # check username is valid and not a duplicate
+    if (!isset($errors['username']) && (!isset($duplicates['username'])) ) {
+        $cleanData['username'] = $username;
+    }
+    $password = trim($_POST['password']);
+    if (!isset($errors['password']))  {
+        $cleanData['password'] = $password;
+    }
+    $confirmPassword = trim($_POST['confirm-password']);
+    if (!isset($passwordError['confirm password']) && (!isset($errors['password']))) { # only clean if no password error and password itself is valid
+        $cleanData['confirm password'] = $confirmPassword;
+    }
 
     return $cleanData;
 }

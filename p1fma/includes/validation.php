@@ -12,7 +12,7 @@ if(isset($_POST['submit'])) {
         include('includes/connection.php');
     }
 
-    if($admin == true || ($admin == false && $connection == true)){ #only running code if admin or not admin and connection to file is true
+    if($admin == true || ($admin == false && $connection == true)){ #only running code if admin or not admin and connection to file is true (this is checked in connection.php)
         $self = $_SERVER['PHP_SELF'];
         if($admin == false){
             $loggeddata = getData($handle);
@@ -21,7 +21,7 @@ if(isset($_POST['submit'])) {
              $loggeddata = $adminUserPassword;
          }
          $errors = reportLoginErrors($self, $loggeddata);
-         $cleanData = validateLoginInputs($self, $errors, $admin);
+         $cleanData = validateLoginInputs($self, $errors);
 
          switch (true) {
              case (isset( $_SESSION['admin']) && (isset( $_SESSION['user']))):
@@ -35,17 +35,17 @@ if(isset($_POST['submit'])) {
              case ((count($cleanData) < 2) && ($admin == true)) :
              echo displayErrors($errors);
              break;
-             case ((count($cleanData) == 2) && ($admin == false)): # clean data == 2 - no errors so redirect to index
+             case ((count($cleanData) == 2) && ($admin == false)): # clean data == 2 - no errors so redirect to intranet
              session_regenerate_id(true);
-             $_SESSION['user'] = $cleanData[username];
+             $_SESSION['user'] = $cleanData[username]; #admin == false therfore setup session[user]
              closeHandle($handle);
              closeDirectory($handleDir); #close handle close directory as we have opened file to look at data for staff login
              header('Location: intranet.php');
              break;
              case ((count($cleanData) == 2) && ($admin == true)): # clean data == 2 - no errors so redirect to index
              session_regenerate_id(true);
-             $_SESSION['admin'] = $cleanData[username];
-             header('Location: add-user.php');
+             $_SESSION['admin'] = $cleanData[username]; #admin == true therfore setup session[admin]
+             header('Location: intranet.php');# clean data == 2 - no errors so redirect to intranet
          }
      }
  }
