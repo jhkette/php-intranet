@@ -11,5 +11,5 @@ echo makeSideMenu('News', $menu3);
 echo '</nav>';
 echo '</div>';
 
-/*Creates sidemenu - this uses makeSideMenu function  */ 
+/* Creates sidemenu - this uses makeSideMenu function  */
 ?>
