@@ -19,10 +19,10 @@
             <div class="main-container">
                 <?php include('includes/navigation.php'); ?>
                 <main class = "container">
-                     <section class="col-1">
+                     <div class="col-1">
                          <div class ="flex-container">
                              <?php include('includes/sidemenu.php'); ?>
-                             <div class= "main-body">
+                             <section class= "main-body">
                                  <h3>Problem Solving for Programming – PfP Results</h3>
                                  <table>
                                    <tr>
@@ -66,9 +66,9 @@
                                      <td>7</td>
                                    </tr>
                                  </table>
-                             </div>
+                             </section>
                          </div>
-                     </section>
+                     </div>
                  </main>
              </div>
          </div>

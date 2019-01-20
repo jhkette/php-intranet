@@ -2,7 +2,7 @@
 echo '<div class ="navcontainer">
          <nav class="main-menu">'.PHP_EOL;
             echo  makeMenu($menu);
-    echo '</nav>'.PHP_EOL;
+echo '</nav>'.PHP_EOL;
 echo '<div class="status">'.PHP_EOL;
 
 

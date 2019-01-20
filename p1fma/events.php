@@ -19,18 +19,18 @@
              <div class="main-container">
                  <?php include('includes/navigation.php'); ?>
                   <main class = "container">
-                      <section class="col-1">
+                      <div class="col-1">
                           <div class ="flex-container">
                               <?php include('includes/sidemenu.php'); ?>
-                              <div class="main-body">
+                              <section class="main-body">
                                   <h2>Events</h2>
-                                  <div class="events"><?php include('includes/lorum.php');?></div>
-                                  <div class="events"><?php include('includes/lorum.php');?></div>
-                                  <div class="events"><?php include('includes/lorum.php');?></div>
+                                  <article class="events"><?php include('includes/lorum.php');?></article>
+                                  <article class="events"><?php include('includes/lorum.php');?></article>
+                                  <article class="events"><?php include('includes/lorum.php');?></article>
                                   <div class="line"> </div>
-                              </div>
+                              </section>
                           </div>
-                      </section>
+                      </div>
                   </main>
               </div>
           </div>

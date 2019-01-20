@@ -359,7 +359,7 @@ function makeMenu($menu){
 
 /* Function that displays sidemenu. The array is stored in menu.php */
 function makeSideMenu($title, $menu){
-    $output = '<h3 class"sidetitle">'.$title.'</h3>'.
+    $output = '<h3 class="sidetitle">'.$title.'</h3>'.
     makeMenu($menu);
     return $output;
 }

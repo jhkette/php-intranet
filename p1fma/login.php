@@ -22,13 +22,9 @@
                      <section class="col-1">
                          <h2>Login</h2>
                          <?php
-                          /*I am initially presenting the form to the user. When the user submits, I check if the function
-                          that returns clean data == 2 or not. If there are no errors the user is logged in and directed back to index page. I've set the variable
-                          admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
-                          If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
-                          $admin = false;
-                          include('includes/validation.php');
-                          ?>
+                         $admin = false;
+                         include('includes/validation.php'); #see validation.php for comments on validation process
+                         ?>
                       </section>
                   </main>
               </div>
