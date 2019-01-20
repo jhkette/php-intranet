@@ -342,7 +342,7 @@ function closeDirectory($handleDir){
 function refreshPageButton(){
     $self = htmlentities($_SERVER['PHP_SELF']);
     $output='
-    <a href="'.$self.'" class="button1">Add User</a>';
+    <div class="button1"><a href="'.$self.'">Add User</a><img src="images/arrow.svg" alt="arrow" class="arrow"></div>';
     return $output;
 
 }
