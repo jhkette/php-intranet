@@ -9,10 +9,10 @@ $errors=array();
 
 if(isset($_POST['submit'])) {#if the form is submitted
     if($admin == false ){
-        include('includes/connection.php');
+        include('includes/connection.php'); # check connection to file
     }
 
-    if($admin == true || ($admin == false && $connection == true)){ #only running code if admin= true  admin = false and connection to file is true (this is checked in connection.php)
+    if($admin == true || ($admin == false && $connection == true)){ # Only running code if admin= true or  admin = false and connection to file is true (this is checked in connection.php)
         $self = $_SERVER['PHP_SELF'];
         if($admin == false){
             $loggeddata = getData($handle);
@@ -25,27 +25,27 @@ if(isset($_POST['submit'])) {#if the form is submitted
 
          switch (true) {
              case (isset( $_SESSION['admin']) && (isset( $_SESSION['user']))):
-             echo '<p class="message"> Please logout first </p>'; # can't login as admin or user if already logged on
+             echo '<p class="message"> Please logout first </p>'; # Prevent login as admin or user if already logged in
              break;
              case (count($cleanData) < 2 && ($admin == false)) :
-             echo displayErrors($errors); # clean data is less than 2 so display errors
+             echo displayErrors($errors); # Clean data is less than 2 so display errors
              closeHandle($handle);
-             closeDirectory($handleDir);
+             closeDirectory($handleDir); #close handle, close directory, as we have initially opened file to look at the data
              break;
              case ((count($cleanData) < 2) && ($admin == true)) :
              echo displayErrors($errors);
              break;
-             case ((count($cleanData) == 2) && ($admin == false)): # clean data == 2 - no errors so redirect to intranet
+             case ((count($cleanData) == 2) && ($admin == false)): # Clean data == 2 - no errors so redirect to intranet
              session_regenerate_id(true);
              $_SESSION['user'] = $cleanData[username]; #admin == false therfore setup session[user]
              closeHandle($handle);
-             closeDirectory($handleDir); #close handle close directory as we have opened file to look at data for staff login
+             closeDirectory($handleDir); #close handle, close directory, as we have initially opened file to look at the data
              header('Location: intranet.php');
              break;
              case ((count($cleanData) == 2) && ($admin == true)): # clean data == 2 - no errors so redirect to index
              session_regenerate_id(true);
              $_SESSION['admin'] = $cleanData[username]; #admin == true therfore setup session[admin]
-             header('Location: add-user.php');# clean data == 2 - no errors so redirect to add-user.php
+             header('Location: add-user.php'); # Clean data == 2 - no errors so redirect to add-user.php
          }
      }
  }

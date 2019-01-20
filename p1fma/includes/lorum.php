@@ -1,4 +1,4 @@
-<?php /* print lorum text */
+<?php /* Print lorum text */
 echo '<p>Maecenas at ipsum lorem. Lorem ipsum dolor sit amet,
 consectetur adipiscing elit. Ut dapibus facilisis tortor, eu suscipit dolor cursus eu. Fusce vitae tortor est. Aenean
 volutpat dui eu ex iaculis vestibulum. Maecenas semper imperdiet nibh. Donec at volutpat lectus, quis faucibus nulla.
