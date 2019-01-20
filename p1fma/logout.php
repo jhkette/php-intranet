@@ -1,4 +1,5 @@
 <?php require_once('includes/init.php');
+include('includes/secure.php'); # still need to be logged in to access this page
 
 $_SESSION = array(); #unset session - removes all stored data from array
 if (ini_get("session.use_cookies")) {

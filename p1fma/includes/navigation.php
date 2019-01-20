@@ -1,9 +1,9 @@
 <?php
 echo '<div class ="navcontainer">
-         <nav class="main-menu">';
+         <nav class="main-menu">'.PHP_EOL;
             echo  makeMenu($menu);
-    echo '</nav>';
-echo '<div class="status">';
+    echo '</nav>'.PHP_EOL;
+echo '<div class="status">'.PHP_EOL;
 
 
 if ($loggedState == true) {
@@ -30,6 +30,6 @@ if ($loggedState == false){ # div is only presented if loggestate is false
     echo '</div>'.PHP_EOL;
 }
 
-echo '</div>'
+echo '</div>';
 
-    ?>
+?>

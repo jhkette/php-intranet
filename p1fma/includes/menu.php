@@ -7,7 +7,6 @@ by the makeMenu function on the functions page */
 if(isset($_SESSION['admin'])) {
     $menu = [
     'index.php'  => 'Home',
-    'news.php'  => 'News',
     'intranet.php'  => 'Intranet',
     'add-user.php' => 'Add User',
     'logout.php' => 'Logout',
@@ -18,7 +17,6 @@ if(isset($_SESSION['admin'])) {
 elseif (isset($_SESSION['user'])) {
     $menu = [
     'index.php'  => 'Home',
-    'news.php'  => 'News',
     'intranet.php'  => 'Intranet',
     'logout.php'  => 'Logout',
 
@@ -28,7 +26,6 @@ elseif (isset($_SESSION['user'])) {
 else{
     $menu = [
     'index.php'  => 'Home',
-    'news.php'  => 'News',
     'login.php'  => 'Staff Login',
     'admin-login.php'  => 'Administration login',
 
@@ -38,11 +35,15 @@ else{
 
 
 $menu2 = [
-
     'DTresults.php' => 'DT results',
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',
 
+];
+
+$menu3 = [
+    'News.php' => 'News',
+    'Events.php' => 'Events',
 ]
 
 ?>

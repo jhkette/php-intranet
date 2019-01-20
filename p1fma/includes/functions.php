@@ -3,7 +3,7 @@
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
 /*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the form fields if there
 are errors  */
-function displayForm( $cleanData , $errors){
+function displayForm( $cleanData=array() , $errors=array()){ #default arguments because arrays are passed as argument until after validation
     $passwordErrors='';
     $userErrors = '';
     if(isset($cleanData['username'])) { #check if clean data or error data isset
@@ -148,7 +148,7 @@ function reportLoginErrors($self, $loggedData){
      # block of code only runs when user has submitted form
         $username = trim($_POST['username']); # assign variables for user input
         $password = trim($_POST['password']);
-        foreach ($loggedData as $key => $value) { # loop through stored user data on text file
+        foreach ($loggedData as $value) { # loop through stored user data on text file
             $userPassword = explode(',', $value); # explode at comma
             $userPassword[0] = trim($userPassword[0]); #trim data
             $userPassword[1] = trim($userPassword[1]);
@@ -172,25 +172,6 @@ function reportLoginErrors($self, $loggedData){
     return $errors;
 }
 
-/*Function to valdate admin login. The username and password is hardcoded into the function.  */
-function reportAdminErrors($self){
-    $adminusername = 'admin'; #correct username
-    $adminpassword = 'DCSadmin01'; #correct password
-    $errors = array();
- # block of code only runs when user has submitted form
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        if ($username !== $adminusername) {
-            $errors['username'] = 'This is not the correct username for Admin';
-        }
-
-        if ($username == $adminusername){
-            if ($password !== $adminpassword) {  # i'm only adding an error to the password field if the username is valid
-                $errors['password'] = 'This is not the correct password for Admin';
-            }
-        }
-    return $errors;
-}
 
 /*This function is used by the admin and oridinary login pages. It takes in the error array from the prior function
 reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. If both password and
@@ -389,6 +370,13 @@ function makeMenu($menu){
      }
      $finalMenu = $list . $output . $listClose;
      return $finalMenu;
+}
+
+function makeSideMenu($title, $menu){
+    $output = '<h3 class"sidetitle">'.$title.'</h3>'.
+    makeMenu($menu);
+    return $output;
+
 }
 
 // <!--Joseph Ketterer

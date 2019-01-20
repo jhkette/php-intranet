@@ -26,14 +26,14 @@
                        <?php
                        /*Please see login.php for descripton of how this form validation works.*/
                        $admin = true; #admin is true so if valid session[admin] will be created by the validateLoginInputs function.
-                       $errors = array();
-                       $cleanData = array();
-
+                       $cleanData=array();
+                       $errors=array();
                        /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                        or redirects the user to index.php if no errors were detected */
                        if (isset($_POST['submit'])) {
                            $self = $_SERVER['PHP_SELF'];
-                           $errors = reportAdminErrors($self);
+                           $loggeddata = array('admin,DCSadmin01');
+                           $errors = reportLoginErrors($self, $loggeddata);
                            $cleanData = validateLoginInputs($self, $errors, $admin);
 
                            switch (true) {
@@ -44,8 +44,7 @@
                                 echo displayErrors($errors); # clean data is less than 2 so display errors
                                 break;
                                 case (count($cleanData) == 2): # clean data == 2 - no errors so redirect to index
-                                header('Location: add-user.php');
-
+                                header('Location: intranet.php');
                             }
                        }
                         /* This shows if user trys to view add user without logging in. Although it is not accessible via menu */

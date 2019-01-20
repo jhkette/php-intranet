@@ -27,9 +27,8 @@
                           admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
                           If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
                           $admin = false;
-
-                          $errors = array();
-                          $cleanData = array();
+                          $cleanData=array();
+                          $errors=array();
 
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                           or redirects the user to welcome.php if no errors were detected */

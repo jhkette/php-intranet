@@ -1,9 +1,6 @@
-<?php require_once('includes/init.php');
-if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
-    header("Location: login.php?message2=Please log in");
-}
-/*If the user is not admin or user redirect to login.php . This page is only accessible to those logged in */
-?>
+<?php require_once('includes/init.php');?>
+<?php include('includes/secure.php');?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -25,11 +22,7 @@ if (!isset( $_SESSION['admin']) && (!isset( $_SESSION['user']))) {
                 <main class = "container">
                      <section class="col-1">
                          <div class ="flex-container">
-                             <nav class="side-menu">
-                                 <?php
-                                 echo makeMenu($menu2);
-                                 ?>
-                             </nav>
+                             <?php include('includes/sidemenu.php'); ?>
                              <div class= "main-body">
                                  <h3>Web Programming using PHP - P1 Results</h3>
                                  <table>

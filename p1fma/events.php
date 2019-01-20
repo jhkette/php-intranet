@@ -1,6 +1,5 @@
 <?php require_once('includes/init.php');?>
 <?php include('includes/secure.php');?>
-
 <!doctype html>
 <html lang="en">
      <head>
@@ -21,7 +20,7 @@
                  <?php include('includes/navigation.php'); ?>
                  <main class = "container">
                      <section class="col-1">
-                         <h2>News</h2>
+                         <h2>Events</h2>
                          <div class="news"><?php include('includes/lorum.php'); ?></div>
                          <div class="news"><?php include('includes/lorum.php'); ?></div>
                          <div class="news"><?php include('includes/lorum.php'); ?></div>

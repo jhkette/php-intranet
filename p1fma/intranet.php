@@ -22,11 +22,7 @@
                  <main class = "container">
                      <section class="col-1">
                          <div class ="flex-container">
-                             <nav class="side-menu">
-                                 <?php
-                                 echo makeMenu($menu2);
-                                 ?>
-                             </nav>
+                             <?php include('includes/sidemenu.php'); ?>
                              <div class="main-body">
                                  <h2>Intranet Home</h2>
                                  <?php include('includes/lorum.php');?>

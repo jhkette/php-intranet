@@ -8,5 +8,6 @@ header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 require_once('functions.php');
 include('includes/menu.php');
+$admin = array('admin,DCSadmin01');
 
  ?>
