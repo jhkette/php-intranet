@@ -28,21 +28,23 @@
              }
          }
      }
-     $self = $_SERVER['PHP_SELF'];
-     if($admin == false){
-         $loggeddata = getData($handle);
-     }
-     else{
-          $loggeddata = $adminUserPassword;
-      }
+
+      if($admin == true || ($admin == false && $connection == true)){
+          $self = $_SERVER['PHP_SELF'];
+          if($admin == false){
+              $loggeddata = getData($handle);
+          }
+          else{
+               $loggeddata = $adminUserPassword;
+           }
       $errors = reportLoginErrors($self, $loggeddata);
       $cleanData = validateLoginInputs($self, $errors, $admin);
       switch (true) {
           case (isset( $_SESSION['admin']) && ($admin== false)):
-          echo '<p class="message"> Please logout first </p>'; # checking they are not logged in as an admin
+          echo '<p class="message"> Please logout first </p>'; # can't login as admin and user
           break;
           case (isset( $_SESSION['user']) && ($admin== true)):
-          echo '<p class="message"> Please logout first </p>'; # checking they are not logged in as an admin
+          echo '<p class="message"> Please logout first </p>'; # can't login as admin and user
           break;
           case (count($cleanData) < 2 && ($admin == false)) :
           echo displayErrors($errors); # clean data is less than 2 so display errors
@@ -61,6 +63,7 @@
           header('Location: add-user.php');
           break;
       }
+  }
 
 }
 
