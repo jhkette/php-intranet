@@ -48,8 +48,11 @@ h1{
     margin: 2rem 0;
 }
 
-.message  {
+.news p{
+  padding: 0;
+}
 
+.message  {
     list-style: none;
     margin: .6rem 0rem;
     color: #fc4a4a;
@@ -69,7 +72,7 @@ h1{
 
 .line{
     width: 80%;
-    margin:  6rem auto 0 auto;
+    margin:  4rem auto 0 auto;
     border-top: 1px solid var(--secondary);
     padding-bottom: 2rem;
 }
@@ -255,18 +258,20 @@ tr:nth-child(even) {
     margin-top: 2.5rem;
     margin-right: 4rem;
     width: 14.5rem;
-    background-color:  var(--tertiary);
-    height: 18rem;
+    background-color:  white;
+    height: auto;
 }
 
 .side-menu li {
     margin: 1rem 0;
     padding-left: 1.5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid var(--tertiary);
 
 }
 .side-menu li a:hover {
-    border-bottom: 2px solid var(--dark);
-    transition: .1s;
+text-decoration: underline;
+border: 0;
 }
 
 

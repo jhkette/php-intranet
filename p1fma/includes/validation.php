@@ -2,11 +2,10 @@
  /*I am initially presenting the form to the user. When the user submits, I check if the function
  that returns clean data == 2 or not. If there are no errors the user is logged in and directed back to index page. I've set the variable
  admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
- If everything is correct a new session id is generated and a session username (not session[admin]) is stored.     */
+ If everything is correct a new session id is generated and a session username is stored. */
 
 $cleanData=array();
 $errors=array();
-
 
 if(isset($_POST['submit'])) {
     if($admin == false ){
@@ -30,8 +29,8 @@ if(isset($_POST['submit'])) {
              break;
              case (count($cleanData) < 2 && ($admin == false)) :
              echo displayErrors($errors); # clean data is less than 2 so display errors
-             closeHandle($handle); # close handle
-             closeDirectory($handleDir); # close directory
+             closeHandle($handle);
+             closeDirectory($handleDir);
              break;
              case ((count($cleanData) < 2) && ($admin == true)) :
              echo displayErrors($errors);
@@ -39,8 +38,8 @@ if(isset($_POST['submit'])) {
              case ((count($cleanData) == 2) && ($admin == false)): # clean data == 2 - no errors so redirect to index
              session_regenerate_id(true);
              $_SESSION['user'] = $cleanData[username];
-             closeHandle($handle); # close handle
-             closeDirectory($handleDir); # close directory
+             closeHandle($handle);
+             closeDirectory($handleDir); #close handle close directory as we have opened file to look at data for staff login
              header('Location: intranet.php');
              break;
              case ((count($cleanData) == 2) && ($admin == true)): # clean data == 2 - no errors so redirect to index
@@ -53,7 +52,7 @@ if(isset($_POST['submit'])) {
 
 
 if(isset($_GET['message2'])) {
-    if($_GET['message2'] == 'Please log in'){#check that it's letters by removing white space with str replace
+    if($_GET['message2'] == 'Please log in'){#check that it's the correct message as it is sent bu url
         echo '<p class ="message">'. htmlentities($_GET['message2']).'</p>';
     }
 }

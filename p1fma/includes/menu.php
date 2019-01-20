@@ -28,22 +28,25 @@ else{
     'index.php'  => 'Home',
     'login.php'  => 'Staff Login',
     'admin-login.php'  => 'Administration login',
-
-
     ];
 }
+
+/*Side menus */
+
+$menu1 = [
+    'intranet.php' => 'DCS intranet',
+];
 
 
 $menu2 = [
     'DTresults.php' => 'DT results',
     'P1results.php' => 'P1 results',
     'PfPresults.php' => 'PfP results',
-
 ];
 
 $menu3 = [
     'News.php' => 'News',
     'Events.php' => 'Events',
-]
+];
 
 ?>

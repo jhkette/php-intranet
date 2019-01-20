@@ -43,7 +43,7 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                               if($connection == true){
 
 
-                              $loggeddata = getData($handle); # the data from the txt file in an array
+                                  $loggeddata = getData($handle); # the data from the txt file in an array
                                   $duplicates = checkDuplicates($self, $loggeddata); # duplicates array
                                   $errors = addUserErrors($self); #errors array
                                   $confirmPassword = confirmPassword($self, $errors); # cofirm password array

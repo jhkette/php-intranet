@@ -3,25 +3,25 @@
 /* ------------------------ FORM PRESENTATION AND FEEDBACK FUNCTIONS -------------------------------*/
 /*This displays form for the admin login and normal login. Error feedback is presnted above and prompts are presnted by the form fields if there
 are errors  */
-function displayForm( $cleanData=array() , $errors=array()){ #default arguments because arrays are passed as argument until after validation
+function displayForm( $cleanData , $errors){ #default arguments because arrays are passed as argument until after validation
     $passwordErrors='';
     $userErrors = '';
     if(isset($cleanData['username'])) { #check if clean data or error data isset
         $userName = htmlentities($cleanData['username']);
     }
     else{
-        $userName = '';
+        $userName ='';
     }
     if (isset($errors['username']))
-      {$userErrors =  '<p> Please enter a valid username </p>';}
+      {$userErrors =  '<p>Please enter a valid username </p>';}
      else {
          $userErrors = '';
         }
     if (!isset($errors['username'])){ # only add password error if username is NOT an error. (I do this throughout, passwords are only correct in relation to usernames)
         if (isset($errors['password'])) {
-            $passwordErrors =  '<p> This is not the correct password </p>';}
+            $passwordErrors =  '<p>This is not the correct password </p>';}
          else {
-             $passwordErrors = '';
+             $passwordErrors ='';
             }
         }
     $self = htmlentities($_SERVER['PHP_SELF']);
@@ -97,12 +97,12 @@ of the website */
          return  $handleDir;
      }
      else{
-      $handleDir = opendir("../data");
-      return $handleDir;
-
-  }
- }
-
+         $handleDir = opendir("../data");
+         /*i'm checking if the handleDir == false for some oth reason in connection.php which is part of validation,
+         this allows me to present error message above the form */
+         return $handleDir;
+     }
+}
  function readDirectory($handleDir){
      while(false !== ($file = readdir($handleDir))){
          if ($file != "." && $file != "..") { # don't add dots which represent directories to array
@@ -114,8 +114,9 @@ of the website */
                      return $handle;
                  }
                  $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
+                 /*i'm checking if the handle == false for some other reason in connection.php which is part of validation,
+                 this allows me to present error message above the form */
                  return $handle;
-
              }
          }
      }
@@ -168,31 +169,26 @@ function reportLoginErrors($self, $loggedData){
         if(($correctPassword == false) && ($correctData == true)){
             $errors['password'] = 'This is not the correct password';
         }
-
     return $errors;
 }
 
 
-/*This function is used by the admin and oridinary login pages. It takes in the error array from the prior function
-reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. If both password and
-username are correct, the username is stored to the $_SESSION array. I regenerate the session id beforehand; as both items are correct and the form
-has been submitted, the user will be logging in  */
+/*This function is used by the admin and staff login pages. It takes in the error array from the prior function
+reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. This is retuned to validation process.
+If there are 2 indexes in clean data the user is logged in (see validation.php) */
 function validateLoginInputs($self, $errors, $admin){
     $cleanData = array();
-    /* I'm representing the password login data. Passwords are not like other form data. They can only be correct in relation to
+    /* I'm not representing the password login data. Passwords are not like other form data. They can only be correct in relation to
     a correct username. It would not be appropriate (or secure) to save correct passwords independant of usernames. */
     # only runs after form submission
-        $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        if(!isset($errors['username'])) {
-            $cleanData['username'] = $username;
+    $username = trim($_POST['username']);
+    $password = trim($_POST['password']);
+    if(!isset($errors['username'])) {
+        $cleanData['username'] = $username;
         }
         if(!isset($errors['username']) && (!isset($errors['password']))) {
             $cleanData['password'] = $password;
-            #i'm regenerating the session id as both fields are correct so the user is logged in
-
         }
-
     return $cleanData;
 }
 
@@ -361,6 +357,7 @@ function makeMenu($menu){
      return $finalMenu;
 }
 
+/* Function that displays sidemenu. The array is stored in menu.php */
 function makeSideMenu($title, $menu){
     $output = '<h3 class"sidetitle">'.$title.'</h3>'.
     makeMenu($menu);

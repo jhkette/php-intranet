@@ -5,7 +5,7 @@
      <head>
          <meta charset="UTF-8">
          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>News</title>
+         <title>Events</title>
          <link rel="stylesheet" type="text/css" href="css/styles.css" />
          <style>
          @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab');
@@ -34,10 +34,10 @@
                   </main>
               </div>
           </div>
-         <div class ="footer-container">
+          <div class ="footer-container">
               <?php include('includes/footer.php')?>
-         </div>
-     </body>
+          </div>
+      </body>
 </html>
 
 <!--Joseph Ketterer
