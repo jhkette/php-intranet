@@ -191,7 +191,7 @@ h4{
 }
 
 .container-user{
-    min-height: 90rem;
+    min-height: 95rem;
 }
 
 .main-body{width: 75%;}
@@ -321,6 +321,9 @@ tr:nth-child(even) {
     padding-bottom: .5rem;
     border-bottom: 1px solid var(--tertiary);
 
+}
+.side-menu a{
+    font-weight: 400;
 }
 .side-menu li a:hover {
 text-decoration: underline;
