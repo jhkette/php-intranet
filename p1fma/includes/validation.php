@@ -1,9 +1,9 @@
 <?php
- /*I am initially presenting the form to the user. When the user submits, I check if the function
- that returns clean data == 2 or not. If there are no errors the user is logged in and directed back to index page. I've set the variable
- admin to 'false', this is passed as an argument to the cleanData function, which, also uses the errors array to check data is clean.
- If everything is correct a new session id is generated and a session username is stored. */
+ /*I am initially presenting the form to the user. When the user submits, I check if validateLoginInputs
+ returns 2 indexes of cleanData (ie the form is valid). If there are no errors, the user is logged in and directed to intranet.php.
+ A new session id is generated and a session username is stored. */
 
+/*i'm initally declaring these variables, which are arguments in displayForm, as empty arrays  */
 $cleanData=array();
 $errors=array();
 
@@ -45,12 +45,12 @@ if(isset($_POST['submit'])) {
              case ((count($cleanData) == 2) && ($admin == true)): # clean data == 2 - no errors so redirect to index
              session_regenerate_id(true);
              $_SESSION['admin'] = $cleanData[username]; #admin == true therfore setup session[admin]
-             header('Location: intranet.php');# clean data == 2 - no errors so redirect to intranet
+             header('Location: add-user.php');# clean data == 2 - no errors so redirect to add-user.php
          }
      }
  }
 
-
+/* This echos a message to login using the GET superglobal if the user is redirected to a login page */
 if(isset($_GET['message2'])) {
     if($_GET['message2'] == 'Please log in'){#check that it's the correct message as it is sent bu url
         echo '<p class ="message">'. htmlentities($_GET['message2']).'</p>';

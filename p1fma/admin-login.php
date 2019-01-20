@@ -25,7 +25,7 @@
 
                        <?php
                        /*Please see login.php for descripton of how this form validation works.*/
-                       $admin = true; #admin is true so if valid session[admin] will be created by the validateLoginInputs function.
+                       $admin = true; #admin is true so if valid, session[admin] will be created by the validateLoginInputs function.
                        include('includes/validation.php');
                        ?>
                        <div class="add-info small">

@@ -23,7 +23,7 @@
                      <section class="col-1">
                          <h2>Login</h2>
                          <?php
-                         $admin = false;
+                         $admin = false; #admin = false so session[username] will be created if form is valid
                          include('includes/validation.php'); #see validation.php for comments on validation process
                          ?>
                          <div class="add-info small">

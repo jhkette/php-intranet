@@ -65,41 +65,42 @@ function displayForm( $cleanData , $errors){ #default arguments because arrays a
 
 /* Function that displays errors, used by all three forms on the intranet site. Loops through error arrays
 passed as arguments  */
-  function displayErrors($errors, $duplicates=array(), $passwordError=array()){ /* i'm creating default arguments for the last 2 parameters. The login
-      and admin login doesn't use them. However, the adduser function provides these arrays when it calls this function*/
-      $output='';
-      foreach ($errors as $key => $value) {
-          $output.='<li class = "list-group-error">
+function displayErrors($errors, $duplicates=array(), $passwordError=array()){
+/* i'm creating default arguments for the last 2 parameters. The login
+and admin login don't use them. However, the adduser function provides these arrays when it calls this function*/
+$output='';
+foreach ($errors as $key => $value) {
+    $output.='<li class = "list-group-error">
                    <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
-                   </li>';
-       }
-       foreach ($duplicates as $key => $value) {
-           $output.='<li class = "list-group-error">
-                     <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
-                     </li>';
-        }
-        foreach ($passwordError as $key => $value) {
-            $output.='<li class = "list-group-error">
-                      <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
-                      </li>';
+              </li>';
+    }
+foreach ($duplicates as $key => $value) {
+    $output.='<li class = "list-group-error">
+                  <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
+             </li>';
+    }
+foreach ($passwordError as $key => $value) {
+    $output.='<li class = "list-group-error">
+                   <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
+              </li>';
         }
         return $output;
   }
 
 /*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
 /* function that opens directory that contains data file. While not possible in this excercise, ideally this
-folder would not be stored on the  public folder of the server, obviously not possible in this instance. The data folder is not in the root directory
+folder would not be stored on the  public folder of the server. The data folder is not in the root directory
 of the website */
 
  function openDirectory(){
-     if (!file_exists("../data")){
+     if (!file_exists("../data")){ #if file doesn't exist return false
          $handleDir = false;
          return  $handleDir;
      }
      else{
          $handleDir = opendir("../data");
          /*i'm checking if the handleDir ==  retruns false for some other reason in connection.php. This is part of validation.php,
-         which allows me to present error message above the form (nb if opendir can't connect it returns a boolean value of false) */
+         which allows me to present an error message above the form (nb if opendir can't connect it returns a boolean value of false) */
          return $handleDir;
      }
 }
@@ -110,13 +111,13 @@ of the website */
              $fileDir1 = array();
              array_push($fileDir1, $file); # push into array
              foreach ($fileDir1 as $key => $value) { # readdir creates an array of files so i'm using a foreach loop to get the file value.
-                 if ((pathinfo($value, PATHINFO_EXTENSION)) !== 'txt'){ #check the extension is 'txt'
+                 if ((pathinfo($value, PATHINFO_EXTENSION)) !== 'txt'){ #check the extension is 'txt', if not return false
                      $handle = false;
                      return $handle;
                  }
                  $handle = fopen('../data/' . htmlentities(trim($value)), 'a+');
                  /*i'm checking if the handle == false for some reason in connection.php which is part of validation,
-                 this allows me to present error message above the form (nb if fopen can't connect it returns a boolean value of false) */
+                 this allows me to present an error message above the form (nb if fopen can't connect it returns a boolean value of false) */
                  return $handle;
              }
          }
@@ -178,7 +179,7 @@ function reportLoginErrors($self, $loggedData, $admin){
 
 
 /*This function is used by the admin and staff login pages. It takes in the error array from the prior function
-reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. This is retuned to validation process.
+reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. The clean data is counted in validation.php
 If there are 2 indexes in clean data the user is logged in (see validation.php) */
 function validateLoginInputs($self, $errors){
     $cleanData = array();

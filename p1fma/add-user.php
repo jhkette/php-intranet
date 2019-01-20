@@ -31,12 +31,7 @@ if (!isset($_SESSION['admin'])) {  # check that the user is an admin else redire
                         If there are errors, I add error messages above the form and display prompts by the form fields.   */
 
                          $self = $_SERVER['PHP_SELF'];
-                         $errors = array();
-                         $cleanData = array();
-                         $duplicates  = array();
-                         $confirmPassword = array();
-                         #clean data checked against the other arrays it takes as parameters
-                         $displayForm = true;
+                         $displayForm = true; # display form is set to true at the start
                           /* This block of code ONLY runs if the form has been submitted. It shows the errors above the form
                           or adds another user and hides form if no errors are detected.  */
                          if (isset($_POST['submit'])) {

@@ -31,7 +31,7 @@ else{
     ];
 }
 
-/*Side menus */
+/*Side menus -uses makeSideMenu function to create a menu */
 
 $menu1 = [
     'intranet.php' => 'DCS intranet',
