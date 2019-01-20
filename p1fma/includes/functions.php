@@ -216,7 +216,7 @@ function addUserErrors($self){
     }
     $username = trim($_POST['username']); # The username needs to be letters/numbers and between 2 and 19 characters long
     if (!ctype_alnum($username) || (strlen($username) > 20) || (strlen($username) < 5))  {
-        $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more chrecters long.';
+        $errors['username'] = 'Usernames can only be numbers or letters. It needs to be five or more charecters long.';
     }
     $password = trim($_POST['password']); # The password needs to be letters/numbers and between 2 and 19 characters long
     if (!ctype_alnum($password) || (strlen($password) > 20) || (strlen($password) < 5)) {
