@@ -57,7 +57,7 @@ function displayForm( $cleanData , $errors){
       $output='';
       foreach ($cleanData as $key => $value) {
           $output.='<li class = "list-group-item">
-                   <strong>'. htmlentities($key). ': </strong> '.htmlentities($value).'
+                   <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
                    </li>';
       }
       return $output;
