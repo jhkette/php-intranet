@@ -1,6 +1,6 @@
 <?php require_once('includes/init.php');
+include('includes/secure.php');?>
 
-?>
 <!doctype html>
 <html lang="en">
     <head>
