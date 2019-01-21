@@ -68,23 +68,23 @@ passed as arguments  */
 function displayErrors($errors, $duplicates=array(), $passwordError=array()){
 /* i'm creating default arguments for the last 2 parameters. The login
 and admin login don't use them. However, the adduser function provides these arrays when it calls this function*/
-$output='';
-foreach ($errors as $key => $value) {
-    $output.='<li class = "list-group-error">
-                   <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
-              </li>';
+    $output='';
+    foreach ($errors as $key => $value) {
+        $output.='<li class = "list-group-error">
+                       <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
+                 </li>';
     }
-foreach ($duplicates as $key => $value) {
-    $output.='<li class = "list-group-error">
+    foreach ($duplicates as $key => $value) {
+        $output.='<li class = "list-group-error">
                   <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
-             </li>';
+                 </li>';
     }
-foreach ($passwordError as $key => $value) {
-    $output.='<li class = "list-group-error">
-                   <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
-              </li>';
+    foreach ($passwordError as $key => $value) {
+         $output.='<li class = "list-group-error">
+                        <strong>'. htmlentities(ucfirst($key)). ': </strong> '.htmlentities($value).'
+                   </li>';
         }
-        return $output;
+    return $output;
   }
 
 /*-------------------------- FUNCTIONS TO GET DATA FROM FILES -------------------------- */
@@ -142,7 +142,7 @@ of the website */
 /*------------------------ FUNCTIONS TO VALIDATE LOGIN FORMS ---------------------------- */
 
 
- /* Function to process login errors, this function takes data from the text file,
+ /* Function to process login errors, this function takes data from the text file, or adminUserPassword array,
  explodes at the comma and then checks to see if user input matches  a recorded entry*/
 function reportLoginErrors($self, $loggedData, $admin){
     $errors  = array(); # create errors array
@@ -179,7 +179,7 @@ function reportLoginErrors($self, $loggedData, $admin){
 
 
 /*This function is used by the admin and staff login pages. It takes in the error array from the prior function
-reportLoginErrors or reportAdminErrors. It checks if an error was assigned to a form field. If not it saves data as clean. The clean data is counted in validation.php
+reportLoginErrors. It checks if an error was assigned to a form field. If not it saves data as clean. The clean data is counted in validation.php
 If there are 2 indexes in clean data the user is logged in (see validation.php) */
 function validateLoginInputs($self, $errors){
     $cleanData = array();

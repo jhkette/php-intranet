@@ -24,7 +24,7 @@ if(isset($_POST['submit'])) {#if the form is submitted
          $cleanData = validateLoginInputs($self, $errors);
 
          switch (true) {
-             case (isset( $_SESSION['admin']) && (isset( $_SESSION['user']))):
+             case (isset( $_SESSION['admin']) || (isset( $_SESSION['user']))):
              echo '<p class="message"> Please logout first </p>'; # Prevent login as admin or user if already logged in
              break;
              case (count($cleanData) < 2 && ($admin == false)) :
